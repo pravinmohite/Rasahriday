@@ -1,0 +1,7 @@
+<div class="category-menu-container">
+    <ul class="category-list">
+        <li class="product-item" [ngClass]="{'active': i == 0}" *ngFor="let category of categories; let i=index">
+           {{category.categoryName}}
+        </li>
+    </ul>
+</div>

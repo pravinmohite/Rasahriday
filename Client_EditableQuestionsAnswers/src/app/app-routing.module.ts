@@ -24,6 +24,10 @@ let routes: Routes = [
     path: "frontend-interview-questions/:searchKey", 
     loadChildren: () => import('./interview-questions/interview-questions.module').then(m => m.InterviewQuestionsModule)
   },
+  {
+    path: "products",
+    loadChildren: () => import('./products/products.module').then(m => m.ProductsModule)
+  },
   { 
     path: '**',
     redirectTo: 'frontend-interview-questions', 

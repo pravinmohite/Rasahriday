@@ -1,29 +1,27 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import * as questionAnswerList from '../../mockQuestionAnswerList.json';
 import { LoaderService } from './../../services/loader-service/loader.service';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
-export class QuestionAnswerService {
+export class ProductService {
   filterData: any;
   currentQuestionTypeSelected: String;
   currentSearchString: String;
-  questionTypeUrl: String = "/api/questionType";
-  questionAnswerUrl: String = "/api/questionAnswer";
   loginDetailsUrl: String = "/api/loginDetails";
+  productUrl: string = "/api/product";
+  categoryUrl: string = "/api/category";
   isProd: boolean = false;
   /*---with ssl changed due to loadbalancer----can be done using nginx*/
   //prodUrl:String="https://www.ssl.frontendinterviewquestions.com";
   prodUrl: String = "http://54.255.150.70:3000";
   devDomain: any = this.isProd ? this.prodUrl : "http://localhost:3000";
-  finalquestionTypeUrl: any = this.devDomain + this.questionTypeUrl;
-  finalQuestionAnswerUrl: any = this.devDomain + this.questionAnswerUrl;
-  finalloginDetailsUrl: any = this.devDomain + this.loginDetailsUrl;
-  mockData = (questionAnswerList as any).default;
+  finalloginDetailsUrl: string = this.devDomain + this.loginDetailsUrl;
+  finalProductUrl: string = this.devDomain + this.productUrl;
+  finalCategoryUrl: string = this.devDomain + this.categoryUrl;
   questionAnswerData: any;
   private data = new BehaviorSubject(null);
   currentData = this.data.asObservable();
@@ -61,53 +59,67 @@ export class QuestionAnswerService {
     return this.http.patch(this.finalloginDetailsUrl + "/" + data._id, data);
   }
 
-  /*---------------for question types----------*/
-
-  getQuestionTypes() {
-    return this.http.get(this.finalquestionTypeUrl);
-  }
-
-  addQuestionType(data) {
-    return this.http.post(this.finalquestionTypeUrl, data);
-  }
-
-  deleteQuestionType(id) {
-    return this.http.delete(this.finalquestionTypeUrl + "/" + id);
-  }
-
-  updateQuestionType(data) {
-    return this.http.patch(this.finalquestionTypeUrl + "/" + data._id, data)
-  };
   /*-------------for question answers----------*/
 
-  getQuestionAnswerList() {
+  getProductList() {
+    // return this.http.get(this.finalProductUrl).subscribe(response => {
+    //   this.data.next(response);
+    //   this.questionAnswerData = response;
+    // })
+    return this.http.get(this.finalProductUrl);
+  }
+
+  addProduct(data) {
     this.loaderService.display(true);
-    this.http.get(this.finalQuestionAnswerUrl).subscribe(response => {
-      this.data.next(response);
-      this.questionAnswerData = response;
+    this.http.post(this.finalProductUrl, data).subscribe(response => {
+      this.getProductList();
     })
   }
 
-  addQuestionAnswer(data) {
+  deleteProduct(id) {
     this.loaderService.display(true);
-    this.http.post(this.finalQuestionAnswerUrl, data).subscribe(response => {
-      this.getQuestionAnswerList();
+    this.http.delete(this.finalProductUrl + "/" + id).subscribe(response => {
+      this.getProductList();
     })
   }
 
-  deleteQuestionAnswer(id) {
+  updateProduct(data) {
     this.loaderService.display(true);
-    this.http.delete(this.finalQuestionAnswerUrl + "/" + id).subscribe(response => {
-      this.getQuestionAnswerList();
+    this.http.patch(this.finalProductUrl + '/' + data._id, data).subscribe(response => {
+      this.getProductList();
     })
   }
 
-  updateQuestionAnswer(data) {
+  /*----categories---*/
+  getCategoryList() {
+    // return this.http.get(this.finalProductUrl).subscribe(response => {
+    //   this.data.next(response);
+    //   this.questionAnswerData = response;
+    // })
+    return this.http.get(this.finalCategoryUrl);
+  }
+
+  addCategory(data) {
     this.loaderService.display(true);
-    this.http.patch(this.finalQuestionAnswerUrl + '/' + data._id, data).subscribe(response => {
-      this.getQuestionAnswerList();
+    this.http.post(this.finalCategoryUrl, data).subscribe(response => {
+      this.getCategoryList();
     })
   }
+
+  deleteCategory(id) {
+    this.loaderService.display(true);
+    this.http.delete(this.finalCategoryUrl + "/" + id).subscribe(response => {
+      this.getCategoryList();
+    })
+  }
+
+  updateCategory(data) {
+    this.loaderService.display(true);
+    this.http.patch(this.finalCategoryUrl + '/' + data._id, data).subscribe(response => {
+      this.getCategoryList();
+    })
+  }
+  /*---end categories---*/
 
   filterDataByQuestionType(type) {
     this.currentQuestionTypeSelected = type;

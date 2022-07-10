@@ -1,0 +1,20 @@
+@import "./../../../assets/scss/variables.scss";
+
+.category-menu-container {
+    border: solid 1px gainsboro;
+    box-shadow: 0px 2px 2px gainsboro;
+    background-color: $page-container-background;
+
+    .category-list {
+        list-style-type: none;
+        padding-left: 0px;
+        li {
+           border: solid 1px gainsboro;
+           padding: 10px;
+
+           &.active {
+            border-left: solid 2px red;
+           }
+        }
+    }
+}

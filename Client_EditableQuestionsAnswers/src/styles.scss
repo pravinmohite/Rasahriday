@@ -4,6 +4,7 @@
 body {
     font-family:cursive;
    // background-image: url($img-path+$background-img);
+   background-color: $body-background !important;
 }
 .hand-cursor {
     cursor: pointer;

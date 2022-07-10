@@ -3,6 +3,8 @@ const router=express.Router();
 
 const QuestionType=require('../models/questionType');
 const QuestionAnswer=require('../models/questionAnswer');
+const Product= require('../models/product');
+const Category= require('../models/category');
 const Login=require('../models/login');
 let loginEndPoint="/loginDetails"
 
@@ -161,5 +163,118 @@ router.patch('/questionAnswer/:id',(req,res,next)=>{
 });
 
 //update question answer
+
+/*----crud for products data-----------------*/
+
+router.get('/product',(req,res,next)=>{
+    //res.send('retrieving the question answer list');
+    Product.find((err,productList)=>{
+       res.json(productList);
+    })
+})
+
+router.post('/product',(req,res,next)=>{
+  //logic to add
+  let newProduct=new Product({
+    productName:req.body.productName,
+    description:req.body.description,
+    quantity:req.body.quantity,
+    price:req.body.price,
+    category: req.body.category,
+    price:req.body.price,
+    date: req.body.date
+  })
+   newProduct.save((err,product)=>{
+      if(err) {
+          res.json({msg:'failed to add product with err:'+ err});
+      }
+      else {
+          res.json({msg:'product added successfully'});
+      }
+  })
+})
+
+router.delete('/product/:id',(req,res,next)=>{
+  Product.remove({_id:req.params.id},(err,result)=>{
+    if(err) {
+        res.json(err);
+    }
+    else {
+        res.json(result);
+    }
+  })
+})
+
+router.patch('/product/:id',(req,res,next)=>{
+    Product.updateOne({_id:req.params.id},{$set:{
+        productName:req.body.productName,
+        description:req.body.description,
+        quantity:req.body.quantity,
+        price:req.body.price,
+        category: req.body.price,
+        price:req.body.price,
+        date: req.body.date
+    }},(err,result)=>{
+        if(err) {
+            res.json(err);
+        }
+        else {
+            res.json(result);
+        }
+    });
+  
+});
+
+/* end crud for product data --*/
+
+/*----crud for category data-----------------*/
+
+router.get('/category',(req,res,next)=>{
+    //res.send('retrieving the question answer list');
+    Category.find((err,categoryList)=>{
+       res.json(categoryList);
+    })
+})
+
+router.post('/category',(req,res,next)=>{
+  //logic to add
+  let newCategory=new Category({
+    categoryName:req.body.categoryName,
+  })
+   newCategory.save((err,category)=>{
+      if(err) {
+          res.json({msg:'failed to add category'});
+      }
+      else {
+          res.json({msg:'category added successfully'});
+      }
+  })
+})
+
+router.delete('/category/:id',(req,res,next)=>{
+  Category.remove({_id:req.params.id},(err,result)=>{
+    if(err) {
+        res.json(err);
+    }
+    else {
+        res.json(result);
+    }
+  })
+})
+
+router.patch('/category/:id',(req,res,next)=>{
+    Category.updateOne({_id:req.params.id},{$set:{
+        categoryName:req.body.categoryName,
+    }},(err,result)=>{
+        if(err) {
+            res.json(err);
+        }
+        else {
+            res.json(result);
+        }
+    });
+});
+
+/* end crud for Category */
 
 module.exports=router;
