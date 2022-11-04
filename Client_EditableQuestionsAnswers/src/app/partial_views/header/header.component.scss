@@ -1,3 +1,7 @@
+.page-header {
+    position: sticky;
+    top: 0;
+}
 .question-type{
     min-height: 30px;
 }
@@ -39,6 +43,12 @@
 
 #menubars{
     display: none;
+}
+
+.searchbox-container {
+    @media screen and (min-width: 768px){
+       padding-left: 0px;
+    }
 }
 
 @media screen and (max-width: 768px){
