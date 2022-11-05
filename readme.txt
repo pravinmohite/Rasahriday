@@ -7,6 +7,11 @@ latest mongodb:-
 
 mongodb:-"C:\Program Files\MongoDB\Server\5.0\bin\mongod.exe" --dbpath D:\DB\data\db
 
+->to run queries got to mongodb application 
+show dbs
+use contactList 
+db.getCollectionNames().map( (name) => ({[name]: db[name].find().toArray().length}) ) 
+
 to run dist folder locally:-
 
 I:\Passion_for_coding\Node_Projects\AmazingJavascript\Client_EditableQuestionsAnswers>angular-http-server --path I:\Passion_for_coding\Node_Projects\AmazingJavascript\Client_EditableQuestionsAnswers\dist\sample-task

@@ -5,7 +5,7 @@ import { RouterModule , Routes } from '@angular/router';
 let routes: Routes = [
   {
     path: "", 
-    redirectTo:"frontend-interview-questions",
+    redirectTo:"products",
     pathMatch: 'full' 
   },
   {
@@ -27,12 +27,7 @@ let routes: Routes = [
   {
     path: "products",
     loadChildren: () => import('./products/products.module').then(m => m.ProductsModule)
-  },
-  { 
-    path: '**',
-    redirectTo: 'frontend-interview-questions', 
-    pathMatch: 'full' 
-  },
+  }
 ]
 @NgModule({
   declarations: [],
