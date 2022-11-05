@@ -8,6 +8,22 @@ const LoginSchema=mongoose.Schema({
     password:{
         type:String,
         required:true
+    },
+    confirmPassword: {
+        type: String,
+        required: false
+    },
+    isAdmin: {
+        type:Boolean,
+        required: false
+    },
+    address: {
+        type: String,
+        required: false
+    },
+    phoneNumber: {
+        type: String,
+        required: false
     }
 })
 

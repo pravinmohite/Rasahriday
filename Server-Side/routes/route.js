@@ -6,7 +6,19 @@ const QuestionAnswer=require('../models/questionAnswer');
 const Product= require('../models/product');
 const Category= require('../models/category');
 const Login=require('../models/login');
-let loginEndPoint="/loginDetails"
+const Cart=require('../models/cart');
+let loginEndPoint="/loginDetails";
+let signUpEndPoint="/signUp";
+
+// let storage = multer.diskStorage({
+//     destination: function (req, file, cb) {
+//        cb(null, 'uploads');
+//     },
+//     filename: function (req, file, cb) {
+//        cb(null, Date.now() + '-' + file.originalname);
+//     }
+//  });
+//  let upload = multer({ storage: storage });
 
 /*--------crud for login details-----------*/
 router.get(loginEndPoint,(req,res,next)=>{
@@ -15,12 +27,29 @@ router.get(loginEndPoint,(req,res,next)=>{
     })
 })
 
-
 router.post(loginEndPoint,(req,res,next)=>{
+    Login.find((err,existingCredentials)=>{
+        existingCredentials.filter(function(item){
+            if(req.body.username === item.username){
+             res.json(item);
+            }
+        });
+        let item={
+            invalidUser: true
+        }
+        res.json(item);
+     })
+})
+
+
+router.post(signUpEndPoint,(req,res,next)=>{
     //logic to add
     let newLogin=new Login({
         username:req.body.username,
-        password:req.body.password
+        password:req.body.password,
+        isAdmin: req.body.isAdmin,
+        address: req.body.address,
+        phoneNumber: req.body.phoneNumber
     })
     newLogin.save((err,questionType)=>{
         if(err) {
@@ -176,13 +205,20 @@ router.get('/product',(req,res,next)=>{
 router.post('/product',(req,res,next)=>{
   //logic to add
   let newProduct=new Product({
+    categoryId: req.body.categoryId,
     productName:req.body.productName,
     description:req.body.description,
     quantity:req.body.quantity,
     price:req.body.price,
-    category: req.body.category,
-    price:req.body.price,
-    date: req.body.date
+    slok: req.body.slok,
+    references: req.body.references,
+    dosage: req.body.dosage,
+    indications: req.body.indications,
+    contraIndications:req.body.contraIndications,
+    sanskritName: req.body.sanskritName,
+    botanicalName: req.body.botanicalName,
+    drugQuantity: req.body.drugQuantity,
+    stock: req.body.stock,
   })
    newProduct.save((err,product)=>{
       if(err) {
@@ -276,5 +312,78 @@ router.patch('/category/:id',(req,res,next)=>{
 });
 
 /* end crud for Category */
+
+/*---crud for cart data ---*/
+
+router.get('/cart',(req,res,next)=>{
+    //res.send('retrieving the question answer list');
+    Cart.find((err,cartList)=>{
+       res.json(cartList);
+    })
+})
+
+router.post('/cart',(req,res,next)=>{
+  //logic to add
+  let newCart=new Cart({
+    categoryId: req.body.categoryId,
+    productName:req.body.productName,
+    description:req.body.description,
+    quantity:req.body.quantity,
+    price:req.body.price,
+    slok: req.body.slok,
+    dosage: req.body.dosage,
+    indications: req.body.indications,
+    contraIndications:req.body.contraIndications,
+    sanskritName: req.body.sanskritName,
+    botanicalName: req.body.botanicalName,
+    drugQuantity: req.body.drugQuantity,
+  })
+  newCart.save((err,product)=>{
+      if(err) {
+          res.json({msg:'failed to add cart with err:'+ err});
+      }
+      else {
+          res.json({msg:'product added to cart successfully'});
+      }
+  })
+})
+
+router.delete('/cart/:id',(req,res,next)=>{
+  Cart.remove({_id:req.params.id},(err,result)=>{
+    if(err) {
+        res.json(err);
+    }
+    else {
+        res.json(result);
+    }
+  })
+})
+
+router.patch('/cart/:id',(req,res,next)=>{
+    Cart.updateOne({_id:req.params.id},{$set:{
+        categoryId: req.body.categoryId,
+        productName:req.body.productName,
+        description:req.body.description,
+        quantity:req.body.quantity,
+        price:req.body.price,
+        slok: req.body.slok,
+        dosage: req.body.dosage,
+        indications: req.body.indications,
+        contraIndications:req.body.contraIndications,
+        sanskritName: req.body.sanskritName,
+        botanicalName: req.body.botanicalName,
+        drugQuantity: req.body.drugQuantity,
+    }},(err,result)=>{
+        if(err) {
+            res.json(err);
+        }
+        else {
+            res.json(result);
+        }
+    });
+  
+});
+
+/*----crud end for cart data----*/
 
 module.exports=router;

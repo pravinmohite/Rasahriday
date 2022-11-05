@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const ProductSchema = mongoose.Schema({
+const CartSchema = mongoose.Schema({
     categoryId: {
         type: Number,
         required: true
@@ -53,14 +53,14 @@ const ProductSchema = mongoose.Schema({
         type: Number,
         required: false
     },
-    stock: {
-        type: Number,
+    orderPlaced: {
+        type: Boolean,
         required: false
     },
-    date: {
-        type: Date,
+    orderAccepted: {
+        type: Boolean,
         required: false
     }
 })
 
-const QuestionAnswer = module.exports = mongoose.model('Product', ProductSchema)
+const QuestionAnswer = module.exports = mongoose.model('Cart', CartSchema)
