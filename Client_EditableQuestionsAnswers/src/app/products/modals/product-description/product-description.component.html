@@ -1,0 +1,36 @@
+<button (click) = "openProductDescriptionModal(productDescriptionTemplate)">product description</button>
+
+    <!-- product description modal  -->
+    <ng-template #productDescriptionTemplate>
+        <div class="modal-header">
+            <h4 class="modal-title pull-left">Product description</h4>
+            <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="modalRef?.hide()">
+            <span aria-hidden="true" class="visually-hidden">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class = "product-image-container">
+                <img src = "assets/images/herbal-med.jpg" width = "100px" height = "100px"/>
+            </div>
+            <div class = "product-name">Product Name</div>
+            <div class = "product-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus at mi ac velit euismod eleifend a a urna. Aliquam metus neque, fringilla ac tincidunt in, tempus at dui. Maecenas pellentesque lacus ut nunc blandit, eget auctor lacus faucibus. Etiam eget tortor velit.</div>
+            <table class = "table">
+                <thead>
+                    <tr>
+                      <th>sr. no.</th>
+                      <th>Sanskrit Name</th>
+                      <th>Botanical Name</th>
+                      <th>Quantity</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>xyz</td>
+                        <td>abc</td>
+                        <td>4</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </ng-template>

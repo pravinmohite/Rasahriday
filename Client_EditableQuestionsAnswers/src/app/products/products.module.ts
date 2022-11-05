@@ -5,6 +5,7 @@ import { ProductsRoutingModule } from './products-routing.module';
 import { CategoryMenuComponent } from '../partial_views/category-menu/category-menu.component';
 import { AddProductComponent } from './modals/add-product/add-product.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ProductDescriptionComponent } from './modals/product-description/product-description.component';
 
 
 
@@ -12,7 +13,8 @@ import { ReactiveFormsModule } from '@angular/forms';
   declarations: [
     ProductListComponent,
     CategoryMenuComponent,
-    AddProductComponent
+    AddProductComponent,
+    ProductDescriptionComponent
   ],
   imports: [
     CommonModule,
