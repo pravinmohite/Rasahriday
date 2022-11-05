@@ -5,6 +5,10 @@ const CartSchema = mongoose.Schema({
         type: Number,
         required: true
     },
+    userName: {
+        type:String,
+        required: false
+    },
     productName: {
         type: String,
         required: true

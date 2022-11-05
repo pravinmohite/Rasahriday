@@ -322,10 +322,48 @@ router.get('/cart',(req,res,next)=>{
     })
 })
 
+router.get('/cartByUserName/:userName',(req,res,next)=>{
+    //res.send('retrieving the question answer list');
+    Cart.find((err,cartList)=>{
+        cartList.filter(function(item){
+            if(req.params.userName === item.userName){
+                res.json(item);
+            }
+        });
+        })
+});
+
 router.post('/cart',(req,res,next)=>{
+    //logic to add
+    let newCart=new Cart({
+      categoryId: req.body.categoryId,
+      productName:req.body.productName,
+      description:req.body.description,
+      quantity:req.body.quantity,
+      price:req.body.price,
+      slok: req.body.slok,
+      dosage: req.body.dosage,
+      indications: req.body.indications,
+      contraIndications:req.body.contraIndications,
+      sanskritName: req.body.sanskritName,
+      botanicalName: req.body.botanicalName,
+      drugQuantity: req.body.drugQuantity,
+    })
+    newCart.save((err,product)=>{
+        if(err) {
+            res.json({msg:'failed to add cart with err:'+ err});
+        }
+        else {
+            res.json({msg:'product added to cart successfully'});
+        }
+    })
+  })
+
+router.post('/cartByUserName',(req,res,next)=>{
   //logic to add
   let newCart=new Cart({
     categoryId: req.body.categoryId,
+    userName: req.body.userName,
     productName:req.body.productName,
     description:req.body.description,
     quantity:req.body.quantity,

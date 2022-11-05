@@ -22,4 +22,10 @@ export class CartComponent implements OnInit {
     }) 
   }
 
+  getCartItemsByUserName() {
+    this.cartService.getCartListByUserName('shubhamait123').subscribe(data=>{
+      this.cartList = data;
+    }) 
+  }
+
 }

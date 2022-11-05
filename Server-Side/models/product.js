@@ -56,10 +56,6 @@ const ProductSchema = mongoose.Schema({
     stock: {
         type: Number,
         required: false
-    },
-    date: {
-        type: Date,
-        required: false
     }
 })
 

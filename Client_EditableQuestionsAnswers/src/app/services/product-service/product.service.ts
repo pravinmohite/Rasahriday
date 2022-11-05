@@ -39,6 +39,10 @@ export class ProductService {
     return this.http.get(this.finalloginDetailsUrl);
   }
 
+  validateLoginDetails(data) {
+    return this.http.post(this.finalloginDetailsUrl, data);
+  }
+
   addloginDetails(data) {
     return this.http.post(this.finalloginDetailsUrl, data);
   }
