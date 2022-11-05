@@ -1,0 +1,17 @@
+label{
+    display: block;
+    margin-bottom: 2px;
+}
+
+.inline-block{
+    display: inline-block;
+}
+
+form .ng-invalid.ng-touched{
+    border: 1px solid red;
+}
+
+.error-message{
+    color: red;
+}
+
