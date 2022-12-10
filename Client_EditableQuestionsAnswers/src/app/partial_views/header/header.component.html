@@ -13,9 +13,9 @@
         <fa-icon [icon]="faBars" (click) = "openSiderBar()"></fa-icon>
       </span>
     </div>
-    <div class="form-inline col-md-5 searchbox-container">
+    <div class="form-inline col-md-4 searchbox-container">
         <!-- <form #myForm= "ngForm"> -->
-          <input name = "searchVal" #searchString [(ngModel)] = "searchVal" class="form-control mr-sm-2 col-md-8" type="text" (keydown)="checkEnterKeyPressed(searchString.value,$event)" placeholder="Search" aria-label="Search">
+          <input name = "searchVal" #searchString [(ngModel)] = "searchVal" class="form-control mr-sm-2 col-md-9" type="text" (keydown)="checkEnterKeyPressed(searchString.value,$event)" placeholder="Search" aria-label="Search">
           <button class="btn btn-outline-success my-2 my-sm-0 col-md-2 hand-cursor" (click)="searchByQuestion(searchString.value)">Search</button>
         <!-- </form> -->
     </div>
@@ -25,9 +25,21 @@
          {{item.questionType}}
         </option>
     </select> -->
-    <div id="about-us-and-social-links" class = "col-md-3">
-      <span id = "about-us-label" (click) = "openAboutusModal()">About Us</span>
-      <div id = "follow-us-container">
+    <div class="col-md-2 header-nav">
+      <span class="header-links">
+        <a class="nav-links" href="/#/carts">
+          Carts
+        </a>
+      </span>
+      <span class="header-links">
+        <a class="nav-links" href="/#/products">
+          Products
+        </a>
+      </span>
+    </div>
+    <!-- <div class="col-md-3"> -->
+       <!-- <span id = "about-us-label" (click) = "openAboutusModal()">About Us</span> -->
+      <!-- <div id = "follow-us-container">
           <ul id = "social-address-links">
               <li class = "social-link-item">
                   <a href = "https://www.facebook.com/Front-end-interview-questions-106067168139636" target = "_blank">
@@ -40,12 +52,7 @@
                   </a>
               </li>
           </ul>
-      </div>
-      <div class="carts-nav">
-        <a href="/#/carts">
-          carts
-        </a>
-      </div>
-    </div>
+      </div> -->
+    <!-- </div> -->
   </div>
 </header>

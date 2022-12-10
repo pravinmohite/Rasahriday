@@ -1,21 +1,27 @@
 <div class="product-page-container">
     <div class="row">
         <!-- <div class="col-md-12 col-xs-12 col-12"> -->
-            <!-- add product modal -->
-            <app-add-product></app-add-product>
-            <!-- product description modal -->
-            <app-product-description></app-product-description>
             <div class="col-md-2 col-4">
                 <app-category-menu></app-category-menu>
             </div>
             <div class="col-md-10 col-8 product-list-container">
+               <div class="row">
+                 <div class="col-md-3 addproduct-btn-container">
+                    <!-- add product modal -->
+                    <app-add-product></app-add-product>
+                 </div>
+               </div> 
                <div class="row"> 
+                  
                     <div class="col-md-3 col-sm-12 col-xs-12 col-12 product-list-item-container" *ngFor="let product of products">
                         <div class="product-list-item">
                             <div class="product-img-container">
                                 <img class="product-img" src="./../../../assets/images/herbal-med.jpg" />
                             </div>
-                            <div class="product-name">{{product.productName}}</div>
+                            <div class="product-name">
+                                                    <!-- product description modal -->
+                                   <app-product-description [productName]=product.productName></app-product-description>
+                            </div>
                             <div class="product-description">{{product.description}}</div>
                             <div>
                                 <button class="btn btn-primary add-to-cart" (click)="addToCart()">Add to cart</button>

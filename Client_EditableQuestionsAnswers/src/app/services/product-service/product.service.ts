@@ -12,6 +12,7 @@ export class ProductService {
   currentQuestionTypeSelected: String;
   currentSearchString: String;
   loginDetailsUrl: String = "/api/loginDetails";
+  signUpUrl = "/api/signUp";
   productUrl: string = "/api/product";
   categoryUrl: string = "/api/category";
   isProd: boolean = false;
@@ -20,6 +21,7 @@ export class ProductService {
   prodUrl: String = "http://54.255.150.70:3000";
   devDomain: any = this.isProd ? this.prodUrl : "http://localhost:3000";
   finalloginDetailsUrl: string = this.devDomain + this.loginDetailsUrl;
+  finalSignUpUrl = this.devDomain + this.signUpUrl;
   finalProductUrl: string = this.devDomain + this.productUrl;
   finalCategoryUrl: string = this.devDomain + this.categoryUrl;
   questionAnswerData: any;
@@ -45,6 +47,11 @@ export class ProductService {
 
   addloginDetails(data) {
     return this.http.post(this.finalloginDetailsUrl, data);
+  }
+
+  /*---for signup ---*/
+  signUpUser(data) {
+    return this.http.post(this.finalSignUpUrl, data);
   }
 
   setUrlSearchVal(urlSearchVal): void {

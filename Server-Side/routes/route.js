@@ -56,7 +56,7 @@ router.post(signUpEndPoint,(req,res,next)=>{
             res.json({msg:'failed to add login details'});
         }
         else {
-            res.json({msg:'login details added successfully'});
+            res.json(req.body);
         }
     })
   })

@@ -13,7 +13,7 @@ let routes: Routes = [
     loadChildren: () => import('./notes-feature/notes-feature.module').then(m => m.NotesFeatureModule)
   },
   {
-    path: "admin-panel",
+    path: "login",
     loadChildren: () => import('./admin-panel/admin-panel.module').then(m => m.AdminPanelModule)
   },
   {

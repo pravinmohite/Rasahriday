@@ -9,6 +9,9 @@ body {
 .hand-cursor {
     cursor: pointer;
 }
+.btn-light-default {
+  border:solid 1px $btn-lightdefault-border;
+}
 .main-container {
   .note-type-container {
     display: flex;

@@ -1,8 +1,27 @@
-<section>
-    <span id = "close-icon-container">
-        <fa-icon [icon]="faTimes" (click) = "closeSideBar()" *ngIf = "isSideBarOpen"></fa-icon>
+<section class="sidebar-container">
+    <span id="close-icon-container">
+        <fa-icon [icon]="faTimes" (click)="closeSideBar()" *ngIf="isSideBarOpen"></fa-icon>
     </span>
-    <div id="about-us-and-social-links" class = "col-md-3">
+    <div class="col-md-12 header-nav">
+        <span class="header-links">
+           {{userName}}
+        </span>
+    </div>
+    <div class="col-md-12 header-nav">
+        <span class="header-links">
+            <a class="nav-links" href="/#/carts">
+                Carts
+            </a>
+        </span>
+    </div>
+    <div class="col-md-12 header-nav">
+        <span class="header-links">
+            <a class="nav-links" href="/#/products">
+                Products
+            </a>
+        </span>
+    </div>
+    <!-- <div id="about-us-and-social-links" class = "col-md-3">
         <a id = "about-us-label" (click) = "openAboutusModal()">About Us</a>
         <div id = "follow-us-container">
             <ul id = "social-address-links">
@@ -18,5 +37,5 @@
                 </li>
             </ul>
         </div>
-    </div>
+    </div> -->
 </section>

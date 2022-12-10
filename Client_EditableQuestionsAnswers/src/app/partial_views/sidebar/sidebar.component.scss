@@ -1,3 +1,10 @@
+@import "./../../../assets/scss/variables.scss";
+
+
+.sidebar-container {
+  margin-top: 35px;
+}
+
 #close-icon-container{
     display: inline;
     position: absolute;
@@ -40,4 +47,15 @@
 
 #about-us-label:hover{
     text-decoration: underline;
+}
+
+.header-nav {
+    border-bottom: solid 1px $product-name-color;
+    .header-links {
+        margin-right: 10px;
+        .nav-links {
+            text-decoration: none;
+            color: inherit;
+        }
+    }
 }
