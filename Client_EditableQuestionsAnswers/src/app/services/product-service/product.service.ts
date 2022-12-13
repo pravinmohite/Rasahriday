@@ -72,33 +72,24 @@ export class ProductService {
 
   /*-------------for question answers----------*/
 
+  getProductListByCategoryId(categoryId) {
+    return this.http.get(this.finalProductUrl+'?categoryId='+categoryId);
+  }
+
   getProductList() {
-    // return this.http.get(this.finalProductUrl).subscribe(response => {
-    //   this.data.next(response);
-    //   this.questionAnswerData = response;
-    // })
     return this.http.get(this.finalProductUrl);
   }
 
   addProduct(data) {
-    this.loaderService.display(true);
-    this.http.post(this.finalProductUrl, data).subscribe(response => {
-      this.getProductList();
-    })
+    return this.http.post(this.finalProductUrl, data);
   }
 
   deleteProduct(id) {
-    this.loaderService.display(true);
-    this.http.delete(this.finalProductUrl + "/" + id).subscribe(response => {
-      this.getProductList();
-    })
+    return this.http.delete(this.finalProductUrl + "/" + id);
   }
 
   updateProduct(data) {
-    this.loaderService.display(true);
-    this.http.patch(this.finalProductUrl + '/' + data._id, data).subscribe(response => {
-      this.getProductList();
-    })
+    return this.http.patch(this.finalProductUrl + '/' + data._id, data);
   }
 
   /*----categories---*/
@@ -111,24 +102,15 @@ export class ProductService {
   }
 
   addCategory(data) {
-    this.loaderService.display(true);
-    this.http.post(this.finalCategoryUrl, data).subscribe(response => {
-      this.getCategoryList();
-    })
+    return this.http.post(this.finalCategoryUrl, data);
   }
 
   deleteCategory(id) {
-    this.loaderService.display(true);
-    this.http.delete(this.finalCategoryUrl + "/" + id).subscribe(response => {
-      this.getCategoryList();
-    })
+    return this.http.delete(this.finalCategoryUrl + "/" + id);
   }
 
   updateCategory(data) {
-    this.loaderService.display(true);
-    this.http.patch(this.finalCategoryUrl + '/' + data._id, data).subscribe(response => {
-      this.getCategoryList();
-    })
+    return this.http.patch(this.finalCategoryUrl + '/' + data._id, data);
   }
   /*---end categories---*/
 

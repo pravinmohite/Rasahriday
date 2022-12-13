@@ -1,8 +1,8 @@
 @import "./assets/scss/variables.scss";
 @import "./assets/scss/mixins.scss";
+@import "~angular-notifier/styles";;
 /* You can add global styles to this file, and also import other style files */
 body {
-    font-family:cursive;
    // background-image: url($img-path+$background-img);
    background-color: $body-background !important;
 }
@@ -140,6 +140,11 @@ body {
     margin-bottom: 30px;
 }
 
+.add-product-modalcontainer {
+  &.modal-dialog {
+     max-width: 800px;
+  }
+}
 
 //--------------for question answer listing page----------
 .amazing-js-container {

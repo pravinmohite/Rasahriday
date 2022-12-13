@@ -1,6 +1,9 @@
-import { Component, createPlatform, OnInit, TemplateRef } from '@angular/core';
+import { Component, Input, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
+import { CommonService } from 'src/app/services/common-service/common.service';
+import { LoaderService } from 'src/app/services/loader-service/loader.service';
+import { ProductService } from 'src/app/services/product-service/product.service';
 
 
 @Component({
@@ -9,23 +12,41 @@ import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
   styleUrls: ['./add-product.component.scss']
 })
 export class AddProductComponent implements OnInit {
+  @Input() editMode; 
+  @ViewChild('addProductTemplate') templateRef: TemplateRef<any>;
   modalRef?: BsModalRef;
   productForm: FormGroup;
-  constructor(private modalService: BsModalService) { }
+  categories: any;
+  className = 'add-product-modalcontainer'
+  isAdmin = false;
+
+  constructor(
+    private productService: ProductService,
+    private commonService: CommonService,
+    private modalService: BsModalService,
+    private loaderService: LoaderService
+    ) { }
 
   ngOnInit(): void {
-    this.createForm()
+    this.setPrivileges();
+    this.createForm();
+  }
+
+  setPrivileges() {
+    this.isAdmin = this.commonService.userDetails.isAdmin;
   }
 
   createForm(): void{
     this.productForm = new FormGroup({
-      name: new FormControl('', Validators.required) ,      
+      _id: new FormControl('') , 
+      categoryId: new FormControl('', Validators.required) , 
+      productName: new FormControl('', Validators.required) ,      
       description: new FormControl(''),
       shlok: new FormControl(''),
-      reference: new FormControl(''),
+      references: new FormControl(''),
       dosage: new FormControl(''),
       indications: new FormControl(''),
-      contraindications: new FormControl(''),
+      contraIndications: new FormControl(''),
       sanskritName: new FormControl(''),
       botanicalName: new FormControl(''),
       drugQuantity: new FormControl(''),
@@ -34,13 +55,63 @@ export class AddProductComponent implements OnInit {
     })
   }
 
+  ngOnChanges() {
+    if(this.editMode && this.editMode.status) {
+      this.openAddProductModal(this.templateRef);
+      this.setValuesToBeEdited(this.editMode.editedItem);
+    }
+  }
+
+  setValuesToBeEdited(editedItem) {
+    this.productForm.patchValue(editedItem)
+  }
+
 
   openAddProductModal(templateRef:TemplateRef<any>): void{
-    this.modalRef = this.modalService.show(templateRef);
+    this.productForm.reset();
+    this.getCategories();
+    const config= this.commonService.getModalConfig(this.className);
+    this.modalRef = this.modalService.show(templateRef, config);
   }
 
-  handleFormSubmit(formVal): void{
-    console.log(formVal);
+  submit(formVal): void{
+    if(this.editMode && this.editMode.status) {
+      this.update(formVal);
+    }
+    else {
+      this.save(formVal);
+    }
   }
 
+  save(data) {
+    this.loaderService.display(true);
+    this.productService.addProduct(data).subscribe(response=>{
+      this.loaderService.display(false);
+      this.handleProductChangeEvent(data);
+    })
+  }
+
+  update(data) {
+    this.loaderService.display(true);
+    this.productService.updateProduct(data).subscribe(response=>{
+      this.loaderService.display(false);
+      this.handleProductChangeEvent(this.editMode.editedItem);
+    })
+  }
+
+  handleProductChangeEvent(data) {
+    this.hideModalAndClearForm();
+    if(data.categoryId) {
+      this.commonService.refreshProductEvent(data);
+    }
+  }
+
+  hideModalAndClearForm() {
+    this.modalRef?.hide();
+    this.productForm.reset();
+  }
+
+  getCategories() {
+    this.categories = this.commonService.getCategories();
+  }
 }

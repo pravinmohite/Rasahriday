@@ -1,4 +1,5 @@
 @import "./../../../assets/scss/variables.scss";
+@import "./../../../assets/scss/common.scss";
 
 .product-page-container {
     width: 100%;
@@ -27,6 +28,10 @@
             @media only screen and (max-width: 768px) {
                 padding-left: 0px;
             }
+        }
+
+        .add-category-container {
+            margin-left: 10px;
         }
     }
 
@@ -70,5 +75,12 @@
             overflow: hidden;
             padding: 0;
         }
+    }
+}
+
+
+@media (min-width: 768px) {
+    .modal-dialog {
+        max-width: 800px;
     }
 }

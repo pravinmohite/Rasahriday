@@ -1,4 +1,5 @@
 @import "./../../../assets/scss/variables.scss";
+@import "./../../../assets/scss/common.scss";
 
 .category-menu-container {
     border: solid 1px gainsboro;
@@ -18,3 +19,8 @@
         }
     }
 }
+
+.add-category-btncontainer {
+    margin-bottom: 20px;
+}
+

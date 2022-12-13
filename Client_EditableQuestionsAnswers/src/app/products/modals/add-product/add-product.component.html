@@ -1,64 +1,149 @@
-    <!-- add product button -->
-    <button class="btn btn-default btn-light btn-light-default" (click) = "openAddProductModal(addProductTemplate)">add product</button>
-    <!-- add product modal  -->
-    <ng-template #addProductTemplate>
-      <div class="modal-header">
-          <h4 class="modal-title pull-left">Add Product</h4>
-          <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="modalRef?.hide()">
-          <span aria-hidden="true" class="visually-hidden">&times;</span>
-          </button>
-      </div>
-      <div class="modal-body">
-          <form [formGroup] = "productForm" (ngSubmit) = "handleFormSubmit(productForm.value)">
-                <div>
-                    <label>Name</label>
-                    <input type = "text" formControlName= "name"/>
-                    <div *ngIf = "productForm.controls['name'].errors?.required && productForm.controls['name'].touched" class = "error-message">Please fill name.</div>
+<!-- add product button -->
+<button *ngIf="isAdmin" class="btn btn-default btn-light btn-light-default" (click)="openAddProductModal(addProductTemplate)">+ add
+    product</button>
+<!-- add product modal  -->
+<ng-template #addProductTemplate>
+    <div class="modal-header">
+        <h4 class="modal-title pull-left">Add Product</h4>
+        <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="modalRef?.hide()">
+            <span aria-hidden="true" class="visually-hidden">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form class="add-product-form" [formGroup]="productForm" (ngSubmit)="submit(productForm.value)">
+
+            <div class="form-group row">
+                <div class="col-6">
+                    <div class="row">
+                        <label for="type" class="col-3 col-form-label">Category</label>
+                        <div class="col-9">
+                            <select id="type" name="type" class="custom-select" formControlName="categoryId">
+                                <option *ngFor="let item of categories" [value]="item._id">{{item.categoryName}}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
                 </div>
-                <div>
-                    <label>Description</label>
-                    <textarea type = "text" formControlName= "description"></textarea>
-                </div>   
-                <div>
-                    <label>Shlok</label>
-                    <input type = "text" formControlName= "Shlok"/>
+                <div class="col-6">
+                    <div class="row">
+                        <label for="text" class="col-3 col-form-label">Name</label>
+                        <div class="col-9">
+                            <input class="form-control" type="text" formControlName="productName" />
+                            <div *ngIf="productForm.controls['productName'].errors?.required && productForm.controls['productName'].touched"
+                                class="error-message">Please fill name.</div>
+                        </div>
+                    </div>
                 </div>
-                <div>
-                    <label>Reference</label>
-                    <input type = "text" formControlName= "reference"/>
-                </div>  
-                <div>
-                    <label>dosage</label>
-                    <input type = "text" formControlName= "dosage"/>
-                </div>   
-                <div>
-                    <label>Indications</label>
-                    <input type = "text" formControlName= "indications"/>
+            </div>
+            <div class="form-group row">
+                <div class="col-6">
+                    <div class="row">
+                        <label for="text" class="col-3 col-form-label">Shlok</label>
+                        <div class="col-9">
+                            <input class="form-control" type="text" formControlName="shlok" />
+                        </div>
+                    </div>
                 </div>
-                <div>
-                    <label>Contraindications</label>
-                    <input type = "text" formControlName= "contraindications"/>
-                </div>    
-                <div>
-                    <label>Sanskrit Name</label>
-                    <input type = "text" formControlName= "sanskritName"/>
-                </div>     
-                <div>
-                    <label>Botanical Name</label>
-                    <input type = "text" formControlName= "botanicalName"/>
-                </div>  
-                <div>
-                    <label>Drug Quantity</label>
-                    <input type = "text" formControlName= "drugQuantity"/>
+                <div class="col-6">
+                    <div class="row">
+                        <label for="text" class="col-3 col-form-label">Description</label>
+                        <div class="col-9">
+                            <textarea class="form-control" type="text" formControlName="description"></textarea>
+                        </div>
+                    </div>
                 </div>
-                <div>
-                    <label>Stock</label>
-                    <input type="number" formControlName = "stock"/>
+            </div>
+            <div class="form-group row">
+                <div class="col-6">
+                    <div class="row">
+                        <label for="text" class="col-3 col-form-label">Reference</label>
+                        <div class="col-9">
+                            <input class="form-control" type="text" formControlName="references" />
+                        </div>
+                    </div>
                 </div>
-                <div>
-                    <label>Price</label>
-                    <input type="number" formControlName = "price"/>
-                </div>               
-          </form>
-      </div>
-  </ng-template>
+                <div class="col-6">
+                    <div class="row">
+                        <label for="text" class="col-3 col-form-label">dosage</label>
+                        <div class="col-9">
+                            <input class="form-control" type="text" formControlName="dosage" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-6">
+                    <div class="row">
+                        <label for="text" class="col-3 col-form-label">Indications</label>
+                        <div class="col-9">
+                            <input class="form-control" type="text" formControlName="indications" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="row">
+                        <label for="text" class="col-3 col-form-label">Contraindications</label>
+                        <div class="col-9">
+                            <input class="form-control" type="text" formControlName="contraIndications" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-6">
+                    <div class="row">
+                        <label for="text" class="col-3 col-form-label">Sanskrit Name</label>
+                        <div class="col-9">
+                            <input class="form-control" type="text" formControlName="sanskritName" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="row">
+                        <label for="text" class="col-3 col-form-label">Botanical Name</label>
+                        <div class="col-9">
+                            <input class="form-control" type="text" formControlName="botanicalName" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-6">
+                    <div class="row">
+                        <label for="text" class="col-3 col-form-label">Drug Quantity</label>
+                        <div class="col-9">
+                            <input class="form-control" type="text" formControlName="drugQuantity" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="row">
+                        <label for="text" class="col-3 col-form-label">Stock</label>
+                        <div class="col-9">
+                            <input class="form-control" type="number" formControlName="stock" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-6">
+                    <div class="row">
+                        <label for="text" class="col-3 col-form-label">Price</label>
+                        <div class="col-9">
+                            <input class="form-control" type="number" formControlName="price" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="offset-2 col-4">
+                    <button name="submit" type="submit" class="btn btn-primary btn-full-width">Save</button>
+                </div>
+                <div class="col-4">
+                    <button name="submit" type="button" class="btn btn-danger btn-full-width"
+                        (click)="modalRef?.hide()">Cancel</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</ng-template>

@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const ProductSchema = mongoose.Schema({
     categoryId: {
-        type: Number,
+        type: String,
         required: true
     },
     productName: {
@@ -17,7 +17,7 @@ const ProductSchema = mongoose.Schema({
         type: Number,
         required: false
     },
-    slok: {
+    shlok: {
         type:String,
         required:false
     },

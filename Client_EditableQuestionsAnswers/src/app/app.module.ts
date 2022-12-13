@@ -10,6 +10,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { LoaderComponent } from './partial_views/loader/loader.component';
 import { SidebarComponent } from './partial_views/sidebar/sidebar.component';
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { NotifierModule } from 'angular-notifier';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,40 @@ import { ModalModule } from 'ngx-bootstrap/modal';
     HttpClientModule,
     FormsModule,
     FontAwesomeModule,
+    NotifierModule.withConfig({
+      theme: 'material',
+      position: {
+        horizontal: {
+          /**
+           * Defines the horizontal position on the screen
+           * @type {'left' | 'middle' | 'right'}
+           */
+          position: 'right',
+          /**
+           * Defines the horizontal distance to the screen edge (in px)
+           * @type {number}
+           */
+          distance: 12
+        },
+        vertical: {
+          /**
+           * Defines the vertical position on the screen
+           * @type {'top' | 'bottom'}
+           */
+          position: 'bottom',
+          /**
+           * Defines the vertical distance to the screen edge (in px)
+           * @type {number}
+           */
+          distance: 12,
+          /**
+           * Defines the vertical gap, existing between multiple notifications (in px)
+           * @type {number}
+           */
+          gap: 10
+        }
+      }
+   }),
     ModalModule.forRoot()
   ],
   providers: [],

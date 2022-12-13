@@ -29,15 +29,20 @@ router.get(loginEndPoint,(req,res,next)=>{
 
 router.post(loginEndPoint,(req,res,next)=>{
     Login.find((err,existingCredentials)=>{
-        existingCredentials.filter(function(item){
-            if(req.body.username === item.username){
-             res.json(item);
+       let result= existingCredentials.find(function(item){
+            if(req.body.username === item.username && req.body.password === item.password){
+              return item;
             }
         });
-        let item={
-            invalidUser: true
+        if(result.length==0) {
+            let item={
+                invalidUser: true
+            }
+            res.json(item);
         }
-        res.json(item);
+        else {
+            res.json(result);
+        }
      })
 })
 
@@ -195,11 +200,26 @@ router.patch('/questionAnswer/:id',(req,res,next)=>{
 
 /*----crud for products data-----------------*/
 
-router.get('/product',(req,res,next)=>{
-    //res.send('retrieving the question answer list');
+router.get('/productAll',(req,res,next)=>{
     Product.find((err,productList)=>{
-       res.json(productList);
+        res.json(productList);
     })
+})
+
+router.get('/product',(req,res,next)=>{
+    if(!req.query.categoryId) {
+        res.json(null);
+    }
+    else {
+    Product.find((err,productList)=>{
+        let result= productList.filter(function(item){
+            if(req.query.categoryId === item.categoryId){
+               return true;
+            }
+        });
+       res.json(result);
+    })
+   }
 })
 
 router.post('/product',(req,res,next)=>{
@@ -210,7 +230,7 @@ router.post('/product',(req,res,next)=>{
     description:req.body.description,
     quantity:req.body.quantity,
     price:req.body.price,
-    slok: req.body.slok,
+    shlok: req.body.shlok,
     references: req.body.references,
     dosage: req.body.dosage,
     indications: req.body.indications,
@@ -219,6 +239,7 @@ router.post('/product',(req,res,next)=>{
     botanicalName: req.body.botanicalName,
     drugQuantity: req.body.drugQuantity,
     stock: req.body.stock,
+    date: req.body.date
   })
    newProduct.save((err,product)=>{
       if(err) {
@@ -243,12 +264,20 @@ router.delete('/product/:id',(req,res,next)=>{
 
 router.patch('/product/:id',(req,res,next)=>{
     Product.updateOne({_id:req.params.id},{$set:{
+        categoryId: req.body.categoryId,
         productName:req.body.productName,
         description:req.body.description,
         quantity:req.body.quantity,
         price:req.body.price,
-        category: req.body.price,
-        price:req.body.price,
+        shlok: req.body.shlok,
+        references: req.body.references,
+        dosage: req.body.dosage,
+        indications: req.body.indications,
+        contraIndications:req.body.contraIndications,
+        sanskritName: req.body.sanskritName,
+        botanicalName: req.body.botanicalName,
+        drugQuantity: req.body.drugQuantity,
+        stock: req.body.stock,
         date: req.body.date
     }},(err,result)=>{
         if(err) {

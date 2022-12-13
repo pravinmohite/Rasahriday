@@ -1,6 +1,8 @@
 import { Component, TemplateRef } from '@angular/core';
 import { DataService } from './services/data.service';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
+import { Router } from '@angular/router';
+import { CommonService } from './services/common-service/common.service';
 
 @Component({
   selector: 'app-root',
@@ -15,11 +17,24 @@ export class AppComponent{
 
   constructor(
     private dataService:DataService,
-    private modalService: BsModalService) {
+    private modalService: BsModalService,
+    private commonService: CommonService,
+    private router: Router
+    ) {
   }
 
   ngOnInit() {
+    this.checkAndSetLoggedInDetails();
     this.createWebStorageDemo();
+  }
+
+  checkAndSetLoggedInDetails() {
+   if(localStorage.getItem('loggedIn')=="true") {
+      this.commonService.getUserDetails();
+   }
+   else {
+     this.router.navigateByUrl('/login');
+   }
   }
 
   createWebStorageDemo(): void{

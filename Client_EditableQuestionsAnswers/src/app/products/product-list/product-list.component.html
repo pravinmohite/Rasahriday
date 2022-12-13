@@ -6,9 +6,9 @@
             </div>
             <div class="col-md-10 col-8 product-list-container">
                <div class="row">
-                 <div class="col-md-3 addproduct-btn-container">
+                 <div class="col-md-3 addproduct-btn-container" *ngIf="isAdmin">
                     <!-- add product modal -->
-                    <app-add-product></app-add-product>
+                    <app-add-product class="add-product-container" [editMode]="editMode" (productAddEvent)="receiveProductAddEvent($event)"></app-add-product>
                  </div>
                </div> 
                <div class="row"> 
@@ -24,6 +24,12 @@
                             </div>
                             <div class="product-description">{{product.description}}</div>
                             <div>
+                                <span class="edit-delete-btncontainer" *ngIf="isAdmin">
+                                    <fa-icon class="hand-cursor edit-icon" [icon]="faEdit" (click)="editProduct(product)">
+                                    </fa-icon>
+                                    <fa-icon class="hand-cursor delete-icon" [icon]="faTrash" (click)="deleteProduct(product)">
+                                    </fa-icon>
+                                </span>
                                 <button class="btn btn-primary add-to-cart" (click)="addToCart()">Add to cart</button>
                             </div>
                         </div>

@@ -6,7 +6,9 @@ import { CategoryMenuComponent } from '../partial_views/category-menu/category-m
 import { AddProductComponent } from './modals/add-product/add-product.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ProductDescriptionComponent } from './modals/product-description/product-description.component';
-
+import { AddCategoryComponent } from './modals/add-category/add-category.component';
+import { FormsModule } from '@angular/forms';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 
 @NgModule({
@@ -14,10 +16,13 @@ import { ProductDescriptionComponent } from './modals/product-description/produc
     ProductListComponent,
     CategoryMenuComponent,
     AddProductComponent,
-    ProductDescriptionComponent
+    ProductDescriptionComponent,
+    AddCategoryComponent
   ],
   imports: [
     CommonModule,
+    FormsModule,
+    FontAwesomeModule,
     ProductsRoutingModule,
     ReactiveFormsModule
   ]

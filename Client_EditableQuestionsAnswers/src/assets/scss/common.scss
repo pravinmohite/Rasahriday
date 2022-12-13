@@ -1,0 +1,13 @@
+@import "./variables.scss";
+
+.btn-full-width {
+  width: 100% !important;
+}
+
+.edit-icon {
+  margin-right: 5px
+}
+
+.delete-icon {
+  color: $delete-icon-color;
+}
