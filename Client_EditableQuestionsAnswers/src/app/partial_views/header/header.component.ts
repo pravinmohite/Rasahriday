@@ -3,6 +3,7 @@ import {QuestionAnswerService} from "../../services/question-answer-service/ques
 import { faTwitter,  faFacebookF, faInstagramSquare } from '@fortawesome/free-brands-svg-icons';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 import { ActivatedRoute, Router } from '@angular/router';
+import { CommonService } from 'src/app/services/common-service/common.service';
 
 @Component({
   selector: 'app-header',
@@ -15,22 +16,46 @@ export class HeaderComponent implements OnInit {
   faTwitter = faTwitter;
   faBars = faBars;
   searchVal = '';
+  userName: string;
   @Output('sidebarStatus') sidebarStatus = new EventEmitter();
   @Output('openAboutUs') openAboutUs = new EventEmitter();
   constructor(
     private questionAnswerService:QuestionAnswerService,
     private route: ActivatedRoute,
+    private router: Router,
+    private commonService: CommonService
   ) { 
   }
 
   ngOnInit(): void {
-    this.getQuestionTypes();
-    this.questionAnswerService.getUrlSearchVal().subscribe((searchVal:string) => {
-      this.searchVal = searchVal;
-      if(searchVal && searchVal != ''){
-        setTimeout(() => this.searchByQuestion(searchVal),1000);
-      }
+    this.handleSubscriptions();
+    this.setUserName();
+  }
+
+  handleSubscriptions() {
+    this.commonService.userLoggedIn.subscribe(data=>{
+      this.userName = data['userName'];
     })
+  }
+
+  setUserName() {
+    if(!this.userName) {
+      this.userName = this.commonService.userDetails.userName;
+    }
+  }
+
+  logOut() {
+    this.commonService.removeUserDetails();
+    this.removeUserName();
+    this.navigateToLoginPage();
+  }
+
+  removeUserName() {
+    this.userName ='';
+  }
+
+  navigateToLoginPage() {
+    this.router.navigate(['/login']);
   }
 
   openSiderBar(): void{

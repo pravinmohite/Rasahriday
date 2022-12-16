@@ -2,19 +2,26 @@
     <span id="close-icon-container">
         <fa-icon [icon]="faTimes" (click)="closeSideBar()" *ngIf="isSideBarOpen"></fa-icon>
     </span>
-    <div class="col-md-12 header-nav">
-        <span class="header-links">
-           {{userName}}
-        </span>
-    </div>
-    <div class="col-md-12 header-nav">
+    <div *ngIf="userName" class="col-md-12 header-nav" dropdown>
+        <button id="button-basic" dropdownToggle type="button" class="btn btn-default dropdown-toggle no-padding" aria-controls="dropdown-basic">
+                {{userName}} 
+                <span class="caret"></span>
+        </button>
+        <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu"
+            role="menu" aria-labelledby="button-basic">
+          <li role="menuitem">
+            <a class="dropdown-item" (click)="logOut()" href="#">Logout</a>
+          </li>
+        </ul>
+      </div>
+    <div *ngIf="userName" class="col-md-12 header-nav">
         <span class="header-links">
             <a class="nav-links" href="/#/carts">
                 Carts
             </a>
         </span>
     </div>
-    <div class="col-md-12 header-nav">
+    <div *ngIf="userName" class="col-md-12 header-nav">
         <span class="header-links">
             <a class="nav-links" href="/#/products">
                 Products

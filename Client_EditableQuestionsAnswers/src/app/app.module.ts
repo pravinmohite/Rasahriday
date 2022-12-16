@@ -11,6 +11,7 @@ import { LoaderComponent } from './partial_views/loader/loader.component';
 import { SidebarComponent } from './partial_views/sidebar/sidebar.component';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { NotifierModule } from 'angular-notifier';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { NotifierModule } from 'angular-notifier';
     HttpClientModule,
     FormsModule,
     FontAwesomeModule,
+    BsDropdownModule.forRoot(),
     NotifierModule.withConfig({
       theme: 'material',
       position: {

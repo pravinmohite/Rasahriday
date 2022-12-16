@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     if(localStorage.getItem('loggedIn')=="true") {
-      this.router.navigateByUrl('/admin-panel/updateInterviewQuestions');
+      this.router.navigateByUrl('/products');
     }
   }
 
@@ -35,13 +35,6 @@ export class LoginComponent implements OnInit {
     else {
        this.validateLoginDetails();
     }
-    // this.productService.getloginDetails().subscribe(data=>{
-    //   if(this.login.username==data[0].username && this.login.password==data[0].password)
-    //    {
-    //       localStorage.setItem('loggedIn','true');
-    //       this.router.navigateByUrl('/admin-panel/updateInterviewQuestions');
-    //    }
-    //  })
   }
 
   signUpUser() {

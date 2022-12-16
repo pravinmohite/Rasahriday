@@ -6,7 +6,7 @@
             </div>
             <div class="col-md-10 col-8 product-list-container">
                <div class="row">
-                 <div class="col-md-3 addproduct-btn-container" *ngIf="isAdmin">
+                 <div class="col-md-3 addproduct-btn-container">
                     <!-- add product modal -->
                     <app-add-product class="add-product-container" [editMode]="editMode" (productAddEvent)="receiveProductAddEvent($event)"></app-add-product>
                  </div>

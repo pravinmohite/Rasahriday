@@ -10,6 +10,7 @@ export class CommonService {
   confirmationText = "Are you sure you want to delete";
   refreshCategory = new Subject();
   refreshProduct = new Subject();
+  userLoggedIn = new Subject();
   categoryMenus;
   modalClass = 'modal-dialog-container'
 
@@ -18,6 +19,7 @@ export class CommonService {
   setUserDetails(userDetails) {
     localStorage.setItem('userDetails', JSON.stringify(userDetails));
     this.userDetails =userDetails;
+    this.userLoggedInEvent(userDetails);
   }
 
   getUserDetails() {
@@ -27,8 +29,13 @@ export class CommonService {
     }
   }
 
+  userLoggedInEvent(userDetails) {
+    this.userLoggedIn.next(userDetails);
+  }
+
   removeUserDetails() {
     localStorage.removeItem('userDetails');
+    localStorage.removeItem('loggedIn');
   }
 
   refreshCategoryEvent(data) {
