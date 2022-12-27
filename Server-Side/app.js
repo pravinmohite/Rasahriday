@@ -1,4 +1,5 @@
 var express=require('express');
+//const upload = require('express-fileupload');
 var mongoose=require('mongoose');
 var bodyparser=require('body-parser');
 var cors=require('cors');
@@ -28,6 +29,8 @@ app.use(cors());
 
 //body-parser
 app.use(bodyparser.json());
+
+app.use('/productImages', express.static('productImages'));
 
 //static files
 app.use(express.static(path.join(__dirname,"public")));

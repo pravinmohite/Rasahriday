@@ -56,7 +56,11 @@ const ProductSchema = mongoose.Schema({
     stock: {
         type: Number,
         required: false
+    },
+    productImages:
+    {
+       type: String
     }
-})
+}, {timeStamps: true})
 
 const QuestionAnswer = module.exports = mongoose.model('Product', ProductSchema)

@@ -4,6 +4,7 @@ import { CommonService } from 'src/app/services/common-service/common.service';
 import { LoaderService } from 'src/app/services/loader-service/loader.service';
 import { ProductService } from 'src/app/services/product-service/product.service';
 import { faTrash,faEdit } from '@fortawesome/free-solid-svg-icons';
+import { CartService } from 'src/app/services/cart-service/cart.service';
 
 @Component({
   selector: 'app-product-list',
@@ -24,7 +25,8 @@ export class ProductListComponent implements OnInit {
   constructor(
     private loaderService: LoaderService,
     private productService: ProductService,
-    private commonService: CommonService
+    private commonService: CommonService,
+    private cartService: CartService
     ) { }
 
   ngOnInit(): void {
@@ -76,8 +78,26 @@ export class ProductListComponent implements OnInit {
     };
   }
 
-  addToCart() {
-    
+  getProductImageToBeShown(productImage) {
+    return this.productService.getProductImageToBeShown(productImage);
+  }
+
+  addUserDetailsInCart(data) {
+    let userDetails = this.commonService.userDetails;
+    data.userId= userDetails._id;
+    data.userName= userDetails.userName;
+    data.userAddress = userDetails.address;
+    data.userPhoneNumber = userDetails.phoneNumber
+  }
+
+  addToCart(product) {
+    let data = product;
+    this.addUserDetailsInCart(data);
+    this.loaderService.display(true);
+    this.cartService.addToCartList(data).subscribe(response=>{
+      this.loaderService.display(false);
+      console.log('product added to cart successfully');
+    })
   }
 
   receiveProductAddEvent(data) {

@@ -7,7 +7,7 @@ import { LoaderService } from '../loader-service/loader.service';
 @Injectable({
   providedIn: 'root'
 })
-export class CartService {
+export class OrderService {
   filterData: any;
   currentQuestionTypeSelected: String;
   currentSearchString: String;
@@ -31,17 +31,17 @@ export class CartService {
     private router: Router) {
   }
 
-  /*-------------for question answers----------*/
+  /*-------------for orders----------*/
 
-  getCartListByUser(userId) {
+  getOrderListByUser(userId) {
     return this.http.get(this.finalCartUrl+'/'+userId);
   }
 
-  getCartListAll() {
+  getOrderListAll() {
     return this.http.get(this.finalCartAllUrl);
   }
 
-  addToCartList(data) {
+  addToOrderList(data) {
     return this.http.post(this.finalCartUrl, data);
   }
 
@@ -50,11 +50,11 @@ export class CartService {
   //   return this.http.post(this.finalCartByUserNameUrl, data);
   // }
 
-  deleteCartItem(id) {
+  deleteOrderItem(id) {
     return this.http.delete(this.finalCartUrl + "/" + id);
   }
 
-  updateCartList(data) {
+  updateOrderList(data) {
     return this.http.patch(this.cartUrl + '/' + data._id, data);
   }
 }

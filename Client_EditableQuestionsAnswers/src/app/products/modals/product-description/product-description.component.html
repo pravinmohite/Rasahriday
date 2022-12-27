@@ -1,4 +1,4 @@
-<div class="product-name" (click) = "openProductDescriptionModal(productDescriptionTemplate)">{{productName}}</div>
+<div class="product-name" (click) = "openProductDescriptionModal(productDescriptionTemplate)">{{product.productName}}</div>
 
     <!-- product description modal  -->
     <ng-template #productDescriptionTemplate>
@@ -9,11 +9,16 @@
             </button>
         </div>
         <div class="modal-body">
-            <div class = "product-image-container">
+            <div class="form-group product-img-container row" *ngIf="this.productImages">
+                <div class="col-4" *ngFor="let item of this.productImages;let i=index">
+                    <img class="product-img" src='{{item}}' />
+                </div>
+            </div>
+            <div class ="product-image-container" *ngIf="!this.productImages">
                 <img src = "assets/images/herbal-med.jpg" width = "100px" height = "100px"/>
             </div>
-            <div class = "product-name">Product Name</div>
-            <div class = "product-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus at mi ac velit euismod eleifend a a urna. Aliquam metus neque, fringilla ac tincidunt in, tempus at dui. Maecenas pellentesque lacus ut nunc blandit, eget auctor lacus faucibus. Etiam eget tortor velit.</div>
+            <div class = "product-name">{{product.productName}}</div>
+            <div class = "product-description">{{product.description}}</div>
             <table class = "table">
                 <thead>
                     <tr>
@@ -26,9 +31,9 @@
                 <tbody>
                     <tr>
                         <td>1</td>
-                        <td>xyz</td>
-                        <td>abc</td>
-                        <td>4</td>
+                        <td>{{product.sanskritName}}</td>
+                        <td>{{product.botanicalName}}</td>
+                        <td>{{product.drugQuantity}}</td>
                     </tr>
                 </tbody>
             </table>

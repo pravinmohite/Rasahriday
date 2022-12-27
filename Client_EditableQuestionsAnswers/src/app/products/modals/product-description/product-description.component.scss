@@ -16,10 +16,30 @@
   font-family: 'Arial';
 }
 
+.product-img-container {
+    width: 100%;
+}
+
 .product-name {
     color: $product-name-color;
     font-size: 14px;
     font-weight: 500;
     text-transform: uppercase;
     cursor: pointer;
+}
+
+.product-img {
+    height: 200px;
+    width: 200px;
+    border: solid 1px gainsboro;
+    margin: auto;
+    display: block;
+}
+
+::ng-deep {
+    .product-description-modalcontainer {
+        &.modal-dialog {
+            max-width: 800px;
+        }
+    }
 }

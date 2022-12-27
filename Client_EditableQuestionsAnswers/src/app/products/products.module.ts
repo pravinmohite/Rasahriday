@@ -9,6 +9,7 @@ import { ProductDescriptionComponent } from './modals/product-description/produc
 import { AddCategoryComponent } from './modals/add-category/add-category.component';
 import { FormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { SafeResourceUrlPipe } from './../pipes/safe-resource-url.pipe';
 
 
 @NgModule({
@@ -17,14 +18,15 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     CategoryMenuComponent,
     AddProductComponent,
     ProductDescriptionComponent,
-    AddCategoryComponent
+    AddCategoryComponent,
+    SafeResourceUrlPipe
   ],
   imports: [
     CommonModule,
     FormsModule,
     FontAwesomeModule,
     ProductsRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ]
 })
 export class ProductsModule { }

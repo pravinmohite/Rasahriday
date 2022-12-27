@@ -74,14 +74,20 @@ export class LoginComponent implements OnInit {
       userName: userDetails.username,
       address: userDetails.address,
       phoneNumber: userDetails.phoneNumber,
-      isAdmin: userDetails.isAdmin
+      isAdmin: userDetails.isAdmin,
+      _id: userDetails._id
     }
     this.commonService.setUserDetails(formattedUserDetails);
   }
 
   validateLoginDetails() {
     this.productService.validateLoginDetails(this.login).subscribe(data=>{
-       this.setPrivilegesOfUser(data);
+       if(data && data['invalidUser']) {
+         alert('incorrect credentials');
+       }
+       else {
+         this.setPrivilegesOfUser(data);
+       }
      })
   }
 

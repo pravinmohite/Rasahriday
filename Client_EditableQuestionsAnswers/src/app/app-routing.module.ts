@@ -31,6 +31,10 @@ let routes: Routes = [
   {
     path: "carts",
     loadChildren: ()=> import('./cart/cart.module').then(m=>m.CartModule)
+  },
+  {
+    path: "orders",
+    loadChildren: ()=> import('./order/order.module').then(m=>m.OrderModule)
   }
 ]
 @NgModule({

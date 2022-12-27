@@ -1,5 +1,5 @@
 <!-- add product button -->
-<button *ngIf="isAdmin" class="btn btn-default btn-light btn-light-default" (click)="openAddProductModal(addProductTemplate)">+ add
+<button *ngIf="isAdmin" class="btn btn-default btn-light btn-light-default" (click)="openAddProductModal(addProductTemplate, false)">+ add
     product</button>
 <!-- add product modal  -->
 <ng-template #addProductTemplate>
@@ -134,7 +134,34 @@
                         </div>
                     </div>
                 </div>
+                <div class="col-6">
+                    <div class="row">
+                        <label for="text" class="col-3 col-form-label">Product Images</label>
+                        <div class="col-9">
+                            <label class="custom-upload-btn btn-light btn-light-default" for="upload">Choose file
+                                <input type="file" class="file-upload" multiple (change)="getFiles($event)">
+                            </label>
+                        </div>
+                    </div>
+                </div>
             </div>
+
+            <!--below code to be edited-->
+            <div class="form-group product-img-container row" *ngIf="currentlyUploadedImageSrc.length==0">
+                <div class="col-4" *ngFor="let item of this.productImagesToBeEdited;let i=index">
+                    <img class="product-img" src='{{item}}' />
+                </div>
+                <!-- <div class="col-4" *ngIf="!this.productImagesToBeEdited">
+                    <img class="product-img" src="./../../../assets/images/herbal-med.jpg" />
+                </div> -->
+            </div>
+            <div class="form-group product-img-container row" *ngIf="currentlyUploadedImageSrc.length>0">
+                <div class="col-4" *ngFor="let item of this.productImages;let i=index">
+                    <img class="product-img" [src]="currentlyUploadedImageSrc[i] | safeResourceUrl" />
+                </div>
+            </div>
+
+
             <div class="form-group row">
                 <div class="offset-2 col-4">
                     <button name="submit" type="submit" class="btn btn-primary btn-full-width">Save</button>

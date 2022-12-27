@@ -65,6 +65,7 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
     ModalModule.forRoot()
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  exports: []
 })
 export class AppModule { }

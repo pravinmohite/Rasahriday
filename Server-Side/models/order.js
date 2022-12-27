@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const CartSchema = mongoose.Schema({
+const OrderSchema = mongoose.Schema({
     categoryId: {
         type: String,
         required: false
@@ -83,4 +83,4 @@ const CartSchema = mongoose.Schema({
     }
 })
 
-const Cart = module.exports = mongoose.model('Cart', CartSchema)
+const Order = module.exports = mongoose.model('Order', OrderSchema)

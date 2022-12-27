@@ -6,6 +6,21 @@ import { Subject } from 'rxjs';
   providedIn: 'root'
 })
 export class CommonService {
+  loginDetailsUrl: String = "/api/loginDetails";
+  signUpUrl = "/api/signUp";
+  productUrl: string = "/api/product";
+  categoryUrl: string = "/api/category";
+  orderUrl = "/api/order";
+  isProd: boolean = false;
+  /*---with ssl changed due to loadbalancer----can be done using nginx*/
+  //prodUrl:String="https://www.ssl.frontendinterviewquestions.com";
+  prodUrl: String = "http://54.255.150.70:3000";
+  devDomain: any = this.isProd ? this.prodUrl : "http://localhost:3000";
+  finalloginDetailsUrl: string = this.devDomain + this.loginDetailsUrl;
+  finalSignUpUrl = this.devDomain + this.signUpUrl;
+  finalProductUrl: string = this.devDomain + this.productUrl;
+  finalCategoryUrl: string = this.devDomain + this.categoryUrl;
+  finalOrderUrl = this.devDomain + this.orderUrl;
   userDetails: any;
   confirmationText = "Are you sure you want to delete";
   refreshCategory = new Subject();

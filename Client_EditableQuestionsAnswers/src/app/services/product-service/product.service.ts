@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { LoaderService } from './../../services/loader-service/loader.service';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -88,16 +88,12 @@ export class ProductService {
     return this.http.delete(this.finalProductUrl + "/" + id);
   }
 
-  updateProduct(data) {
-    return this.http.patch(this.finalProductUrl + '/' + data._id, data);
+  updateProduct(formData, data) {
+    return this.http.patch(this.finalProductUrl + '/' + data._id, formData);
   }
 
   /*----categories---*/
   getCategoryList() {
-    // return this.http.get(this.finalProductUrl).subscribe(response => {
-    //   this.data.next(response);
-    //   this.questionAnswerData = response;
-    // })
     return this.http.get(this.finalCategoryUrl);
   }
 
@@ -113,6 +109,28 @@ export class ProductService {
     return this.http.patch(this.finalCategoryUrl + '/' + data._id, data);
   }
   /*---end categories---*/
+
+  getProductImageToBeShown(productImage) {
+    let url = this.devDomain;
+    if(productImage) {
+     return url + '/' + productImage.split(',')[0];
+   }
+   return null;
+  }
+
+  getAllProductImagesToBeShown(productImage) {
+    let url = this.devDomain;
+    if(productImage) {
+      let allProductImages=productImage.split(',');
+      let productArr=[];
+      for(let image of allProductImages) {
+         let productUrl=url + '/' + image;
+         productArr.push(productUrl)
+      }
+      return productArr;
+   }
+   return null;
+  }
 
   filterDataByQuestionType(type) {
     this.currentQuestionTypeSelected = type;

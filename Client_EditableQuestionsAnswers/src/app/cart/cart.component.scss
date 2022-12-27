@@ -1,4 +1,4 @@
-@import "./../../assets/scss/variables.scss";
+@import "./../../assets/scss/common.scss";
 
 .cart-container {
     width:70%;
@@ -8,11 +8,20 @@
     background: $page-container-background;
     .product-img-container {
         margin-bottom: 10px;
+        display: flex;
+        .product-images {
+            display: flex;
+            margin: auto;
+            max-width: 100%;
+        }
+        .product-img {
+            margin: auto;
+        }
     }
 
     .product-img {
         height: 200px;
-        width: 100%;
+        width: 200px;
         border: solid 1px $container-border-color;
         margin: auto;
         display: block;

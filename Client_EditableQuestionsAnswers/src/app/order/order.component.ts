@@ -4,11 +4,11 @@ import { CommonService } from '../services/common-service/common.service';
 import { ProductService } from '../services/product-service/product.service';
 
 @Component({
-  selector: 'app-cart',
-  templateUrl: './cart.component.html',
-  styleUrls: ['./cart.component.scss']
+  selector: 'app-order',
+  templateUrl: './order.component.html',
+  styleUrls: ['./order.component.scss']
 })
-export class CartComponent implements OnInit {
+export class OrderComponent implements OnInit {
 
   cartItem: Record<string,unknown>;
   cartList: any;

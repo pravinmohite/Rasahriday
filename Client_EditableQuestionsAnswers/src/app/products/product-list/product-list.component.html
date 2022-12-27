@@ -15,12 +15,14 @@
                   
                     <div class="col-md-3 col-sm-12 col-xs-12 col-12 product-list-item-container" *ngFor="let product of products">
                         <div class="product-list-item">
+                           
                             <div class="product-img-container">
-                                <img class="product-img" src="./../../../assets/images/herbal-med.jpg" />
+                                <img *ngIf="product.productImages && product.productImages[0]" class="product-img" src='{{getProductImageToBeShown(product.productImages)}}' />
+                                <img *ngIf="!(product.productImages && product.productImages[0])" class="product-img" src="./../../../assets/images/herbal-med.jpg" />
                             </div>
                             <div class="product-name">
                                                     <!-- product description modal -->
-                                   <app-product-description [productName]=product.productName></app-product-description>
+                                   <app-product-description [product]=product></app-product-description>
                             </div>
                             <div class="product-description">{{product.description}}</div>
                             <div>
@@ -30,7 +32,7 @@
                                     <fa-icon class="hand-cursor delete-icon" [icon]="faTrash" (click)="deleteProduct(product)">
                                     </fa-icon>
                                 </span>
-                                <button class="btn btn-primary add-to-cart" (click)="addToCart()">Add to cart</button>
+                                <button class="btn btn-primary add-to-cart" (click)="addToCart(product)">Add to cart</button>
                             </div>
                         </div>
                     </div>
