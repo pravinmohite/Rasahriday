@@ -13,7 +13,14 @@
             <a class="dropdown-item" (click)="logOut()" href="#">Logout</a>
           </li>
         </ul>
-      </div>
+    </div>
+    <div *ngIf="userName" class="col-md-12 header-nav">
+        <span class="header-links">
+            <a class="nav-links" href="/#/products">
+                Products
+            </a>
+        </span>
+    </div>
     <div *ngIf="userName" class="col-md-12 header-nav">
         <span class="header-links">
             <a class="nav-links" href="/#/carts">
@@ -23,8 +30,8 @@
     </div>
     <div *ngIf="userName" class="col-md-12 header-nav">
         <span class="header-links">
-            <a class="nav-links" href="/#/products">
-                Products
+            <a class="nav-links" href="/#/orders">
+                Orders
             </a>
         </span>
     </div>

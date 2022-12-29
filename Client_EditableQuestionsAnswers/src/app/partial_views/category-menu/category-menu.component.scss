@@ -12,10 +12,18 @@
         li {
            border: solid 1px gainsboro;
            padding: 10px;
+           font-size: 13px;
 
            &.active {
             border-left: solid 2px red;
            }
+        }
+
+        .category-actions-btn {
+            @media screen and (max-width: 768px){
+                float: none!important;
+                display: block;
+            }
         }
     }
 }

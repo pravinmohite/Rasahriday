@@ -10,7 +10,10 @@ export class CommonService {
   signUpUrl = "/api/signUp";
   productUrl: string = "/api/product";
   categoryUrl: string = "/api/category";
+  cartUrl: string = "/api/cart";
+  cartAllUrl = '/api/cartAll';
   orderUrl = "/api/order";
+  orderAllUrl = "/api/orderAll";
   isProd: boolean = false;
   /*---with ssl changed due to loadbalancer----can be done using nginx*/
   //prodUrl:String="https://www.ssl.frontendinterviewquestions.com";
@@ -21,6 +24,7 @@ export class CommonService {
   finalProductUrl: string = this.devDomain + this.productUrl;
   finalCategoryUrl: string = this.devDomain + this.categoryUrl;
   finalOrderUrl = this.devDomain + this.orderUrl;
+  finalOrderAllUrl = this.devDomain + this.orderAllUrl;
   userDetails: any;
   confirmationText = "Are you sure you want to delete";
   refreshCategory = new Subject();

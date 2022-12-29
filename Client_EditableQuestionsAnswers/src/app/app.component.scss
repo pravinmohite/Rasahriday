@@ -1,3 +1,9 @@
+.router-outlet-container {
+    max-height: 95vh;
+    overflow: auto;
+    padding-top: 15px;
+}
+
 .sidebar-open{
     right: 0;
     animation: openSidebar 0.8s;

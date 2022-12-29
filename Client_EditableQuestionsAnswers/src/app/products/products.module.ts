@@ -10,6 +10,7 @@ import { AddCategoryComponent } from './modals/add-category/add-category.compone
 import { FormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { SafeResourceUrlPipe } from './../pipes/safe-resource-url.pipe';
+import { ConfirmOrderDetailsComponent } from './modals/confirm-order-details/confirm-order-details.component';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { SafeResourceUrlPipe } from './../pipes/safe-resource-url.pipe';
     AddProductComponent,
     ProductDescriptionComponent,
     AddCategoryComponent,
-    SafeResourceUrlPipe
+    SafeResourceUrlPipe,
+    ConfirmOrderDetailsComponent
   ],
   imports: [
     CommonModule,

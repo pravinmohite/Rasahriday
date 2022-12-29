@@ -1,0 +1,45 @@
+@import "./../../../../assets/scss/common.scss";
+
+%section-styles {
+    padding: 5px;
+}
+
+::ng-deep {
+    .confirm-order-modal {
+        .product-details {
+            position: relative;
+            @extend %section-styles;
+            .form-group {
+                margin-bottom: 10px
+            }
+        }
+
+        .user-details {
+            position: relative;
+            @extend %section-styles;
+            .form-group {
+                margin-bottom: 10px
+            }
+        }
+
+        .fa-icon {
+            position: absolute;
+            margin-top: -26px;
+            right: 0;
+        }
+        .check-icon {
+            color: green;
+            margin-right: 5px;
+            font-size: 18px;
+        }
+    }
+
+    .legend-title {
+        font-size: 16px;
+        font-weight: 500;
+    }
+
+    .fieldset-container {
+        margin-bottom: 15px;
+    }
+}

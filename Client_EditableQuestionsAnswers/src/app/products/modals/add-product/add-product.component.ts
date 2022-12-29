@@ -134,8 +134,13 @@ export class AddProductComponent implements OnInit {
   }
 
   setAllFilesInFormData(formData) {
-    for(let i=0;i<this.productImages.length;i++) {
-      formData.append('files',this.productImages[i]); 
+    if(Array.isArray(this.productImages)) {
+      for(let i=0;i<this.productImages.length;i++) {
+        formData.append('files',this.productImages[i]); 
+      }
+    }
+    else {
+      formData.append('productImages', this.productImages);
     }
   } 
 

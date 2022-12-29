@@ -275,7 +275,7 @@ router.delete('/product/:id', (req, res, next) => {
 
 router.patch('/product/:id', upload.any(), (req, res, next) => {
     let path = '';
-    if (req.files) {
+    if (req.files && req.files.length > 0) {
         req.files.forEach((files, index, arr) => {
             path += files.path + ',';
         });
@@ -298,7 +298,7 @@ router.patch('/product/:id', upload.any(), (req, res, next) => {
             drugQuantity: req.body.drugQuantity,
             stock: req.body.stock,
             date: req.body.date,
-            productImages: path
+            productImages: path?path: req.body.productImages
         }
     }, (err, result) => {
         if (err) {

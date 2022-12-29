@@ -1,12 +1,12 @@
 <div class="cart-container">
     <div class="row" *ngFor="let cartItem of cartList">
         <div class="col-5">
-            <div class="form-group product-img-container row" *ngIf="cartItem.productImages">
-                <div class="col-4 product-images" *ngFor="let item of cartItem.productImages;let i=index">
+            <div class="form-group product-img-container row" *ngIf="cartItem.productImagesToBeShown">
+                <div class="col-4 product-images" *ngFor="let item of cartItem.productImagesToBeShown;let i=index">
                     <img class="product-img" src='{{item}}' />
                 </div>
             </div>
-            <div class ="product-img-container default-img-container" *ngIf="!cartItem.productImages">
+            <div class ="product-img-container default-img-container" *ngIf="!cartItem.productImagesToBeShown">
                 <img class="product-img" src = "assets/images/herbal-med.jpg"/>
             </div>
         </div>
@@ -14,7 +14,7 @@
             <div class="product-name">{{cartItem.productName}}</div>
             <div class="product-description">{{cartItem.description}}</div>
             <div>
-                <button class="btn btn-primary place-order-btn">Place order</button>
+                <button class="btn btn-primary place-order-btn" (click)="confirmOrder(cartItem)">Place order</button>
             </div>
         </div>
     </div>

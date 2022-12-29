@@ -5,6 +5,7 @@
 body {
    // background-image: url($img-path+$background-img);
    background-color: $body-background !important;
+   overflow: hidden;
 }
 .hand-cursor {
     cursor: pointer;
