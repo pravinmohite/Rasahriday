@@ -24,6 +24,8 @@ export class CartService {
   currentData = this.data.asObservable();
   confirmationText = "Are you sure you want to delete";
   $urlSearchVal = new Subject();
+  cartDataSearch = new Subject();
+  cartItemChange = new Subject();
   constructor(
     private http: HttpClient,
     private loaderService: LoaderService,

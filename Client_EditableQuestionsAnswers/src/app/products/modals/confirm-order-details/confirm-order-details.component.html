@@ -44,15 +44,15 @@
                 <div class="form-group row">
                     <label class="col-5 col-form-label" for="categoryName">User Contact No.</label> 
                     <div class="col-7">
-                        <label *ngIf="!editMode" class="col-2 col-form-label" for="categoryName">{{product.userPhoneNumber}}</label>
+                        <label *ngIf="!editMode" class="col-form-label" for="categoryName">{{product.userPhoneNumber}}</label>
                         <input *ngIf="editMode" id="userPhoneNumber" [(ngModel)]="editedProduct.userPhoneNumber" name="userPhoneNumber" placeholder="Enter user contact No." type="text" class="form-control">
                     </div>
                 </div> 
             </div>
         </fieldset>
         <div class="form-group row">
-            <div class="offset-2 col-3">
-            <button name="submit" type="submit" class="btn btn-primary btn-full-width" (click)="save()">Save</button>
+            <div class="offset-2 col-4">
+            <button name="submit" type="submit" class="btn btn-primary btn-full-width" (click)="save()">Confirm Order</button>
             </div>  
             <div class="col-3">
             <button name="submit" type="button" class="btn btn-danger btn-full-width" (click)="modalRef?.hide()">Cancel</button>

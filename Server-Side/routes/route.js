@@ -568,6 +568,7 @@ router.patch('/order/:id', (req, res, next) => {
             sanskritName: req.body.sanskritName,
             botanicalName: req.body.botanicalName,
             drugQuantity: req.body.drugQuantity,
+            orderAccepted: req.body.orderAccepted
         }
     }, (err, result) => {
         if (err) {

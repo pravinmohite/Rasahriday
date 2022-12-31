@@ -29,6 +29,7 @@ export class ProductService {
   currentData = this.data.asObservable();
   confirmationText = "Are you sure you want to delete";
   $urlSearchVal = new Subject();
+  productDataSearch = new Subject();
   constructor(
     private http: HttpClient,
     private loaderService: LoaderService,
@@ -132,42 +133,10 @@ export class ProductService {
    return null;
   }
 
-  filterDataByQuestionType(type) {
-    this.currentQuestionTypeSelected = type;
-    this.handleFilteringOfDataBySearchStringAndQuestionType();
-  }
-
-  handleFilteringOfDataBySearchStringAndQuestionType() {
-    if ((!this.currentQuestionTypeSelected || this.currentQuestionTypeSelected.toUpperCase() == "ALL") && (this.currentSearchString == undefined || this.currentSearchString.trim() == "")) {
-      this.data.next(this.questionAnswerData);
-    }
-    else if (!this.currentQuestionTypeSelected || this.currentQuestionTypeSelected.toUpperCase() == "ALL" && (this.currentSearchString && this.currentSearchString.trim() != "")) {
-      this.filterData = {};
-      this.filterData = this.questionAnswerData.filter((item, index) => {
-        return item.question.toUpperCase().indexOf(this.currentSearchString.toUpperCase()) > -1;
-      })
-      this.data.next(this.filterData);
-    }
-    else if (this.currentQuestionTypeSelected.toUpperCase() != "ALL" && (this.currentSearchString && this.currentSearchString.trim() != "")) {
-      this.filterDataByQuestionTypeAndSearchString();
-    }
-    else {
-      this.filterData = {}
-      this.filterData = this.questionAnswerData.filter((item, index) => {
-        return item.questionType.toUpperCase() == this.currentQuestionTypeSelected.toUpperCase();
-      })
-      this.data.next(this.filterData);
-    }
-  }
-
-  filterDataBySearchString(value) {
-    let urlParam = this.route.snapshot.paramMap.get('searchKey');
-    if (urlParam !== value) {
-      this.router.navigate(['/frontend-interview-questions', value], { relativeTo: this.route });
-    }
-    this.currentSearchString = value;
-    this.handleFilteringOfDataBySearchStringAndQuestionType();
-  }
+  // filterDataByQuestionType(type) {
+  //   this.currentQuestionTypeSelected = type;
+  //   this.handleFilteringOfDataBySearchString();
+  // }
 
   filterDataByQuestionTypeAndSearchString() {
     this.filterData = {}

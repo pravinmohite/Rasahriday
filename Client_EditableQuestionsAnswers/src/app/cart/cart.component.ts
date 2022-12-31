@@ -5,11 +5,15 @@ import { CartService } from '../services/cart-service/cart.service';
 import { CommonService } from '../services/common-service/common.service';
 import { OrderService } from '../services/order-service/order.service';
 import { ProductService } from '../services/product-service/product.service';
+import { CarouselConfig } from 'ngx-bootstrap/carousel';
 
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
-  styleUrls: ['./cart.component.scss']
+  styleUrls: ['./cart.component.scss'],
+  providers: [
+    { provide: CarouselConfig, useValue: { showIndicators: false } }
+  ]
 })
 export class CartComponent implements OnInit {
 
@@ -19,6 +23,7 @@ export class CartComponent implements OnInit {
   productImages: any[];
   userDetails: any;
   modalRef: BsModalRef;
+  unfilteredCartItems: any;
   constructor(
     private modalService: BsModalService,
     private commonService: CommonService,
@@ -31,6 +36,13 @@ export class CartComponent implements OnInit {
 
   ngOnInit(): void {
     this.getCartItemsByPrivileges();
+    this.handleCartSearchSubscriptions();
+  }
+
+  handleCartSearchSubscriptions() {
+    this.cartService.cartDataSearch.subscribe(data=>{
+       this.cartList = this.commonService.filterDataBySearchString(this.unfilteredCartItems,data);
+    })
   }
 
   getCartItemsByPrivileges() {
@@ -44,15 +56,28 @@ export class CartComponent implements OnInit {
 
   getCartItemsByUser() {
     this.cartService.getCartListByUser(this.userDetails['_id']).subscribe(data=>{
-      this.cartList = data;
-      this.getProductImageToBeShown();
+      this.setCartData(data);
     }) 
+  }
+
+  setCartData(data) {
+    this.cartList = data;
+    this.setUnfilteredData(data);
+    this.getProductImageToBeShown();
+    this.setHeaderCartItemBadge(data.length);
+  }
+
+  setHeaderCartItemBadge(cartItemsLength) {
+    this.cartService.cartItemChange.next(cartItemsLength);
+  }
+
+  setUnfilteredData(data) {
+    this.unfilteredCartItems = data;
   }
 
   getCartItemsAll() {
     this.cartService.getCartListAll().subscribe(data=>{
-      this.cartList = data;
-      this.getProductImageToBeShown();
+      this.setCartData(data);
     }) 
   }
 

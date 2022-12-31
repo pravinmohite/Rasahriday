@@ -9,16 +9,20 @@
             </button>
         </div>
         <div class="modal-body">
-            <div class="form-group product-img-container row" *ngIf="this.productImages">
-                <div class="col-4" *ngFor="let item of this.productImages;let i=index">
-                    <img class="product-img" src='{{item}}' />
-                </div>
-            </div>
+           <div class="carousel-container" *ngIf="this.productImages">
+            <carousel>
+                <slide  *ngFor="let item of this.productImages;let i=index">
+                  <img src="{{item}}" alt="first slide" style="display: block; width: 100%;">
+                </slide>
+              </carousel>
+            </div>   
             <div class ="product-image-container" *ngIf="!this.productImages">
                 <img src = "assets/images/herbal-med.jpg" width = "100px" height = "100px"/>
             </div>
-            <div class = "product-name">{{product.productName}}</div>
-            <div class = "product-description">{{product.description}}</div>
+            <div class="product-details">
+                <div class = "product-name">{{product.productName}}</div>
+                <div class = "product-description">{{product.description}}</div>
+            </div>
             <table class = "table">
                 <thead>
                     <tr>

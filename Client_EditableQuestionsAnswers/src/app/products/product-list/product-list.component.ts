@@ -21,6 +21,7 @@ export class ProductListComponent implements OnInit {
     editedItem: {} 
   };
   isAdmin = false;
+  unfilteredProducts: any;
 
   constructor(
     private loaderService: LoaderService,
@@ -32,6 +33,7 @@ export class ProductListComponent implements OnInit {
   ngOnInit(): void {
     this.setPrivileges();
     this.handleSubscriptions();
+    this.handleProductSearchSubsriptions();
   }
 
   setPrivileges() {
@@ -42,6 +44,13 @@ export class ProductListComponent implements OnInit {
     this.commonService.refreshProduct.subscribe(data=>{
       this.setCategoryIdParamIfNotAvailable(data);
       this.getProducts(data['categoryId']);
+    })
+  
+  }
+
+  handleProductSearchSubsriptions() {
+    this.productService.productDataSearch.subscribe(data=>{
+       this.products = this.commonService.filterDataBySearchString(this.unfilteredProducts,data);
     })
   }
 
@@ -55,6 +64,7 @@ export class ProductListComponent implements OnInit {
     this.loaderService.display(true);
     this.productService.getProductListByCategoryId(data).subscribe(data=>{
        this.products = data;
+       this.unfilteredProducts = data;
        this.loaderService.display(false);
     })
   }
@@ -97,6 +107,7 @@ export class ProductListComponent implements OnInit {
     this.cartService.addToCartList(data).subscribe(response=>{
       this.loaderService.display(false);
       console.log('product added to cart successfully');
+      this.cartService.cartItemChange.next();
     })
   }
 

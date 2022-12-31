@@ -15,6 +15,7 @@ export class OrderService {
   currentData = this.data.asObservable();
   confirmationText = "Are you sure you want to delete";
   $urlSearchVal = new Subject();
+  orderDataSearch = new Subject();
   constructor(
     private http: HttpClient,
     private loaderService: LoaderService,

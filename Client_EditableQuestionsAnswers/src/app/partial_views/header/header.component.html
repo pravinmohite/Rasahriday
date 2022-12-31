@@ -16,10 +16,10 @@
     <div *ngIf="userName" class="form-inline col-md-4 searchbox-container">
         <!-- <form #myForm= "ngForm"> -->
           <input name = "searchVal" #searchString [(ngModel)] = "searchVal" class="form-control mr-sm-2 col-md-9" type="text" (keydown)="checkEnterKeyPressed(searchString.value,$event)" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success my-2 my-sm-0 col-md-2 hand-cursor" (click)="searchByQuestion(searchString.value)">Search</button>
+          <button class="btn btn-outline-success my-2 my-sm-0 col-md-2 hand-cursor" (click)="searchByPage(searchString.value)">Search</button>
         <!-- </form> -->
     </div>
-    <div *ngIf="userName" class="col-md-2 header-nav d-none d-md-block">
+    <div *ngIf="userName" class="col-md-3 header-nav d-none d-md-block">
       <span class="header-links">
         <a class="nav-links" href="/#/products">
           Products
@@ -27,7 +27,9 @@
       </span>
       <span class="header-links">
         <a class="nav-links" href="/#/carts">
-          Carts
+          Carts  
+          <!-- <fa-icon [icon]="faOpencart" (click)= "openSiderBar()"></fa-icon>  -->
+          <span *ngIf="cartItems && cartItems>0" class="badge badge-light">{{cartItems}}</span>
         </a>
       </span>
       <span class="header-links">
@@ -36,7 +38,7 @@
         </a>
       </span>
     </div>
-    <div *ngIf="userName" class="offset-lg-3 offset-md-2 col-1 btn-group d-none d-md-block" dropdown>
+    <div *ngIf="userName" class="offset-lg-2 offset-md-2 col-1 btn-group d-none d-md-block" dropdown>
       <button id="button-basic" dropdownToggle type="button" class="btn btn-default dropdown-toggle" aria-controls="dropdown-basic">
               {{userName}} 
               <span class="caret"></span>

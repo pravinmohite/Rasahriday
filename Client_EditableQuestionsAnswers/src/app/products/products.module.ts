@@ -9,6 +9,7 @@ import { ProductDescriptionComponent } from './modals/product-description/produc
 import { AddCategoryComponent } from './modals/add-category/add-category.component';
 import { FormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { CarouselModule } from 'ngx-bootstrap/carousel';
 import { SafeResourceUrlPipe } from './../pipes/safe-resource-url.pipe';
 import { ConfirmOrderDetailsComponent } from './modals/confirm-order-details/confirm-order-details.component';
 
@@ -29,6 +30,7 @@ import { ConfirmOrderDetailsComponent } from './modals/confirm-order-details/con
     FontAwesomeModule,
     ProductsRoutingModule,
     ReactiveFormsModule,
+    CarouselModule.forRoot()
   ]
 })
 export class ProductsModule { }

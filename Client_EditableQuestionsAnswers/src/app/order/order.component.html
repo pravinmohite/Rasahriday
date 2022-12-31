@@ -1,21 +1,43 @@
 <div class="cart-container">
     <div class="row" *ngFor="let orderedItem of orderList">
         <div class="col-5">
-            <div class="form-group product-img-container row" *ngIf="orderedItem.productImages">
-                <div class="col-4 product-images" *ngFor="let item of orderedItem.productImages;let i=index">
+            <div class="carousel-container" *ngIf="orderedItem.productImagesToBeShown">
+                <carousel>
+                    <slide *ngFor="let item of orderedItem.productImagesToBeShown;let i=index">
+                      <img class="product-img" src='{{item}}' style="display: block; width: 100%;">
+                    </slide>
+                  </carousel>
+            </div> 
+            <!-- <div class="form-group product-img-container row" *ngIf="orderedItem.productImagesToBeShown">
+                <div class="col-4 product-images" *ngFor="let item of orderedItem.productImagesToBeShown;let i=index">
                     <img class="product-img" src='{{item}}' />
                 </div>
-            </div>
-            <div class ="product-img-container default-img-container" *ngIf="!orderedItem.productImages">
+            </div> -->
+            <div class ="product-img-container default-img-container" *ngIf="!orderedItem.productImagesToBeShown">
                 <img class="product-img" src = "assets/images/herbal-med.jpg"/>
             </div>
         </div>
         <div class="col-7">
             <div class="product-name">{{orderedItem.productName}}</div>
             <div class="product-description">{{orderedItem.description}}</div>
+            <div *ngIf="!userDetails.isAdmin">
+                <div class="order-progress" *ngIf="!orderedItem.orderAccepted">
+                    <fa-icon class="hand-cursor fa-icon clock-icon" [icon]="faClock">
+                    </fa-icon>
+                    Pending confirmation
+                </div>
+            </div>
             <div>
-                <button *ngIf="userDetails.isAdmin" class="btn btn-primary place-order-btn">Confirm order</button>
+                <button *ngIf="userDetails.isAdmin && !orderedItem.orderAccepted" class="btn btn-primary place-order-btn" (click)="acceptOrder(orderedItem)">Accept order</button>
+            </div>
+            <div class="order-accepted" *ngIf="orderedItem.orderAccepted">
+                <fa-icon class="hand-cursor fa-icon check-icon" [icon]="faCheckSquare">
+                </fa-icon>
+                Order Accepted
             </div>
         </div>
+    </div>
+    <div class="empty-data" *ngIf="orderList && orderList.length==0">
+        Order list is empty
     </div>
 </div>

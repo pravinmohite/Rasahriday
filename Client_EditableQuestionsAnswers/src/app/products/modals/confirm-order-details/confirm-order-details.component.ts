@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit } from '@angular/core';
 import { BsModalRef } from 'ngx-bootstrap/modal';
-import { faEdit,faCheckSquare } from '@fortawesome/free-solid-svg-icons';
+import { faEdit, faCheckSquare } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-confirm-order-details',

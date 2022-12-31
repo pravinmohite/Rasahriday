@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ModalOptions } from 'ngx-bootstrap/modal';
 import { Subject } from 'rxjs';
 
@@ -6,6 +7,7 @@ import { Subject } from 'rxjs';
   providedIn: 'root'
 })
 export class CommonService {
+  currentSearchString: String;
   loginDetailsUrl: String = "/api/loginDetails";
   signUpUrl = "/api/signUp";
   productUrl: string = "/api/product";
@@ -33,7 +35,10 @@ export class CommonService {
   categoryMenus;
   modalClass = 'modal-dialog-container'
 
-  constructor() { }
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router
+  ) { }
 
   setUserDetails(userDetails) {
     localStorage.setItem('userDetails', JSON.stringify(userDetails));
@@ -87,5 +92,22 @@ export class CommonService {
 
   getCategories() {
     return this.categoryMenus;
+  }
+
+  handleFilteringOfDataBySearchString(products, searchVal) {
+    let filteredData= products.filter(data=>{
+      return (data.productName.indexOf(searchVal)>-1 || 
+              data.description.indexOf(searchVal)> -1)
+    })
+    return filteredData;
+  }
+
+  filterDataBySearchString(products, value) {
+    let urlParam = this.route.snapshot.paramMap.get('searchKey');
+    if (urlParam !== value) {
+      this.router.navigate(['/products', value], { relativeTo: this.route });
+    }
+    this.currentSearchString = value;
+    return this.handleFilteringOfDataBySearchString(products, value);
   }
 }

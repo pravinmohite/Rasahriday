@@ -40,7 +40,7 @@ export class LoginComponent implements OnInit {
   signUpUser() {
      this.productService.signUpUser(this.login).subscribe(data=>{
         console.log('Registration successfull');
-        this.setPrivilegesOfUser(data);
+        this.validateLoginDetails();
      })
   }
 

@@ -1,23 +1,34 @@
 @import "./../../../../assets/scss/variables.scss";
 
-.product-image-container{
+%img-dimensions {
+    height: 340px;
+    width: 668px;
+}
+
+.product-image-container {
     text-align: center;
 }
 
-.product-name{
+.product-name {
     font-weight: bold;
 }
 
-.table{
+.table {
     margin-top: 8px;
 }
 
-.modal-header, .modal-body{
-  font-family: 'Arial';
+.modal-header,
+.modal-body {
+    font-family: 'Arial';
 }
 
 .product-img-container {
     width: 100%;
+}
+
+.product-details {
+    margin-top: 6px;
+    text-align: center;
 }
 
 .product-name {
@@ -39,7 +50,20 @@
 ::ng-deep {
     .product-description-modalcontainer {
         &.modal-dialog {
-            max-width: 800px;
+            max-width: 700px;
+
+            .modal-body {
+                padding: 15px 15px 5px 15px !important;
+            }
+
+            .carousel-container {
+                @extend %img-dimensions;
+                margin: auto;
+
+                img {
+                    @extend %img-dimensions;
+                }
+            }
         }
     }
 }

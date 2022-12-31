@@ -1,1 +1,25 @@
 @import "./../../assets/scss/common.scss";
+
+.order-accepted {
+    border: solid 1px $container-border-color;
+    background-color: $confirm-status-background;
+    border-radius: 5px;
+    padding: 5px;
+    display: inline;
+
+    .check-icon {
+        color:$check-icon-color;
+    }
+}
+
+.order-progress {
+    border: solid 1px $container-border-color;
+    background-color: $pending-status-background;
+    border-radius: 5px;
+    padding: 5px;
+    display: inline;
+
+    .clock-icon {
+        color: $pendingclock-icon-color;
+    }
+}
