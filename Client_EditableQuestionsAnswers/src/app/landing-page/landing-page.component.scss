@@ -1,0 +1,13 @@
+.landing-page {
+    min-height: 100vh; 
+
+    .carousel-img {
+        height: 90vh;
+        display: block;
+        width: 100%;
+    }
+}
+
+.router-outlet-container {
+   padding: 0px;
+}

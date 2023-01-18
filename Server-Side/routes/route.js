@@ -613,4 +613,11 @@ router.post('/orderAll', (req, res, next) => {
     })
 })
 
+/*----LandingPage---*/
+router.get('/landingPageDetails', (req, res, next) => {
+    Product.find((err, productList) => {
+        res.json(productList);
+    })
+})
+
 module.exports = router;

@@ -29,6 +29,10 @@ let routes: Routes = [
     loadChildren: () => import('./products/products.module').then(m => m.ProductsModule)
   },
   {
+    path: "home",
+    loadChildren: ()=> import('./landing-page/landing-page.module').then(m=>m.LandingPageModule)
+  },
+  {
     path: "carts",
     loadChildren: ()=> import('./cart/cart.module').then(m=>m.CartModule)
   },

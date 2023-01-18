@@ -34,7 +34,7 @@ export class SidebarComponent implements OnInit {
   }
 
   setUserName() {
-    if(!this.userName) {
+    if(!this.userName && this.commonService.userDetails) {
       this.userName = this.commonService.userDetails.userName;
     }
   }

@@ -16,6 +16,7 @@ export class CommonService {
   cartAllUrl = '/api/cartAll';
   orderUrl = "/api/order";
   orderAllUrl = "/api/orderAll";
+  landingPageDetailsUrl ="/api/landingPageDetails";
   isProd: boolean = false;
   /*---with ssl changed due to loadbalancer----can be done using nginx*/
   //prodUrl:String="https://www.ssl.frontendinterviewquestions.com";
@@ -27,12 +28,14 @@ export class CommonService {
   finalCategoryUrl: string = this.devDomain + this.categoryUrl;
   finalOrderUrl = this.devDomain + this.orderUrl;
   finalOrderAllUrl = this.devDomain + this.orderAllUrl;
+  finalLandingPageDetailsUrl = this.devDomain + this.landingPageDetailsUrl;
   userDetails: any;
   confirmationText = "Are you sure you want to delete";
   refreshCategory = new Subject();
   refreshProduct = new Subject();
   userLoggedIn = new Subject();
   categoryMenus;
+  currentCurrency = '₹';
   modalClass = 'modal-dialog-container'
 
   constructor(
@@ -110,4 +113,13 @@ export class CommonService {
     this.currentSearchString = value;
     return this.handleFilteringOfDataBySearchString(products, value);
   }
+
+  getProductImageToBeShown(productImage) {
+    let url = this.devDomain;
+    if(productImage) {
+     return url + '/' + productImage.split(',')[0];
+   }
+   return null;
+  }
+  
 }

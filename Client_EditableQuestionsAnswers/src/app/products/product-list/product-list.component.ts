@@ -22,6 +22,7 @@ export class ProductListComponent implements OnInit {
   };
   isAdmin = false;
   unfilteredProducts: any;
+  currentCurrency: string;
 
   constructor(
     private loaderService: LoaderService,
@@ -34,10 +35,15 @@ export class ProductListComponent implements OnInit {
     this.setPrivileges();
     this.handleSubscriptions();
     this.handleProductSearchSubsriptions();
+    this.setCurrentCurrency();
   }
 
   setPrivileges() {
     this.isAdmin = this.commonService.userDetails.isAdmin;
+  }
+
+  setCurrentCurrency() {
+    this.currentCurrency = this.commonService.currentCurrency;
   }
 
   handleSubscriptions() {
@@ -109,6 +115,10 @@ export class ProductListComponent implements OnInit {
       console.log('product added to cart successfully');
       this.cartService.cartItemChange.next();
     })
+  }
+
+  changeQty(product) {
+    console.log('qty', product.quantity)
   }
 
   receiveProductAddEvent(data) {

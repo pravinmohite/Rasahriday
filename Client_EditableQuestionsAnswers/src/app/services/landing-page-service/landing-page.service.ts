@@ -1,0 +1,34 @@
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { BehaviorSubject, Subject } from 'rxjs';
+import { CommonService } from '../common-service/common.service';
+import { LoaderService } from '../loader-service/loader.service';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class LandingPageService {
+  orderUrl: string;
+  orderAllUrl: string;
+  private data = new BehaviorSubject(null);
+  currentData = this.data.asObservable();
+  confirmationText = "Are you sure you want to delete";
+  $urlSearchVal = new Subject();
+  orderDataSearch = new Subject();
+  landingPageDetailsUrl: string;
+  constructor(
+    private http: HttpClient,
+    private loaderService: LoaderService,
+    private route: ActivatedRoute,
+    private commonService: CommonService,
+    private router: Router) {
+      this.landingPageDetailsUrl = this.commonService.finalLandingPageDetailsUrl;
+  }
+
+  /*-------------for orders----------*/
+
+  getLandingPageDetails() {
+    return this.http.get(this.landingPageDetailsUrl);
+  }
+}

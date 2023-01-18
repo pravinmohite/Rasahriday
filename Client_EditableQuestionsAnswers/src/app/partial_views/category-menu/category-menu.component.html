@@ -3,6 +3,7 @@
     <app-add-category class="add-category-container" [editMode]="editMode"></app-add-category>
 </div>
 <div class="category-menu-container">
+    <div class="categories-header-title">Category</div>
     <ul class="category-list">
         <li class="product-item" [ngClass]="{'active': i == activeIndex}" *ngFor="let category of categories; let i=index">
             <span class="hand-cursor" (click)="onCategorySelected(category,i)">{{category.categoryName}}</span>

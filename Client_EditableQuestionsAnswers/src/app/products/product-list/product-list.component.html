@@ -20,19 +20,32 @@
                                 <img *ngIf="product.productImages && product.productImages[0]" class="product-img" src='{{getProductImageToBeShown(product.productImages)}}' />
                                 <img *ngIf="!(product.productImages && product.productImages[0])" class="product-img" src="./../../../assets/images/herbal-med.jpg" />
                             </div>
-                            <div class="product-name">
-                                                    <!-- product description modal -->
-                                   <app-product-description [product]=product></app-product-description>
-                            </div>
-                            <div class="product-description">{{product.description}}</div>
-                            <div>
-                                <span class="edit-delete-btncontainer" *ngIf="isAdmin">
-                                    <fa-icon class="hand-cursor edit-icon" [icon]="faEdit" (click)="editProduct(product)">
-                                    </fa-icon>
-                                    <fa-icon class="hand-cursor delete-icon" [icon]="faTrash" (click)="deleteProduct(product)">
-                                    </fa-icon>
-                                </span>
-                                <button class="btn btn-primary add-to-cart" (click)="addToCart(product)">Add to cart</button>
+                            <div class="img-details-container">
+                                <div class="product-name">
+                                                        <!-- product description modal -->
+                                    <app-product-description [product]=product></app-product-description>
+                                </div>
+                                <div class="product-description">{{product.description}}</div>
+                                <div class="product-price">
+                                 <span class="current-currency-symbol">{{currentCurrency}}</span>   
+                                 <span class="price-value">{{product.price}}</span>
+                                </div>
+                                <div class="user-action-btns row">
+                                    <input type="number" class="qty-input col-3" value="1" id="input1" placeholder="Qty">
+                                    <button class="btn btn-primary btn-outline add-to-cart add-cart-btn" (click)="addToCart(product)">
+                                        <!-- <i class="fa-solid fa-user"></i> -->
+                                        Add to cart
+                                    </button>
+                                    <button class="btn btn-primary btn-outline add-to-cart buy-btn" (click)="changeQty(this)" value="1">Buy</button>
+                                </div>
+                                <div class="admin-btn">
+                                    <span class="edit-delete-btncontainer" *ngIf="isAdmin">
+                                        <fa-icon class="hand-cursor edit-icon" [icon]="faEdit" (click)="editProduct(product)">
+                                        </fa-icon>
+                                        <fa-icon class="hand-cursor delete-icon" [icon]="faTrash" (click)="deleteProduct(product)">
+                                        </fa-icon>
+                                    </span>
+                                </div>
                             </div>
                         </div>
                     </div>

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, OnInit, Output } from '@angular/core';
 import {QuestionAnswerService} from "../../services/question-answer-service/question-answer.service";
 import { faTwitter,  faFacebookF, faOpencart } from '@fortawesome/free-brands-svg-icons';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
@@ -13,7 +13,7 @@ import { OrderService } from 'src/app/services/order-service/order.service';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit, AfterViewInit {
   @Output('sidebarStatus') sidebarStatus = new EventEmitter();
   @Output('openAboutUs') openAboutUs = new EventEmitter();
   questionTypes:any;
@@ -39,8 +39,11 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
     this.handleUserLoggedInSubscriptions();
     this.setUserDetails();
-    this.handleCartItemChangeSubscriptions();
     this.getCartItemsByPrivileges();
+  }
+
+  ngAfterViewInit() {
+    this.handleCartItemChangeSubscriptions();
   }
 
   handleCartItemChangeSubscriptions() {

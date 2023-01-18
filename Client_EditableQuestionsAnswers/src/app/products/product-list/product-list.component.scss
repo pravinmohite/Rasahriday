@@ -39,13 +39,36 @@
         box-shadow: 0px 0px 2px 2px gainsboro;
         float: left;
         border: solid 1px gainsboro;
-        padding: 10px;
+        padding: 5px 5px 10px 5px;
         margin-bottom: 10px;
         width: 100%;
         background-color: white;
 
+        .user-action-btns {
+            .qty-input {
+              margin-left: 10px;
+              margin-right: 5px;
+              padding-right: 0px;
+            }
+            .buy-btn {
+              margin-right: 5px;
+            }
+            .add-cart-btn {
+              margin-right: 5px;
+            }
+        }
+
+        .edit-delete-btncontainer {
+            vertical-align: sub !important;
+        }
+
+        .img-details-container {
+            padding: 5px 10px 5px 10px !important;
+        }
+
         .product-img-container {
             margin-bottom: 10px;
+            overflow: hidden;
         }
 
         .product-img {
@@ -54,6 +77,11 @@
             border: solid 1px gainsboro;
             margin: auto;
             display: block;
+            transition: transform 250ms ease-out;
+
+            &:hover {
+                transform: scale(1.1);
+            }
         }
 
         .add-to-cart {

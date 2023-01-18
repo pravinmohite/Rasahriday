@@ -1,0 +1,8 @@
+<div class="landing-page carousel-container" *ngIf="this.randomProductsArr">
+    
+    <carousel>
+        <slide *ngFor="let item of this.randomProductsArr;let i=index">
+          <img src="{{item}}" alt="first slide" class="carousel-img">
+        </slide>
+      </carousel>
+    </div>  

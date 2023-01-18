@@ -1,4 +1,4 @@
-@import "./../../../../assets/scss/variables.scss";
+@import "./../../../../assets/scss/common.scss";
 
 %img-dimensions {
     height: 340px;
@@ -45,6 +45,21 @@
     border: solid 1px gainsboro;
     margin: auto;
     display: block;
+}
+
+
+.user-action-btns {
+    .qty-input {
+      margin-left: 10px;
+      margin-right: 5px;
+      padding-right: 0px;
+    }
+    .buy-btn {
+      margin-right: 5px;
+    }
+    .add-cart-btn {
+      margin-right: 5px;
+    }
 }
 
 ::ng-deep {
