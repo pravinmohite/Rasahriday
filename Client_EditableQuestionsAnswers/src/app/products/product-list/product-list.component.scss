@@ -45,6 +45,7 @@
         background-color: white;
 
         .user-action-btns {
+            //display: none; //can be added later if required
             .qty-input {
               margin-left: 10px;
               margin-right: 5px;
@@ -64,6 +65,13 @@
 
         .img-details-container {
             padding: 5px 10px 5px 10px !important;
+            
+         /*can be added later if required */   
+         /*   &:hover {
+                .user-action-btns {
+                    display: block!important;
+                }
+            } */
         }
 
         .product-img-container {
