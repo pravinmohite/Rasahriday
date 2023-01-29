@@ -1,13 +1,73 @@
-.landing-page {
-    min-height: 100vh; 
+@import './../.././/assets/scss/common.scss';
 
-    .carousel-img {
-        height: 90vh;
-        display: block;
-        width: 100%;
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+::ng-deep {
+    .landing-page {
+        .new-arrival-slide {
+            animation: fadeIn 3s;
+        }
+
+        .carousel-img {
+            height: 90vh;
+            display: block;
+            width: 100%;
+        }
+
+        .carousel-caption {
+            position: absolute;
+            width: 100%;
+            text-align: left;
+            text-transform: uppercase;
+            top: 130px !important;
+            left: 130px;
+            color: $button-theme-color;
+            max-width: 440px;
+
+            .header-text {
+                font-family: cursive;
+            }
+
+            .header-text-details {
+                font-family: cursive;
+            }
+        }
+
+        .product-percategory-slides {
+            margin-top: 30px !important;
+            margin: auto;
+
+            .carousel-indicators {
+                display: none !important;
+            }
+
+            .carousel-item {
+                margin-right: inherit !important;
+                height: 300px !important;
+                padding: 30px;
+
+                img {
+                    height: 450px;
+                }
+            }
+        }
     }
 }
 
 .router-outlet-container {
-   padding: 0px;
+    padding: 0px;
+}
+
+::ng-deep {
+    .carousel-control-next {
+        z-index: 999 !important;
+    }
 }

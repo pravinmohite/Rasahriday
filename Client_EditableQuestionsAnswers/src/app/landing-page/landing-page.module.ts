@@ -4,6 +4,7 @@ import { LandingPageComponent } from './landing-page.component';
 import { LandingPageRoutingModule } from './landing-page-routing.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CarouselModule } from 'ngx-bootstrap/carousel';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -12,7 +13,8 @@ import { CarouselModule } from 'ngx-bootstrap/carousel';
     CommonModule,
     LandingPageRoutingModule,
     FontAwesomeModule,
-    CarouselModule
+    CarouselModule,
+    FormsModule
   ]
 })
 export class LandingPageModule { }

@@ -1,6 +1,10 @@
 .router-outlet-container {
-    max-height: 93vh;
+    max-height: 92vh;
     overflow: auto;
+    padding-top: 15px;
+    &.landing-page {
+       padding-top: 0px !important;
+    }
 }
 
 .sidebar-open{

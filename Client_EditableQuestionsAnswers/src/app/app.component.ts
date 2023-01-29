@@ -13,7 +13,7 @@ export class AppComponent{
   sideBarOpen:boolean = false;
   modalRef?: BsModalRef;
   isSideBarUntouched:boolean = true;
-
+  isLandingPage = false;
 
   constructor(
     private dataService:DataService,
@@ -21,11 +21,28 @@ export class AppComponent{
     private commonService: CommonService,
     private router: Router
     ) {
+      this.checkRouterEvent();
+  }
+
+  checkRouterEvent() {
+    this.router.events.subscribe((val) => {
+      this.checkIfLandingPage();
+  });
   }
 
   ngOnInit() {
     this.checkAndSetLoggedInDetails();
     this.createWebStorageDemo();
+  }
+
+  checkIfLandingPage() {
+    let url = window.location.href;
+    if(url.indexOf('home')> -1) {
+       this.isLandingPage = true;
+    }
+    else {
+       this.isLandingPage = false;
+    }
   }
 
   checkAndSetLoggedInDetails() {

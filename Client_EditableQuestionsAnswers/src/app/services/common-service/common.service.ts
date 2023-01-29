@@ -17,6 +17,7 @@ export class CommonService {
   orderUrl = "/api/order";
   orderAllUrl = "/api/orderAll";
   landingPageDetailsUrl ="/api/landingPageDetails";
+  productPerCategoryUrl = "/api/productPerCategory";
   isProd: boolean = false;
   /*---with ssl changed due to loadbalancer----can be done using nginx*/
   //prodUrl:String="https://www.ssl.frontendinterviewquestions.com";
@@ -29,6 +30,7 @@ export class CommonService {
   finalOrderUrl = this.devDomain + this.orderUrl;
   finalOrderAllUrl = this.devDomain + this.orderAllUrl;
   finalLandingPageDetailsUrl = this.devDomain + this.landingPageDetailsUrl;
+  finalProductPerCategoryUrl = this.devDomain + this.productPerCategoryUrl;
   userDetails: any;
   confirmationText = "Are you sure you want to delete";
   refreshCategory = new Subject();
@@ -121,5 +123,5 @@ export class CommonService {
    }
    return null;
   }
-  
+
 }

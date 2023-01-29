@@ -12,13 +12,15 @@ import { SidebarComponent } from './partial_views/sidebar/sidebar.component';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { NotifierModule } from 'angular-notifier';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { FooterComponent } from './partial_views/footer/footer.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     LoaderComponent,
-    SidebarComponent
+    SidebarComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,

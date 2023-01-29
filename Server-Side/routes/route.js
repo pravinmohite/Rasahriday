@@ -620,4 +620,19 @@ router.get('/landingPageDetails', (req, res, next) => {
     })
 })
 
+/*------get one product from each category----*/
+router.get('/productPerCategory',(req, res, next) => {
+    Product.find((err, productList) => {
+        let obj={};
+        let resultArr=[];
+        productList.map(data=>{
+            if(!obj[data.categoryId] && data.productImages && data.productImages!="") {
+                 resultArr.push(data);
+                 obj[data.categoryId]=true;
+            }
+        })
+        res.json(resultArr);
+    })
+})
+
 module.exports = router;

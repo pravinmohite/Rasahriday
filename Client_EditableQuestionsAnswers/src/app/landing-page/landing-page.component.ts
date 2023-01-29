@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { CommonService } from '../services/common-service/common.service';
 import { LandingPageService } from '../services/landing-page-service/landing-page.service';
+import { LoaderService } from '../services/loader-service/loader.service';
+
 
 @Component({
   selector: 'app-landing-page',
@@ -10,17 +13,42 @@ import { LandingPageService } from '../services/landing-page-service/landing-pag
 export class LandingPageComponent implements OnInit {
   landingPageDetails: any;
   randomProductsArr=[];
+  path = './../../assets/images/landingpage_img_';
+  imgFormat = '.jpg';
+  itemsPerSlide = 3;
+  singleSlideOffset = true;
+  noWrap = true;
+  slidesChangeMessage = '';
+  productPerCategorySlides = [];
+  showIndicator = false;
+
   constructor(
     private commonService: CommonService,
-    private landingPageService: LandingPageService
+    private landingPageService: LandingPageService,
+    private router: Router,
+    private loaderService: LoaderService
   ) { }
 
   ngOnInit(): void {
-    this.getLandingPageDetails();
+   // this.getLandingPageDetails();
+   this.getStaticLandingPageImages();
+   this.getProductPerCategory();
+  }
+
+  onSlideRangeChange(indexes: number[]): void {
+    this.slidesChangeMessage = `Slides have been switched: ${indexes}`;
+  }
+
+  getStaticLandingPageImages() {
+    for(let i=1;i<=3;i++){
+       this.randomProductsArr.push(this.path+i+this.imgFormat);
+    }
   }
 
   getLandingPageDetails() {
+     this.loaderService.display(true);
      this.landingPageService.getLandingPageDetails().subscribe(response=>{
+      this.loaderService.display(false);
       this.landingPageDetails = response;
       this.getRandomProductsToShow();
      });
@@ -36,5 +64,28 @@ export class LandingPageComponent implements OnInit {
       this.randomProductsArr.push(currentProductImage);
     }
     console.log('product',this.randomProductsArr);
+  }
+
+  showAllProducts() {
+    this.router.navigate(["/products"]);
+  }
+
+  setProductPerCategoryInSlides(response) {
+    for(const item of response) {
+       let productImage= this.commonService.getProductImageToBeShown(item['productImages']);
+       let imgObj = {
+        image: productImage
+       }
+       this.productPerCategorySlides.push(imgObj);
+    }
+    console.log('image product per cat', this.productPerCategorySlides);
+  }
+
+  getProductPerCategory() {
+    this.loaderService.display(true);
+    this.landingPageService.getProductPerCategory().subscribe(response=>{
+       this.loaderService.display(false);
+       this.setProductPerCategoryInSlides(response);
+    })
   }
 }

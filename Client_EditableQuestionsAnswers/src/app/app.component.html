@@ -11,8 +11,9 @@
         >
         </app-sidebar>
     </div>
-    <div class="router-outlet-container">
+    <div class="router-outlet-container" [ngClass] ="{'landing-page': isLandingPage}">
       <router-outlet></router-outlet>
+      <app-footer></app-footer>
     </div>
 
     <!-- about us modal -->
