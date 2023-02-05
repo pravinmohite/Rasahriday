@@ -74,7 +74,8 @@ export class LandingPageComponent implements OnInit {
     for(const item of response) {
        let productImage= this.commonService.getProductImageToBeShown(item['productImages']);
        let imgObj = {
-        image: productImage
+        image: productImage,
+        data: item
        }
        this.productPerCategorySlides.push(imgObj);
     }

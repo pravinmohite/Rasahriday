@@ -1,16 +1,50 @@
 @import '../../../assets/scss/variables.scss';
 
-.footer {
-    position: relative;
-    width: 100%;
-    float: left;
-    margin: 50px 0px 0px 0;
-    padding: 20px 0px 25px 0px;
-    overflow: hidden;
-    background-color: #304659;
-    color: white;
+.contact-us-part {
+  background-color: $contact-us-footer;
+  color: $contact-us-footercolor !important;
+  border-top: solid 1px $contact-us-border;
+  .call-us-text {
+    padding-top: 15px;
+  }
 
-    .copyright-info {
-        text-align: center;
+  .contact-email-container {
+    .contact-item {
+      margin-bottom:0px;
+      padding-bottom: 15px !important;
     }
+  }
+
+  a {
+    color: $contactus-linkicon-color !important;
+  }
+
+  fa-icon {
+    color: $contactus-linkicon-color !important;
+  }
+
+  .email-contact {
+    margin-bottom: 0px;
+    padding-bottom: 5px;
+  }
+
+}
+
+.footer {
+  position: relative;
+  width: 100%;
+  float: left;
+  margin: 50px 0px 0px 0;
+  padding-top: 10px;
+  overflow: hidden;
+
+  .footer-info {
+    background-color: $copyright-footer;
+    color: white;
+    padding: 10px;
+  }
+
+  .copyright-info {
+    text-align: center;
+  }
 }

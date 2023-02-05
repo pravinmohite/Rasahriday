@@ -25,12 +25,11 @@
         .carousel-caption {
             position: absolute;
             width: 100%;
-            text-align: left;
-            text-transform: uppercase;
-            top: 130px !important;
-            left: 130px;
+            top: 347px !important;
             color: $button-theme-color;
-            max-width: 440px;
+            max-width: 335px;
+            margin-top: 6px;
+            top: 347px !important;
 
             .header-text {
                 font-family: cursive;
@@ -45,14 +44,28 @@
             margin-top: 30px !important;
             margin: auto;
 
-            .carousel-indicators {
-                display: none !important;
-            }
-
             .carousel-item {
                 margin-right: inherit !important;
                 height: 300px !important;
                 padding: 30px;
+
+                .carousel-caption {
+                    position: absolute;
+                    width: 100%;
+                    max-width: 335px;
+                    top: 230px !important;
+                    width: 71%;
+                    height: 55px;
+
+                    .carousel-text {
+                        padding: 5px;
+                        background: $btn-outline-color1  !important;
+                        font-size: 1.2em;
+                        white-space: nowrap;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                    }
+                }
 
                 img {
                     height: 450px;

@@ -17,9 +17,9 @@
         <carousel [showIndicators]="showIndicator" [itemsPerSlide]="itemsPerSlide" [singleSlideOffset]="singleSlideOffset" [noWrap]="!noWrap"
             [interval]="0" [startFromIndex]="0" (slideRangeChange)="onSlideRangeChange($event)">
             <slide *ngFor="let slide of productPerCategorySlides; let index=index">
-                <img [src]="slide.image" alt="image slide" style="display: block; width: 100%;">
+                <img class="img-responsive center-block" [src]="slide.image" alt="image slide" style="display: block; width: 100%;">
                 <div class="carousel-caption">
-                    <h4>category {{index}}</h4>
+                    <h4 class="carousel-text">{{slide.data.productName}}</h4>
                 </div>
             </slide>
         </carousel>
