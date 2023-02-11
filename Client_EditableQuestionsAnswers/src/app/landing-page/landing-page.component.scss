@@ -107,6 +107,9 @@
 .fadeOut { 
     opacity: 0;
     transform: translateY(10vh);
+    @media screen and (max-width: 768px){
+        transform: translateY(1vh);
+    }
 }
 
 .fadeIn { 
