@@ -13,7 +13,7 @@
             </slide>
         </carousel>
     </div>
-    <div class="product-percategory-slides">
+    <div class="product-percategory-slides fade fadeOut">
         <carousel [showIndicators]="showIndicator" [itemsPerSlide]="itemsPerSlide" [singleSlideOffset]="singleSlideOffset" [noWrap]="!noWrap"
             [interval]="0" [startFromIndex]="0" (slideRangeChange)="onSlideRangeChange($event)">
             <slide *ngFor="let slide of productPerCategorySlides; let index=index">

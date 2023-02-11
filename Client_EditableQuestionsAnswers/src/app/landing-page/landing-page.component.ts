@@ -27,7 +27,9 @@ export class LandingPageComponent implements OnInit {
     private landingPageService: LandingPageService,
     private router: Router,
     private loaderService: LoaderService
-  ) { }
+  ) {
+    
+   }
 
   ngOnInit(): void {
    // this.getLandingPageDetails();
@@ -37,6 +39,10 @@ export class LandingPageComponent implements OnInit {
 
   onSlideRangeChange(indexes: number[]): void {
     this.slidesChangeMessage = `Slides have been switched: ${indexes}`;
+  }
+
+  addFadeAnimation() {
+    this.commonService.addFadeObserver();
   }
 
   getStaticLandingPageImages() {
@@ -79,7 +85,7 @@ export class LandingPageComponent implements OnInit {
        }
        this.productPerCategorySlides.push(imgObj);
     }
-    console.log('image product per cat', this.productPerCategorySlides);
+    this.addFadeAnimation();
   }
 
   getProductPerCategory() {

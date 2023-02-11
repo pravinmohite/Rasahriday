@@ -14,6 +14,10 @@
     border-top: solid 1px $contact-us-border;
     .call-us-text {
       padding-top: 15px;
+
+      @media screen and (max-width: 768px){
+        text-align: center;
+    }
     }
   
     .contact-email-container {
