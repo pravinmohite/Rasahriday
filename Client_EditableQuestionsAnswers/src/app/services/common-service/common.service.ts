@@ -16,6 +16,7 @@ export class CommonService {
   cartAllUrl = '/api/cartAll';
   orderUrl = "/api/order";
   orderAllUrl = "/api/orderAll";
+  productAllUrl = "/api/productAll";
   landingPageDetailsUrl ="/api/landingPageDetails";
   productPerCategoryUrl = "/api/productPerCategory";
   isProd: boolean = false;
@@ -29,6 +30,7 @@ export class CommonService {
   finalCategoryUrl: string = this.devDomain + this.categoryUrl;
   finalOrderUrl = this.devDomain + this.orderUrl;
   finalOrderAllUrl = this.devDomain + this.orderAllUrl;
+  finalProductAllUrl = this.devDomain + this.productAllUrl;
   finalLandingPageDetailsUrl = this.devDomain + this.landingPageDetailsUrl;
   finalProductPerCategoryUrl = this.devDomain + this.productPerCategoryUrl;
   userDetails: any;

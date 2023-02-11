@@ -15,12 +15,19 @@ export class CategoryMenuComponent implements OnInit {
   categories: any;
   faTrash=faTrash;
   faEdit=faEdit;
+  isAllCategoryActive = true;
   editMode = { 
     status: false, 
     editedItem: {} 
   };
-  activeIndex=0;
+  activeIndex=-1;
+  allCategoryText = 'All';
+  editIconTag = 'svg';
+  deleteIconTag = 'path';
   isAdmin = false;
+  categorySelectedObj = {
+    isAllCategorySelected: true
+  };
 
   constructor(
     private loaderService: LoaderService,
@@ -54,7 +61,7 @@ export class CategoryMenuComponent implements OnInit {
   }
 
   refreshProductAndSetCategoriesGlobally(data) {
-    this.commonService.refreshProduct.next(data[0])
+    this.commonService.refreshProduct.next(this.categorySelectedObj)
     this.commonService.setCategoriesGlobally(data);
   }
 
@@ -77,9 +84,19 @@ export class CategoryMenuComponent implements OnInit {
     };
   }
 
-  onCategorySelected(data,i) {
-    this.setActiveIndex(i);
-    this.commonService.refreshProduct.next(data)
+  onCategorySelected(event, data, i) {
+    const currentTagName = event.target.tagName;
+    if(currentTagName !== this.editIconTag && currentTagName !== this.deleteIconTag) {
+      this.setActiveIndex(i);
+      this.isAllCategoryActive = false;
+      this.commonService.refreshProduct.next(data)
+    }
+  }
+
+  allCategorySelected() {
+    this.setActiveIndex(-1);
+    this.isAllCategoryActive = true;
+    this.commonService.refreshProduct.next(this.categorySelectedObj);
   }
 
   setActiveIndex(index) {

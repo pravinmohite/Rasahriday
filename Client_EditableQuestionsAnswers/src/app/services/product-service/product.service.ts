@@ -3,6 +3,7 @@ import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { LoaderService } from './../../services/loader-service/loader.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { CommonService } from '../common-service/common.service';
 
 @Injectable({
   providedIn: 'root'
@@ -30,11 +31,15 @@ export class ProductService {
   confirmationText = "Are you sure you want to delete";
   $urlSearchVal = new Subject();
   productDataSearch = new Subject();
+  productAllUrl: any;
+  
   constructor(
     private http: HttpClient,
     private loaderService: LoaderService,
+    private commonService: CommonService,
     private route: ActivatedRoute,
     private router: Router) {
+      this.productAllUrl = this.commonService.finalProductAllUrl;
   }
 
   /*---------------for login details-------------*/
@@ -77,8 +82,8 @@ export class ProductService {
     return this.http.get(this.finalProductUrl+'?categoryId='+categoryId);
   }
 
-  getProductList() {
-    return this.http.get(this.finalProductUrl);
+  getAllProductList() {
+    return this.http.get(this.productAllUrl);
   }
 
   addProduct(data) {

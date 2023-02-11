@@ -16,6 +16,7 @@ export class ProductListComponent implements OnInit {
   categoryId;
   faTrash=faTrash;
   faEdit=faEdit;
+  isAllCategorySelected = true;
   editMode = { 
     status: false, 
     editedItem: {} 
@@ -48,8 +49,15 @@ export class ProductListComponent implements OnInit {
 
   handleSubscriptions() {
     this.commonService.refreshProduct.subscribe(data=>{
-      this.setCategoryIdParamIfNotAvailable(data);
-      this.getProducts(data['categoryId']);
+      if(data && data['isAllCategorySelected']) {
+         this.isAllCategorySelected = true;
+         this.getAllProducts();
+      }
+      else {
+        this.isAllCategorySelected = false;
+        this.setCategoryIdParamIfNotAvailable(data);
+        this.getProducts(data['categoryId']);
+      }
     })
   
   }
@@ -75,15 +83,33 @@ export class ProductListComponent implements OnInit {
     })
   }
 
+  getAllProducts() {
+    this.loaderService.display(true);
+    this.productService.getAllProductList().subscribe(data=>{
+      this.products = data;
+      this.unfilteredProducts = data;
+      this.loaderService.display(false);
+    })
+  }
+
   deleteProduct(data) {
     let result=this.commonService.confirmAction();
     if(result) {
     this.loaderService.display(true);
     this.productService.deleteProduct(data._id).subscribe(response=>{
-      this.getProducts(data['categoryId']);
+      this.checkAndLoadProductsByCategory(data);
       this.loaderService.display(false);
     })
    }
+  }
+
+  checkAndLoadProductsByCategory(data) {
+    if(this.isAllCategorySelected) {
+      this.getAllProducts();
+    }
+    else {
+      this.getProducts(data['categoryId']);
+    }
   }
 
   editProduct(item){
