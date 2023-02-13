@@ -36,14 +36,15 @@
 }
 
 .cart-container {
-  width: 70%;
+  width: 64%;
   margin: auto;
-  border: solid 1px $container-border-color;
   padding: 10px;
   background: $page-container-background;
 
   .product-item {
     margin-bottom: 15px;
+    padding-top: 15px;
+    box-shadow: 0px 0px 2px 2px gainsboro;
   }
 
   .product-img-container {
