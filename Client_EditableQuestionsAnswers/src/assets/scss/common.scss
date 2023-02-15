@@ -104,6 +104,28 @@
 }
 
 .btn-outline {
+  color: $btn-outline-textcolor;
+  background-color: $btn-outline-color;
+  border-color: $btn-outline-color;
+  font-weight: bold;
+  letter-spacing: 0.05em;
+  border-radius: 0;
+  padding: 3px 6px !important;
+  box-shadow: 2px 2px $box-shadow-color;
+
+  &:active,
+  &:hover,
+  &:focus {
+    background: $btn-outline-backgroundhover !important;
+    color: $button-theme-color !important;
+    border-color: $btn-outline-color !important;
+  }
+  &:active {
+    transform: translateY(1px);
+  }
+}
+
+.btn-outline-customsecondary {
   color: $btn-outline-color;
   background-color: $button-theme-color;
   border-color: $btn-outline-color;
@@ -111,14 +133,19 @@
   letter-spacing: 0.05em;
   border-radius: 0;
   padding: 3px 6px !important;
-
-  &:hover,
+  box-shadow: 2px 2px $box-shadow-color;
+  
   &:active,
+  &:hover,
   &:focus {
-    background: $btn-outline-color !important;
-    color: $button-theme-color !important;
-    border-color: $btn-outline-color !important;
+    color: $btn-outline-color !important;
+    background-color: $button-theme-color !important;
+    border-color: $btn-outlinesecondary-borderhover !important;
   }
+  &:active {
+    transform: translateY(1px);
+  }
+
 }
 
 .btn-color-1 {
