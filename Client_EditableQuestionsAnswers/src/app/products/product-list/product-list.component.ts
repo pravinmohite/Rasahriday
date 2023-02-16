@@ -5,6 +5,10 @@ import { LoaderService } from 'src/app/services/loader-service/loader.service';
 import { ProductService } from 'src/app/services/product-service/product.service';
 import { faTrash,faEdit } from '@fortawesome/free-solid-svg-icons';
 import { CartService } from 'src/app/services/cart-service/cart.service';
+import { OrderService } from 'src/app/services/order-service/order.service';
+import { BsModalRef, BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
+import { ConfirmOrderDetailsComponent } from '../modals/confirm-order-details/confirm-order-details.component';
+import { NotifierService } from 'angular-notifier';
 
 @Component({
   selector: 'app-product-list',
@@ -12,6 +16,7 @@ import { CartService } from 'src/app/services/cart-service/cart.service';
   styleUrls: ['./product-list.component.scss']
 })
 export class ProductListComponent implements OnInit {
+  orderConfirmationClass='order-confirmation';
   products: any;
   categoryId;
   faTrash=faTrash;
@@ -24,12 +29,16 @@ export class ProductListComponent implements OnInit {
   isAdmin = false;
   unfilteredProducts: any;
   currentCurrency: string;
-
+  modalRef: BsModalRef;
+  
   constructor(
     private loaderService: LoaderService,
     private productService: ProductService,
     private commonService: CommonService,
-    private cartService: CartService
+    private cartService: CartService,
+    private orderService: OrderService,
+    private modalService: BsModalService,
+    private notifierService: NotifierService
     ) { }
 
   ngOnInit(): void {
@@ -124,7 +133,7 @@ export class ProductListComponent implements OnInit {
     return this.productService.getProductImageToBeShown(productImage);
   }
 
-  addUserDetailsInCart(data) {
+  addUserDetails(data) {
     let userDetails = this.commonService.userDetails;
     data.userId= userDetails._id;
     data.userName= userDetails.userName;
@@ -134,7 +143,7 @@ export class ProductListComponent implements OnInit {
 
   addToCart(product) {
     let data = product;
-    this.addUserDetailsInCart(data);
+    this.addUserDetails(data);
     this.loaderService.display(true);
     this.cartService.addToCartList(data).subscribe(response=>{
       this.loaderService.display(false);
@@ -155,4 +164,23 @@ export class ProductListComponent implements OnInit {
     
   }
 
+  openOrderConfirmationModal(product): void{
+    this.addUserDetails(product);
+    const initialState: ModalOptions = {
+      initialState: {
+        product
+      }
+    };
+    const config= this.commonService.getModalConfig(this.orderConfirmationClass);
+    this.modalRef = this.modalService.show(ConfirmOrderDetailsComponent, initialState);
+    this.modalRef.content.event.subscribe(data=>{
+      this.placeOrder(data);
+    });
+  }
+
+  placeOrder(cartItem) {
+    this.orderService.addToOrderList(cartItem).subscribe(response=>{
+      this.notifierService.notify('success', 'Order placed successfully!');
+    })
+  }
 }

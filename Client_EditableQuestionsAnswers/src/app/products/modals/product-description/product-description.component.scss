@@ -1,79 +1,138 @@
 @import "./../../../../assets/scss/common.scss";
 
+%carouse-container-dimensions {
+    height: 450px;
+    width: 500px;
+}
+
 %img-dimensions {
-    height: 340px;
-    width: 668px;
+    height: 430px;
+    width: 480px;
 }
 
-.product-image-container {
-    text-align: center;
+%action-btn-size {
+    font-size: 20px !important;
+    padding: 10px !important;
 }
 
-.product-name {
-    font-weight: bold;
-}
-
-.table {
-    margin-top: 8px;
-}
-
-.modal-header,
-.modal-body {
-    font-family: 'Arial';
-}
-
-.product-img-container {
-    width: 100%;
-}
-
-.product-details {
-    margin-top: 6px;
-    text-align: center;
-}
-
-.product-name {
-    color: $product-name-color;
-    font-size: 14px;
-    font-weight: 500;
-    text-transform: uppercase;
-    cursor: pointer;
-}
-
-.product-img {
-    height: 200px;
-    width: 200px;
-    border: solid 1px gainsboro;
-    margin: auto;
-    display: block;
-}
-
-
-.user-action-btns {
-    .qty-input {
-      margin-left: 10px;
-      margin-right: 5px;
-      padding-right: 0px;
+.product-description-modal {
+    .product-image-container {
+        text-align: center;
     }
-    .buy-btn {
-      margin-right: 5px;
+    
+    .product-name {
+        font-weight: bold;
     }
-    .add-cart-btn {
-      margin-right: 5px;
+    
+    .table {
+        margin-top: 8px;
     }
+    
+    .modal-header,
+    .modal-body {
+        font-family: 'Arial';
+    }
+    
+    .product-img-container {
+        width: 100%;
+    }
+    
+    .product-details {
+      //  margin-top: 6px;
+       // text-align: center;
+       .product-name {
+        color: $product-name-color;
+        font-size: 24px;
+        font-weight: 500;
+        text-transform: uppercase;
+        cursor: pointer;
+      }
+      .product-description {
+        font-size: 20px;
+        color: $product-description-color !important;
+      }
+
+      .product-price {
+        margin-top: 20px;
+
+        .current-currency-symbol {
+            top: -12.25px;
+            font-size: 12px;
+            padding-right: 2px;
+        }
+
+        .price-value {
+            font-size: 30px;
+        }
+      }
+
+      .drug-quantity-container {
+        margin-top: 20px;
+        font-family: sans-serif;
+
+        .drug-quantityvalue-container {
+            margin-top: 10px;
+
+            .drug-quantity-value {
+                background: $btn-search-background;
+                color: $btn-outline-textcolor;
+                padding: 6px 12px 6px 12px;
+                border-radius: 20px;
+            }
+        }
+      }
+
+      .quantity-container {
+        margin-top: 40px;
+        .quantity-title {
+            font-family: sans-serif;
+            font-size: 16px;
+          }
+      }
+
+      .user-action-btns {
+        margin-top:30px;
+
+        .qty-input {
+          margin-left: 10px;
+          margin-right: 5px;
+          padding-right: 0px;
+        }
+        .buy-btn {
+          margin-right: 5px;
+          @extend %action-btn-size;
+        }
+        .add-cart-btn {
+          margin-right: 5px;
+          @extend %action-btn-size;
+        }
+      }
+    }
+    
+    
+    
+    .product-img {
+        height: 200px;
+        width: 200px;
+        border: solid 1px gainsboro;
+        margin: auto;
+        display: block;
+    }
+
 }
+
 
 ::ng-deep {
     .product-description-modalcontainer {
         &.modal-dialog {
-            max-width: 700px;
+            max-width: 1000px;
 
             .modal-body {
                 padding: 15px 15px 5px 15px !important;
             }
 
             .carousel-container {
-                @extend %img-dimensions;
-                margin: auto;
+                @extend %carouse-container-dimensions;
 
                 img {
                     @extend %img-dimensions;

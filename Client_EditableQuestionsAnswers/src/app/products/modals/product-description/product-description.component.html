@@ -1,54 +1,88 @@
-<div class="product-name" (click) = "openProductDescriptionModal(productDescriptionTemplate)">{{product.productName}}</div>
+<div class="product-name" (click)="openProductDescriptionModal(productDescriptionTemplate)">{{product.productName}}
+</div>
 
-    <!-- product description modal  -->
-    <ng-template #productDescriptionTemplate>
-        <div class="modal-header">
-            <h4 class="modal-title pull-left">Product description</h4>
-            <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="modalRef?.hide()">
+<!-- product description modal  -->
+<ng-template #productDescriptionTemplate>
+    <div class="modal-header">
+        <h4 class="modal-title pull-left">Product description</h4>
+        <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="modalRef?.hide()">
             <span aria-hidden="true" class="visually-hidden">&times;</span>
-            </button>
-        </div>
-        <div class="modal-body">
-           <div class="carousel-container" *ngIf="this.productImages">
-            <carousel>
-                <slide  *ngFor="let item of this.productImages;let i=index">
-                  <img src="{{item}}" alt="first slide" style="display: block; width: 100%;">
-                </slide>
-              </carousel>
-            </div>   
-            <div class ="product-image-container" *ngIf="!this.productImages">
-                <img src = "assets/images/herbal-med.jpg" width = "100px" height = "100px"/>
-            </div>
-            <div class="product-details">
-                <div class = "product-name">{{product.productName}}</div>
-                <div class = "product-description">{{product.description}}</div>
-                <div class="product-price">
-                    <span class="current-currency-symbol">{{currentCurrency}}</span>   
-                    <span class="price-value">{{product.price}}</span>
+        </button>
+    </div>
+    <div class="modal-body product-description-modal">
+        <div class="row">
+            <div class="col-md-7 col-xs-12">
+                <div class="carousel-container" *ngIf="this.productImages">
+                    <carousel>
+                        <slide *ngFor="let item of this.productImages;let i=index">
+                            <img src="{{item}}" alt="first slide" style="display: block; width: 100%;">
+                        </slide>
+                    </carousel>
                 </div>
-                <div class="user-action-btns row">
-                    <input type="number" class="qty-input col-1" value="1" id="input1" placeholder="Qty">
-                    <button class="btn btn-primary btn-outline add-to-cart add-cart-btn" (click)="addToCart(product)">Add to cart</button>
-                    <button class="btn btn-primary btn-outline add-to-cart buy-btn" (click)="changeQty(this)" value="1">Buy</button>
+                <div class="product-image-container" *ngIf="!this.productImages">
+                    <img src="assets/images/herbal-med.jpg" width="100px" height="100px" />
                 </div>
             </div>
-            <table class = "table">
-                <thead>
-                    <tr>
-                      <th>sr. no.</th>
-                      <th>Sanskrit Name</th>
-                      <th>Botanical Name</th>
-                      <th>Quantity</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>{{product.sanskritName}}</td>
-                        <td>{{product.botanicalName}}</td>
-                        <td>{{product.drugQuantity}}</td>
-                    </tr>
-                </tbody>
-            </table>
+            <div class="col-md-5 col-xs-12">
+                <div class="product-details">
+                    <div class="product-name">{{product.productName}}</div>
+                    <div class="product-description">{{product.description}}</div>
+                    <div class="product-price">
+                        <span class="current-currency-symbol">{{currentCurrency}}</span>
+                        <span class="price-value">{{product.price}}</span>
+                    </div>
+                    <div class="row drug-quantity-container" *ngIf="product.drugQuantity && product.drugQuantity !== 'null'">
+                        <div class="col-12 quantity-title">Drug quantity</div>
+                        <div class="col-12 drug-quantityvalue-container">
+                            <span class="drug-quantity-value">{{product.drugQuantity}}</span>
+                        </div>
+
+                    </div>
+                    <div class="row quantity-container">
+                        <div class="col-2 quantity-title">Quantity</div>
+                        <div class="input-group col-4">
+                            <div class="input-group-prepend">
+                                <button class="input-group-text" (click)="decrementQuantity(product)">-</button>
+                            </div>
+                            <input type="text" class="qty-input form-control" [(ngModel)]='product.quantity' value="1" id="input1" placeholder="Qty">
+                            <div class="input-group-append">
+                                <button class="input-group-text" (click)="incrementQuantity(product)">+</button>
+                            </div>
+                        </div>
+                        <!-- <div class="col-2 quantity-title">Quantity</div>
+                        <div class="col-3">
+                            <input type="number" class="qty-input form-control" value="1" id="input1" placeholder="Qty">
+                        </div> -->
+                    </div>
+                    <div class="user-action-btns row">
+                        
+                        <button class="btn btn-primary btn-outline add-to-cart add-cart-btn"
+                            (click)="addToCart(product)">Add to
+                            cart</button>
+                        <button class="btn btn-primary btn-outline-customsecondary add-to-cart buy-btn" (click)="changeQty(this)"
+                            value="1">Buy now</button>
+                    </div>
+                </div>
+            </div>
         </div>
-    </ng-template>
+
+        <!-- <table class="table">
+            <thead>
+                <tr>
+                    <th>sr. no.</th>
+                    <th>Sanskrit Name</th>
+                    <th>Botanical Name</th>
+                    <th>Quantity</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>{{product.sanskritName}}</td>
+                    <td>{{product.botanicalName}}</td>
+                    <td>{{product.drugQuantity}}</td>
+                </tr>
+            </tbody>
+        </table> -->
+    </div>
+</ng-template>

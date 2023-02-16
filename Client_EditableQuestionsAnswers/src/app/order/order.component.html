@@ -28,7 +28,7 @@
                 </div>
             </div>
             <div>
-                <button *ngIf="userDetails.isAdmin && !orderedItem.orderAccepted" class="btn btn-primary place-order-btn" (click)="acceptOrder(orderedItem)">Accept order</button>
+                <button *ngIf="userDetails.isAdmin && !orderedItem.orderAccepted" class="btn btn-outline place-order-btn" (click)="acceptOrder(orderedItem)">Accept order</button>
             </div>
             <div class="order-accepted" *ngIf="orderedItem.orderAccepted">
                 <fa-icon class="hand-cursor fa-icon check-icon" [icon]="faCheckSquare">

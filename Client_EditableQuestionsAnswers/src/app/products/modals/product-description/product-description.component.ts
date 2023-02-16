@@ -32,6 +32,7 @@ export class ProductDescriptionComponent implements OnInit {
 
   ngOnInit(): void {
     this.setCurrentCurrency();
+    this.setProductQuantityIfNull();
   }
 
   openProductDescriptionModal(templateRef:TemplateRef<any>): void{
@@ -70,6 +71,22 @@ export class ProductDescriptionComponent implements OnInit {
 
   changeQty(product) {
     console.log('qty', product.quantity)
+  }
+ 
+  setProductQuantityIfNull() {
+    if(!this.product.quantity) {
+      this.product.quantity = 1;
+    }
+  }
+
+  decrementQuantity(product) {
+    if(product.quantity >0) {
+       product.quantity -= 1;
+    }
+  }
+
+  incrementQuantity(product) {
+    product.quantity += 1;
   }
 
 }
