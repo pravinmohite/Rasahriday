@@ -168,3 +168,14 @@
 .full-width {
   width: 100% !important;
 }
+
+.modal-header {
+  padding: 10px;
+  font-size: 15px;
+  font-weight: 600;
+  background-image: url('src/assets/images/background-img.png');
+  color: $questions-theme-color;
+  z-index: 1000;
+  box-shadow: 0 0.25rem 0.75rem $header-box-shadowcolor;
+  white-space: pre-wrap;
+}
