@@ -34,20 +34,23 @@
     }
 
     .product-list-item {
-        box-shadow: 0px 0px 2px 2px gainsboro;
+        box-shadow: 0px 0px 2px 2px $box-shadow-color;
         float: left;
-        border: solid 1px gainsboro;
+        border: solid 1px $box-shadow-color;
         padding: 5px 5px 10px 5px;
         margin-bottom: 10px;
         width: 100%;
         background-color: white;
 
         .user-action-btns {
-            //display: none; //can be added later if required
+            margin-top: 10px !important;
+            .input-group-text {
+                width: 30px;
+                cursor: pointer;
+            }
             .qty-input {
-              margin-left: 10px;
-              margin-right: 5px;
-              padding-right: 0px;
+              padding: 0px !important;
+              text-align: center;
             }
             .buy-btn {
               margin-right: 5px;
@@ -62,7 +65,7 @@
         }
 
         .img-details-container {
-            padding: 5px 10px 5px 10px !important;
+            padding: 5px 5px 5px 5px !important;
             
          /*can be added later if required */   
          /*   &:hover {
@@ -102,6 +105,7 @@
 
         .product-description {
             display: inline-block;
+            color: $product-description-color !important;
             width: calc(100% - 30px);
             text-overflow: ellipsis;
             white-space: nowrap;
@@ -111,6 +115,9 @@
     }
 }
 
+.admin-btn {
+    margin-top: 5px;
+}
 
 @media (min-width: 768px) {
     .modal-dialog {

@@ -13,7 +13,7 @@
         background-image: url('./../../../assets/images/background-img.png');
         color:$questions-theme-color;
         z-index: 1000;
-        box-shadow: 0 0.25rem 0.75rem $header-box-shadowcolor;
+        box-shadow: 1px 1px 4px 1px $box-shadow-color;
         white-space: pre-wrap;
     }
 

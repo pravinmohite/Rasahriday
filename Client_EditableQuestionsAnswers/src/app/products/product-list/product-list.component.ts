@@ -133,17 +133,9 @@ export class ProductListComponent implements OnInit {
     return this.productService.getProductImageToBeShown(productImage);
   }
 
-  addUserDetails(data) {
-    let userDetails = this.commonService.userDetails;
-    data.userId= userDetails._id;
-    data.userName= userDetails.userName;
-    data.userAddress = userDetails.address;
-    data.userPhoneNumber = userDetails.phoneNumber
-  }
-
   addToCart(product) {
     let data = product;
-    this.addUserDetails(data);
+    this.commonService.addUserDetails(data);
     this.loaderService.display(true);
     this.cartService.addToCartList(data).subscribe(response=>{
       this.loaderService.display(false);
@@ -165,7 +157,7 @@ export class ProductListComponent implements OnInit {
   }
 
   openOrderConfirmationModal(product): void{
-    this.addUserDetails(product);
+    this.commonService.addUserDetails(product);
     const initialState: ModalOptions = {
       initialState: {
         product
@@ -179,8 +171,20 @@ export class ProductListComponent implements OnInit {
   }
 
   placeOrder(cartItem) {
+    this.loaderService.display(true);
     this.orderService.addToOrderList(cartItem).subscribe(response=>{
+      this.loaderService.display(false);
       this.notifierService.notify('success', 'Order placed successfully!');
     })
+  }
+
+  decrementQuantity(product) {
+    if(product.quantity >0) {
+       product.quantity -= 1;
+    }
+  }
+
+  incrementQuantity(product) {
+    product.quantity += 1;
   }
 }

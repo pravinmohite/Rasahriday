@@ -4,6 +4,7 @@
     position: fixed;
     top: 0;
     width: 100%;
+    box-shadow: 1px 1px 4px 1px $box-shadow-color !important;
     @media screen and (max-width: 768px){ 
         position: static !important;
     }
