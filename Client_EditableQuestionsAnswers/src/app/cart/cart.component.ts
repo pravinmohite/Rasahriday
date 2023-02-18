@@ -6,6 +6,9 @@ import { CommonService } from '../services/common-service/common.service';
 import { OrderService } from '../services/order-service/order.service';
 import { ProductService } from '../services/product-service/product.service';
 import { CarouselConfig } from 'ngx-bootstrap/carousel';
+import { LoaderService } from '../services/loader-service/loader.service';
+import { NotifierService } from 'angular-notifier';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-cart',
@@ -24,19 +27,28 @@ export class CartComponent implements OnInit {
   userDetails: any;
   modalRef: BsModalRef;
   unfilteredCartItems: any;
+  currentCurrency: string;
+  faTrash= faTrash;
   constructor(
     private modalService: BsModalService,
     private commonService: CommonService,
     private orderService: OrderService,
     private productService: ProductService,
-    private cartService: CartService
+    private cartService: CartService,
+    private loaderService: LoaderService,
+    private notifierService: NotifierService
     ) { 
       this.userDetails = this.commonService.userDetails
     }
 
   ngOnInit(): void {
+    this.setCurrentCurrency();
     this.getCartItemsByPrivileges();
     this.handleCartSearchSubscriptions();
+  }
+
+  setCurrentCurrency() {
+    this.currentCurrency = this.commonService.currentCurrency;
   }
 
   handleCartSearchSubscriptions() {
@@ -91,11 +103,11 @@ export class CartComponent implements OnInit {
     this.openOrderConfirmationModal(cartItem);
   }
 
-  deleteCartItem(cartItem) {
-    this.cartService.deleteCartItem(cartItem._id).subscribe(response=>{
-       this.getCartItemsByPrivileges();
-    })
-  }
+  // deleteCartItem(cartItem) {
+  //   this.cartService.deleteCartItem(cartItem._id).subscribe(response=>{
+  //      this.getCartItemsByPrivileges();
+  //   })
+  // }
 
   
   openOrderConfirmationModal(cartItem): void{
@@ -113,8 +125,31 @@ export class CartComponent implements OnInit {
 
   placeOrder(cartItem) {
     this.orderService.addToOrderList(cartItem).subscribe(response=>{
-      console.log('Order placed successfully');
-      this.deleteCartItem(cartItem);
+      this.notifierService.notify('success', 'order placed successfully!');
+      const placedOrder = true;
+      this.deleteCartItem(cartItem, placedOrder);
     })
+  }
+
+  decrementQuantity(cartItem) {
+    this.commonService.decrementQuantity(cartItem);
+  }
+
+  incrementQuantity(cartItem) {
+    this.commonService.incrementQuantity(cartItem);
+  }
+
+  deleteCartItem(cartItem, placedOrder?) {
+    let result=placedOrder || this.commonService.confirmAction();
+      if(result) {
+        this.loaderService.display(true);
+        this.cartService.deleteCartItem(cartItem._id).subscribe(response =>{
+          this.loaderService.display(false);
+          if(!placedOrder) {
+            this.notifierService.notify('success', 'cart Item deleted successfully!');
+          }
+          this.getCartItemsByPrivileges();
+        });
+    }
   }
 }

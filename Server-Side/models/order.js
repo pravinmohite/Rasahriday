@@ -80,6 +80,11 @@ const OrderSchema = mongoose.Schema({
     orderAccepted: {
         type: Boolean,
         required: false
+    },
+    orderedDate:
+    {
+       type: String,
+       required: false
     }
 })
 

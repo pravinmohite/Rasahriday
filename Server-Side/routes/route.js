@@ -401,6 +401,7 @@ router.post('/cart', (req, res, next) => {
         sanskritName: req.body.sanskritName,
         botanicalName: req.body.botanicalName,
         drugQuantity: req.body.drugQuantity,
+        cartAdditionDate: Date.now()
     })
     newCart.save((err, product) => {
         if (err) {
@@ -526,6 +527,7 @@ router.post('/order', (req, res, next) => {
         sanskritName: req.body.sanskritName,
         botanicalName: req.body.botanicalName,
         drugQuantity: req.body.drugQuantity,
+        orderedDate: Date.now()
     })
     newOrder.save((err, product) => {
         if (err) {

@@ -69,6 +69,10 @@ const CartSchema = mongoose.Schema({
         type:String,
         required: false
     },
+    quantity: {
+        type:Number,
+        required: false
+    },
     price: {
         type: Number,
         required: false
@@ -80,6 +84,11 @@ const CartSchema = mongoose.Schema({
     orderAccepted: {
         type: Boolean,
         required: false
+    },
+    cartAdditionDate:
+    {
+       type: String,
+       required: false
     }
 })
 

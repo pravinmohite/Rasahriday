@@ -5,6 +5,9 @@ import { OrderService } from '../services/order-service/order.service';
 import { ProductService } from '../services/product-service/product.service';
 import { faCheckSquare, faClock, faUserClock } from '@fortawesome/free-solid-svg-icons';
 import { CarouselConfig } from 'ngx-bootstrap/carousel';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import { LoaderService } from '../services/loader-service/loader.service';
+import { NotifierService } from 'angular-notifier';
 
 @Component({
   selector: 'app-order',
@@ -22,17 +25,37 @@ export class OrderComponent implements OnInit {
   faClock = faClock;
   faUserClock = faUserClock;
   unfilteredOrderedItems: any;
+  currentCurrency: string;
+  dateNotAvailableText = 'NA';
+  faTrash = faTrash;
+
   constructor(
     private commonService: CommonService,
     private productService: ProductService,
-    private orderService: OrderService
+    private orderService: OrderService,
+    private loaderService: LoaderService,
+    private notifierService: NotifierService
     ) { 
       this.userDetails = this.commonService.userDetails
     }
 
   ngOnInit(): void {
+    this.setCurrentCurrency();
     this.getOrdersByUserPrivileges();
     this.handleOrderSearchSubsriptions();
+  }
+
+  getFormattedOrderDate(date) {
+    if(date) {
+      return new Date(parseInt(date)).toDateString();
+    }
+    else {
+      return this.dateNotAvailableText;
+    }
+  }
+
+  setCurrentCurrency() {
+    this.currentCurrency = this.commonService.currentCurrency;
   }
 
   handleOrderSearchSubsriptions() {
@@ -81,4 +104,15 @@ export class OrderComponent implements OnInit {
     });
   }
 
+  deleteOrder(orderedItem) {
+    let result = this.commonService.confirmAction();
+    if(result) {
+      this.loaderService.display(true);
+      this.orderService.deleteOrderItem(orderedItem._id).subscribe(response=> {
+        this.loaderService.display(false);
+        this.notifierService.notify('success', 'order deleted successfully!');
+        this.getOrdersByUserPrivileges();
+      })
+    }
+  }
 }

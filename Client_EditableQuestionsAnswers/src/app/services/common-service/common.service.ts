@@ -162,4 +162,18 @@ export class CommonService {
     data.userAddress = userDetails.address;
     data.userPhoneNumber = userDetails.phoneNumber
   }
+
+  decrementQuantity(product) {
+    if(product.quantity >0) {
+       product.quantity -= 1;
+    }
+  }
+
+  incrementQuantity(product) {
+    if(!product.quantity) {
+      product.quantity = 1;
+    }
+    product.quantity += 1;
+  }
+
 }
