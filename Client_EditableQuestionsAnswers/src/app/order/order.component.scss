@@ -6,7 +6,7 @@
     border-radius: 5px;
     padding: 5px;
     display: inline-block;
-    margin-top: 10px;
+    margin-bottom: 10px;
 
     .check-icon {
         color:$check-icon-color;
@@ -14,8 +14,8 @@
 }
 
 .order-progress-container {
-    margin-top: 10px;
-    
+    margin-bottom: 10px;
+
     .order-progress {
         border: solid 1px $container-border-color;
         background-color: $pending-status-background;

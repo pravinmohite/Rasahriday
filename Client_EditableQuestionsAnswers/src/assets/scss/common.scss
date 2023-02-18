@@ -66,7 +66,7 @@
       border: solid 1px $contact-us-border;
       border-radius: 15px;
       padding: 5px;
-      margin-top: 10px;
+      margin-bottom: 10px;
 
       .phone-number {
         color: $phonenumber-link-color !important;
@@ -128,12 +128,16 @@
   }
 
   .drug-quantity-container {
-    margin-top: 10px;
+    margin-bottom: 10px;
     font-family: sans-serif;
+
+    .drug-quantity-title {
+      margin-bottom: 5px;
+    }
   
     .drug-quantityvalue-container {
-        margin-top: 10px;
-  
+        margin-bottom: 10px;
+        
         .drug-quantity-value {
             background: $btn-search-background;
             color: $btn-outline-textcolor;
@@ -144,7 +148,7 @@
   }
   
   .quantity-container {
-    margin-top: 10px;
+    margin-bottom: 10px;
   
     .qty-input {
       text-align: center;
@@ -168,6 +172,8 @@
 }
 
 .product-price {
+  margin-bottom: 10px;
+
   .current-currency-symbol {
     top: -4.25px;
     font-size: 11px;
