@@ -20,7 +20,7 @@ export class CommonService {
   orderUrl = "/api/order";
   orderAllUrl = "/api/orderAll";
   productAllUrl = "/api/productAll";
-  landingPageDetailsUrl ="/api/landingPageDetails";
+  landingPageDetailsUrl = "/api/landingPageDetails";
   productPerCategoryUrl = "/api/productPerCategory";
   isProd: boolean = false;
   /*---with ssl changed due to loadbalancer----can be done using nginx*/
@@ -53,13 +53,13 @@ export class CommonService {
 
   setUserDetails(userDetails) {
     localStorage.setItem('userDetails', JSON.stringify(userDetails));
-    this.userDetails =userDetails;
+    this.userDetails = userDetails;
     this.userLoggedInEvent(userDetails);
   }
 
   getUserDetails() {
     let retrievedDetails = localStorage.getItem('userDetails');
-    if(retrievedDetails) {
+    if (retrievedDetails) {
       this.userDetails = JSON.parse(retrievedDetails);
     }
   }
@@ -92,7 +92,7 @@ export class CommonService {
       keyboard: false,
       animated: true,
       ignoreBackdropClick: true,
-      class: className?className:this.modalClass
+      class: className ? className : this.modalClass
     };
     return config;
   }
@@ -106,11 +106,34 @@ export class CommonService {
   }
 
   handleFilteringOfDataBySearchString(products, searchVal) {
-    let filteredData= products.filter(data=>{
-      return (data.productName.indexOf(searchVal)>-1 || 
-              data.description.indexOf(searchVal)> -1)
+    let lowerCaseSearchValue = searchVal.toLowerCase();
+    let filteredData = products.filter(data => {
+      return (data.productName.toLowerCase().indexOf(lowerCaseSearchValue) > -1 ||
+        data.description.toLowerCase().indexOf(lowerCaseSearchValue) > -1) ||
+        this.checkOrderedDate(data.orderedDate, lowerCaseSearchValue) ||
+        this.checkUserDetails(data, lowerCaseSearchValue)
     })
     return filteredData;
+  }
+
+  checkUserDetails(data, lowerCaseSearchValue) {
+    if (data.userName && data.userPhoneNumber) {
+      if (data.userName.toLowerCase().indexOf(lowerCaseSearchValue)> -1 ||
+        data.userPhoneNumber.toLowerCase().indexOf(lowerCaseSearchValue) > -1) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  checkOrderedDate(orderedDate, searchVal) {
+    if (orderedDate) {
+      let formattedOrderedDate = new Date(parseInt(orderedDate)).toDateString().toLowerCase();
+      if (formattedOrderedDate.indexOf(searchVal) > -1) {
+        return true;
+      }
+    }
+    return false;
   }
 
   filterDataBySearchString(products, value) {
@@ -124,10 +147,10 @@ export class CommonService {
 
   getProductImageToBeShown(productImage) {
     let url = this.devDomain;
-    if(productImage) {
-     return url + '/' + productImage.split(',')[0];
-   }
-   return null;
+    if (productImage) {
+      return url + '/' + productImage.split(',')[0];
+    }
+    return null;
   }
 
   observerCallback(entries, observer) {
@@ -148,29 +171,29 @@ export class CommonService {
       rootMargin: "0px",
       threshold: 0.7
     };
-    
+
     const observer = new IntersectionObserver(this.observerCallback, observerOptions);
-    
+
     const fadeElms = document.querySelectorAll('.fade');
     fadeElms.forEach(el => observer.observe(el));
   }
 
   addUserDetails(data) {
     let userDetails = this.userDetails;
-    data.userId= userDetails._id;
-    data.userName= userDetails.userName;
+    data.userId = userDetails._id;
+    data.userName = userDetails.userName;
     data.userAddress = userDetails.address;
     data.userPhoneNumber = userDetails.phoneNumber
   }
 
   decrementQuantity(product) {
-    if(product.quantity >0) {
-       product.quantity -= 1;
+    if (product.quantity > 0) {
+      product.quantity -= 1;
     }
   }
 
   incrementQuantity(product) {
-    if(!product.quantity) {
+    if (!product.quantity) {
       product.quantity = 1;
     }
     product.quantity += 1;
