@@ -18,6 +18,8 @@ export class CommonService {
   cartUrl: string = "/api/cart";
   cartAllUrl = '/api/cartAll';
   orderUrl = "/api/order";
+  multipleOrderUrl = "/api/multipleOrder";
+  multipleCartItemsUrl = "/api/multipleCartItems"
   orderAllUrl = "/api/orderAll";
   productAllUrl = "/api/productAll";
   landingPageDetailsUrl = "/api/landingPageDetails";
@@ -33,9 +35,13 @@ export class CommonService {
   finalCategoryUrl: string = this.devDomain + this.categoryUrl;
   finalOrderUrl = this.devDomain + this.orderUrl;
   finalOrderAllUrl = this.devDomain + this.orderAllUrl;
+  finalMultipleOrderUrl = this.devDomain + this.multipleOrderUrl;
   finalProductAllUrl = this.devDomain + this.productAllUrl;
   finalLandingPageDetailsUrl = this.devDomain + this.landingPageDetailsUrl;
   finalProductPerCategoryUrl = this.devDomain + this.productPerCategoryUrl;
+  finalCartUrl = this.devDomain + this.cartUrl;
+  finalCartAllUrl = this.devDomain + this.cartAllUrl;
+  finalMultipleCartItemsUrl = this.devDomain + this.multipleCartItemsUrl;
   userDetails: any;
   confirmationText = "Are you sure you want to delete";
   refreshCategory = new Subject();
@@ -118,7 +124,7 @@ export class CommonService {
 
   checkUserDetails(data, lowerCaseSearchValue) {
     if (data.userName && data.userPhoneNumber) {
-      if (data.userName.toLowerCase().indexOf(lowerCaseSearchValue)> -1 ||
+      if (data.userName.toLowerCase().indexOf(lowerCaseSearchValue) > -1 ||
         data.userPhoneNumber.toLowerCase().indexOf(lowerCaseSearchValue) > -1) {
         return true;
       }
@@ -197,6 +203,21 @@ export class CommonService {
       product.quantity = 1;
     }
     product.quantity += 1;
+  }
+
+  deepClone(obj) {
+    if (typeof obj !== 'object')
+      return obj;
+
+    let tempStorage = {};
+    for (let key in obj) {
+      tempStorage[key] = this.deepClone(obj[key]);
+    }
+    return tempStorage;
+  }
+
+  deepCloneArray(arrayItems){
+    return JSON.parse(JSON.stringify(arrayItems));
   }
 
 }

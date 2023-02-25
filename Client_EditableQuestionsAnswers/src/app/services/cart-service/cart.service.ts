@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BehaviorSubject, Subject } from 'rxjs';
+import { CommonService } from '../common-service/common.service';
 import { LoaderService } from '../loader-service/loader.service';
 
 @Injectable({
@@ -11,15 +12,14 @@ export class CartService {
   filterData: any;
   currentQuestionTypeSelected: String;
   currentSearchString: String;
-  cartUrl: string = "/api/cart";
-  cartAllUrl = '/api/cartAll';
+  cartUrl: string;
+  cartAllUrl: string;
+  multipleCartItemsUrl: string;
   isProd: boolean = false;
   /*---with ssl changed due to loadbalancer----can be done using nginx*/
   //prodUrl:String="https://www.ssl.frontendinterviewquestions.com";
   prodUrl: String = "http://54.255.150.70:3000";
   devDomain: any = this.isProd ? this.prodUrl : "http://localhost:3000";
-  finalCartUrl: string = this.devDomain + this.cartUrl;
-  finalCartAllUrl = this.devDomain + this.cartAllUrl;
   private data = new BehaviorSubject(null);
   currentData = this.data.asObservable();
   confirmationText = "Are you sure you want to delete";
@@ -29,22 +29,26 @@ export class CartService {
   constructor(
     private http: HttpClient,
     private loaderService: LoaderService,
+    private commonService: CommonService,
     private route: ActivatedRoute,
     private router: Router) {
+      this.cartAllUrl = this.commonService.finalCartAllUrl;
+      this.cartUrl = this.commonService.finalCartUrl;
+      this.multipleCartItemsUrl = this.commonService.finalMultipleCartItemsUrl;
   }
 
   /*-------------for question answers----------*/
 
   getCartListByUser(userId) {
-    return this.http.get(this.finalCartUrl+'/'+userId);
+    return this.http.get(this.cartUrl+'/'+userId);
   }
 
   getCartListAll() {
-    return this.http.get(this.finalCartAllUrl);
+    return this.http.get(this.cartAllUrl);
   }
 
   addToCartList(data) {
-    return this.http.post(this.finalCartUrl, data);
+    return this.http.post(this.cartUrl, data);
   }
 
   // addToCartListByUserId(userId, data) {
@@ -53,10 +57,14 @@ export class CartService {
   // }
 
   deleteCartItem(id) {
-    return this.http.delete(this.finalCartUrl + "/" + id);
+    return this.http.delete(this.cartUrl + "/" + id);
   }
 
   updateCartList(data) {
     return this.http.patch(this.cartUrl + '/' + data._id, data);
+  }
+
+  deleteMultipleCartItems(data) {
+    return this.http.post(this.multipleCartItemsUrl, data);
   }
 }

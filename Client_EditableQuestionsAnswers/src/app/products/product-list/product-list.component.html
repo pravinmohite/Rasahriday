@@ -34,7 +34,7 @@
                                 <span class="current-currency-symbol">{{currentCurrency}}</span>
                                 <span class="price-value">{{product.price}}</span>
                             </div>
-                            <div class="user-action-btns row">
+                            <div class="user-action-btns row" *ngIf="product.stock > 0">
                                 <div class="input-group col-5">
                                     <div class="input-group-prepend">
                                         <button class="input-group-text" (click)="decrementQuantity(product)">-</button>
@@ -51,6 +51,9 @@
                                 </button>
                                 <button class="btn btn-primary btn-outline-customsecondary add-to-cart buy-btn"
                                     (click)="openOrderConfirmationModal(product)" value="1">Buy</button>
+                            </div>
+                            <div class="row out-of-stock" *ngIf="product.stock <= 0">
+                                 <span class="out-of-stock-text">{{outOfStockText}}</span>
                             </div>
                             <div class="admin-btn">
                                 <span class="edit-delete-btncontainer" *ngIf="isAdmin">

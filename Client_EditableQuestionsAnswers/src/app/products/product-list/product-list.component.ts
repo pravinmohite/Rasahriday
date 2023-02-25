@@ -17,6 +17,7 @@ import { NotifierService } from 'angular-notifier';
 })
 export class ProductListComponent implements OnInit {
   orderConfirmationClass='order-confirmation';
+  outOfStockText = 'Out of stock'
   products: any;
   categoryId;
   faTrash=faTrash;
@@ -134,6 +135,7 @@ export class ProductListComponent implements OnInit {
   }
 
   addToCart(product) {
+    this.setProductId(product);
     let data = product;
     this.commonService.addUserDetails(data);
     this.loaderService.display(true);
@@ -142,6 +144,10 @@ export class ProductListComponent implements OnInit {
       console.log('product added to cart successfully');
       this.cartService.cartItemChange.next();
     })
+  }
+
+  setProductId(product) {
+    product.productId = product._id;
   }
 
   changeQty(product) {

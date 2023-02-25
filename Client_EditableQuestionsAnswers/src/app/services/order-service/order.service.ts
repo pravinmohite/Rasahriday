@@ -11,6 +11,7 @@ import { LoaderService } from '../loader-service/loader.service';
 export class OrderService {
   orderUrl: string;
   orderAllUrl: string;
+  multipleOrderUrl: string;
   private data = new BehaviorSubject(null);
   currentData = this.data.asObservable();
   confirmationText = "Are you sure you want to delete";
@@ -24,6 +25,7 @@ export class OrderService {
     private router: Router) {
       this.orderUrl = this.commonService.finalOrderUrl;
       this.orderAllUrl = this.commonService.finalOrderAllUrl;
+      this.multipleOrderUrl = this.commonService.finalMultipleOrderUrl;
   }
 
   /*-------------for orders----------*/
@@ -44,6 +46,10 @@ export class OrderService {
   //   this.finalCartByUserNameUrl = this.finalCartByUserNameUrl+'/'+userId;
   //   return this.http.post(this.finalCartByUserNameUrl, data);
   // }
+
+  addMultipleOrderToOrderList(data) {
+    return this.http.post(this.multipleOrderUrl, data);
+  }
 
   deleteOrderItem(id) {
     return this.http.delete(this.orderUrl + "/" + id);

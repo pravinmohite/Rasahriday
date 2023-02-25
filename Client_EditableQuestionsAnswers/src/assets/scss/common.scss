@@ -274,5 +274,10 @@
   white-space: pre-wrap;
 }
 
+button[disabled] {
+  cursor: not-allowed !important;
+}
 
-
+.total-text {
+  font-weight: 600 !important;
+}

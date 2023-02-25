@@ -12,6 +12,7 @@ const Category = require('../models/category');
 const Login = require('../models/login');
 const Cart = require('../models/cart');
 const Order = require('../models/order');
+const product = require('../models/product');
 let loginEndPoint = "/loginDetails";
 let signUpEndPoint = "/signUp";
 
@@ -385,6 +386,7 @@ router.post('/cart', (req, res, next) => {
     //logic to add
     let newCart = new Cart({
         categoryId: req.body.categoryId,
+        productId: req.body.productId,
         userId: req.body.userId,
         userName: req.body.userName,
         userAddress: req.body.userAddress,
@@ -424,10 +426,17 @@ router.delete('/cart/:id', (req, res, next) => {
     })
 })
 
+router.post('/multipleCartItems', (req, res, next) => {
+    removeMultipleCartItems(req.body, res);
+})
+
+
+
 router.patch('/cart/:id', (req, res, next) => {
     Cart.updateOne({ _id: req.params.id }, {
         $set: {
             categoryId: req.body.categoryId,
+            productId: req.body.productId,
             userId: req.body.userId,
             userName: req.body.userName,
             userAddress: req.body.userAddress,
@@ -467,6 +476,7 @@ router.post('/cartAll', (req, res, next) => {
     //logic to add
     let newCart = new Cart({
         categoryId: req.body.categoryId,
+        productId: req.body.productId,
         productName: req.body.productName,
         description: req.body.description,
         quantity: req.body.quantity,
@@ -511,6 +521,7 @@ router.post('/order', (req, res, next) => {
     //logic to add
     let newOrder = new Order({
         categoryId: req.body.categoryId,
+        productId: req.body.productId,
         userId: req.body.userId,
         userName: req.body.userName,
         userAddress: req.body.userAddress,
@@ -539,6 +550,46 @@ router.post('/order', (req, res, next) => {
     })
 })
 
+/*----to complete multiple order from cart---*/
+router.post('/multipleOrder', (req, res, next) => {
+    //logic to add
+
+    for(let i=0;i<req.body.selectedItems.length;i++) {
+        let reqBodySelectedItems = req.body.selectedItems;
+        let newOrder = new Order({
+            categoryId: reqBodySelectedItems[i].categoryId,
+            productId: reqBodySelectedItems[i].productId,
+            userId: reqBodySelectedItems[i].userId,
+            userName: req.body.userName,
+            userAddress: req.body.userAddress,
+            userPhoneNumber: req.body.userPhoneNumber,
+            productName: reqBodySelectedItems[i].productName,
+            productImages: reqBodySelectedItems[i].productImages,
+            description: reqBodySelectedItems[i].description,
+            quantity: reqBodySelectedItems[i].quantity,
+            price: reqBodySelectedItems[i].price,
+            slok: reqBodySelectedItems[i].slok,
+            dosage: reqBodySelectedItems[i].dosage,
+            indications: reqBodySelectedItems[i].indications,
+            contraIndications: reqBodySelectedItems[i].contraIndications,
+            sanskritName: reqBodySelectedItems[i].sanskritName,
+            botanicalName: reqBodySelectedItems[i].botanicalName,
+            drugQuantity: reqBodySelectedItems[i].drugQuantity,
+            orderedDate: Date.now()
+        })
+        newOrder.save((err, product) => {
+            if (err) {
+                res.json({ msg: 'failed to order with err:' + err });
+            }
+            else {
+                if(i == reqBodySelectedItems.length-1) {
+                  removeMultipleCartItems(reqBodySelectedItems, res);
+                }
+            }
+        })
+    }
+})
+
 router.delete('/order/:id', (req, res, next) => {
     Order.remove({ _id: req.params.id }, (err, result) => {
         if (err) {
@@ -554,6 +605,7 @@ router.patch('/order/:id', (req, res, next) => {
     Order.updateOne({ _id: req.params.id }, {
         $set: {
             categoryId: req.body.categoryId,
+            productId: req.body.productId,
             userId: req.body.userId,
             userName: req.body.userName,
             userAddress: req.body.userAddress,
@@ -577,7 +629,12 @@ router.patch('/order/:id', (req, res, next) => {
             res.json(err);
         }
         else {
-            res.json(result);
+            if(req.body.orderAccepted) {
+                updateStockForProduct(req.body, res)
+            }
+            else {
+               res.json(result);
+            }
         }
     });
 });
@@ -593,6 +650,7 @@ router.post('/orderAll', (req, res, next) => {
     //logic to add
     let newOrder = new Order({
         categoryId: req.body.categoryId,
+        productId: req.body.productId,
         productName: req.body.productName,
         description: req.body.description,
         quantity: req.body.quantity,
@@ -636,5 +694,62 @@ router.get('/productPerCategory',(req, res, next) => {
         res.json(resultArr);
     })
 })
+
+removeMultipleCartItems =(selectedItems, res)=> {
+    for(let i=0;i< selectedItems.length; i++) {
+        Cart.remove({ _id: selectedItems[i]._id }, (err, result) => {
+            if (err) {
+                res.json(err);
+            }
+            else {
+                if(i == selectedItems.length-1) {
+                  res.json(result);
+                }
+            }
+        })
+    }
+}
+
+findStockValueForProduct = async (product) =>{
+    let result;
+    await Product.find((err, productList) => {
+           result = productList.filter(function (item) {
+            if (product.productId === item.id) {
+                return true;
+            }
+        });
+    })
+    if(result.length >0) {
+        let stockResult= result[0].stock
+        if(stockResult) {
+           return stockResult
+        }
+    }
+    return result;
+}
+
+updateStockForProduct =(product, res) => {
+    //let stockValue = findStockValueForProduct(product);
+    findStockValueForProduct(product).then((stockValue)=>{
+        if(stockValue) {
+            Product.updateOne({ _id: product.productId}, {
+                $set: {
+                    stock: stockValue - product.quantity,
+                }
+            }, (err, result) => {
+                if (err) {
+                    res.json(err);
+                }
+                else {
+                    res.json(result);
+                }
+            });
+        }
+        else {
+            res.json({ msg: 'failed to update stock details for product' });
+        }
+    })
+ 
+}
 
 module.exports = router;

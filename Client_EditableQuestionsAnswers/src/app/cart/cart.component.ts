@@ -29,6 +29,19 @@ export class CartComponent implements OnInit {
   unfilteredCartItems: any;
   currentCurrency: string;
   faTrash= faTrash;
+  showMultiSelectedActionbtns = false;
+  selectText = 'select';
+  deselectText = 'deselect';
+  currentSelectionText = this.selectText;
+  selectAllActive = false;
+  selectedProducts= {
+    selectedItems: [],
+    userName: '',
+    userAddress : '',
+    userPhoneNumber: '',
+    price: 0,
+    deliveryCharges: 0
+  };
   constructor(
     private modalService: BsModalService,
     private commonService: CommonService,
@@ -38,7 +51,7 @@ export class CartComponent implements OnInit {
     private loaderService: LoaderService,
     private notifierService: NotifierService
     ) { 
-      this.userDetails = this.commonService.userDetails
+      this.userDetails = this.commonService.userDetails;
     }
 
   ngOnInit(): void {
@@ -64,6 +77,7 @@ export class CartComponent implements OnInit {
     else {
       this.getCartItemsByUser();
     }
+    this.selectedProducts.selectedItems = [];
   }
 
   getCartItemsByUser() {
@@ -99,8 +113,8 @@ export class CartComponent implements OnInit {
     }
   }
 
-  confirmOrder(cartItem) {
-    this.openOrderConfirmationModal(cartItem);
+  confirmOrder(cartItem, isMultipleItems?) {
+    this.openOrderConfirmationModal(cartItem , isMultipleItems);
   }
 
   // deleteCartItem(cartItem) {
@@ -110,20 +124,47 @@ export class CartComponent implements OnInit {
   // }
 
   
-  openOrderConfirmationModal(cartItem): void{
-    const initialState: ModalOptions = {
-      initialState: {
-        product: cartItem
+  setUserDetails() {
+    if(this.selectedProducts.selectedItems.length > 0)
+    this.selectedProducts.userName = this.selectedProducts.selectedItems[0].userName;
+    this.selectedProducts.userAddress = this.selectedProducts.selectedItems[0].userAddress;
+    this.selectedProducts.userPhoneNumber = this.selectedProducts.selectedItems[0].userPhoneNumber;
+  }
+
+  openOrderConfirmationModal(cartItem, isMultipleItems?): void{
+    let modalObj: ModalOptions;
+    if(isMultipleItems) {
+      this.setUserDetails();
+      modalObj = {
+        initialState: {
+          productList: this.selectedProducts
+        }
       }
-    };
+    }
+    else {
+      modalObj = {
+        initialState: {
+          product: cartItem
+        }
+      }
+    }
     const config= this.commonService.getModalConfig(this.orderConfirmationClass);
-    this.modalRef = this.modalService.show(ConfirmOrderDetailsComponent, initialState);
+    this.modalRef = this.modalService.show(ConfirmOrderDetailsComponent, modalObj);
     this.modalRef.content.event.subscribe(data=>{
       this.placeOrder(data);
     });
   }
 
-  placeOrder(cartItem) {
+  placeOrder(data) {
+    if(this.selectedProducts.selectedItems.length>0) {
+      this.placeMultipleOrder(data);
+    }
+    else {
+      this.placeSingleOrder(data);
+    }
+  }
+
+  placeSingleOrder(cartItem) {
     this.orderService.addToOrderList(cartItem).subscribe(response=>{
       this.notifierService.notify('success', 'order placed successfully!');
       const placedOrder = true;
@@ -131,12 +172,31 @@ export class CartComponent implements OnInit {
     })
   }
 
-  decrementQuantity(cartItem) {
-    this.commonService.decrementQuantity(cartItem);
+  placeMultipleOrder(data) {
+    this.setUpdatedDetails(data);
+    this.orderService.addMultipleOrderToOrderList(this.selectedProducts).subscribe(response=>{
+      this.notifierService.notify('success', 'order placed successfully!');
+      this.getCartItemsByPrivileges();
+    })
   }
 
-  incrementQuantity(cartItem) {
+  setUpdatedDetails(data) {
+    this.selectedProducts.userAddress = data.userAddress;
+    this.selectedProducts.userPhoneNumber = data.userPhoneNumber;
+  }
+
+  decrementQuantity(cartItem, index) {
+    this.commonService.decrementQuantity(cartItem);
+    if(cartItem.isSelected) { 
+      this.selectedProducts.price -= cartItem.price;
+    }
+  }
+
+  incrementQuantity(cartItem, index) {
     this.commonService.incrementQuantity(cartItem);
+    if(cartItem.isSelected) { 
+      this.selectedProducts.price += cartItem.price;
+    }
   }
 
   deleteCartItem(cartItem, placedOrder?) {
@@ -151,5 +211,82 @@ export class CartComponent implements OnInit {
           this.getCartItemsByPrivileges();
         });
     }
+  }
+
+  deleteSelectedCartItems() {
+    let result=this.commonService.confirmAction();
+    if(result) {
+      this.loaderService.display(true);
+      this.cartService.deleteMultipleCartItems(this.selectedProducts.selectedItems).subscribe(response =>{
+        this.loaderService.display(false);
+        this.notifierService.notify('success', 'cart Items deleted successfully!');
+        this.getCartItemsByPrivileges();
+      });
+    }
+  }   
+
+  toggleCheckboxSelection(cartItem, index) {
+    if(cartItem.isSelected) {
+      this.selectedProducts.selectedItems.push(cartItem);
+      this.increamentAddedItemPrice(cartItem);
+    }
+    else {
+      this.selectedProducts.selectedItems.splice(index,1);
+      this.decreamentRemovedItemPrice(cartItem);
+    }
+    this.updateMultipleSelectedActionbtnVisibility();
+  }
+
+  increamentAddedItemPrice(cartItem) {
+    this.selectedProducts.price += cartItem.price*cartItem.quantity;
+  }
+
+  decreamentRemovedItemPrice(cartItem) {
+    this.selectedProducts.price -= cartItem.price*cartItem.quantity;
+  }
+
+  updateMultipleSelectedActionbtnVisibility() {
+    if(this.selectedProducts.selectedItems.length>0) {
+      this.showMultiSelectedActionbtns = true;
+    }
+    else {
+      this.showMultiSelectedActionbtns = false;
+    }
+
+  }
+
+  selectDeselectAllItems() {
+    if(!this.selectAllActive) {
+      this.selectAllItems();
+    }
+    else {
+      this.deselectAllItems();
+    }
+  }
+
+  selectAllItems() {
+    this.selectAllActive = true;
+    this.currentSelectionText = this.deselectText;
+    this.showMultiSelectedActionbtns = true;
+    this.selectedProducts.selectedItems = this.commonService.deepCloneArray(this.cartList);
+    this.cartList.map(data=>{
+      data.isSelected = true;
+      this.selectedProducts.price += data.price*data.quantity;
+    })
+  }
+
+  deselectAllItems() {
+    this.selectAllActive = false;
+    this.currentSelectionText = this.selectText;
+    this.showMultiSelectedActionbtns = false;
+    this.selectedProducts.selectedItems = [];
+    this.cartList.map(data=>{
+      data.isSelected = false;
+      this.selectedProducts.price -= data.price*data.quantity;
+    })
+  }
+
+  confirmMultipleOrder() {
+    
   }
 }

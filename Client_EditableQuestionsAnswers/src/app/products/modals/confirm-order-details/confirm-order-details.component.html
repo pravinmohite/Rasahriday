@@ -6,9 +6,26 @@
         </button>
     </div>
     <div class="modal-body">
-        <fieldset class="fieldset-container border p-2">
-            <legend class="legend-title w-auto">Product Details:</legend> 
-            <div class="product-details">
+        <!-- <fieldset class="fieldset-container border p-2">
+            <legend class="legend-title w-auto">Product Details:</legend>
+            <div *ngIf="productList">
+                <div class="product-details" *ngFor="let product of productList.selectedItems;let i=index">
+                    <div class="form-group row">
+                        <label class="col-5 col-form-label" for="categoryName">{{i+1}}) Product Name</label> 
+                        <div class="col-7">
+                            <label class="col-form-label" for="categoryName">{{product.productName}}</label>
+                        </div>
+                    </div> 
+                     <div class="form-group row">
+                        <label class="col-5 col-form-label" for="categoryName">Product Description</label> 
+                        <div class="col-7">
+                            <label class="col-form-label" for="categoryName">{{product.description}}</label>
+                        </div>
+                    </div>  
+                </div>
+            </div> 
+            
+            <div class="product-details" *ngIf="!productList">
                 <div class="form-group row">
                     <label class="col-5 col-form-label" for="categoryName">Product Name</label> 
                     <div class="col-7">
@@ -22,7 +39,34 @@
                     </div>
                 </div> 
             </div>
-        </fieldset>
+        </fieldset> -->
+
+
+        <fieldset class="fieldset-container border p-2">
+            <legend class="legend-title w-auto">Order Summary:</legend>
+            <div class="user-details order-details">
+                <div class="form-group row">
+                    <label class="col-5 col-form-label" for="categoryName">Price </label> 
+                    <div class="col-7">
+                        <label class="col-form-label" for="categoryName">{{product.price}}</label>
+                    </div>
+                </div> 
+                <div class="form-group row">
+                    <label class="col-5 col-form-label" for="categoryName">Delivery Charges</label> 
+                    <div class="col-7">
+                        <label class="col-form-label" for="categoryName">Free</label>
+                    </div>
+                </div> 
+                <div class="form-group row">
+                    <label class="col-5 col-form-label order-total-text" for="categoryName">Order Total</label> 
+                    <div class="col-7">
+                        <label class="col-form-label product-final-price" for="categoryName">{{product.price}}</label>
+                    </div>
+                </div> 
+            </div>
+            </fieldset>
+         
+
         <fieldset class="fieldset-container border p-2">
             <legend class="legend-title w-auto">User Details:</legend>
             <div class="user-details">
