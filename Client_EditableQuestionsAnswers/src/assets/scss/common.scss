@@ -281,3 +281,15 @@ button[disabled] {
 .total-text {
   font-weight: 600 !important;
 }
+
+.out-of-stock {
+  .out-of-stock-text {
+      margin: auto;
+      text-transform: uppercase;
+      color: $btn-outline-textcolor;
+      background: $outOfStock-background-color;
+      border: solid 1px $box-shadow-color;
+      border-radius: 20px;
+      padding: 6.5px 10px;
+  }
+}

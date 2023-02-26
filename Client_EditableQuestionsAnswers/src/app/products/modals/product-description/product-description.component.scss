@@ -114,14 +114,21 @@
       }
     }
     
-    
-    
     .product-img {
         height: 200px;
         width: 200px;
         border: solid 1px gainsboro;
         margin: auto;
         display: block;
+    }
+
+    .out-of-stock {
+      margin-top: 30px;  
+      margin-left: 0px;
+      .out-of-stock-text {
+        margin: initial !important;
+        padding: 10px 15px !important; 
+      }
     }
 
 }

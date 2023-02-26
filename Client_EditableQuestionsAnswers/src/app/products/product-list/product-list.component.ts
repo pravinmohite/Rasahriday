@@ -17,7 +17,7 @@ import { NotifierService } from 'angular-notifier';
 })
 export class ProductListComponent implements OnInit {
   orderConfirmationClass='order-confirmation';
-  outOfStockText = 'Out of stock'
+  outOfStockText: string;
   products: any;
   categoryId;
   faTrash=faTrash;
@@ -31,6 +31,7 @@ export class ProductListComponent implements OnInit {
   unfilteredProducts: any;
   currentCurrency: string;
   modalRef: BsModalRef;
+  sellerStocksEmptyText: string;
   
   constructor(
     private loaderService: LoaderService,
@@ -40,7 +41,10 @@ export class ProductListComponent implements OnInit {
     private orderService: OrderService,
     private modalService: BsModalService,
     private notifierService: NotifierService
-    ) { }
+    ) { 
+      this.outOfStockText = this.commonService.outOfStockText;
+      this.sellerStocksEmptyText = this.commonService.sellerStocksEmptyText;
+    }
 
   ngOnInit(): void {
     this.setPrivileges();

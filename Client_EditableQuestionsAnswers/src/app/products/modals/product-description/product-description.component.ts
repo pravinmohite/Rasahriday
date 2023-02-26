@@ -26,6 +26,8 @@ export class ProductDescriptionComponent implements OnInit {
   className = 'product-description-modalcontainer'
   currentCurrency: string;
   orderConfirmationClass='order-confirmation';
+  outOfStockText: string;
+  sellerStocksEmptyText: string;
 
   constructor(
     private modalService: BsModalService,
@@ -35,7 +37,10 @@ export class ProductDescriptionComponent implements OnInit {
     private cartService: CartService,
     private orderService: OrderService,
     private notifierService: NotifierService
-    ) { }
+    ) { 
+      this.outOfStockText = this.commonService.outOfStockText;
+      this.sellerStocksEmptyText = this.commonService.sellerStocksEmptyText;
+    }
 
   ngOnInit(): void {
     this.setCurrentCurrency();

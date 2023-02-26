@@ -42,6 +42,7 @@ export class CartComponent implements OnInit {
     price: 0,
     deliveryCharges: 0
   };
+  sellerStocksEmptyText: string;
   constructor(
     private modalService: BsModalService,
     private commonService: CommonService,
@@ -52,6 +53,7 @@ export class CartComponent implements OnInit {
     private notifierService: NotifierService
     ) { 
       this.userDetails = this.commonService.userDetails;
+      this.sellerStocksEmptyText = this.commonService.sellerStocksEmptyText;
     }
 
   ngOnInit(): void {

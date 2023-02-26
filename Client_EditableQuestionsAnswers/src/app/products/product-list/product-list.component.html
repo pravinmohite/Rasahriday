@@ -42,7 +42,7 @@
                                     <input type="text" class="qty-input form-control" [(ngModel)]='product.quantity'
                                         value="1" id="input1" placeholder="Qty">
                                     <div class="input-group-append">
-                                        <button class="input-group-text" (click)="incrementQuantity(product)">+</button>
+                                        <button class="input-group-text" [disabled]="(product.quantity >= product.stock)" [attr.title]="(product.quantity >= product.stock) ? sellerStocksEmptyText : '' "  (click)="incrementQuantity(product)">+</button>
                                     </div>
                                 </div>
                                 <button class="btn btn-primary btn-outline add-to-cart add-cart-btn"

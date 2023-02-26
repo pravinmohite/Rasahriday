@@ -11,6 +11,8 @@ import { OrderService } from '../order-service/order.service';
 })
 export class CommonService {
   currentSearchString: String;
+  outOfStockText = 'Out of stock';
+  sellerStocksEmptyText ='Seller stock is empty'
   loginDetailsUrl: String = "/api/loginDetails";
   signUpUrl = "/api/signUp";
   productUrl: string = "/api/product";

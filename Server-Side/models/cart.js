@@ -41,6 +41,10 @@ const CartSchema = mongoose.Schema({
         type: Number,
         required: false
     },
+    stock: {
+        type: Number,
+        required: false
+    },
     slok: {
         type:String,
         required:false
