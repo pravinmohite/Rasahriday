@@ -1,3 +1,7 @@
+<h2 class="page-heading">Your orders</h2>
+<alert *ngIf="showOrderDeliveryNotification" class="order-page-info" type="info" [dismissible]="true" (onClosed)="onClosed()">
+    Once confirmed! <strong>Your Order</strong> will be delivered within 2 week from the order placed date.
+</alert>
 <div class="cart-container">
     <div class="row product-item" *ngFor="let orderedItem of orderList">
         <div class="col-5">

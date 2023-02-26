@@ -1,6 +1,10 @@
 .router-outlet-container {
     min-height: 75vh;
     padding-top: 75px;
+
+    @media only screen and (max-width: 768px) {
+        padding-top: 25px;
+    }
     &.landing-page {
        padding-top: 54px !important;
     }

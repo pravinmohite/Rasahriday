@@ -28,6 +28,7 @@ export class OrderComponent implements OnInit {
   currentCurrency: string;
   dateNotAvailableText = 'NA';
   faTrash = faTrash;
+  showOrderDeliveryNotification;
 
   constructor(
     private commonService: CommonService,
@@ -36,13 +37,24 @@ export class OrderComponent implements OnInit {
     private loaderService: LoaderService,
     private notifierService: NotifierService
     ) { 
-      this.userDetails = this.commonService.userDetails
+      this.userDetails = this.commonService.userDetails;
+      this.checkIfOrderDeliveryNotificationToBeshown();
     }
 
   ngOnInit(): void {
     this.setCurrentCurrency();
     this.getOrdersByUserPrivileges();
     this.handleOrderSearchSubsriptions();
+  }
+
+  checkIfOrderDeliveryNotificationToBeshown() {
+    let flag = localStorage.getItem('showOrderDeliveryNotification');
+    if(flag) {
+      this.showOrderDeliveryNotification = false;
+    }
+    else {
+      this.showOrderDeliveryNotification = true;
+    }
   }
 
   getFormattedOrderDate(date) {
@@ -114,5 +126,10 @@ export class OrderComponent implements OnInit {
         this.getOrdersByUserPrivileges();
       })
     }
+  }
+
+  onClosed() {
+    this.showOrderDeliveryNotification = false;
+    localStorage.setItem('showOrderDeliveryNotification', this.showOrderDeliveryNotification.toString());
   }
 }

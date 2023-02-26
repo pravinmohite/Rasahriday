@@ -4,6 +4,7 @@ import { OrderComponent } from './order.component';
 import { OrderRoutingModule } from './order-routing.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CarouselModule } from 'ngx-bootstrap/carousel';
+import { AlertModule } from 'ngx-bootstrap/alert';
 
 @NgModule({
   declarations: [OrderComponent],
@@ -11,7 +12,8 @@ import { CarouselModule } from 'ngx-bootstrap/carousel';
     CommonModule,
     OrderRoutingModule,
     FontAwesomeModule,
-    CarouselModule.forRoot()
+    CarouselModule.forRoot(),
+    AlertModule.forRoot()
   ]
 })
 export class OrderModule { }

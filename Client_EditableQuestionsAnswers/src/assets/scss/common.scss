@@ -301,3 +301,9 @@ button[disabled] {
   @extend .btn-outline;
   background-color: $btn-outline-backgroundhover !important;
 }
+
+.page-heading {
+  text-align: center !important;
+  font-family: cursive;
+  margin-bottom: 15px !important;
+}
