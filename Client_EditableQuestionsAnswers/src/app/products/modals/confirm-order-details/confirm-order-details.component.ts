@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, EventEmitter, Input, OnInit } from '@angular/core';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 import { faEdit, faCheckSquare } from '@fortawesome/free-solid-svg-icons';
+import { CommonService } from 'src/app/services/common-service/common.service';
 
 @Component({
   selector: 'app-confirm-order-details',
@@ -17,11 +18,20 @@ export class ConfirmOrderDetailsComponent implements OnInit {
   editedProduct: any;
   productImagesToBeEdited: any;
   editMode = false;
-  constructor(public modalRef: BsModalRef) {
+  currentCurrency: any;
+  constructor(
+    public modalRef: BsModalRef,
+    private commonService: CommonService
+    ) {
   }
 
   ngOnInit(): void {
+    this.setCurrentCurrency();
     this.setUserDetailsForMultipleItems();
+  }
+
+  setCurrentCurrency() {
+    this.currentCurrency = this.commonService.currentCurrency;
   }
 
   setUserDetailsForMultipleItems() {

@@ -194,6 +194,7 @@
   border-radius: 0;
   padding: 3px 6px !important;
   box-shadow: 2px 2px $box-shadow-color;
+  cursor: pointer;
 
   &:active,
   &:hover,
@@ -216,6 +217,7 @@
   border-radius: 0;
   padding: 3px 6px !important;
   box-shadow: 2px 2px $box-shadow-color;
+  cursor: pointer;
   
   &:active,
   &:hover,
@@ -251,6 +253,7 @@
   @extend .btn-outline-customsecondary;
   color: $btn-outline-removebtn !important;
   border-color: $btn-outline-removebtn !important;
+  cursor: pointer;
 
   &:active,
   &:hover,
@@ -292,4 +295,9 @@ button[disabled] {
       border-radius: 20px;
       padding: 6.5px 10px;
   }
+}
+
+.btn-outline-modal {
+  @extend .btn-outline;
+  background-color: $btn-outline-backgroundhover !important;
 }
