@@ -1,5 +1,5 @@
 <header>
-  <div class="page-header d-flex flex-column flex-md-row align-items-center px-md-4 border-bottom box-shadow" role="img" aria-label="frontend interview questions">
+  <div [ngClass]="userName? 'flex-column': 'user-loggedin'" class="page-header d-flex flex-md-row align-items-center px-md-4 border-bottom box-shadow" role="img" aria-label="frontend interview questions">
     <div class="col-md-2 col-12 font-weight-normal project-name hand-cursor">
       <a href="/#/home">
         <img src="../../../assets/images/frontend.png" alt="Frontend interview questions" class="project-icon">
@@ -9,39 +9,40 @@
           </h1>
         </div> 
       </a>
-      <span *ngIf="userName" id = "menubars" class = "col-1">
-        <fa-icon [icon]="faBars" (click) = "openSiderBar()"></fa-icon>
+      <span id="menubars" class="col-1">
+        <fa-icon [icon]="faBars" (click)="openSiderBar()"></fa-icon>
       </span>
     </div>
-    <div *ngIf="userName" class="form-inline col-md-4 searchbox-container">
+    <div *ngIf="userName" [ngClass]="userName && !isLandingPage ? 'shown': 'hidden'" class="form-inline col-md-4 col-12 searchbox-container">
         <!-- <form #myForm= "ngForm"> -->
           <input name = "searchVal" #searchString [(ngModel)] = "searchVal" class="form-control mr-sm-2 col-md-9" type="text" (keydown)="checkEnterKeyPressed(searchString.value,$event)" placeholder="Search" aria-label="Search">
           <button class="btn btn-outline my-2 my-sm-0 col-md-2 hand-cursor search-btn" (click)="searchByPage(searchString.value)">Search</button>
         <!-- </form> -->
     </div>
-    <div *ngIf="userName" class="col-md-3 header-nav d-none d-md-block">
+    <div class="col-md-3 header-nav d-none d-md-block">
       <span class="header-links">
         <a class="nav-links" href="/#/products">
           Products
         </a>
       </span>
-      <span class="header-links">
+      <span class="header-links" *ngIf="userName" >
         <a class="nav-links" href="/#/carts">
           Carts  
           <!-- <fa-icon [icon]="faOpencart" (click)= "openSiderBar()"></fa-icon>  -->
           <span *ngIf="cartItems && cartItems>0" class="badge badge-light">{{cartItems}}</span>
         </a>
       </span>
-      <span class="header-links">
+      <span class="header-links" *ngIf="userName" >
         <a class="nav-links" href="/#/orders">
           Orders
         </a>
       </span>
     </div>
-    <div *ngIf="userName" class="offset-lg-2 offset-md-2 col-1 btn-group d-none d-md-block" dropdown>
+    <div *ngIf="userName" class="offset-lg-2 offset-md-2 col-1 btn-group d-none d-md-block loggedin-user" dropdown>
       <button id="button-basic" dropdownToggle type="button" class="btn btn-default dropdown-toggle" aria-controls="dropdown-basic">
               {{userName}} 
               <span class="caret"></span>
+              <fa-icon [icon]="faUserCircle"></fa-icon>
       </button>
       <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu"
           role="menu" aria-labelledby="button-basic">
@@ -50,6 +51,13 @@
         </li>
       </ul>
     </div>
+    <div *ngIf="!userName && !this.loginPage" class="login-link-container d-none d-md-block col-md-7 col-3">
+        <a class="login-link" href="/#/login">
+          Login 
+          <fa-icon [icon]="faUserCircle">
+          </fa-icon>
+        </a>
+    </div>  
     <!-- <div class="col-md-3"> -->
        <!-- <span id = "about-us-label" (click) = "openAboutusModal()">About Us</span> -->
       <!-- <div id = "follow-us-container">

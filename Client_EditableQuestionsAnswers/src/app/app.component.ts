@@ -27,7 +27,7 @@ export class AppComponent{
   checkRouterEvent() {
     this.router.events.subscribe((val) => {
       this.checkIfLandingPage();
-  });
+    });
   }
 
   ngOnInit() {
@@ -36,13 +36,7 @@ export class AppComponent{
   }
 
   checkIfLandingPage() {
-    let url = window.location.href;
-    if(url.indexOf('home')> -1) {
-       this.isLandingPage = true;
-    }
-    else {
-       this.isLandingPage = false;
-    }
+    this.isLandingPage = this.commonService.checkIfLandingPage();
   }
 
   checkAndSetLoggedInDetails() {
@@ -50,7 +44,10 @@ export class AppComponent{
       this.commonService.getUserDetails();
    }
    else {
-     this.router.navigateByUrl('/login');
+    let userDetails ={
+      isVisitor: true
+    }
+    this.commonService.setUserDetails(userDetails);
    }
   }
 

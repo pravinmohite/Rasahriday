@@ -76,6 +76,31 @@
     }
 }
 
+.login-link-container {
+    .login-link {
+      color: inherit !important;
+      text-decoration: none;
+      @media screen and (min-width: 768px){
+        float:right;
+     }
+
+     &:hover {
+        color: $product-hover-border !important;
+     }
+    }
+}
+
+.loggedin-user {
+    &:hover {
+        color: $product-hover-border !important;
+     }
+}
+
+.hidden {
+    @media screen and (max-width: 768px){
+       display: none !important;
+    }
+}
 @media screen and (max-width: 768px){
 
     #about-us-and-social-links{

@@ -14,7 +14,14 @@
           </li>
         </ul>
     </div>
-    <div *ngIf="userName" class="col-md-12 header-nav">
+    <div *ngIf="!userName && !this.loginPage" class="login-link-container col-md-7 col-7">
+        <a class="login-link" href="/#/login">
+          Login 
+          <fa-icon [icon]="faUserCircle">
+          </fa-icon>
+        </a>
+    </div>  
+    <div class="col-md-12 header-nav">
         <span class="header-links">
             <a class="nav-links" href="/#/products">
                 Products

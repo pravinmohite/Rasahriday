@@ -222,4 +222,14 @@ export class CommonService {
     return JSON.parse(JSON.stringify(arrayItems));
   }
 
+  checkIfLandingPage() {
+    let url = window.location.href;
+    if(url.indexOf('home')> -1) {
+       return true;
+    }
+    else {
+       return false;
+    }
+  }
+
 }

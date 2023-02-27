@@ -1,6 +1,5 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { faTimes } from '@fortawesome/free-solid-svg-icons';
-import { faTwitter,  faFacebookF } from '@fortawesome/free-brands-svg-icons';
+import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
+import { faBars, faSignInAlt, faUser, faUserCircle, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { CommonService } from 'src/app/services/common-service/common.service';
 import { Router } from '@angular/router';
 
@@ -10,21 +9,50 @@ import { Router } from '@angular/router';
   styleUrls: ['./sidebar.component.scss']
 })
 export class SidebarComponent implements OnInit {
+  @Input('isSideBarOpen') isSideBarOpen;
+  @Output('sidebarStatus') sidebarStatus = new EventEmitter();
+  @Output('openAboutUs') openAboutUs = new EventEmitter();
   faTimes = faTimes;
-  faFacebook = faFacebookF;
-  faTwitter = faTwitter;
+  faUserCircle = faUserCircle;
+  // faFacebook = faFacebookF;
+  // faTwitter = faTwitter;
   userName;
+  isLandingPage: boolean;
+  loginPage: boolean;
   constructor(
     private router: Router,
     private commonService: CommonService
     ) { }
-  @Input('isSideBarOpen') isSideBarOpen;
-  @Output('sidebarStatus') sidebarStatus = new EventEmitter();
-  @Output('openAboutUs') openAboutUs = new EventEmitter();
 
   ngOnInit(): void {
     this.handleSubscriptions();
     this.setUserName();
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    this.isSideBarOpen = changes.isSideBarOpen.currentValue;
+  }
+
+  
+  checkRouterEvent() {
+    this.router.events.subscribe((val) => {
+      this.checkIfLoginPage();
+      this.checkIfLandingPage();
+    });
+  }
+
+  checkIfLandingPage() {
+    this.isLandingPage = this.commonService.checkIfLandingPage();
+  }
+
+  checkIfLoginPage() {
+    let url = window.location.href;
+    if (url.indexOf('login') > -1) {
+      this.loginPage = true;
+    }
+    else {
+      this.loginPage = false;
+    }
   }
 
   handleSubscriptions() {
