@@ -1,10 +1,16 @@
-<div class="add-category-btncontainer">
+<div class="add-category-btncontainer d-none d-md-block">
     <!-- add category modal -->
     <app-add-category class="add-category-container" [editMode]="editMode"></app-add-category>
 </div>
 <div class="category-menu-container">
-    <div class="categories-header-title">Category</div>
-    <ul class="category-list">
+    <div class="categories-header-title">Category 
+        <app-add-category class="d-block d-sm-none addcategory-mobile-container" [editMode]="editMode"></app-add-category>
+        <fa-icon *ngIf="!isCategoryOpen" class="d-block d-sm-none hand-cursor accordion-icon" [icon]="faChevronDown" (click)="toggleCustomAccordion()">
+        </fa-icon>
+        <fa-icon *ngIf="isCategoryOpen" class="d-block d-sm-none hand-cursor accordion-icon" [icon]="faChevronUp" (click)="toggleCustomAccordion()">
+        </fa-icon>
+    </div>
+    <ul class="category-list" *ngIf="!isMobile || isCategoryOpen">
         <li class="product-item" [ngClass]="{'active': isAllCategoryActive == true}" (click)="allCategorySelected()">
             <span class="hand-cursor">
                 {{allCategoryText}}

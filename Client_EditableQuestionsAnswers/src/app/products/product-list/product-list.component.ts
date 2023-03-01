@@ -139,15 +139,20 @@ export class ProductListComponent implements OnInit {
   }
 
   addToCart(product) {
-    this.setProductId(product);
-    let data = product;
-    this.commonService.addUserDetails(data);
-    this.loaderService.display(true);
-    this.cartService.addToCartList(data).subscribe(response=>{
-      this.loaderService.display(false);
-      console.log('product added to cart successfully');
-      this.cartService.cartItemChange.next();
-    })
+    if(this.commonService.checkIfVisitorAndNavigate()) {
+       this.commonService.navigateToLoginPage();
+    }
+    else {
+      this.setProductId(product);
+      let data = product;
+      this.commonService.addUserDetails(data);
+      this.loaderService.display(true);
+      this.cartService.addToCartList(data).subscribe(response=>{
+        this.loaderService.display(false);
+        console.log('product added to cart successfully');
+        this.cartService.cartItemChange.next();
+      })
+    }
   }
 
   setProductId(product) {
@@ -167,17 +172,22 @@ export class ProductListComponent implements OnInit {
   }
 
   openOrderConfirmationModal(product): void{
-    this.commonService.addUserDetails(product);
-    const initialState: ModalOptions = {
-      initialState: {
-        product
-      }
-    };
-    const config= this.commonService.getModalConfig(this.orderConfirmationClass);
-    this.modalRef = this.modalService.show(ConfirmOrderDetailsComponent, initialState);
-    this.modalRef.content.event.subscribe(data=>{
-      this.placeOrder(data);
-    });
+    if(this.commonService.checkIfVisitorAndNavigate()) {
+      this.commonService.navigateToLoginPage();
+   }
+   else {
+      this.commonService.addUserDetails(product);
+      const initialState: ModalOptions = {
+        initialState: {
+          product
+        }
+      };
+      const config= this.commonService.getModalConfig(this.orderConfirmationClass);
+      this.modalRef = this.modalService.show(ConfirmOrderDetailsComponent, initialState);
+      this.modalRef.content.event.subscribe(data=>{
+        this.placeOrder(data);
+      });
+    }
   }
 
   placeOrder(cartItem) {

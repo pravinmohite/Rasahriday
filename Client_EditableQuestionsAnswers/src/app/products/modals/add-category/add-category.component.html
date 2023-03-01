@@ -1,7 +1,8 @@
     <!-- add product button -->
-    <button *ngIf="isAdmin" class="btn btn-default btn-light btn-light-default" (click)="openCategoryModal(addCategoryTemplate)">
+    <button *ngIf="isAdmin" class="btn btn-default btn-light btn-light-default add-category-btn" (click)="openCategoryModal(addCategoryTemplate)">
         <!-- <fa-icon class="hand-cursor edit-icon" size="1x" [icon]="faPlus"></fa-icon> -->
-        + add category
+        <span>+</span> 
+        <span class="d-none d-md-block display-inline"> add category</span>
     </button>
     <!-- add product modal  -->
     <ng-template #addCategoryTemplate>
@@ -26,7 +27,7 @@
                     <button name="submit" type="submit" class="btn btn-outline-modal btn-full-width">Save</button>
                    </div>  
                    <div class="col-3">
-                    <button name="submit" type="button" class="btn btn-outline-removebtn btn-full-width" (click)="modalRef?.hide()">Cancel</button>
+                    <button name="submit" type="button" class="btn btn-outline-removebtn btn-full-width" (click)="hideCategoryModal()">Cancel</button>
                   </div>
                 </div>
               </form>

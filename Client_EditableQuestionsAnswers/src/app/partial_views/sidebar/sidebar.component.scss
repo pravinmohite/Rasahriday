@@ -50,7 +50,8 @@
 }
 
 .header-nav {
-    border-bottom: solid 1px $product-name-color;
+    border-bottom: solid 1px $box-shadow-color;
+    padding: 12px;
     .header-links {
         margin-right: 10px;
         .nav-links {

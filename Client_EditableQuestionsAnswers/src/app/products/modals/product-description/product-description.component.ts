@@ -62,14 +62,20 @@ export class ProductDescriptionComponent implements OnInit {
   }
 
   addToCart(product) {
-    let data = product;
-    this.commonService.addUserDetails(data);
-    this.loaderService.display(true);
-    this.cartService.addToCartList(data).subscribe(response=>{
-      this.loaderService.display(false);
-      console.log('product added to cart successfully');
-      this.cartService.cartItemChange.next();
-    })
+    if(this.commonService.checkIfVisitorAndNavigate()) {
+      this.modalRefProductDescription.hide();
+      this.commonService.navigateToLoginPage();
+   }
+   else {
+      let data = product;
+      this.commonService.addUserDetails(data);
+      this.loaderService.display(true);
+      this.cartService.addToCartList(data).subscribe(response=>{
+        this.loaderService.display(false);
+        console.log('product added to cart successfully');
+        this.cartService.cartItemChange.next();
+      })
+    }
   }
 
   changeQty(product) {
@@ -93,18 +99,24 @@ export class ProductDescriptionComponent implements OnInit {
   }
 
   openOrderConfirmationModal(product): void{
-    this.modalRefProductDescription.hide();
-    this.commonService.addUserDetails(product);
-    const initialState: ModalOptions = {
-      initialState: {
-        product
-      }
-    };
-    const config= this.commonService.getModalConfig(this.orderConfirmationClass);
-    this.modalRefOrderConfirmation = this.modalService.show(ConfirmOrderDetailsComponent, initialState);
-    this.modalRefOrderConfirmation.content.event.subscribe(data=>{
-      this.placeOrder(data);
-    });
+    if(this.commonService.checkIfVisitorAndNavigate()) {
+      this.modalRefProductDescription.hide();
+      this.commonService.navigateToLoginPage();
+   }
+   else {
+      this.modalRefProductDescription.hide();
+      this.commonService.addUserDetails(product);
+      const initialState: ModalOptions = {
+        initialState: {
+          product
+        }
+      };
+      const config= this.commonService.getModalConfig(this.orderConfirmationClass);
+      this.modalRefOrderConfirmation = this.modalService.show(ConfirmOrderDetailsComponent, initialState);
+      this.modalRefOrderConfirmation.content.event.subscribe(data=>{
+        this.placeOrder(data);
+      });
+    }
   }
 
   placeOrder(cartItem) {

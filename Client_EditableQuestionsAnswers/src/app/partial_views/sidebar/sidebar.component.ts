@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@
 import { faBars, faSignInAlt, faUser, faUserCircle, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { CommonService } from 'src/app/services/common-service/common.service';
 import { Router } from '@angular/router';
+import { CategoryMenuComponent} from './../category-menu/category-menu.component';
 
 @Component({
   selector: 'app-sidebar',
@@ -70,6 +71,7 @@ export class SidebarComponent implements OnInit {
   logOut() {
     this.commonService.removeUserDetails();
     this.removeUserName();
+    this.closeSideBar();
     this.navigateToLoginPage();
   }
 

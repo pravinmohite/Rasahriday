@@ -6,11 +6,6 @@
     padding-left: 15px;
     padding-right: 15px;
 
-    @media only screen and (max-width: 768px) {
-        overflow-y: auto;
-        max-height: 100vh;
-    }
-
     .product-list-container {
 
         .addproduct-btn-container {
@@ -19,13 +14,6 @@
 
         @media only screen and (max-width: 768px) {
             max-height: initial;
-            overflow-y: hidden;
-        }
-
-        .product-list-item-container {
-            @media only screen and (max-width: 768px) {
-                padding-left: 0px;
-            }
         }
 
         .add-category-container {
@@ -55,7 +43,7 @@
             .buy-btn {
                 margin-right: 5px;
                 @media only screen and (max-width: 768px) {
-                    width: 86%;
+                    width: 94%;
                     margin: auto;
                     margin-top: 15px;
                 }
@@ -63,6 +51,9 @@
             }
             .add-cart-btn {
               margin-right: 5px;
+              @media only screen and (max-width: 768px) {
+                width: 60%;
+              }
             }
         }
 

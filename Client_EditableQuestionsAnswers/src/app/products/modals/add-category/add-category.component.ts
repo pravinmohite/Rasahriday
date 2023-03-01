@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, SimpleChange, TemplateRef, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { CommonService } from 'src/app/services/common-service/common.service';
@@ -30,16 +30,23 @@ export class AddCategoryComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
+    this.handleUserLoggedInSubscriptions();
     this.setPrivileges();
     this.createForm()
+  }
+
+  handleUserLoggedInSubscriptions() {
+    this.commonService.userLoggedIn.subscribe(data => {
+      this.setPrivileges();
+    })
   }
 
   setPrivileges() {
     this.isAdmin = this.commonService.userDetails.isAdmin;
   }
   
-  ngOnChanges() {
-    if(this.editMode && this.editMode.status) {
+  ngOnChanges(changes: SimpleChange) {
+    if(this.editMode && this.editMode.status && this.modalService['modalsCount'] == 0) {
       this.openCategoryModal(this.templateRef);
       this.setValuesToBeEdited(this.editMode.editedItem);
     }
@@ -63,6 +70,10 @@ export class AddCategoryComponent implements OnInit {
     this.categoryForm.reset();
     const config= this.commonService.getModalConfig();
     this.modalRef = this.modalService.show(templateRef, config);
+  }
+
+  hideCategoryModal() {
+    this.modalRef.hide();
   }
 
   submit(formVal): void{

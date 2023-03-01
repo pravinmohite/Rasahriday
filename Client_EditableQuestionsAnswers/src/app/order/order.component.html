@@ -66,7 +66,7 @@
             <div class="cart-item-actionbtns" *ngIf="userDetails.isAdmin">
                 <button *ngIf="!orderedItem.orderAccepted" class="btn btn-outline place-order-btn"
                     (click)="acceptOrder(orderedItem)">Accept order</button>
-                <button class="btn btn-outline-removebtn place-order-btn" (click)="deleteOrder(orderedItem)">
+                <button class="btn btn-outline-removebtn place-order-btn remove-btn" (click)="deleteOrder(orderedItem)">
                     <fa-icon class="hand-cursor delete-icon" [icon]="faTrash"></fa-icon>
                     remove
                 </button>

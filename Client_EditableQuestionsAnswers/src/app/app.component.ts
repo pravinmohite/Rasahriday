@@ -24,15 +24,22 @@ export class AppComponent{
       this.checkRouterEvent();
   }
 
+  ngOnInit() {
+    this.checkAndSetLoggedInDetails();
+    this.createWebStorageDemo();
+    this.handleSidebarStatusChange();
+  }
+
   checkRouterEvent() {
     this.router.events.subscribe((val) => {
       this.checkIfLandingPage();
     });
   }
 
-  ngOnInit() {
-    this.checkAndSetLoggedInDetails();
-    this.createWebStorageDemo();
+  handleSidebarStatusChange() {
+    this.commonService.sideBarStatus.subscribe(data=>{
+       this.openOrCloseSidebar(data);
+    })
   }
 
   checkIfLandingPage() {
@@ -52,14 +59,12 @@ export class AppComponent{
   }
 
   createWebStorageDemo(): void{
-    console.log(sessionStorage['dev1']);
-    console.log(localStorage['dev2']);
     if( !sessionStorage['dev1']){
       sessionStorage['dev1'] = 'viresh';
       console.log('dev1 set')
     }
     if(!localStorage['dev2']){
-      localStorage['dev2'] = 'Praveen';
+      localStorage['dev2'] = 'Pravin';
       console.log('dev2 set')
     }
   }

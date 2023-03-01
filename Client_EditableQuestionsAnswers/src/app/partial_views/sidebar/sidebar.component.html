@@ -14,8 +14,8 @@
           </li>
         </ul>
     </div>
-    <div *ngIf="!userName && !this.loginPage" class="login-link-container col-md-7 col-7">
-        <a class="login-link" href="/#/login">
+    <div *ngIf="!userName && !this.loginPage" class="login-link-container col-md-7 col-12 header-nav">
+        <a class="login-link" href="/#/login" (click)="closeSideBar()">
           Login 
           <fa-icon [icon]="faUserCircle">
           </fa-icon>
@@ -23,21 +23,21 @@
     </div>  
     <div class="col-md-12 header-nav">
         <span class="header-links">
-            <a class="nav-links" href="/#/products">
+            <a class="nav-links" href="/#/products" (click)="closeSideBar()">
                 Products
             </a>
         </span>
     </div>
     <div *ngIf="userName" class="col-md-12 header-nav">
         <span class="header-links">
-            <a class="nav-links" href="/#/carts">
+            <a class="nav-links" href="/#/carts" (click)="closeSideBar()">
                 Carts
             </a>
         </span>
     </div>
     <div *ngIf="userName" class="col-md-12 header-nav">
         <span class="header-links">
-            <a class="nav-links" href="/#/orders">
+            <a class="nav-links" href="/#/orders" (click)="closeSideBar()">
                 Orders
             </a>
         </span>
@@ -59,4 +59,5 @@
             </ul>
         </div>
     </div> -->
+    <app-category-menu></app-category-menu> 
 </section>
