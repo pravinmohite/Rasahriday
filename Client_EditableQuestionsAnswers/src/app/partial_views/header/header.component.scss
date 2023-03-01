@@ -101,6 +101,12 @@
        display: none !important;
     }
 }
+
+.project-text {
+    .logo-text {
+        color: $btn-search-background;
+    }
+}
 @media screen and (max-width: 768px){
 
     #about-us-and-social-links{
