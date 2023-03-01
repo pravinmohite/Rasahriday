@@ -10,8 +10,8 @@
                 <span class="price-value">{{selectedProducts.price}}</span>
             </div>
             <div class="col-12 col-md-8 multiselect-btns-container">
-                <button class="btn btn-outline place-order-btn col-6" (click)="confirmOrder(null, true)">Place order</button>
-                <button class="btn btn-outline-removebtn place-order-btn col-5" (click)="deleteSelectedCartItems()">
+                <button class="btn btn-outline place-order-btn" (click)="confirmOrder(null, true)">Place order</button>
+                <button class="btn btn-outline-removebtn place-order-btn remove-btn" (click)="deleteSelectedCartItems()">
                     <fa-icon class="hand-cursor delete-icon" [icon]="faTrash"></fa-icon>
                     remove
                 </button>
