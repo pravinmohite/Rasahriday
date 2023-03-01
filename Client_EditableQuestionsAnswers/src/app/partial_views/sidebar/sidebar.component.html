@@ -3,24 +3,24 @@
         <fa-icon [icon]="faTimes" (click)="closeSideBar()" *ngIf="isSideBarOpen"></fa-icon>
     </span>
     <div *ngIf="userName" class="col-md-12 header-nav" dropdown>
-        <button id="button-basic" dropdownToggle type="button" class="btn btn-default dropdown-toggle no-padding" aria-controls="dropdown-basic">
-                {{userName}} 
-                <span class="caret"></span>
+        <button id="button-basic" dropdownToggle type="button" class="btn btn-default dropdown-toggle no-padding"
+            aria-controls="dropdown-basic">
+            {{userName}}
+            <span class="caret"></span>
         </button>
-        <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu"
-            role="menu" aria-labelledby="button-basic">
-          <li role="menuitem">
-            <a class="dropdown-item" (click)="logOut()" href="#">Logout</a>
-          </li>
+        <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
+            <li role="menuitem">
+                <a class="dropdown-item" (click)="logOut()" href="#">Logout</a>
+            </li>
         </ul>
     </div>
     <div *ngIf="!userName && !this.loginPage" class="login-link-container col-md-7 col-12 header-nav">
         <a class="login-link" href="/#/login" (click)="closeSideBar()">
-          Login 
-          <fa-icon [icon]="faUserCircle">
-          </fa-icon>
+            Login
+            <fa-icon [icon]="faUserCircle">
+            </fa-icon>
         </a>
-    </div>  
+    </div>
     <div class="col-md-12 header-nav">
         <span class="header-links">
             <a class="nav-links" href="/#/products" (click)="closeSideBar()">
@@ -42,22 +42,10 @@
             </a>
         </span>
     </div>
-    <!-- <div id="about-us-and-social-links" class = "col-md-3">
-        <a id = "about-us-label" (click) = "openAboutusModal()">About Us</a>
-        <div id = "follow-us-container">
-            <ul id = "social-address-links">
-                <li class = "social-link-item">
-                    <a href = "https://www.facebook.com/Front-end-interview-questions-106067168139636" target = "_blank">
-                        <fa-icon [icon]="faFacebook"></fa-icon>
-                    </a>
-                </li>
-                <li class = "social-link-item">
-                    <a href = "https://twitter.com/amazingjavascr1" target = "_blank">
-                        <fa-icon [icon]="faTwitter"></fa-icon>
-                    </a>
-                </li>
-            </ul>
-        </div>
-    </div> -->
-    <app-category-menu></app-category-menu> 
+    <div class="col-md-12 header-nav">
+        <span class="header-links">
+            <a id="about-us-label" (click)="openAboutusModal()">About Us</a>
+        </span>
+    </div>
+    <app-category-menu></app-category-menu>
 </section>
