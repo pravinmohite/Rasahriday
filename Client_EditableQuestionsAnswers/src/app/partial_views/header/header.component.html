@@ -32,8 +32,8 @@
       </span>
       <span class="header-links" *ngIf="userName">
         <a class="nav-links" href="/#/carts">
-          Carts
-          <!-- <fa-icon [icon]="faOpencart" (click)= "openSiderBar()"></fa-icon>  -->
+           Carts
+          <fa-icon [icon]="faCartPlus"></fa-icon>
           <span *ngIf="cartItems && cartItems>0" class="badge badge-light">{{cartItems}}</span>
         </a>
       </span>

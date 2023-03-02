@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { QuestionAnswerService } from "../../services/question-answer-service/question-answer.service";
 import { faTwitter, faFacebookF, faOpencart } from '@fortawesome/free-brands-svg-icons';
-import { faBars, faSignInAlt, faUser, faUserCircle } from '@fortawesome/free-solid-svg-icons';
+import { faBars, faSignInAlt, faUser, faUserCircle, faCartPlus, faCartArrowDown } from '@fortawesome/free-solid-svg-icons';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CommonService } from 'src/app/services/common-service/common.service';
 import { ProductService } from 'src/app/services/product-service/product.service';
@@ -24,6 +24,8 @@ export class HeaderComponent implements OnInit, AfterViewInit {
   faOpencart = faOpencart;
   faSignInAlt = faSignInAlt
   faUserCircle = faUserCircle;
+  faCartPlus = faCartPlus;
+  faCartArrowDown = faCartArrowDown
   searchVal = '';
   userName: string;
   cartItems: any;
