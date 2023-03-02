@@ -3,11 +3,21 @@
 %carouse-container-dimensions {
     height: 450px;
     width: 500px;
+
+    @media screen and (max-width: 768px) {
+       height: 320px;
+       width: 100%;
+    }
 }
 
 %img-dimensions {
     height: 430px;
     width: 480px;
+
+    @media screen and (max-width: 768px) {
+      height: 300px;
+      width: 100%;
+   }
 }
 
 %action-btn-size {
@@ -103,6 +113,11 @@
 
       .user-action-btns {
         margin-top:30px;
+
+        @media screen and (max-width: 768px) {
+          margin-bottom: 10px;
+        }
+
         .buy-btn {
           margin-right: 5px;
           @extend %action-btn-size;
