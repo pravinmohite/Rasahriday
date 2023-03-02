@@ -11,8 +11,16 @@
           </h1>
         </div>
       </a>
-      <span id="menubars" class="col-1">
-        <fa-icon [icon]="faBars" (click)="openSiderBar()"></fa-icon>
+      <span id="menubars" class="col-4">
+        <span class="cart-menubar-container">
+          <span class="d-block d-sm-none header-nav" *ngIf="userName">
+            <a class="nav-links" href="/#/carts">
+              <fa-icon class="cart-icon" [icon]="faCartPlus"></fa-icon>
+              <span *ngIf="cartItems && cartItems>0" class="badge badge-light">{{cartItems}}</span>
+            </a>
+          </span>
+          <fa-icon class="menu-bar-icon" [icon]="faBars" (click)="openSiderBar()"></fa-icon>
+        </span> 
       </span>
     </div>
     <div *ngIf="userName" [ngClass]="userName && !isLandingPage ? 'shown': 'hidden'"
@@ -33,7 +41,7 @@
       <span class="header-links" *ngIf="userName">
         <a class="nav-links" href="/#/carts">
            Carts
-          <fa-icon [icon]="faCartPlus"></fa-icon>
+          <fa-icon class="cart-icon" [icon]="faCartPlus"></fa-icon>
           <span *ngIf="cartItems && cartItems>0" class="badge badge-light">{{cartItems}}</span>
         </a>
       </span>

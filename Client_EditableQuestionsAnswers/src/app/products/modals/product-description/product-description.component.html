@@ -39,11 +39,9 @@
                             <span class="drug-quantity-value">{{product.drugQuantity}}</span>
                         </div>
                     </div>
-                    <!-- <div class="row quantity-action-btnscontainer">
-                        <div class="col-12"> -->
                     <div class="row quantity-container" *ngIf="product.stock > 0">
                         <div class="col-12 quantity-title">Quantity</div>
-                        <div class="input-group col-4">
+                        <div class="input-group col-md-4 col-5">
                             <div class="input-group-prepend">
                                 <button class="input-group-text" (click)="decrementQuantity(product)">-</button>
                             </div>
@@ -66,29 +64,8 @@
                     <div class="row out-of-stock" *ngIf="product.stock <= 0">
                         <span class="out-of-stock-text">{{outOfStockText}}</span>
                    </div>
-                    <!-- </div>
-                    </div> -->
                 </div>
             </div>
         </div>
-
-        <!-- <table class="table">
-            <thead>
-                <tr>
-                    <th>sr. no.</th>
-                    <th>Sanskrit Name</th>
-                    <th>Botanical Name</th>
-                    <th>Quantity</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>{{product.sanskritName}}</td>
-                    <td>{{product.botanicalName}}</td>
-                    <td>{{product.drugQuantity}}</td>
-                </tr>
-            </tbody>
-        </table> -->
     </div>
 </ng-template>

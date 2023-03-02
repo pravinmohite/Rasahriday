@@ -4,7 +4,7 @@
 </alert>
 <div class="cart-container">
     <div class="row product-item" *ngFor="let orderedItem of orderList">
-        <div class="col-5">
+        <div class="col-md-5 col-12">
             <div class="carousel-container" *ngIf="orderedItem.productImagesToBeShown">
                 <carousel>
                     <slide *ngFor="let item of orderedItem.productImagesToBeShown;let i=index">
@@ -21,7 +21,7 @@
                 <img class="product-img" src="assets/images/herbal-med.jpg" />
             </div>
         </div>
-        <div class="col-7">
+        <div class="col-md-7 col-12">
             <div class="product-name">{{orderedItem.productName}}</div>
             <div class="product-description">{{orderedItem.description}}</div>
             <div class="product-ordered-datecontainer">
