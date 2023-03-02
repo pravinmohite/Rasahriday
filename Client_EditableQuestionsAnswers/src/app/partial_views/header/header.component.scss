@@ -58,6 +58,10 @@
     .header-links {
         margin-right: 15px;
 
+        &:hover {
+            color: $product-hover-border !important
+        }
+
         .nav-links {
             text-decoration: none;
             color: inherit;
@@ -116,6 +120,17 @@
     }
 }
 
+.cart-menubar-container {
+    .badge-light {
+        font-size: 12px;
+    }
+}
+
+
+.cart-icon {
+  color: $cart-icon-color !important; 
+}
+
 @media screen and (max-width: 768px) {
 
     #about-us-and-social-links {
@@ -127,7 +142,10 @@
         float: right;
         font-size: 1.2em;
         margin-top: 5px;
-        margin-right: 10px;
+
+        .menu-bar-icon {
+            float: right;
+        }
     }
 
 }
