@@ -2,36 +2,39 @@
 
 
 .sidebar-container {
-  margin-top: 35px;
+    margin-top: 35px;
+    max-height: 590px;
+    overflow: auto;
+    height: 100%;
 }
 
-#close-icon-container{
+#close-icon-container {
     display: inline;
     position: absolute;
     right: 10px;
     top: 10px;
 }
 
-#social-address-links{
+#social-address-links {
     list-style: none;
     padding-left: 0;
     display: inline;
 }
 
-.social-link-item:nth-child(2){
+.social-link-item:nth-child(2) {
     margin-left: 20px;
 }
 
-.social-link-item{
+.social-link-item {
     display: inline-block;
 }
 
-#about-us-and-social-links{
+#about-us-and-social-links {
     padding-left: 10%;
     margin-top: 40px;
 }
 
-#follow-us-container{
+#follow-us-container {
     border: 1px solid lightgrey;
     padding: 4px 10px;
     border-radius: 11px;
@@ -40,20 +43,22 @@
     margin-left: -1px;
 }
 
-#about-us-label{
+#about-us-label {
     vertical-align: middle;
     cursor: pointer;
 }
 
-#about-us-label:hover{
+#about-us-label:hover {
     text-decoration: underline;
 }
 
 .header-nav {
     border-bottom: solid 1px $box-shadow-color;
     padding: 12px;
+
     .header-links {
         margin-right: 10px;
+
         .nav-links {
             text-decoration: none;
             color: inherit;
