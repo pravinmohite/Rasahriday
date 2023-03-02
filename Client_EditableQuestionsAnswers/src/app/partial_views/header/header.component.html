@@ -4,7 +4,7 @@
     aria-label="frontend interview questions">
     <div class="col-md-2 col-12 font-weight-normal project-name hand-cursor">
       <a href="/#/home">
-        <img src="../../../assets/images/rasahriday_logo.png" alt="Frontend interview questions" class="project-icon">
+        <img src="../../../assets/images/rasahriday-logo.png" alt="Frontend interview questions" class="project-icon">
         <div class="project-text">
           <h1 class="logo-text">
             <span class="first-line">Rasahriday</span>
@@ -32,8 +32,8 @@
       </span>
       <span class="header-links" *ngIf="userName">
         <a class="nav-links" href="/#/carts">
-          Carts
-          <!-- <fa-icon [icon]="faOpencart" (click)= "openSiderBar()"></fa-icon>  -->
+           Carts
+          <fa-icon [icon]="faCartPlus"></fa-icon>
           <span *ngIf="cartItems && cartItems>0" class="badge badge-light">{{cartItems}}</span>
         </a>
       </span>
