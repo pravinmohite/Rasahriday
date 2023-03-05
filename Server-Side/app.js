@@ -24,6 +24,8 @@ mongoose.connection.on('error',(err)=>{
 
 const port=3000;
 
+const app_folder = './../Client_EditableQuestionsAnswers/dist/sample-task';
+
 //cors
 app.use(cors());
 
@@ -33,13 +35,15 @@ app.use(bodyparser.json());
 app.use('/productImages', express.static('productImages'));
 
 //static files
-app.use(express.static(path.join(__dirname,"public")));
-
+//app.use(express.static(path.join(__dirname,"public")));
+app.use(express.static('./../Client_EditableQuestionsAnswers/dist'));
 app.use('/api',route);
 
-app.get('/',(req,res)=>{
-    res.send('foobar');
-})
+app.get('*.*', express.static(app_folder, {maxAge: '2y'}));
+
+app.get('*',(req,res) => {
+       res.status(200).sendFile('/',{root: app_folder});
+});
 
 app.listen(port,()=>{
   console.log('server started at port:'+port);   

@@ -12,19 +12,11 @@ export class ProductService {
   filterData: any;
   currentQuestionTypeSelected: String;
   currentSearchString: String;
-  loginDetailsUrl: String = "/api/loginDetails";
-  signUpUrl = "/api/signUp";
-  productUrl: string = "/api/product";
-  categoryUrl: string = "/api/category";
-  isProd: boolean = false;
-  /*---with ssl changed due to loadbalancer----can be done using nginx*/
-  //prodUrl:String="https://www.ssl.frontendinterviewquestions.com";
-  prodUrl: String = "http://54.255.150.70:3000";
-  devDomain: any = this.isProd ? this.prodUrl : "http://localhost:3000";
-  finalloginDetailsUrl: string = this.devDomain + this.loginDetailsUrl;
-  finalSignUpUrl = this.devDomain + this.signUpUrl;
-  finalProductUrl: string = this.devDomain + this.productUrl;
-  finalCategoryUrl: string = this.devDomain + this.categoryUrl;
+  devDomain: string;
+  finalloginDetailsUrl: string;
+  finalSignUpUrl: string
+  finalProductUrl: string;
+  finalCategoryUrl: string;
   questionAnswerData: any;
   private data = new BehaviorSubject(null);
   currentData = this.data.asObservable();
@@ -39,7 +31,12 @@ export class ProductService {
     private commonService: CommonService,
     private route: ActivatedRoute,
     private router: Router) {
+      this.devDomain = this.commonService.devDomain;
       this.productAllUrl = this.commonService.finalProductAllUrl;
+      this.finalloginDetailsUrl = this.commonService.finalloginDetailsUrl;
+      this.finalSignUpUrl = this.commonService.finalSignUpUrl;
+      this.finalProductUrl = this.commonService.finalProductUrl;
+      this.finalCategoryUrl = this.commonService.finalCategoryUrl;
   }
 
   /*---------------for login details-------------*/

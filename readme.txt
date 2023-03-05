@@ -28,3 +28,40 @@ debug angular code in chrome->run with development configuration
   }
   
   ng build --configuration development
+
+
+  
+sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 3B4FE6ACC0B21F32
+
+mongodb on ubuntu 22
+
+
+const app_folder = './Client_EditableQuestionsAnswers\dist\sample-task';
+
+//cors
+app.use(cors());
+
+//body-parser
+app.use(bodyparser.json());
+
+app.use('/productImages', express.static('productImages'));
+
+//static files
+//app.use(express.static(path.join(__dirname,"public")));
+app.use(express.static('./Client_EditableQuestionsAnswers/dist'));
+app.use('/api',route);
+
+app.get('*.*', express.static(app_folder, {maxAge: '2y'}));
+
+app.get('*',(req,res) => {
+       res.status(200).sendFile('/',{root: app_folder});
+});
+
+app.listen(port,()=>{
+  console.log('server started at port:'+port);   
+})
+
+to restart nginx
+->go to /etc/nginx/sites-available
+>run following command
+sudo service nginx restart
