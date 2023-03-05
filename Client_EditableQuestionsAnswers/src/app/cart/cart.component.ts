@@ -134,7 +134,7 @@ export class CartComponent implements OnInit {
   }
 
   openOrderConfirmationModal(cartItem, isMultipleItems?): void{
-    let modalObj: ModalOptions;
+    let modalObj: any;
     if(isMultipleItems) {
       this.setUserDetails();
       modalObj = {

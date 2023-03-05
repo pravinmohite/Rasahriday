@@ -177,7 +177,7 @@ export class ProductListComponent implements OnInit {
    }
    else {
       this.commonService.addUserDetails(product);
-      const initialState: ModalOptions = {
+      const initialState: any = {
         initialState: {
           product
         }

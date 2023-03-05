@@ -15,11 +15,6 @@ export class CartService {
   cartUrl: string;
   cartAllUrl: string;
   multipleCartItemsUrl: string;
-  isProd: boolean = false;
-  /*---with ssl changed due to loadbalancer----can be done using nginx*/
-  //prodUrl:String="https://www.ssl.frontendinterviewquestions.com";
-  prodUrl: String = "http://54.255.150.70:3000";
-  devDomain: any = this.isProd ? this.prodUrl : "http://localhost:3000";
   private data = new BehaviorSubject(null);
   currentData = this.data.asObservable();
   confirmationText = "Are you sure you want to delete";

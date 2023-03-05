@@ -106,7 +106,7 @@ export class ProductDescriptionComponent implements OnInit {
    else {
       this.modalRefProductDescription.hide();
       this.commonService.addUserDetails(product);
-      const initialState: ModalOptions = {
+      const initialState: any = {
         initialState: {
           product
         }
