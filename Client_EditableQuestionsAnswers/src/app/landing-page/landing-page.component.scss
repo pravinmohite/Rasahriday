@@ -20,6 +20,10 @@
             height: 90vh;
             display: block;
             width: 100%;
+
+            @media screen and (max-width: 768px) {
+               height: 30vh;
+            }
         }
 
         .carousel-caption {
@@ -51,7 +55,7 @@
 
                 @media screen and (max-width: 768px){
                     padding: 5px;
-                    height: 200px !important;
+                    height: 130px !important;
                 }
 
                 .carousel-caption {
@@ -63,7 +67,7 @@
                     height: 55px;
 
                     @media screen and (max-width: 768px){
-                        top: 135px !important;
+                        top: 60px !important;
                     }
 
                     .carousel-text {
@@ -86,7 +90,7 @@
                     }
 
                     @media screen and (max-width: 768px){
-                        height: 200px !important;
+                        height: 120px !important;
                     }
                 }
             }

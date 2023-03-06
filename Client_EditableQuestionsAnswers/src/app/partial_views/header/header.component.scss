@@ -117,6 +117,10 @@
 .project-text {
     .logo-text {
         color: $btn-search-background;
+
+        @media screen and (max-width: 768px) {
+          font-family: sans-serif;
+        }
     }
 }
 
@@ -128,6 +132,10 @@
     }
     .badge-light {
         font-size: 12px;
+
+        @media screen and (max-width: 768px) {
+          font-family: sans-serif;
+        }
     }
 }
 
