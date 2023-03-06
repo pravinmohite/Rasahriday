@@ -65,3 +65,5 @@ to restart nginx
 ->go to /etc/nginx/sites-available
 >run following command
 sudo service nginx restart
+
+https://www.digitalocean.com/community/tutorials/how-to-secure-nginx-with-let-s-encrypt-on-ubuntu-20-04
