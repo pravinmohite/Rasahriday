@@ -8,6 +8,10 @@
   padding-top: 10px;
   overflow: hidden;
 
+  @media screen and (max-width: 768px){
+    margin-top: 20px !important;
+  }
+
   .contact-us-part {
     background-color: $contact-us-footer;
     color: $contact-us-footercolor !important;

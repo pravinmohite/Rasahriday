@@ -20,6 +20,10 @@
             height: 90vh;
             display: block;
             width: 100%;
+
+            @media screen and (max-width: 768px) {
+               height: 35vh;
+            }
         }
 
         .carousel-caption {
@@ -29,7 +33,10 @@
             color: $button-theme-color;
             max-width: 335px;
             margin-top: 6px;
-            top: 347px !important;
+
+            @media screen and (max-width: 768px) {
+                top: 60px !important;
+            }
 
             .header-text {
                 font-family: cursive;
@@ -51,7 +58,7 @@
 
                 @media screen and (max-width: 768px){
                     padding: 5px;
-                    height: 200px !important;
+                    height: 130px !important;
                 }
 
                 .carousel-caption {
@@ -63,7 +70,7 @@
                     height: 55px;
 
                     @media screen and (max-width: 768px){
-                        top: 135px !important;
+                        top: 60px !important;
                     }
 
                     .carousel-text {
@@ -86,7 +93,7 @@
                     }
 
                     @media screen and (max-width: 768px){
-                        height: 200px !important;
+                        height: 120px !important;
                     }
                 }
             }
