@@ -61,7 +61,13 @@ app.listen(port,()=>{
   console.log('server started at port:'+port);   
 })
 
+install mongodb on digital ocean:-
+
+https://wiki.crowncloud.net/How_To_Install_Duf_On_Ubuntu_22_04?How_to_Install_Latest_MongoDB_on_Ubuntu_22_04
+
 to restart nginx
 ->go to /etc/nginx/sites-available
 >run following command
 sudo service nginx restart
+
+https://www.digitalocean.com/community/tutorials/how-to-secure-nginx-with-let-s-encrypt-on-ubuntu-20-04

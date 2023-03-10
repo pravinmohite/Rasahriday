@@ -47,5 +47,5 @@
             <a id="about-us-label" (click)="openAboutusModal()">About Us</a>
         </span>
     </div>
-    <app-category-menu></app-category-menu>
+    <app-category-menu *ngIf="isProductListingPage || isAdmin"></app-category-menu>
 </section>

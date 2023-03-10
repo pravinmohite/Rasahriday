@@ -18,12 +18,16 @@ export class SidebarComponent implements OnInit {
   // faFacebook = faFacebookF;
   // faTwitter = faTwitter;
   userName;
+  isAdmin = false;
   isLandingPage: boolean;
   loginPage: boolean;
+  isProductListingPage: boolean;
   constructor(
     private router: Router,
     private commonService: CommonService
-    ) { }
+    ) { 
+      this.checkRouterEvent();
+    }
 
   ngOnInit(): void {
     this.handleSubscriptions();
@@ -37,8 +41,7 @@ export class SidebarComponent implements OnInit {
   
   checkRouterEvent() {
     this.router.events.subscribe((val) => {
-      this.checkIfLoginPage();
-      this.checkIfLandingPage();
+      this.checkIfProductListingPage();
     });
   }
 
@@ -46,26 +49,27 @@ export class SidebarComponent implements OnInit {
     this.isLandingPage = this.commonService.checkIfLandingPage();
   }
 
+  checkIfProductListingPage() {
+    this.isProductListingPage = this.commonService.checkIfProductListingPage();
+  }
+
   checkIfLoginPage() {
-    let url = window.location.href;
-    if (url.indexOf('login') > -1) {
-      this.loginPage = true;
-    }
-    else {
-      this.loginPage = false;
-    }
+   this.loginPage = this.commonService.checkIfLoginPage();
   }
 
   handleSubscriptions() {
     this.commonService.userLoggedIn.subscribe(data=>{
       this.userName = data['userName'];
+      this.isAdmin = data['isAdmin'];
     })
   }
 
   setUserName() {
-    if(!this.userName && this.commonService.userDetails) {
-      this.userName = this.commonService.userDetails.userName;
+    const userDetails = this.commonService.userDetails;
+    if(!this.userName) {
+      this.userName = userDetails.userName;
     }
+    this.isAdmin = userDetails.isAdmin
   }
 
   logOut() {

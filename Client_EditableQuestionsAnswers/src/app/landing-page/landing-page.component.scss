@@ -12,6 +12,10 @@
 
 ::ng-deep {
     .landing-page {
+        @media screen and (max-width: 768px) {
+           position: relative;
+           z-index: 0;
+        }
         .new-arrival-slide {
             animation: fadeIn 3s;
         }

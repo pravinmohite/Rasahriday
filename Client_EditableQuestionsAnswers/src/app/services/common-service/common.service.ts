@@ -27,9 +27,8 @@ export class CommonService {
   landingPageDetailsUrl = "/api/landingPageDetails";
   productPerCategoryUrl = "/api/productPerCategory";
   isProd: boolean = true;
-  /*---with ssl changed due to loadbalancer----can be done using nginx*/
-  //prodUrl:String="https://www.ssl.frontendinterviewquestions.com";
-  prodUrl: String = "https://46.101.150.128";
+ // prodUrl: String = "https://46.101.150.128";
+  prodUrl: String = "https://rasahriday.com"
   devDomain: any = this.isProd ? this.prodUrl : "http://localhost:3000";
   finalloginDetailsUrl: string = this.devDomain + this.loginDetailsUrl;
   finalSignUpUrl = this.devDomain + this.signUpUrl;
@@ -271,6 +270,26 @@ export class CommonService {
     }
     else {
        return false;
+    }
+  }
+
+  checkIfProductListingPage() {
+    let url = window.location.href;
+    if(url.indexOf('products')> -1) {
+       return true;
+    }
+    else {
+       return false;
+    }
+  }
+
+  checkIfLoginPage() {
+    let url = window.location.href;
+    if (url.indexOf('login') > -1) {
+      return true;
+    }
+    else {
+      return false;
     }
   }
 
