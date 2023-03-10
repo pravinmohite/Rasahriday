@@ -273,4 +273,24 @@ export class CommonService {
     }
   }
 
+  checkIfProductListingPage() {
+    let url = window.location.href;
+    if(url.indexOf('products')> -1) {
+       return true;
+    }
+    else {
+       return false;
+    }
+  }
+
+  checkIfLoginPage() {
+    let url = window.location.href;
+    if (url.indexOf('login') > -1) {
+      return true;
+    }
+    else {
+      return false;
+    }
+  }
+
 }
