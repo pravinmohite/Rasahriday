@@ -1,0 +1,338 @@
+@import "./variables.scss";
+
+.btn-full-width {
+  width: 100% !important;
+}
+
+.edit-icon {
+  margin-right: 5px;
+
+  @media only screen and (max-width: 768px) {
+    margin-right: 15px;
+  }
+}
+
+.delete-icon {
+  color: $delete-icon-color;
+}
+
+.no-padding {
+  padding: 0px !important;
+}
+
+.no-padding-left {
+  padding-left: 0px !important;
+}
+
+.no-padding-right {
+  padding-right: 0px !important;
+}
+
+.empty-data {
+  text-align: center;
+}
+
+.default-img-container {
+  img {
+    width: 200px;
+    height: 200px;
+  }
+}
+
+.cart-container {
+  width: 64%;
+  margin: auto;
+  padding: 10px;
+  background: $page-container-background;
+
+  @media only screen and (max-width: 768px) {
+    width: 90%;
+  }
+
+  .product-ordered-datecontainer {
+     margin-bottom: 10px;
+    .ordered-date {
+      background-color: $pendingclock-icon-color !important;
+      color: $button-theme-color !important;
+      border-radius: 6px;
+      padding: 5px;
+    }
+  }
+  
+  .product-item {
+    margin-bottom: 15px;
+    padding-top: 15px;
+    box-shadow: 0px 0px 2px 2px $box-shadow-color;
+
+    .user-details {
+      background-color: $contact-us-footer;
+      color: $contact-us-footercolor !important;
+      border: solid 1px $contact-us-border;
+      border-radius: 15px;
+      padding: 5px;
+      margin-bottom: 10px;
+
+      .phone-number {
+        color: $phonenumber-link-color !important;
+      }
+    }
+
+    @media only screen and (max-width: 768px) { 
+      height: 100%;
+    }
+  }
+
+  .product-img-container {
+    margin-bottom: 10px;
+    display: flex;
+
+    .product-images {
+      display: flex;
+      margin: auto;
+      max-width: 100%;
+    }
+
+    .product-img {
+      margin: auto;
+    }
+  }
+
+  .product-img {
+    height: 250px;
+    width: 100%;
+    border: solid 1px $container-border-color;
+    margin: auto auto 15px auto;
+    display: block;
+  }
+
+  .add-to-cart {
+    float: right;
+  }
+
+  .cart-item-actionbtns {
+     margin-top: 15px;
+     margin-bottom: 15px;
+  }
+
+  .product-name {
+    color: $product-name-color;
+    font-size: 18px;
+    font-weight: 500;
+    text-transform: capitalize;
+  }
+
+  .product-description {
+    color: $product-description-color !important;
+    display: inline-block;
+    width: calc(100% - 30px);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    padding: 0;
+  }
+
+  .drug-quantity-container {
+    margin-bottom: 10px;
+    font-family: sans-serif;
+
+    .drug-quantity-title {
+      margin-bottom: 5px;
+    }
+  
+    .drug-quantityvalue-container {
+        margin-bottom: 10px;
+        
+        .drug-quantity-value {
+            background: $btn-search-background;
+            color: $btn-outline-textcolor;
+            padding: 6px 12px 6px 12px;
+            border-radius: 20px;
+        }
+    }
+  }
+  
+  .quantity-container {
+    margin-bottom: 10px;
+  
+    .qty-input {
+      text-align: center;
+    }
+  
+    .input-group-text {
+        width: 35px;
+        cursor: pointer;
+    }
+  
+    .quantity-title {
+        font-family: sans-serif;
+        font-size: 16px;
+        margin-bottom: 10px;
+      }
+  }
+
+  .btn-outline {
+    margin-right: 5px;
+  }
+}
+
+.product-price {
+  margin-bottom: 10px;
+
+  .current-currency-symbol {
+    top: -4.25px;
+    font-size: 11px;
+    position: relative;
+  }
+  .price-value {
+     font-size: 18px;
+     font-family: cursive;
+
+     @media only screen and (max-width: 768px) {
+      font-family: sans-serif;
+    }
+  }
+}
+
+.btn-outline {
+  color: $btn-outline-textcolor;
+  background-color: $btn-outline-color;
+  border-color: $btn-outline-color;
+  font-weight: bold;
+  letter-spacing: 0.05em;
+  border-radius: 0;
+  padding: 3px 6px !important;
+  box-shadow: 2px 2px $box-shadow-color;
+  cursor: pointer;
+
+  &:active,
+  &:hover,
+  &:focus {
+    background: $btn-outline-backgroundhover !important;
+    color: $button-theme-color !important;
+    border-color: $btn-outline-color !important;
+  }
+  &:active {
+    transform: translateY(1px);
+  }
+}
+
+.btn-outline-customsecondary {
+  color: $btn-outline-color;
+  background-color: $button-theme-color;
+  border-color: $btn-outline-color;
+  font-weight: bold;
+  letter-spacing: 0.05em;
+  border-radius: 0;
+  padding: 3px 6px !important;
+  box-shadow: 2px 2px $box-shadow-color;
+  cursor: pointer;
+  
+  &:active,
+  &:hover,
+  &:focus {
+    color: $btn-outline-color !important;
+    background-color: $button-theme-color !important;
+    border-color: $btn-outlinesecondary-borderhover !important;
+  }
+  &:active {
+    transform: translateY(1px);
+  }
+
+}
+
+.btn-color-1 {
+  color: $button-theme-color;
+  background-color: $btn-outline-color1;
+  border-color: $btn-outline-color1;
+  font-weight: bold;
+  letter-spacing: 0.05em;
+  border-radius: 0;
+
+  &:hover,
+  &:active,
+  &:focus {
+    background: $btn-outline-color1-active !important;
+    color: $button-theme-color !important;
+    border-color: $btn-outline-color1-active !important;
+  }
+}
+
+.btn-outline-removebtn {
+  @extend .btn-outline-customsecondary;
+  color: $btn-outline-removebtn !important;
+  border-color: $btn-outline-removebtn !important;
+  cursor: pointer;
+
+  &:active,
+  &:hover,
+  &:focus {
+    color: $btn-outline-removebtn !important;
+  }
+}
+
+.full-width {
+  width: 100% !important;
+}
+
+.modal-header {
+  padding: 10px;
+  font-size: 15px;
+  font-weight: 600;
+  background-image: url('src/assets/images/background-img.png');
+  color: $questions-theme-color;
+  z-index: 1000;
+  box-shadow: 1px 1px 4px 1px $box-shadow-color;
+  white-space: pre-wrap;
+}
+
+.modal-body {
+  @media only screen and (max-width: 768px) {
+    max-height: 580px;
+    overflow: auto;
+  }
+}
+
+button[disabled] {
+  cursor: not-allowed !important;
+}
+
+.total-text {
+  font-weight: 600 !important;
+}
+
+.out-of-stock {
+  .out-of-stock-text {
+      margin: auto;
+      text-transform: uppercase;
+      color: $btn-outline-textcolor;
+      background: $outOfStock-background-color;
+      border: solid 1px $box-shadow-color;
+      border-radius: 20px;
+      padding: 6.5px 10px;
+  }
+}
+
+.btn-outline-modal {
+  @extend .btn-outline;
+  background-color: $btn-outline-backgroundhover !important;
+}
+
+.page-heading {
+  text-align: center !important;
+  font-family: cursive;
+  margin-bottom: 15px !important;
+}
+
+.hidden {
+  visibility: hidden !important;
+}
+
+::ng-deep {
+  .alert-dismissible {
+    .close {
+      @media only screen and (max-width: 768px) {
+        z-index: 0;
+      }
+    }
+  }
+}
