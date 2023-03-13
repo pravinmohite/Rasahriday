@@ -32,6 +32,7 @@ export class ProductListComponent implements OnInit {
   currentCurrency: string;
   modalRef: BsModalRef;
   sellerStocksEmptyText: string;
+  isFireCrackerShown = false;
   
   constructor(
     private loaderService: LoaderService,
@@ -195,6 +196,7 @@ export class ProductListComponent implements OnInit {
     this.orderService.addToOrderList(cartItem).subscribe(response=>{
       this.loaderService.display(false);
       this.notifierService.notify('success', 'Order placed successfully!');
+      this.showFireCrackers();
     })
   }
 
@@ -206,5 +208,12 @@ export class ProductListComponent implements OnInit {
 
   incrementQuantity(product) {
     product.quantity += 1;
+  }
+
+  showFireCrackers() {
+    this.isFireCrackerShown= true;
+    setTimeout(()=>{
+      this.isFireCrackerShown = false;
+    },this.commonService.fireCrackersTimeout);
   }
 }

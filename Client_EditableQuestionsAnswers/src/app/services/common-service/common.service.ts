@@ -58,6 +58,7 @@ export class CommonService {
   }
   isMobile: boolean;
   mobileWidth = 768;
+  fireCrackersTimeout = 4000;
 
   constructor(
     private route: ActivatedRoute,

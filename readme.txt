@@ -71,3 +71,29 @@ to restart nginx
 sudo service nginx restart
 
 https://www.digitalocean.com/community/tutorials/how-to-secure-nginx-with-let-s-encrypt-on-ubuntu-20-04
+
+Mongod  on unbuntu:-
+
+root@ecommerce-webapp:~/Rasahriday# mongo
+MongoDB shell version v5.0.15
+connecting to: mongodb://127.0.0.1:27017/?compressors=disabled&gssapiServiceName=mongodb
+
+> show dbs
+admin        0.000GB
+config       0.000GB
+contactList  0.000GB
+local        0.000GB
+
+> use contactList
+switched to db contactList
+> db
+contactList
+
+->to get all data of carts table
+
+db.carts.find()
+
+To check size of folder:-
+
+root@ecommerce-webapp:~# du -sh Rasahriday/
+665M    Rasahriday/
