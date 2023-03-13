@@ -43,6 +43,7 @@ export class CartComponent implements OnInit {
     deliveryCharges: 0
   };
   sellerStocksEmptyText: string;
+  isFireCrackerShown = false;
   constructor(
     private modalService: BsModalService,
     private commonService: CommonService,
@@ -169,6 +170,7 @@ export class CartComponent implements OnInit {
   placeSingleOrder(cartItem) {
     this.orderService.addToOrderList(cartItem).subscribe(response=>{
       this.notifierService.notify('success', 'order placed successfully!');
+      this.showFireCrackers();
       const placedOrder = true;
       this.deleteCartItem(cartItem, placedOrder);
     })
@@ -178,8 +180,16 @@ export class CartComponent implements OnInit {
     this.setUpdatedDetails(data);
     this.orderService.addMultipleOrderToOrderList(this.selectedProducts).subscribe(response=>{
       this.notifierService.notify('success', 'order placed successfully!');
+      this.showFireCrackers();
       this.getCartItemsByPrivileges();
     })
+  }
+
+  showFireCrackers() {
+    this.isFireCrackerShown= true;
+    setTimeout(()=>{
+      this.isFireCrackerShown = false;
+    }, this.commonService.fireCrackersTimeout);
   }
 
   setUpdatedDetails(data) {

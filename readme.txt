@@ -92,3 +92,8 @@ contactList
 ->to get all data of carts table
 
 db.carts.find()
+
+To check size of folder:-
+
+root@ecommerce-webapp:~# du -sh Rasahriday/
+665M    Rasahriday/
