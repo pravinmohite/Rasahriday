@@ -84,8 +84,10 @@ export class CartComponent implements OnInit {
   }
 
   getCartItemsByUser() {
+    this.loaderService.display(true);
     this.cartService.getCartListByUser(this.userDetails['_id']).subscribe(data=>{
       this.setCartData(data);
+      this.loaderService.display(false);
     }) 
   }
 
@@ -105,8 +107,10 @@ export class CartComponent implements OnInit {
   }
 
   getCartItemsAll() {
+    this.loaderService.display(true);
     this.cartService.getCartListAll().subscribe(data=>{
       this.setCartData(data);
+      this.loaderService.display(false);
     }) 
   }
 

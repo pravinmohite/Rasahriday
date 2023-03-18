@@ -2,9 +2,6 @@
 @import "./../../../assets/scss/common.scss";
 
 .category-menu-container {
-    border: solid 1px gainsboro;
-    box-shadow: 0px 2px 2px gainsboro;
-    background-color: $page-container-background;
 
     @media screen and (max-width: 768px){
         border: none !important;
@@ -15,12 +12,17 @@
         padding: 10px;
         font-size: 15px;
         font-weight: 600;
-        background-image: url('./../../../assets/images/background-img.png');
-        color:$questions-theme-color;
         z-index: 1000;
         box-shadow: 1px 1px 4px 1px $box-shadow-color;
         white-space: pre-wrap;
 
+        @media screen and (min-width: 769px){
+            background: $goldentheme-header-background;
+            color: $goldentheme-headertext-color;
+            border-top-left-radius: 20px;
+            border-top-right-radius: 20px;
+            text-align: center;
+        }
         @media screen and (max-width: 768px){
             background-image: none !important;
             box-shadow: none;
@@ -38,10 +40,36 @@
         list-style-type: none;
         padding-left: 0px;
         margin-bottom: 0px;
+        background-color: $goldentheme-panel-background;
+        border-bottom-left-radius: 20px;
+        border-bottom-right-radius: 20px;
         li {
-           border: solid 1px gainsboro;
+           border-top: solid 1px $goldentheme-header-background;
            padding: 10px;
            font-size: 13px;
+           font-weight: bold;
+           color: $goldentheme-header-background;
+
+           .category-icon {
+             width: 30px;
+             height: 30px;
+           }
+
+           .all-icon {
+            font-size: 25px;
+            vertical-align: middle;  
+            color: $goldentheme-headertext-color;
+            vertical-align: sub;
+            display: inline-block;
+           }
+
+           .category-name {
+            margin-left: 15px;
+
+            @media screen and (min-width: 769px){
+                margin-left: 30px !important;
+            }
+           }
 
            @media screen and (max-width: 768px){
             padding: 12px;
@@ -50,11 +78,11 @@
            }
 
            &.active {
-            border-left: solid 2px $delete-icon-color;
+           // border-left: solid 2px $delete-icon-color;
            }
 
            &:hover {
-            border-left: solid 2px $delete-icon-color;
+           // border-left: solid 2px $delete-icon-color;
            }
 
         }

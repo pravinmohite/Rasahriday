@@ -2,10 +2,16 @@
 @import "./assets/scss/mixins.scss";
 @import "~angular-notifier/styles";
 /* You can add global styles to this file, and also import other style files */
+
+@font-face {
+  font-family: nunito-light;
+  src: url(assets/font/nunito/Nunito-Light.ttf) format("opentype");
+}
+
 body {
-   // background-image: url($img-path+$background-img);
-   background-color: $body-background !important;
-   //overflow: hidden;
+   background-image: url($img-path+$goldentheme-background-img);
+   background-size: cover;
+   font-family: nunito-light, sans-serif;
 }
 .hand-cursor {
     cursor: pointer;
@@ -149,7 +155,7 @@ body {
 
 //--------------for question answer listing page----------
 .amazing-js-container {
-  font-family:"Open Sans",sans-serif;
+  font-family: nunito-light,"Open Sans",sans-serif;
   .affiliate-ads-container {
     iframe {
       margin-right:20px;
@@ -275,18 +281,18 @@ body {
     }
   }
   .login-panel-container {
+    background-color: $goldentheme-panel-background;
     border: solid 1px gainsboro;
     width: 40%;
     margin: 8% auto 0px auto;
-    padding: 30px;
     @media only screen and (max-width: 768px) {
       width: 90%;
       padding: 20px;
     }
   }
   .page-header {
-    background-image: url($img-path+$background-img);
-    color:#333;
+    background-color: $goldentheme-header-background;
+    color: $goldentheme-headertext-color;
     top: 0;
     z-index: 1000;
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);

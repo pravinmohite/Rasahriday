@@ -1,6 +1,6 @@
 <header>
   <div [ngClass]="userName? 'flex-column': 'user-loggedin'"
-    class="page-header d-flex flex-md-row align-items-center px-md-4 border-bottom box-shadow" role="img"
+    class="page-header d-flex flex-md-row align-items-center px-md-4 box-shadow" role="img"
     aria-label="frontend interview questions">
     <div class="col-md-2 col-12 font-weight-normal project-name hand-cursor">
       <a href="/#/home">
@@ -26,9 +26,9 @@
     <div *ngIf="userName" [ngClass]="userName && !isLandingPage ? 'shown': 'hidden'"
       class="form-inline col-md-4 col-12 searchbox-container">
       <!-- <form #myForm= "ngForm"> -->
-      <input name="searchVal" #searchString [(ngModel)]="searchVal" class="form-control mr-sm-2 col-md-9" type="text"
+      <input name="searchVal" #searchString [(ngModel)]="searchVal" class="form-control mr-sm-2 col-md-9 search-input" type="text"
         (keydown)="checkEnterKeyPressed(searchString.value,$event)" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline my-2 my-sm-0 col-md-2 hand-cursor search-btn"
+      <button class="btn my-2 my-sm-0 col-md-2 hand-cursor search-btn"
         (click)="searchByPage(searchString.value)">Search</button>
       <!-- </form> -->
     </div>

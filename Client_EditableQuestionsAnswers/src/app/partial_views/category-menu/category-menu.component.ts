@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonService } from 'src/app/services/common-service/common.service';
 import { LoaderService } from 'src/app/services/loader-service/loader.service';
 import { ProductService } from 'src/app/services/product-service/product.service';
-import { faTrash,faEdit, faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons';
+import { faTrash,faEdit, faChevronDown, faChevronUp, faGlobe } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-category-menu',
@@ -17,6 +17,7 @@ export class CategoryMenuComponent implements OnInit {
   faEdit = faEdit;
   faChevronDown = faChevronDown;
   faChevronUp = faChevronUp
+  faGlobe = faGlobe;
   isAllCategoryActive = true;
   editMode = { 
     status: false, 

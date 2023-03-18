@@ -36,6 +36,8 @@
     margin: auto;
     border: solid 1px $box-shadow-color;
     transition: width 2s, opacity 0.5s linear;
+    background-color: $goldentheme-panel-background;
+    border-radius: $goldentheme-border-radius;
 
     @media screen and (max-width: 768px) {
         width: 93% !important;

@@ -6,6 +6,11 @@
 
 ::ng-deep {
     .confirm-order-modal {
+        .fieldset-container {
+            &.border {
+                border-color: $goldentheme-confirmmodal-bordercolor !important;
+            }
+        }
         .product-details {
             position: relative;
             @extend %section-styles;
@@ -38,8 +43,8 @@
                 font-weight: 600;
             }
             .product-final-price {
-                background-color: $pendingclock-icon-color !important;
-                color: $button-theme-color !important;
+                background-color: $goldentheme-headertext-color !important;
+                color: $goldentheme-badge-text !important;
                 border-radius: 20px;
                 padding: 5px 10px;
             }

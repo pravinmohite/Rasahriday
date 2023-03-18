@@ -86,14 +86,18 @@ export class OrderComponent implements OnInit {
   }
 
   getOrderedItemsByUser() {
+    this.loaderService.display(true);
     this.orderService.getOrderListByUser(this.userDetails['_id']).subscribe(data=>{
       this.setOrderedItems(data);
+      this.loaderService.display(false);
     }) 
   }
 
   getOrderedItemsAll() {
+    this.loaderService.display(true);
     this.orderService.getOrderListAll().subscribe(data=>{
       this.setOrderedItems(data);
+      this.loaderService.display(false);
     }) 
   }
 

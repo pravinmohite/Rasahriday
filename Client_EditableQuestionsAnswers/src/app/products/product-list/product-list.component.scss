@@ -25,20 +25,26 @@
         box-shadow: 0px 0px 2px 2px $box-shadow-color;
         float: left;
         border: solid 1px $box-shadow-color;
-        padding: 5px 5px 10px 5px;
+        padding: 10px;
         margin-bottom: 10px;
         width: 100%;
-        background-color: white;
+        background-color: $goldentheme-panel-background;
+        border-radius: 50px;
 
         .user-action-btns {
             margin-top: 10px !important;
             .input-group-text {
                 width: 30px;
                 cursor: pointer;
+                background: $goldentheme-header-background;
+                color: $goldentheme-headertext-color;
+                border: solid 1px $goldentheme-header-background;
             }
             .qty-input {
               padding: 0px !important;
               text-align: center;
+              background: $goldentheme-panel-background;
+              border-color: $goldentheme-header-background;
             }
             .buy-btn {
                 margin-right: 5px;
@@ -79,8 +85,10 @@
 
         .product-img {
             height: 200px;
-            width: 100%;
+            width: 70%;
+            border-radius: 20px;
             margin: auto;
+            margin-top: 30px;
             display: block;
             transition: transform 250ms ease-out;
 
@@ -94,21 +102,22 @@
         }
 
         .product-name {
-            color: $product-name-color;
+            color: $goldentheme-header-background;
             font-size: 16px;
-            font-weight: 500;
+            font-weight: 700;
             text-transform: capitalize;
         }
 
         .product-description {
             display: inline-block;
-            color: $product-description-color !important;
+            color: $goldentheme-productdescription-color !important;
             width: calc(100% - 30px);
             text-overflow: ellipsis;
             white-space: nowrap;
             overflow: hidden;
             padding: 0;
             font-size: 14px;
+            font-weight: bold;
         }
     }
 }

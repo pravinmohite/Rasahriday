@@ -13,9 +13,9 @@
   }
 
   .contact-us-part {
-    background-color: $contact-us-footer;
-    color: $contact-us-footercolor !important;
-    border-top: solid 1px $contact-us-border;
+    background-color: $goldentheme-footer-color;
+    color: $goldentheme-header-background !important;
+   // border-top: solid 1px $goldentheme-headertext-color;
     .call-us-text {
       padding-top: 15px;
 
@@ -28,13 +28,14 @@
       .contact-item {
         margin-bottom:0px;
         padding-bottom: 15px !important;
+        font-weight: bold;
 
         .contact-us-icon {
           color: $contactus-linkicon-color !important;
           display: inline-block;
           height: 2rem;
           width: 2rem;
-          background-color: #4582EC;
+          background-color: $goldentheme-headertext-color;
           color: #fff !important;
           border-radius: 100%;
           text-align: center;
@@ -46,6 +47,7 @@
       }
 
       .phone-contact {
+         padding-top: 20px;
         .contact-us-icon {
           animation-name: ring;
           animation-duration: 1.5s;
@@ -72,7 +74,7 @@
   }
 
   .footer-info {
-    background-color: $copyright-footer;
+    background-color: $goldentheme-copyright-footer;
     color: white;
     padding: 10px;
   }

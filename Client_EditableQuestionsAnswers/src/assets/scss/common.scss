@@ -1,5 +1,17 @@
 @import "./variables.scss";
 
+$img-path: '~src/assets/images/';
+
+%quantitybtn-left-borderradius {
+  border-bottom-left-radius: 15px;
+  border-top-left-radius: 15px;
+}
+
+%quantitybtn-right-borderradius {
+  border-bottom-right-radius: 15px;
+  border-top-right-radius: 15px;
+}
+
 .btn-full-width {
   width: 100% !important;
 }
@@ -43,7 +55,6 @@
   width: 64%;
   margin: auto;
   padding: 10px;
-  background: $page-container-background;
 
   @media only screen and (max-width: 768px) {
     width: 90%;
@@ -52,9 +63,9 @@
   .product-ordered-datecontainer {
      margin-bottom: 10px;
     .ordered-date {
-      background-color: $pendingclock-icon-color !important;
-      color: $button-theme-color !important;
-      border-radius: 6px;
+      background-color: $goldentheme-headertext-color !important;
+      color: $goldentheme-badge-text !important;
+      border-radius: $goldentheme-border-radius;
       padding: 5px;
     }
   }
@@ -63,14 +74,17 @@
     margin-bottom: 15px;
     padding-top: 15px;
     box-shadow: 0px 0px 2px 2px $box-shadow-color;
+    background: $goldentheme-panel-background;
+    border-radius: 20px;
 
     .user-details {
-      background-color: $contact-us-footer;
-      color: $contact-us-footercolor !important;
-      border: solid 1px $contact-us-border;
+    //  background-color: $goldentheme-headertext-color;
+      color: $goldentheme-header-background !important;
+      border: solid 1px $goldentheme-headertext-color;
       border-radius: 15px;
       padding: 5px;
       margin-bottom: 10px;
+      font-weight: bold;
 
       .phone-number {
         color: $phonenumber-link-color !important;
@@ -115,9 +129,9 @@
   }
 
   .product-name {
-    color: $product-name-color;
+    color: $goldentheme-headertext-color;
     font-size: 18px;
-    font-weight: 500;
+    font-weight: 800;
     text-transform: capitalize;
   }
 
@@ -137,13 +151,14 @@
 
     .drug-quantity-title {
       margin-bottom: 5px;
+      color: $goldentheme-header-background;
     }
   
     .drug-quantityvalue-container {
         margin-bottom: 10px;
         
         .drug-quantity-value {
-            background: $btn-search-background;
+            background: $goldentheme-header-background;
             color: $btn-outline-textcolor;
             padding: 6px 12px 6px 12px;
             border-radius: 20px;
@@ -156,23 +171,52 @@
   
     .qty-input {
       text-align: center;
+      background: $goldentheme-panel-background;
+      border-color: $goldentheme-header-background;
     }
+
   
     .input-group-text {
         width: 35px;
         cursor: pointer;
+        background: $goldentheme-header-background;
+        color: $goldentheme-headertext-color;
+        border: solid 1px $goldentheme-header-background;
     }
   
     .quantity-title {
         font-family: sans-serif;
         font-size: 16px;
         margin-bottom: 10px;
+        color: $goldentheme-header-background;
       }
+  }
+
+  .quantity-readonly-container {
+    .quantity-value {
+      background-color: $goldentheme-headertext-color;
+      color: $goldentheme-badge-text;
+    }
+    .quantity-text {
+      color: $goldentheme-header-background;
+      font-weight: bold;
+    }
   }
 
   .btn-outline {
     margin-right: 5px;
   }
+}
+
+.input-group-prepend {
+  .input-group-text {
+      @extend %quantitybtn-left-borderradius;
+  }
+}
+.input-group-append {
+    .input-group-text {
+        @extend %quantitybtn-right-borderradius;
+    }
 }
 
 .product-price {
@@ -194,22 +238,22 @@
 }
 
 .btn-outline {
-  color: $btn-outline-textcolor;
-  background-color: $btn-outline-color;
-  border-color: $btn-outline-color;
+  color: $goldentheme-header-background;
+  background-color: $goldentheme-panel-background;
+  border-color: $goldentheme-header-background;
   font-weight: bold;
   letter-spacing: 0.05em;
-  border-radius: 0;
+  border-radius: 20px;
   padding: 3px 6px !important;
-  box-shadow: 2px 2px $box-shadow-color;
+  //box-shadow: 2px 2px $box-shadow-color;
   cursor: pointer;
 
   &:active,
   &:hover,
   &:focus {
-    background: $btn-outline-backgroundhover !important;
-    color: $button-theme-color !important;
-    border-color: $btn-outline-color !important;
+    color: $goldentheme-header-background;
+    background-color: $goldentheme-panel-background;
+    border-color: $goldentheme-header-background;
   }
   &:active {
     transform: translateY(1px);
@@ -217,22 +261,22 @@
 }
 
 .btn-outline-customsecondary {
-  color: $btn-outline-color;
-  background-color: $button-theme-color;
-  border-color: $btn-outline-color;
+  color: $goldentheme-headertext-color;
+  background-color: $goldentheme-header-background;
+  border-color: $goldentheme-headertext-color;
   font-weight: bold;
   letter-spacing: 0.05em;
-  border-radius: 0;
-  padding: 3px 6px !important;
+  border-radius: 20px;
+  padding: 3px 10px !important;
   box-shadow: 2px 2px $box-shadow-color;
   cursor: pointer;
   
   &:active,
   &:hover,
   &:focus {
-    color: $btn-outline-color !important;
-    background-color: $button-theme-color !important;
-    border-color: $btn-outlinesecondary-borderhover !important;
+    color: $goldentheme-headertext-color;
+    background-color: $goldentheme-header-background;
+    border-color: $goldentheme-headertext-color;
   }
   &:active {
     transform: translateY(1px);
@@ -259,14 +303,15 @@
 
 .btn-outline-removebtn {
   @extend .btn-outline-customsecondary;
-  color: $btn-outline-removebtn !important;
-  border-color: $btn-outline-removebtn !important;
+  // background-color: $goldentheme-panel-background !important;
+  // color: $btn-outline-removebtn !important;
+  // border-color: $btn-outline-removebtn !important;
   cursor: pointer;
 
   &:active,
   &:hover,
   &:focus {
-    color: $btn-outline-removebtn !important;
+  //  color: $btn-outline-removebtn !important;
   }
 }
 
@@ -278,11 +323,26 @@
   padding: 10px;
   font-size: 15px;
   font-weight: 600;
-  background-image: url('src/assets/images/background-img.png');
-  color: $questions-theme-color;
+ // background-image: url('src/assets/images/background-img.png');
+//  color: $questions-theme-color;
   z-index: 1000;
-  box-shadow: 1px 1px 4px 1px $box-shadow-color;
+ // box-shadow: 1px 1px 4px 1px $box-shadow-color;
   white-space: pre-wrap;
+  border: none !important;
+
+  .close {
+    margin: -0.5rem -0.2rem -1rem auto !important;
+  }
+}
+
+::ng-deep {
+  .modal-content {
+    border-top-left-radius: $goldentheme-border-radius;
+    border-top-right-radius: $goldentheme-border-radius;
+    border-bottom-left-radius: $goldentheme-border-radius;
+    border-bottom-right-radius: $goldentheme-border-radius;
+    background-color: $goldentheme-panel-background;
+ }
 }
 
 .modal-body {
@@ -314,13 +374,14 @@ button[disabled] {
 
 .btn-outline-modal {
   @extend .btn-outline;
-  background-color: $btn-outline-backgroundhover !important;
+ // background-color: $btn-outline-backgroundhover !important;
 }
 
 .page-heading {
   text-align: center !important;
   font-family: cursive;
   margin-bottom: 15px !important;
+  color: $goldentheme-header-background;
 }
 
 .hidden {
@@ -335,6 +396,23 @@ button[disabled] {
       }
     }
   }
+  .alert-info {
+    background-color: $goldentheme-header-background !important;
+    color: $goldentheme-headertext-color !important;
+    border-radius: $goldentheme-border-radius;
+ }
+}
+
+.kupipakwa {
+  background-image: url($img-path + 'kupipakwa.png');
+}
+
+.pottali {
+  background-image: url($img-path + 'pottali.png');
+}
+
+.khalviya {
+  background-image: url($img-path + 'khalviya.png');
 }
 
 /*----firecrackers animation ---*/
