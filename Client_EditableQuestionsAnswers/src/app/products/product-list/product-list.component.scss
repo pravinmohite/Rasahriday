@@ -46,23 +46,20 @@
               background: $goldentheme-panel-background;
               border-color: $goldentheme-header-background;
             }
-            .buy-btn {
-                margin-right: 5px;
-                @media only screen and (max-width: 768px) {
-                    width: 93%;
-                    margin: auto;
-                    margin-top: 15px;
-                }
-
-            }
-            .add-cart-btn {
-              margin-right: 5px;
-              @media only screen and (max-width: 768px) {
-                width: 63%;
-              }
-            }
         }
 
+        .cart-buy-btncontainer {
+            padding: 15px 15px 10px 15px !important;
+
+            .buy-btn {
+                margin-right: 5px;
+            }
+            .add-cart-btn {
+              margin-right: 15px !important;
+              padding-left: 3px !important;
+              padding-right: 3px !important;
+            }
+        }
         .edit-delete-btncontainer {
             vertical-align: sub !important;
         }
@@ -120,10 +117,6 @@
             font-weight: bold;
         }
     }
-}
-
-.admin-btn {
-    margin-top: 5px;
 }
 
 @media (min-width: 768px) {

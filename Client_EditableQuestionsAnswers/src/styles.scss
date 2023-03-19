@@ -319,11 +319,11 @@ body {
         color:$header-theme-color !important;
         font-size:1.3rem;
         font-family: cursive;
-        float: right;
         margin-right: 15px;
         text-decoration: none;
         @media only screen and (max-width: 768px) {
           float: left;
+          font-family: sans-serif;
          }  
         .project-name-text {
           float:right;
@@ -336,7 +336,6 @@ body {
         .project-icon {
           height:30px;
           background: url('../src/assets/images/frontend.png');
-          margin-left:85px;
           @media only screen and (max-width: 768px) {
             margin-left:0px;
            }  
@@ -352,7 +351,11 @@ body {
           }  
           h1 {
             &.logo-text {
-              font-size: inherit;
+              font-size: 20px;
+              text-transform: uppercase;
+              font-family: sans-serif;
+              margin-left: 10px;
+              font-weight: bold;
               @media only screen and (min-width:0px) and (max-width: 361px) {
                 display: inline;
                 font-size: 1.6em !important;

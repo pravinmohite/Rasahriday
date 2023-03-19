@@ -117,6 +117,11 @@ $img-path: '~src/assets/images/';
     border: solid 1px $container-border-color;
     margin: auto auto 15px auto;
     display: block;
+    border-top-right-radius: $goldentheme-border-radius;
+    border-top-left-radius: $goldentheme-border-radius;
+    border-bottom-right-radius: $goldentheme-border-radius;
+    border-bottom-left-radius: $goldentheme-border-radius;
+    
   }
 
   .add-to-cart {
@@ -244,7 +249,7 @@ $img-path: '~src/assets/images/';
   font-weight: bold;
   letter-spacing: 0.05em;
   border-radius: 20px;
-  padding: 3px 6px !important;
+  padding: 3px 10px !important;
   //box-shadow: 2px 2px $box-shadow-color;
   cursor: pointer;
 
@@ -382,6 +387,10 @@ button[disabled] {
   font-family: cursive;
   margin-bottom: 15px !important;
   color: $goldentheme-header-background;
+
+  @media only screen and (max-width: 768px) {
+    font-family: sans-serif;
+  }
 }
 
 .hidden {
@@ -413,6 +422,10 @@ button[disabled] {
 
 .khalviya {
   background-image: url($img-path + 'khalviya.png');
+}
+
+.display-inline {
+  display: inline !important;
 }
 
 /*----firecrackers animation ---*/
