@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { CommonService } from '../services/common-service/common.service';
 import { LandingPageService } from '../services/landing-page-service/landing-page.service';
@@ -11,6 +11,7 @@ import { LoaderService } from '../services/loader-service/loader.service';
   styleUrls: ['./landing-page.component.scss']
 })
 export class LandingPageComponent implements OnInit {
+  @ViewChild('videoPlayer') videoPlayer; 
   landingPageDetails: any;
   randomProductsArr=[];
   path = './../../assets/images/landingpage_img_';
@@ -37,6 +38,11 @@ export class LandingPageComponent implements OnInit {
    // this.getLandingPageDetails();
    this.getStaticLandingPageImages();
    this.getAllCategories();
+   this.play();
+  }
+
+  ngAfterViewInit() {
+    this.play();
   }
 
   onSlideRangeChange(indexes: number[]): void {
@@ -101,5 +107,13 @@ export class LandingPageComponent implements OnInit {
        this.loaderService.display(false);
        this.setProductPerCategoryInSlides(response);
     })
+  }
+
+  play() {
+    if(this.videoPlayer && this.videoPlayer) {
+      const media = this.videoPlayer.nativeElement;
+      media.muted = true;
+      media.play();
+    }
   }
 }
