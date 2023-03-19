@@ -53,7 +53,8 @@
 }
 
 .header-nav {
-    border-bottom: solid 1px $box-shadow-color;
+    border-bottom: solid 1px $goldentheme-header-background;
+    color: $goldentheme-header-background !important;
     padding: 12px;
 
     .header-links {

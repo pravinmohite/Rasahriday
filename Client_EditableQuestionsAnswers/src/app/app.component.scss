@@ -27,7 +27,8 @@
     position: fixed;
     top: 0;
     bottom: 0;
-    background: white;
+    background: $goldentheme-panel-background;
+    color: $goldentheme-header-background;
     z-index: 999 !important;
     width: 180px;
 }
@@ -79,4 +80,18 @@
 #contact-us-label {
     font-weight: 600;
     margin-top: 20px;
+}
+
+::ng-deep {
+    .about-us-header {
+        background-color: $goldentheme-header-background;
+        color: $goldentheme-headertext-color;
+
+        .btn-close {
+            color: $goldentheme-headertext-color !important;
+        }
+    }
+    .about-us-body {
+        @extend .about-us-header;
+    }
 }

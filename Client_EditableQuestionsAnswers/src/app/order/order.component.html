@@ -23,7 +23,7 @@
         </div>
         <div class="col-md-7 col-12">
             <div class="product-name">{{orderedItem.productName}}</div>
-            <div class="product-description">{{orderedItem.description}}</div>
+            <!-- <div class="product-description">{{orderedItem.description}}</div> -->
             <div class="product-ordered-datecontainer">
                 <span class="ordered-date-title">Order placed on: </span>
                 <span class="ordered-date">{{getFormattedOrderDate(orderedItem.orderedDate)}}</span>
@@ -67,7 +67,7 @@
                 <button *ngIf="!orderedItem.orderAccepted" class="btn btn-outline place-order-btn"
                     (click)="acceptOrder(orderedItem)">Accept order</button>
                 <button class="btn btn-outline-removebtn place-order-btn remove-btn" (click)="deleteOrder(orderedItem)">
-                    <fa-icon class="hand-cursor delete-icon" [icon]="faTrash"></fa-icon>
+                    <fa-icon class="hand-cursor delete-icon-cartorder" [icon]="faTrash"></fa-icon>
                     remove
                 </button>
             </div>

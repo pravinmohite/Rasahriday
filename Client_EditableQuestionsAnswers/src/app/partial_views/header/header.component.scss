@@ -4,10 +4,18 @@
     position: fixed;
     top: 0;
     width: 100%;
-    box-shadow: 1px 1px 4px 1px $box-shadow-color  !important;
+    box-shadow: 1px 1px 4px 1px $goldentheme-background-img  !important;
 
+    .search-input {
+        border-radius: 1.25em !important;
+        background-clip: unset !important;
+        border: none;
+    }
     @media screen and (max-width: 768px) {
         position: static !important;
+    }
+    @media screen and (min-width: 769px) {
+        height: 60px !important;
     }
 }
 
@@ -59,7 +67,7 @@
         margin-right: 15px;
 
         &:hover {
-            color: $product-hover-border !important
+            color: $goldentheme-product-hover !important
         }
 
         .nav-links {
@@ -69,17 +77,20 @@
     }
 
     .badge-light {
-        background-color: $pendingclock-icon-color  !important;
-        color: $button-theme-color  !important;
+        background-color: $goldentheme-headertext-color !important;
+        color: $goldentheme-badge-text !important;
         vertical-align: top;
         margin-top: -5px;
+        border-radius: 20px;
     }
 }
 
 .searchbox-container {
     .search-btn {
         height: 35px !important;
-        background-color: $btn-search-background  !important;
+        color: $goldentheme-headertext-color;
+        border: solid 1px $goldentheme-headertext-color;
+        border-radius: $goldentheme-border-radius;
     }
 
     @media screen and (min-width: 768px) {
@@ -103,6 +114,9 @@
 }
 
 .loggedin-user {
+    button {
+        color: $goldentheme-headertext-color;
+    }
     &:hover {
         color: $product-hover-border  !important;
     }
@@ -116,7 +130,7 @@
 
 .project-text {
     .logo-text {
-        color: $btn-search-background;
+        color: $goldentheme-headertext-color;
 
         @media screen and (max-width: 768px) {
           font-family: sans-serif;
@@ -128,6 +142,9 @@
     a {
         &.nav-links {
             margin-left: 10px;
+            @media screen and (max-width: 365px) {
+               margin-left: 0px !important;
+            }
         }
     }
     .badge-light {
@@ -141,7 +158,7 @@
 
 
 .cart-icon {
-  color: $cart-icon-color !important; 
+  color: $goldentheme-headertext-color !important; 
 }
 
 @media screen and (max-width: 768px) {

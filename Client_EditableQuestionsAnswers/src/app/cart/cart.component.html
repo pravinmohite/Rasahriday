@@ -7,7 +7,7 @@
     <div class="cart-item-actionbtns">
         <div class="row">
             <div class="col-6 col-md-2 select-deselect-btncontainer">
-                <button class="btn btn-default btn-light btn-light-default btn-full-width" (click)="selectDeselectAllItems()">{{currentSelectionText}} all</button>
+                <button class="btn btn-default btn-outline btn-light-default btn-full-width" (click)="selectDeselectAllItems()">{{currentSelectionText}} all</button>
             </div>
             <div class="product-price col-5 col-md-1">
                 <span class="current-currency-symbol">{{currentCurrency}}</span>
@@ -16,7 +16,7 @@
             <div class="col-12 col-md-8 multiselect-btns-container">
                 <button class="btn btn-outline place-order-btn" (click)="confirmOrder(null, true)">Place order</button>
                 <button class="btn btn-outline-removebtn place-order-btn remove-btn" (click)="deleteSelectedCartItems()">
-                    <fa-icon class="hand-cursor delete-icon" [icon]="faTrash"></fa-icon>
+                    <fa-icon class="hand-cursor delete-icon-cartorder" [icon]="faTrash"></fa-icon>
                     remove
                 </button>
             </div>
@@ -25,7 +25,7 @@
 </div>
 <div class="cart-container">
     <div class="row select-deselect-btncontainer" *ngIf="!showMultiSelectedActionbtns && cartList && cartList.length > 0">
-        <button class="btn btn-default btn-light btn-light-default" (click)="selectDeselectAllItems()">{{currentSelectionText}} all</button>
+        <button class="btn btn-default btn-outline btn-light-default" (click)="selectDeselectAllItems()">{{currentSelectionText}} all</button>
     </div>
     <div [ngClass]="cartItem.isSelected? 'cart-item-selected': 'cart-item-notselected'" class="row product-item"
         *ngFor="let cartItem of cartList; let i=index">
@@ -49,7 +49,7 @@
         </div>
         <div class="col-md-7 col-xs-12">
             <div class="product-name">{{cartItem.productName}}</div>
-            <div class="product-description">{{cartItem.description}}</div>
+            <!-- <div class="product-description">{{cartItem.description}}</div> -->
             <div class="product-price">
                 <span class="current-currency-symbol">{{currentCurrency}}</span>
                 <span class="price-value">{{cartItem.price}}</span>
@@ -76,7 +76,7 @@
             <div class="cart-item-actionbtns">
                 <button class="btn btn-outline place-order-btn" (click)="confirmOrder(cartItem)">Place order</button>
                 <button class="btn btn-outline-removebtn place-order-btn remove-btn" (click)="deleteCartItem(cartItem)">
-                    <fa-icon class="hand-cursor delete-icon" [icon]="faTrash"></fa-icon>
+                    <fa-icon class="hand-cursor delete-icon-cartorder" [icon]="faTrash"></fa-icon>
                     remove
                 </button>
             </div>

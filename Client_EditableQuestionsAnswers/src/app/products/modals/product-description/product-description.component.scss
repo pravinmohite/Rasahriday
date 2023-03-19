@@ -30,10 +30,14 @@
         text-align: center;
         height: 450px;
         width: 500px;
-
+        padding: 5px 20px !important;
         .product-image {
           height: 430px;
           width: 100%;
+          border-top-left-radius: $goldentheme-border-radius;
+          border-top-right-radius: $goldentheme-border-radius;
+          border-bottom-left-radius: $goldentheme-border-radius;
+          border-bottom-right-radius: $goldentheme-border-radius;
         }
     }
     
@@ -55,18 +59,16 @@
     }
     
     .product-details {
-      //  margin-top: 6px;
-       // text-align: center;
        .product-name {
-        color: $product-name-color;
+        color: $goldentheme-headertext-color;
         font-size: 22px;
-        font-weight: 500;
+        font-weight: bold;
         text-transform: capitalize;
         cursor: pointer;
       }
       .product-description {
         font-size: 20px;
-        color: $product-description-color !important;
+        color: $goldentheme-header-background !important;
       }
 
       .product-price {
@@ -91,8 +93,8 @@
             margin-top: 10px;
 
             .drug-quantity-value {
-                background: $btn-search-background;
-                color: $btn-outline-textcolor;
+                background: $goldentheme-header-background;
+                color: $goldentheme-badge-text;
                 padding: 6px 12px 6px 12px;
                 border-radius: 20px;
             }
@@ -105,11 +107,16 @@
         .qty-input {
           padding: 0px !important;
           text-align: center;
+          background-color: $goldentheme-panel-background;
+          border: solid 1px $goldentheme-header-background;
         }
 
         .input-group-text {
             width: 35px;
             cursor: pointer;
+            background-color: $goldentheme-header-background;
+            color: $goldentheme-headertext-color;
+            border: solid 1px $goldentheme-header-background;
         }
 
         .quantity-title {
@@ -168,9 +175,13 @@
 
             .carousel-container {
                 @extend %carouse-container-dimensions;
-
+                padding: 5px 20px !important;
                 img {
                     @extend %img-dimensions;
+                    border-top-left-radius: $goldentheme-border-radius;
+                    border-top-right-radius: $goldentheme-border-radius;
+                    border-bottom-left-radius: $goldentheme-border-radius;
+                    border-bottom-right-radius: $goldentheme-border-radius;
                 }
             }
         }

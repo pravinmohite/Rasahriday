@@ -50,13 +50,15 @@
                                         <button class="input-group-text" [disabled]="(product.quantity >= product.stock)" [attr.title]="(product.quantity >= product.stock) ? sellerStocksEmptyText : '' "  (click)="incrementQuantity(product)">+</button>
                                     </div>
                                 </div>
-                                <button class="btn btn-primary btn-outline add-to-cart add-cart-btn"
-                                    (click)="addToCart(product)">
-                                    Add to cart
-                                </button>
-                                <button class="btn btn-primary btn-outline-customsecondary add-to-cart buy-btn"
-                                    (click)="openOrderConfirmationModal(product)" value="1">Buy</button>
                             </div>
+                            <div class="row cart-buy-btncontainer" *ngIf="product.stock > 0">
+                                <button class="col-5 btn btn-outline add-to-cart add-cart-btn"
+                                (click)="addToCart(product)">
+                                Add to cart
+                            </button>
+                            <button class="col-6 btn btn-outline-customsecondary add-to-cart buy-btn"
+                                (click)="openOrderConfirmationModal(product)" value="1">Buy now</button>
+                            </div> 
                             <div class="row out-of-stock" *ngIf="product.stock <= 0">
                                  <span class="out-of-stock-text">{{outOfStockText}}</span>
                             </div>

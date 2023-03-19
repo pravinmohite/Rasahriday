@@ -1,15 +1,15 @@
 @import "./../../assets/scss/common.scss";
 
 .order-accepted {
-    border: solid 1px $container-border-color;
-    background-color: $confirm-status-background;
-    border-radius: 5px;
+    background-color: $goldentheme-header-background;
+    border-radius: $goldentheme-border-radius;
+    color: $goldentheme-headertext-color;
     padding: 5px;
     display: inline-block;
     margin-bottom: 10px;
 
     .check-icon {
-        color:$check-icon-color;
+        color: $goldentheme-badge-text;
     }
 }
 
@@ -17,14 +17,14 @@
     margin-bottom: 10px;
 
     .order-progress {
-        border: solid 1px $container-border-color;
-        background-color: $pending-status-background;
-        border-radius: 5px;
+        background-color: $goldentheme-headertext-color;
+        color: $goldentheme-badge-text;
+        border-radius: 20px;
         padding: 5px;
         display: inline;
     
         .clock-icon {
-            color: $pendingclock-icon-color;
+            color: $goldentheme-badge-text;
         }
     }
 }
@@ -52,6 +52,8 @@
 
 .product-ordered-datecontainer {
     .ordered-date-title {
+        color: $goldentheme-header-background;
+        font-weight: bold;
         @media screen and (max-width: 768px) {
             margin-bottom: 5px;
         }
