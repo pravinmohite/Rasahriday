@@ -2,9 +2,9 @@
     <div class="new-arrival-slides">
         <carousel>
             <slide class="new-arrival-slide" *ngFor="let item of this.randomProductsArr;let i=index">
-                <img *ngIf="i>0" src="{{item}}" alt="first slide" class="carousel-img">
-                <div *ngIf="i==0" class="video-container">
-                    <video class="video-item" playsinline="playsinline" oncanplay="this.play()" autoplay="autoplay" loop="loop">
+                <img *ngIf="i!=1" src="{{item}}" alt="first slide" class="carousel-img">
+                <div *ngIf="i==1" class="video-container">
+                    <video class="video-item" playsinline="playsinline" muted="true" oncanplay="this.play()" autoplay="true" loop="loop">
                         <source src="{{item}}" type="video/mp4">
                     </video>
                 </div>

@@ -49,7 +49,7 @@ export class LandingPageComponent implements OnInit {
 
   getStaticLandingPageImages() {
     for(let i=1;i<=4;i++){
-       if(i==1) {
+       if(i==2) {
         this.randomProductsArr.push(this.path+i+this.mp4Format);
        }
        else {
