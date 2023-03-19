@@ -143,6 +143,9 @@
     a {
         &.nav-links {
             margin-left: 10px;
+            @media screen and (max-width: 365px) {
+               margin-left: 0px !important;
+            }
         }
     }
     .badge-light {

@@ -14,7 +14,7 @@ export class LandingPageComponent implements OnInit {
   landingPageDetails: any;
   randomProductsArr=[];
   path = './../../assets/images/landingpage_img_';
-  imgFormat = '.jpg';
+  imgFormat = '.png';
   itemsPerSlide = 3;
   singleSlideOffset = true;
   noWrap = true;
@@ -46,7 +46,7 @@ export class LandingPageComponent implements OnInit {
   }
 
   getStaticLandingPageImages() {
-    for(let i=1;i<=3;i++){
+    for(let i=1;i<=4;i++){
        this.randomProductsArr.push(this.path+i+this.imgFormat);
     }
   }

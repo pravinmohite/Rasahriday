@@ -33,13 +33,15 @@
         .carousel-caption {
             position: absolute;
             width: 100%;
-            top: 347px !important;
+            top: 405px !important;
             color: $button-theme-color;
             max-width: 335px;
             margin-top: 6px;
 
             @media screen and (max-width: 768px) {
-                top: 60px !important;
+            //    top: 60px !important;
+                top: 174px!important;
+                left: 0px;
             }
 
             .header-text {
