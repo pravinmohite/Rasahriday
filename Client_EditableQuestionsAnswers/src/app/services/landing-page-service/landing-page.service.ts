@@ -18,6 +18,7 @@ export class LandingPageService {
   orderDataSearch = new Subject();
   landingPageDetailsUrl: string;
   productPerCategoryUrl: string;
+  categoryUrl: string;
   constructor(
     private http: HttpClient,
     private loaderService: LoaderService,
@@ -25,7 +26,8 @@ export class LandingPageService {
     private commonService: CommonService,
     private router: Router) {
       this.landingPageDetailsUrl = this.commonService.finalLandingPageDetailsUrl;
-      this.productPerCategoryUrl = this.commonService.finalProductPerCategoryUrl
+      this.productPerCategoryUrl = this.commonService.finalProductPerCategoryUrl;
+      this.categoryUrl = this.commonService.finalCategoryUrl;
   }
 
   /*-------------for orders----------*/
@@ -36,5 +38,9 @@ export class LandingPageService {
 
   getProductPerCategory() {
     return this.http.get(this.productPerCategoryUrl);
+  }
+
+  getAllCategories() {
+    return this.http.get(this.categoryUrl);
   }
 }

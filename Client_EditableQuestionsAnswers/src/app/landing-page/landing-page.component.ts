@@ -14,7 +14,9 @@ export class LandingPageComponent implements OnInit {
   landingPageDetails: any;
   randomProductsArr=[];
   path = './../../assets/images/landingpage_img_';
+  categoryPath = './../../assets/images/category_';
   imgFormat = '.png';
+  mp4Format = '.mp4';
   itemsPerSlide = 3;
   singleSlideOffset = true;
   noWrap = true;
@@ -34,7 +36,7 @@ export class LandingPageComponent implements OnInit {
   ngOnInit(): void {
    // this.getLandingPageDetails();
    this.getStaticLandingPageImages();
-   this.getProductPerCategory();
+   this.getAllCategories();
   }
 
   onSlideRangeChange(indexes: number[]): void {
@@ -47,7 +49,12 @@ export class LandingPageComponent implements OnInit {
 
   getStaticLandingPageImages() {
     for(let i=1;i<=4;i++){
-       this.randomProductsArr.push(this.path+i+this.imgFormat);
+       if(i==1) {
+        this.randomProductsArr.push(this.path+i+this.mp4Format);
+       }
+       else {
+        this.randomProductsArr.push(this.path+i+this.imgFormat);
+       }
     }
   }
 
@@ -77,10 +84,10 @@ export class LandingPageComponent implements OnInit {
   }
 
   setProductPerCategoryInSlides(response) {
-    for(const item of response) {
-       let productImage= this.commonService.getProductImageToBeShown(item['productImages']);
+    for(const [index,item] of response.entries()) {
+      // let productImage= this.commonService.getProductImageToBeShown(item['productImages']);
        let imgObj = {
-        image: productImage,
+        image: this.categoryPath+(index+1)+this.imgFormat,
         data: item
        }
        this.productPerCategorySlides.push(imgObj);
@@ -88,9 +95,9 @@ export class LandingPageComponent implements OnInit {
     this.addFadeAnimation();
   }
 
-  getProductPerCategory() {
+  getAllCategories() {
     this.loaderService.display(true);
-    this.landingPageService.getProductPerCategory().subscribe(response=>{
+    this.landingPageService.getAllCategories().subscribe(response=>{
        this.loaderService.display(false);
        this.setProductPerCategoryInSlides(response);
     })
