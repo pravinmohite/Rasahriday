@@ -247,10 +247,31 @@ export class CartComponent implements OnInit {
       this.increamentAddedItemPrice(cartItem);
     }
     else {
-      this.selectedProducts.selectedItems.splice(index,1);
+      this.removeItemsFromSelectedProducts(cartItem);
       this.decreamentRemovedItemPrice(cartItem);
     }
+    this.setSelectedDeselectedAllText();
     this.updateMultipleSelectedActionbtnVisibility();
+  }
+
+  removeItemsFromSelectedProducts(cartItem) {
+    const selectedItems= this.selectedProducts.selectedItems;
+     for(let i=0;i< selectedItems.length; i++) {
+       if(selectedItems[i]._id == cartItem._id) {
+          selectedItems.splice(i,1);
+       }
+     }
+  }
+
+  setSelectedDeselectedAllText() {
+    if(this.selectedProducts.selectedItems.length == this.cartList.length) {
+      this.selectAllActive = true;
+      this.currentSelectionText = this.deselectText;
+    }
+    else {
+      this.selectAllActive = false;
+      this.currentSelectionText = this.selectText;
+    }
   }
 
   increamentAddedItemPrice(cartItem) {
@@ -281,6 +302,7 @@ export class CartComponent implements OnInit {
   }
 
   selectAllItems() {
+    this.selectedProducts.price = 0;
     this.selectAllActive = true;
     this.currentSelectionText = this.deselectText;
     this.showMultiSelectedActionbtns = true;

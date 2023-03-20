@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import { CarouselConfig } from 'ngx-bootstrap/carousel';
 import { CommonService } from '../services/common-service/common.service';
 import { LandingPageService } from '../services/landing-page-service/landing-page.service';
 import { LoaderService } from '../services/loader-service/loader.service';
@@ -8,7 +9,10 @@ import { LoaderService } from '../services/loader-service/loader.service';
 @Component({
   selector: 'app-landing-page',
   templateUrl: './landing-page.component.html',
-  styleUrls: ['./landing-page.component.scss']
+  styleUrls: ['./landing-page.component.scss'],
+  providers: [
+    { provide: CarouselConfig, useValue: { interval: 10000, noPause: true, showIndicators: true } }
+  ]
 })
 export class LandingPageComponent implements OnInit {
   @ViewChild('videoPlayer') videoPlayer; 
@@ -82,7 +86,6 @@ export class LandingPageComponent implements OnInit {
       let currentProductImage = this.commonService.getProductImageToBeShown(this.landingPageDetails[index].productImages);
       this.randomProductsArr.push(currentProductImage);
     }
-    console.log('product',this.randomProductsArr);
   }
 
   showAllProducts() {
@@ -91,9 +94,8 @@ export class LandingPageComponent implements OnInit {
 
   setProductPerCategoryInSlides(response) {
     for(const [index,item] of response.entries()) {
-      // let productImage= this.commonService.getProductImageToBeShown(item['productImages']);
        let imgObj = {
-        image: this.categoryPath+(index+1)+this.imgFormat,
+        image: this.categoryPath+item.categoryName.toLowerCase()+this.imgFormat,
         data: item
        }
        this.productPerCategorySlides.push(imgObj);

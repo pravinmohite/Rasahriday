@@ -4,7 +4,8 @@
             <slide class="new-arrival-slide" *ngFor="let item of this.randomProductsArr;let i=index">
                 <img *ngIf="i!=1" src="{{item}}" alt="first slide" class="carousel-img">
                 <div *ngIf="i==1" class="video-container">
-                    <video #videoPlayer class="video-item" playsinline="playsinline" muted="true" oncanplay="this.play()" autoplay="true" loop="loop">
+                    <video #videoPlayer class="video-item" playsinline="playsinline" muted="true"
+                        oncanplay="this.play()" autoplay="true" loop="loop">
                         <source src="{{item}}" type="video/mp4">
                     </video>
                 </div>
@@ -18,11 +19,16 @@
             </slide>
         </carousel>
     </div>
+    <div class="col-12">
+        <div class="categories-header">Our categories</div>
+    </div>
     <div class="product-percategory-slides fade fadeOut">
-        <carousel [showIndicators]="showIndicator" [itemsPerSlide]="itemsPerSlide" [singleSlideOffset]="singleSlideOffset" [noWrap]="!noWrap"
-            [interval]="0" [startFromIndex]="0" (slideRangeChange)="onSlideRangeChange($event)">
+        <carousel [showIndicators]="showIndicator" [itemsPerSlide]="itemsPerSlide"
+            [singleSlideOffset]="singleSlideOffset" [noWrap]="!noWrap" [interval]="5000" [startFromIndex]="0"
+            (slideRangeChange)="onSlideRangeChange($event)">
             <slide *ngFor="let slide of productPerCategorySlides; let index=index">
-                <img class="img-responsive center-block" [src]="slide.image" alt="image slide" style="display: block; width: 100%;">
+                <img class="img-responsive center-block" [src]="slide.image" alt="image slide"
+                    style="display: block; width: 100%;">
                 <div class="carousel-caption">
                     <h4 class="carousel-text">{{slide.data.categoryName}}</h4>
                 </div>

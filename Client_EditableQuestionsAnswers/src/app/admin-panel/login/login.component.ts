@@ -49,13 +49,13 @@ export class LoginComponent implements OnInit {
       localStorage.setItem('loggedIn','true');
       localStorage.setItem('isAdmin','true');
       this.setLoggedInUserDetails(data);
-      this.router.navigateByUrl('/products');
+      this.router.navigateByUrl('/home');
    }
    else if(data) {
      localStorage.setItem('loggedIn','true');
      localStorage.setItem('isAdmin','false');
      this.setLoggedInUserDetails(data);
-     this.router.navigateByUrl('/products');
+     this.router.navigateByUrl('/home');
    }
    else {
      localStorage.removeItem('loggedIn');

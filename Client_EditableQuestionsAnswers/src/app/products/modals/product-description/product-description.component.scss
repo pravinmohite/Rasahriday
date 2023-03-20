@@ -25,6 +25,15 @@
     padding: 10px !important;
 }
 
+.product-name-link {
+  display: inline-block;
+  width: calc(100% - 20px);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  padding: 0;
+}
+
 .product-description-modal {
     .product-image-container {
         text-align: center;

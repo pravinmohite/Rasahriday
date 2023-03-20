@@ -16,6 +16,16 @@
            position: relative;
            z-index: 0;
         }
+
+        .categories-header {
+            text-align: center;
+            font-size: 35px;
+            margin: 50px 0px 0px 0px;
+            color: $goldentheme-header-background;
+            font-weight: bold;
+            text-decoration: underline;
+            text-decoration-color: $goldentheme-headertext-color;
+        }
         .new-arrival-slide {
             animation: fadeIn 3s;
             .video-item {
@@ -26,6 +36,17 @@
                 
                 @media screen and (max-width: 768px) {
                     height: 35vh;
+                }
+            }
+
+            .carousel-caption {
+                .btn {
+                    @media screen and (max-width: 768px) {
+                        font-size: 12px;
+                    }
+                }
+                @media screen and (max-width: 768px) {
+                    left: -30px;
                 }
             }
         }
@@ -49,7 +70,27 @@
             margin-top: 6px;
 
             @media screen and (max-width: 768px) {
-                top: 174px!important;
+                top: 170px!important;
+                left: 0px;
+            }
+
+            @media screen and (min-width: 377px) and(max-width: 400px) {
+                top: 195px!important;
+                left: 0px;
+            }
+
+            @media screen and (min-width: 401px) and(max-width: 420px) {
+                top: 210px!important;
+                left: 0px;
+            }
+
+            @media screen and (max-width: 376px) {
+                top: 144px!important;
+                left: 0px;
+            }
+
+            @media screen and (max-width: 365px) {
+                top: 163px!important;
                 left: 0px;
             }
 
@@ -68,8 +109,8 @@
 
             .carousel-item {
                 margin-right: inherit !important;
-                height: 300px !important;
-                padding: 30px;
+            //    height: 300px !important;
+                padding: 20px 30px 30px 30px;
 
                 @media screen and (max-width: 768px){
                     padding: 5px;
@@ -80,27 +121,36 @@
                     position: absolute;
                     width: 100%;
                     max-width: 335px;
-                    top: 230px !important;
+                    top: 210px !important;
                     width: 71%;
                     height: 55px;
+                    margin-left: 18px;
 
                     @media screen and (max-width: 768px){
-                        top: 60px !important;
+                        top: 50px !important;
                     }
 
                     .carousel-text {
                         padding: 5px;
                         background: $goldentheme-header-background  !important;
-                        color: $goldentheme-headertext-color;
-                        font-size: 1.2em;
+                        color: $goldentheme-carouseltext-color;
+                        font-size: 0.8em;
+                        text-transform: uppercase;
+                        font-weight: bold;
                         white-space: nowrap;
                         overflow: hidden;
                         text-overflow: ellipsis;
+
+                        @media screen and (min-width: 769px){
+                            font-size: 2.2em;
+                            text-transform: uppercase;
+                            font-weight: bold;
+                        }
                     }
                 }
 
                 img {
-                    height: 280px;
+                  //  height: 280px;
                     width: 100% !important;
                     margin: auto;
 
@@ -129,7 +179,7 @@
   
 .fadeOut { 
     opacity: 0;
-    transform: translateY(8vh);
+    transform: translateY(5vh);
     @media screen and (max-width: 768px){
         transform: translateY(1vh);
     }

@@ -5,7 +5,7 @@ import { RouterModule , Routes } from '@angular/router';
 let routes: Routes = [
   {
     path: "", 
-    redirectTo:"login",
+    redirectTo:"home",
     pathMatch: 'full' 
   },
   {
@@ -15,14 +15,6 @@ let routes: Routes = [
   {
     path: "login",
     loadChildren: () => import('./admin-panel/admin-panel.module').then(m => m.AdminPanelModule)
-  },
-  {
-    path: "frontend-interview-questions", 
-    loadChildren: () => import('./interview-questions/interview-questions.module').then(m => m.InterviewQuestionsModule)
-  },
-  {
-    path: "frontend-interview-questions/:searchKey", 
-    loadChildren: () => import('./interview-questions/interview-questions.module').then(m => m.InterviewQuestionsModule)
   },
   {
     path: "products",

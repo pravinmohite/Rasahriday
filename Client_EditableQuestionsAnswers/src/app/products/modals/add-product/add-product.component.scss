@@ -37,11 +37,17 @@ form .ng-invalid.ng-touched {
 
 .custom-upload-btn {
     display: inline-block;
-    background-color: $btn-default;
+    background-color: $goldentheme-header-background;
+    color: $goldentheme-headertext-color;
     padding: 0.5rem;
     font-family: sans-serif;
     border-radius: 0.3rem;
     cursor: pointer;
+
+    &:active {
+        background-color: $goldentheme-header-background !important;
+        color: $goldentheme-headertext-color !important;
+    }
 }
 
 .file-upload {
