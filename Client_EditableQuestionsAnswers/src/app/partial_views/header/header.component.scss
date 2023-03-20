@@ -64,7 +64,7 @@
 
 .header-nav {
 
-    @media screen and (max-width: 1500px) {
+    @media screen and (min-width:993px) and (max-width: 1500px) {
         flex-basis: 33% !important;
         max-width: 33% !important;    
     }
@@ -97,7 +97,7 @@
         border: solid 1px $goldentheme-headertext-color;
         border-radius: $goldentheme-border-radius;
 
-        @media screen and (max-width: 1500px) {
+        @media screen and (min-width:993px) and (max-width: 1500px) {
            flex-basis: 20% !important;
            max-width: 20% !important;
         }
@@ -124,7 +124,7 @@
 }
 
 .loggedin-user {
-    @media screen and (max-width: 1500px) {
+    @media screen and (min-width:993px) and (max-width: 1500px) {
        margin-left: 6% !important;
     }
     button {
