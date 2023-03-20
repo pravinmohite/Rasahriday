@@ -20,13 +20,13 @@
         </carousel>
     </div>
     <div class="col-12">
-        <div class="categories-header">Our categories</div>
+        <div class="categories-header">Our Categories</div>
     </div>
     <div class="product-percategory-slides fade fadeOut">
         <carousel [isAnimated]="true" [showIndicators]="showIndicator" [itemsPerSlide]="itemsPerSlide"
             [singleSlideOffset]="singleSlideOffset" [noWrap]="!noWrap" [interval]="5000" [startFromIndex]="0"
             (slideRangeChange)="onSlideRangeChange($event)">
-            <slide *ngFor="let slide of productPerCategorySlides; let index=index">
+            <slide *ngFor="let slide of productPerCategorySlides; let index=index" (click)="showCategories()">
                 <img class="img-responsive center-block" [src]="slide.image" alt="image slide"
                     style="display: block; width: 100%;">
                 <div class="carousel-caption">

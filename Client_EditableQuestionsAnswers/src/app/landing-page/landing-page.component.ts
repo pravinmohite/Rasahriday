@@ -92,6 +92,10 @@ export class LandingPageComponent implements OnInit {
     this.router.navigate(["/products"]);
   }
 
+  showCategories() {
+    this.router.navigate(["/products"]);
+  }
+
   setProductPerCategoryInSlides(response) {
     for(const [index,item] of response.entries()) {
        let imgObj = {

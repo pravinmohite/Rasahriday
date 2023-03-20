@@ -107,6 +107,14 @@
             margin-top: 30px !important;
             margin: auto;
 
+            @media screen and (min-width: 769px){
+                width: 90%;
+            }
+
+            @media screen and (min-width: 1708px) and (max-width: 1950px) {
+                width: 80%;
+            }
+
             .carousel-indicators {
                 visibility: hidden;
             }
@@ -123,14 +131,23 @@
                 .carousel-caption {
                     position: absolute;
                     width: 100%;
-                    max-width: 335px;
-                    top: 210px !important;
+                    max-width: 240px;
+                    top: 166px !important;
                     width: 71%;
                     height: 55px;
-                    margin-left: 18px;
+                    margin-left: 70px;
+
+                    @media screen and (min-width: 1500px){
+                        margin-left: 45px;
+                    }
+
+                    @media screen and (max-width: 1500px){
+                        margin-left: 36px;
+                    }
 
                     @media screen and (max-width: 768px){
                         top: 50px !important;
+                        margin-left: 18px;
                     }
 
                     .carousel-text {
@@ -157,7 +174,8 @@
                     margin: auto;
 
                     @media screen and (min-width: 1200px){
-                        width: 400px !important;
+                       // width: 400px !important;
+                          width: 330px !important;
                     }
 
                     @media screen and (max-width: 768px){

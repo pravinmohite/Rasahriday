@@ -9,7 +9,7 @@
     .product-list-container {
 
         .addproduct-btn-container {
-           margin-bottom: 20px;
+            margin-bottom: 20px;
         }
 
         @media only screen and (max-width: 768px) {
@@ -33,6 +33,14 @@
 
         .user-action-btns {
             margin-top: 10px !important;
+
+            .input-group {
+                @media screen and (max-width: 1500px) {
+                    flex-basis: 54% !important;
+                    max-width: 54% !important;
+                }
+            }
+
             .input-group-text {
                 width: 30px;
                 cursor: pointer;
@@ -40,11 +48,12 @@
                 color: $goldentheme-headertext-color;
                 border: solid 1px $goldentheme-header-background;
             }
+
             .qty-input {
-              padding: 0px !important;
-              text-align: center;
-              background: $goldentheme-panel-background;
-              border-color: $goldentheme-header-background;
+                padding: 0px !important;
+                text-align: center;
+                background: $goldentheme-panel-background;
+                border-color: $goldentheme-header-background;
             }
         }
 
@@ -54,21 +63,23 @@
             .buy-btn {
                 margin-right: 5px;
             }
+
             .add-cart-btn {
-              margin-right: 15px !important;
-              padding-left: 3px !important;
-              padding-right: 3px !important;
+                margin-right: 15px !important;
+                padding-left: 3px !important;
+                padding-right: 3px !important;
             }
         }
+
         .edit-delete-btncontainer {
             vertical-align: sub !important;
         }
 
         .img-details-container {
             padding: 5px 5px 5px 5px !important;
-            
-         /*can be added later if required */   
-         /*   &:hover {
+
+            /*can be added later if required */
+            /*   &:hover {
                 .user-action-btns {
                     display: block!important;
                 }
@@ -96,6 +107,11 @@
 
         .add-to-cart {
             float: right;
+
+            @media screen and (max-width: 1500px) {
+                flex-basis: 46%;
+                font-size: 13px;
+            }
         }
 
         .product-name {
@@ -107,7 +123,7 @@
 
         .product-description {
             display: inline-block;
-            color: $goldentheme-productdescription-color !important;
+            color: $goldentheme-productdescription-color  !important;
             width: calc(100% - 20px);
             text-overflow: ellipsis;
             white-space: nowrap;

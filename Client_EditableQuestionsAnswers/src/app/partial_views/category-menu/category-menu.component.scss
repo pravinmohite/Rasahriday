@@ -66,8 +66,11 @@
            .category-name {
             margin-left: 15px;
 
-            @media screen and (min-width: 769px){
+            @media screen and (min-width: 1501px){
                 margin-left: 30px !important;
+            }
+            @media screen and (max-width: 1500px){
+               margin-left: 20px;
             }
            }
 

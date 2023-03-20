@@ -179,6 +179,13 @@ $img-path: '~src/assets/images/';
       border-color: $goldentheme-header-background;
     }
 
+    .quantity-fields-container {
+       @media screen and (max-width: 1500px) {
+          flex-basis: 32% !important;
+          max-width: 32% !important;
+       }
+    }
+
   
     .input-group-text {
         width: 35px;
