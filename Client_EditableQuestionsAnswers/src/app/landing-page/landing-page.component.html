@@ -23,7 +23,7 @@
         <div class="categories-header">Our categories</div>
     </div>
     <div class="product-percategory-slides fade fadeOut">
-        <carousel [showIndicators]="showIndicator" [itemsPerSlide]="itemsPerSlide"
+        <carousel [isAnimated]="true" [showIndicators]="showIndicator" [itemsPerSlide]="itemsPerSlide"
             [singleSlideOffset]="singleSlideOffset" [noWrap]="!noWrap" [interval]="5000" [startFromIndex]="0"
             (slideRangeChange)="onSlideRangeChange($event)">
             <slide *ngFor="let slide of productPerCategorySlides; let index=index">

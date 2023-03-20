@@ -49,11 +49,6 @@ export class LandingPageComponent implements OnInit {
     this.play();
   }
 
-  // clickFirstMultilistCarousel() {
-  //   let element: HTMLElement = document.querySelectorAll('.carousel-indicators > li.active')[1] as HTMLElement;
-  //   element.click();
-  // }
-
   onSlideRangeChange(indexes: number[]): void {
     this.slidesChangeMessage = `Slides have been switched: ${indexes}`;
   }
