@@ -208,6 +208,8 @@ export class CommonService {
       if (entry.isIntersecting) {
         // fade in observed elements that are in view
         entry.target.classList.replace('fadeOut', 'fadeIn');
+        let element: HTMLElement = document.querySelectorAll('.carousel-indicators > li.active')[1] as HTMLElement;
+        element.click();
       } else {
         // fade out observed elements that are not in view
         entry.target.classList.replace('fadeIn', 'fadeOut');

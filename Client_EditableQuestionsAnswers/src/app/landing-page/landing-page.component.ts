@@ -27,7 +27,7 @@ export class LandingPageComponent implements OnInit {
   noWrap = true;
   slidesChangeMessage = '';
   productPerCategorySlides = [];
-  showIndicator = false;
+  showIndicator = true;
 
   constructor(
     private commonService: CommonService,
@@ -48,6 +48,11 @@ export class LandingPageComponent implements OnInit {
   ngAfterViewInit() {
     this.play();
   }
+
+  // clickFirstMultilistCarousel() {
+  //   let element: HTMLElement = document.querySelectorAll('.carousel-indicators > li.active')[1] as HTMLElement;
+  //   element.click();
+  // }
 
   onSlideRangeChange(indexes: number[]): void {
     this.slidesChangeMessage = `Slides have been switched: ${indexes}`;

@@ -80,12 +80,12 @@
             }
 
             @media screen and (min-width: 401px) and(max-width: 420px) {
-                top: 210px!important;
+                top: 190px!important;
                 left: 0px;
             }
 
             @media screen and (max-width: 376px) {
-                top: 144px!important;
+                top: 158px!important;
                 left: 0px;
             }
 
@@ -107,9 +107,12 @@
             margin-top: 30px !important;
             margin: auto;
 
+            .carousel-indicators {
+                visibility: hidden;
+            }
+
             .carousel-item {
                 margin-right: inherit !important;
-            //    height: 300px !important;
                 padding: 20px 30px 30px 30px;
 
                 @media screen and (max-width: 768px){
@@ -150,7 +153,6 @@
                 }
 
                 img {
-                  //  height: 280px;
                     width: 100% !important;
                     margin: auto;
 
