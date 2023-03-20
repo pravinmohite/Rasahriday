@@ -117,7 +117,7 @@ export class HeaderComponent implements OnInit, AfterViewInit {
   }
 
   navigateToLoginPage() {
-    this.router.navigate(['/login']);
+    this.router.navigate(["../login"]);
   }
 
   openSiderBar(): void {

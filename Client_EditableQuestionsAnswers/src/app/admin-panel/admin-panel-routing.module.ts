@@ -6,12 +6,12 @@ import { LoginComponent } from './login/login.component';
 
 const routes: Routes = [
   {
-    path: 'updateInterviewQuestions',
-    component: InterviewQuestionsPanelComponent
-  },
-  {
     path:'',
     component:LoginComponent
+  },
+  {
+    path: 'updateInterviewQuestions',
+    component: InterviewQuestionsPanelComponent
   }
 ];
 
