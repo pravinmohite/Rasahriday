@@ -22,7 +22,7 @@
 
 %action-btn-size {
     font-size: 18px !important;
-    padding: 10px !important;
+    padding: 5px 10px !important;
 }
 
 .product-name-link {
@@ -70,13 +70,13 @@
     .product-details {
        .product-name {
         color: $goldentheme-headertext-color;
-        font-size: 22px;
+        font-size: 20px;
         font-weight: bold;
         text-transform: capitalize;
         cursor: pointer;
       }
       .product-description {
-        font-size: 20px;
+        font-size: 16px;
         color: $goldentheme-header-background !important;
       }
 
@@ -137,6 +137,7 @@
 
       .user-action-btns {
         margin-top:30px;
+        margin-bottom: 10px;
 
         @media screen and (max-width: 768px) {
           margin-bottom: 10px;

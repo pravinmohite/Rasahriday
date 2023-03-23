@@ -97,3 +97,7 @@ To check size of folder:-
 
 root@ecommerce-webapp:~# du -sh Rasahriday/
 665M    Rasahriday/
+
+to find disk space used by folders:-
+
+du -hx --max-depth=1 /
