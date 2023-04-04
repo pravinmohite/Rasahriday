@@ -145,14 +145,16 @@ export class CartComponent implements OnInit {
       modalObj = {
         initialState: {
           productList: this.selectedProducts
-        }
+        },
+        class: this.orderConfirmationClass
       }
     }
     else {
       modalObj = {
         initialState: {
           product: cartItem
-        }
+        },
+        class: this.orderConfirmationClass
       }
     }
     const config= this.commonService.getModalConfig(this.orderConfirmationClass);
