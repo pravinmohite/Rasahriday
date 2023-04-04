@@ -12,7 +12,7 @@ import { SafeResourceUrlPipe } from './../pipes/safe-resource-url.pipe';
 import { ConfirmOrderDetailsComponent } from './modals/confirm-order-details/confirm-order-details.component';
 import { CategoryMenuModule } from '../partial_views/category-menu/category-menu.module';
 import { AddCategoryModule } from './modals/add-category/add-category.module';
-
+import Stepper from 'bs-stepper';
 
 @NgModule({
   declarations: [

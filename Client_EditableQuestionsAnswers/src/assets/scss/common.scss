@@ -427,6 +427,18 @@ button[disabled] {
   }
 }
 
+.checkbox-common {
+  font-family: system-ui, sans-serif;
+  font-size: 21rem;
+  font-weight: bold;
+  line-height: 1.1;
+  display: grid;
+  grid-template-columns: 1em auto;
+  gap: 0.5em;
+  width: 20px;
+  height: 20px;
+}
+
 /*----firecrackers animation ---*/
 $particles: 50;
 $width: 500;

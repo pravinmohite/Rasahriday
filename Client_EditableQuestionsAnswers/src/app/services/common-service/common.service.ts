@@ -10,6 +10,8 @@ import { OrderService } from '../order-service/order.service';
   providedIn: 'root'
 })
 export class CommonService {
+  isPaymentGatewaySupported = true;
+  razorPayApiKey = 'rzp_test_lPhE8lGPzuMhDt';
   currentSearchString: String;
   outOfStockText = 'Out of stock';
   sellerStocksEmptyText ='Seller stock is empty'
@@ -66,6 +68,10 @@ export class CommonService {
   ) { 
     this.checkAndSetIfMobile();
     this.setWindowResizeEvent();
+  }
+
+  get nativeWindow() : any {
+    return window;
   }
 
   setUserDetails(userDetails) {

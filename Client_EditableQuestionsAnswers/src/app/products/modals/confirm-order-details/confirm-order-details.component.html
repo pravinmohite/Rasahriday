@@ -1,4 +1,130 @@
-<div class="confirm-order-modal">
+<div class="container" *ngIf="isPaymentGatewaySupported">
+    <div id="stepper1" class="bs-stepper">
+        <div class="bs-stepper-header">
+            <div class="step" data-target="#test-l-1">
+                <button class="step-trigger">
+                    <span class="bs-stepper-circle">1</span>
+                    <span class="bs-stepper-label">Order Details</span>
+                </button>
+            </div>
+            <div class="line"></div>
+            <div class="step" data-target="#test-l-2">
+                <button class="step-trigger">
+                    <span class="bs-stepper-circle">2</span>
+                    <span class="bs-stepper-label">Payment</span>
+                </button>
+            </div>
+        </div>
+        <div class="bs-stepper-content">
+            <form (ngSubmit)="onStepperSubmit()">
+                <div id="test-l-1" class="content">
+                    <div class="confirm-order-modal">
+                        <div class="modal-header">
+                            <h4 class="modal-title pull-left">Confirm order details</h4>
+                            <button type="button" class="btn-close close pull-right" aria-label="Close"
+                                (click)="modalRef?.hide()">
+                                <span aria-hidden="true" class="visually-hidden">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <fieldset class="fieldset-container border p-2">
+                                <legend class="legend-title w-auto">Order Summary:</legend>
+                                <div class="user-details order-details">
+                                    <div class="form-group row">
+                                        <label class="col-5 col-form-label" for="categoryName">Price </label>
+                                        <div class="col-7">
+                                            <label class="col-form-label" for="categoryName">{{product.price}}</label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-5 col-form-label" for="categoryName">Delivery Charges</label>
+                                        <div class="col-7">
+                                            <label class="col-form-label" for="categoryName">Free</label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-5 col-form-label order-total-text" for="categoryName">Order
+                                            Total</label>
+                                        <div class="col-7">
+                                            <label class="col-form-label product-final-price" for="categoryName">
+                                                <span class="current-currency-symbol">{{currentCurrency}}</span>
+                                                {{product.price}}
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+
+
+                            <fieldset class="fieldset-container border p-2">
+                                <legend class="legend-title w-auto">User Details:</legend>
+                                <div class="user-details">
+                                    <fa-icon *ngIf="editMode" class="hand-cursor fa-icon check-icon"
+                                        [icon]="faCheckSquare" (click)="setEditMode(false)"></fa-icon>
+                                    <fa-icon *ngIf="!editMode" class="hand-cursor fa-icon edit-icon" [icon]="faEdit"
+                                        (click)="setEditMode(true)"></fa-icon>
+                                    <div class="form-group row">
+                                        <label class="col-5 col-form-label" for="categoryName">User Name</label>
+                                        <div class="col-7">
+                                            <label class="col-form-label"
+                                                for="categoryName">{{product.userName}}</label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-5 col-form-label" for="categoryName">User Address</label>
+                                        <div class="col-7">
+                                            <label *ngIf="!editMode" class="col-form-label"
+                                                for="categoryName">{{product.userAddress}}</label>
+                                            <input *ngIf="editMode" id="userAddress" name="userAddress"
+                                                [(ngModel)]="editedProduct.userAddress" placeholder="Enter user address"
+                                                type="text" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-5 col-form-label" for="categoryName">User Contact No.</label>
+                                        <div class="col-7">
+                                            <label *ngIf="!editMode" class="col-form-label"
+                                                for="categoryName">{{product.userPhoneNumber}}</label>
+                                            <input *ngIf="editMode" id="userPhoneNumber"
+                                                [(ngModel)]="editedProduct.userPhoneNumber" name="userPhoneNumber"
+                                                placeholder="Enter user contact No." type="text" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <div class="row note-container">
+                                <div class="col-12">
+                                    <span class="note-label">Note: </span>
+                                    <span class="note-text">Only cash on delivery is supported</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button (click)="next()" class="btn btn-primary">Next</button>
+                </div>
+                <div id="test-l-2" class="content payment-container">
+                    <div class="row">
+                        <div class="col-md-1">
+                            <input type="checkbox" class="checkbox-common" />
+                        </div>
+                        <div class="col-md-11 ">
+                            <span class="cashon-delivery-text">
+                                Cash On Delivery
+                            </span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <button class="btn btn-outline-customsecondary" (click)="payUsingPaymentGateway()">Pay</button>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary mt-5">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="confirm-order-modal" *ngIf="!isPaymentGatewaySupported">
     <div class="modal-header">
         <h4 class="modal-title pull-left">Confirm order details</h4>
         <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="modalRef?.hide()">
@@ -6,42 +132,6 @@
         </button>
     </div>
     <div class="modal-body">
-        <!-- <fieldset class="fieldset-container border p-2">
-            <legend class="legend-title w-auto">Product Details:</legend>
-            <div *ngIf="productList">
-                <div class="product-details" *ngFor="let product of productList.selectedItems;let i=index">
-                    <div class="form-group row">
-                        <label class="col-5 col-form-label" for="categoryName">{{i+1}}) Product Name</label> 
-                        <div class="col-7">
-                            <label class="col-form-label" for="categoryName">{{product.productName}}</label>
-                        </div>
-                    </div> 
-                     <div class="form-group row">
-                        <label class="col-5 col-form-label" for="categoryName">Product Description</label> 
-                        <div class="col-7">
-                            <label class="col-form-label" for="categoryName">{{product.description}}</label>
-                        </div>
-                    </div>  
-                </div>
-            </div> 
-            
-            <div class="product-details" *ngIf="!productList">
-                <div class="form-group row">
-                    <label class="col-5 col-form-label" for="categoryName">Product Name</label> 
-                    <div class="col-7">
-                        <label class="col-form-label" for="categoryName">{{product.productName}}</label>
-                    </div>
-                </div> 
-                <div class="form-group row">
-                    <label class="col-5 col-form-label" for="categoryName">Product Description</label> 
-                    <div class="col-7">
-                        <label class="col-form-label" for="categoryName">{{product.description}}</label>
-                    </div>
-                </div> 
-            </div>
-        </fieldset> -->
-
-
         <fieldset class="fieldset-container border p-2">
             <legend class="legend-title w-auto">Order Summary:</legend>
             <div class="user-details order-details">
