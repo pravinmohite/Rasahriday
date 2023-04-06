@@ -6,6 +6,10 @@
 }
 
 ::ng-deep {
+   .order-confirmation { 
+    @media screen and (min-width: 769px) {
+       max-width: 600px;
+    }
     .confirm-order-modal {
         .fieldset-container {
             &.border {
@@ -16,7 +20,7 @@
             position: relative;
             @extend %section-styles;
             .form-group {
-                margin-bottom: 10px
+                margin-bottom: 10px;
             }
         }
 
@@ -24,7 +28,7 @@
             position: relative;
             @extend %section-styles;
             .form-group {
-                margin-bottom: 10px
+                margin-bottom: 8px;
             }
         }
 
@@ -54,6 +58,7 @@
             margin-bottom: 20px;
         }
     }
+   }
 
     .legend-title {
         font-size: 16px;

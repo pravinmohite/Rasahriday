@@ -20,7 +20,7 @@ import { faTrash } from '@fortawesome/free-solid-svg-icons';
 })
 export class CartComponent implements OnInit {
 
-  orderConfirmationClass='order-confirmation';
+  orderConfirmationClass: string;
   cartItem: Record<string,unknown>;
   cartList: any;
   productImages: any[];
@@ -55,6 +55,7 @@ export class CartComponent implements OnInit {
     ) { 
       this.userDetails = this.commonService.userDetails;
       this.sellerStocksEmptyText = this.commonService.sellerStocksEmptyText;
+      this.orderConfirmationClass = this.commonService.orderConfirmationClass;
     }
 
   ngOnInit(): void {
@@ -145,14 +146,16 @@ export class CartComponent implements OnInit {
       modalObj = {
         initialState: {
           productList: this.selectedProducts
-        }
+        },
+        class: this.orderConfirmationClass
       }
     }
     else {
       modalObj = {
         initialState: {
           product: cartItem
-        }
+        },
+        class: this.orderConfirmationClass
       }
     }
     const config= this.commonService.getModalConfig(this.orderConfirmationClass);

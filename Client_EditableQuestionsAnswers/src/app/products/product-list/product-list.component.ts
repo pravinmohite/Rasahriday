@@ -16,7 +16,7 @@ import { NotifierService } from 'angular-notifier';
   styleUrls: ['./product-list.component.scss']
 })
 export class ProductListComponent implements OnInit {
-  orderConfirmationClass='order-confirmation';
+  orderConfirmationClass: string;
   outOfStockText: string;
   products: any;
   categoryId;
@@ -45,6 +45,7 @@ export class ProductListComponent implements OnInit {
     ) { 
       this.outOfStockText = this.commonService.outOfStockText;
       this.sellerStocksEmptyText = this.commonService.sellerStocksEmptyText;
+      this.orderConfirmationClass = this.commonService.orderConfirmationClass;
     }
 
   ngOnInit(): void {
@@ -181,7 +182,8 @@ export class ProductListComponent implements OnInit {
       const initialState: any = {
         initialState: {
           product
-        }
+        },
+        class: this.orderConfirmationClass
       };
       const config= this.commonService.getModalConfig(this.orderConfirmationClass);
       this.modalRef = this.modalService.show(ConfirmOrderDetailsComponent, initialState);
