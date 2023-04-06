@@ -52,6 +52,7 @@ export class CommonService {
   categoryMenus;
   currentCurrency = '₹';
   modalClass = 'modal-dialog-container';
+  orderConfirmationClass='order-confirmation';
   modalRef: any;
   visitorObj = {
     isVisitor: true
