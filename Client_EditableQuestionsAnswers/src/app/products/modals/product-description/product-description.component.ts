@@ -25,7 +25,7 @@ export class ProductDescriptionComponent implements OnInit {
   productImagesToBeEdited: any;
   className = 'product-description-modalcontainer'
   currentCurrency: string;
-  orderConfirmationClass='order-confirmation';
+  orderConfirmationClass: string;
   outOfStockText: string;
   sellerStocksEmptyText: string;
 
@@ -40,6 +40,7 @@ export class ProductDescriptionComponent implements OnInit {
     ) { 
       this.outOfStockText = this.commonService.outOfStockText;
       this.sellerStocksEmptyText = this.commonService.sellerStocksEmptyText;
+      this.orderConfirmationClass = this.commonService.orderConfirmationClass;
     }
 
   ngOnInit(): void {
@@ -109,7 +110,8 @@ export class ProductDescriptionComponent implements OnInit {
       const initialState: any = {
         initialState: {
           product
-        }
+        },
+        class: this.orderConfirmationClass
       };
       const config= this.commonService.getModalConfig(this.orderConfirmationClass);
       this.modalRefOrderConfirmation = this.modalService.show(ConfirmOrderDetailsComponent, initialState);
