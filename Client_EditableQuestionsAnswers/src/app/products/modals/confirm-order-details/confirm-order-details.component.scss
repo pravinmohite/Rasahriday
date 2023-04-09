@@ -57,6 +57,19 @@
         .note-container {
             margin-bottom: 20px;
         }
+
+        .cash-on-delivery-container {
+            padding: 10px;
+        }
+    }
+
+    .payment-options {
+        padding: 15px 0px;
+        margin: 10px 10px;
+        &.active {
+            border: solid 1px $goldentheme-headertext-color;
+            border-radius: 20px;
+        }
     }
    }
 

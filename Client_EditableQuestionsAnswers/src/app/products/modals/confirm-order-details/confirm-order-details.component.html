@@ -1,4 +1,4 @@
-<div class="container" *ngIf="isPaymentGatewaySupported">
+<div class="online-payment-container" *ngIf="isPaymentGatewaySupported">
     <div id="stepper1" class="bs-stepper">
         <div class="bs-stepper-header">
             <div class="step" data-target="#test-l-1">
@@ -103,9 +103,10 @@
                     <button (click)="next()" class="btn btn-primary">Next</button>
                 </div>
                 <div id="test-l-2" class="content payment-container">
-                    <div class="row">
+                    onlinePayment {{onlinePayment}}
+                    <div class="row cash-on-delivery-container payment-options" [ngClass]="{'active': !onlinePayment}">
                         <div class="col-md-1">
-                            <input type="checkbox" class="checkbox-common" />
+                            <input type="radio" [value]="false" [(ngModel)]="onlinePayment" name="payment-method" class="checkbox-common" />
                         </div>
                         <div class="col-md-11 ">
                             <span class="cashon-delivery-text">
@@ -113,12 +114,22 @@
                             </span>
                         </div>
                     </div>
-                    <div class="row">
+                    <div class="row online-payment-container payment-options" [ngClass]="{'active': onlinePayment}">
+                        <div class="col-md-1">
+                            <input type="radio" [value]="true" [(ngModel)]="onlinePayment" name="payment-method" class="checkbox-common" />
+                        </div>
+                        <div class="col-md-11 ">
+                            <span class="cashon-delivery-text">
+                                Online Payment 
+                            </span>
+                            <!-- <button class="btn btn-outline-customsecondary" (click)="payUsingPaymentGateway()">Pay</button> -->
+                        </div>
+<!-- 
                         <div class="col-12">
                             <button class="btn btn-outline-customsecondary" (click)="payUsingPaymentGateway()">Pay</button>
-                        </div>
+                        </div> -->
                     </div>
-                    <button type="submit" class="btn btn-primary mt-5">Submit</button>
+                    <button type="submit" class="btn btn-outline-customsecondary mt-5" (click)="payUsingSelectedOption()">Use this payment method</button>
                 </div>
             </form>
         </div>

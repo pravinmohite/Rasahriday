@@ -23,18 +23,10 @@ export class ConfirmOrderDetailsComponent implements OnInit {
   productImagesToBeEdited: any;
   editMode = false;
   currentCurrency: any;
-  options: {
-    key: string; // Enter the Key ID generated from the Dashboard
-    amount: string; // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
-    currency: string; name: string; //your business name
-    description: string; image: string; order_id: string; //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
-    callback_url: string; prefill: {
-      name: string; //your customer's name
-      email: string; contact: string;
-    }; notes: { address: string; }; theme: { color: string; };
-  };
+  options: any;
   rzp1: any;
   rzPay: any;
+  onlinePayment = false;
   constructor(
     public modalRef: BsModalRef,
     private commonService: CommonService
@@ -62,6 +54,7 @@ export class ConfirmOrderDetailsComponent implements OnInit {
   }
 
   initializePaymentOptions() {
+    const self = this;
     this.product.price*=100 /*--to convert to rupees--*/
     this.options = {
       "key": this.razorPayApiKey, // Enter the Key ID generated from the Dashboard
@@ -71,7 +64,10 @@ export class ConfirmOrderDetailsComponent implements OnInit {
       "description": "Test Transaction",
       "image": "https://example.com/your_logo",
       "order_id": "", //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
-      "callback_url": "https://eneqd3r9zrjok.x.pipedream.net/",
+      "handler": function (response){
+          self.product.paidOnline = true;
+          self.save();
+      },
       "prefill": {
           "name": "Gaurav Kumar", //your customer's name
           "email": "gaurav.kumar@example.com",
@@ -84,6 +80,11 @@ export class ConfirmOrderDetailsComponent implements OnInit {
           "color": "#3399cc"
       }
   };
+  //  this.options.handler== ((response, error) => {
+  //   this.options.response = response;
+  //   console.log(response);
+  //   console.log(this.options);
+  // });
   }
 
   next() {
@@ -92,6 +93,15 @@ export class ConfirmOrderDetailsComponent implements OnInit {
 
   onStepperSubmit() {
 
+  }
+
+  payUsingSelectedOption() {
+    if(this.onlinePayment) {
+      this.payUsingPaymentGateway();
+    }
+    else {
+      this.save();
+    }
   }
 
   payUsingPaymentGateway() {
