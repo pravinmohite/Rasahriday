@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ApplicationRef, Component, OnInit } from '@angular/core';
 import { BsModalRef, BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
 import { ConfirmOrderDetailsComponent } from '../products/modals/confirm-order-details/confirm-order-details.component';
 import { CartService } from '../services/cart-service/cart.service';
@@ -51,7 +51,8 @@ export class CartComponent implements OnInit {
     private productService: ProductService,
     private cartService: CartService,
     private loaderService: LoaderService,
-    private notifierService: NotifierService
+    private notifierService: NotifierService,
+    private appRef: ApplicationRef
     ) { 
       this.userDetails = this.commonService.userDetails;
       this.sellerStocksEmptyText = this.commonService.sellerStocksEmptyText;
@@ -179,6 +180,7 @@ export class CartComponent implements OnInit {
       this.notifierService.notify('success', 'order placed successfully!');
       this.showFireCrackers();
       const placedOrder = true;
+      this.appRef.tick();
       this.deleteCartItem(cartItem, placedOrder);
     })
   }
@@ -188,6 +190,7 @@ export class CartComponent implements OnInit {
     this.orderService.addMultipleOrderToOrderList(this.selectedProducts).subscribe(response=>{
       this.notifierService.notify('success', 'order placed successfully!');
       this.showFireCrackers();
+      this.appRef.tick();
       this.getCartItemsByPrivileges();
     })
   }
@@ -196,6 +199,7 @@ export class CartComponent implements OnInit {
     this.isFireCrackerShown= true;
     setTimeout(()=>{
       this.isFireCrackerShown = false;
+      this.appRef.tick();
     }, this.commonService.fireCrackersTimeout);
   }
 

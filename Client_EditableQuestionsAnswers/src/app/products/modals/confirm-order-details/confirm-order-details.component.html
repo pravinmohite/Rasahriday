@@ -1,4 +1,9 @@
 <div class="online-payment-container" *ngIf="isPaymentGatewaySupported">
+    <div class="close-btn-onlinepayment">
+        <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="modalRef?.hide()">
+            <span aria-hidden="true" class="visually-hidden">&times;</span>
+        </button>
+    </div>
     <div id="stepper1" class="bs-stepper">
         <div class="bs-stepper-header">
             <div class="step" data-target="#test-l-1">
@@ -21,7 +26,7 @@
                     <div class="confirm-order-modal">
                         <div class="modal-header">
                             <h4 class="modal-title pull-left">Confirm order details</h4>
-                            <button type="button" class="btn-close close pull-right" aria-label="Close"
+                            <button *ngIf="!isPaymentGatewaySupported" type="button" class="btn-close close pull-right" aria-label="Close"
                                 (click)="modalRef?.hide()">
                                 <span aria-hidden="true" class="visually-hidden">&times;</span>
                             </button>
@@ -103,7 +108,6 @@
                     <button (click)="next()" class="btn btn-primary">Next</button>
                 </div>
                 <div id="test-l-2" class="content payment-container">
-                    onlinePayment {{onlinePayment}}
                     <div class="row cash-on-delivery-container payment-options" [ngClass]="{'active': !onlinePayment}">
                         <div class="col-md-1">
                             <input type="radio" [value]="false" [(ngModel)]="onlinePayment" name="payment-method" class="checkbox-common" />
@@ -225,3 +229,4 @@
         </div>
     </div>
 </div>
+<button id='click_event_success' class="hidden">hidden</button>

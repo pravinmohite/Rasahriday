@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ApplicationRef, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { CategoryMenuComponent } from 'src/app/partial_views/category-menu/category-menu.component';
 import { CommonService } from 'src/app/services/common-service/common.service';
 import { LoaderService } from 'src/app/services/loader-service/loader.service';
@@ -41,7 +41,8 @@ export class ProductListComponent implements OnInit {
     private cartService: CartService,
     private orderService: OrderService,
     private modalService: BsModalService,
-    private notifierService: NotifierService
+    private notifierService: NotifierService,
+    private appRef: ApplicationRef
     ) { 
       this.outOfStockText = this.commonService.outOfStockText;
       this.sellerStocksEmptyText = this.commonService.sellerStocksEmptyText;
@@ -151,7 +152,6 @@ export class ProductListComponent implements OnInit {
       this.loaderService.display(true);
       this.cartService.addToCartList(data).subscribe(response=>{
         this.loaderService.display(false);
-        console.log('product added to cart successfully');
         this.cartService.cartItemChange.next();
       })
     }
@@ -199,6 +199,7 @@ export class ProductListComponent implements OnInit {
       this.loaderService.display(false);
       this.notifierService.notify('success', 'Order placed successfully!');
       this.showFireCrackers();
+      this.appRef.tick();
     })
   }
 
@@ -212,10 +213,11 @@ export class ProductListComponent implements OnInit {
     product.quantity += 1;
   }
 
-  showFireCrackers() {
-    this.isFireCrackerShown= true;
+  showFireCrackers = () => {
+    this.isFireCrackerShown = true;
     setTimeout(()=>{
       this.isFireCrackerShown = false;
+      this.appRef.tick();
     },this.commonService.fireCrackersTimeout);
   }
 }

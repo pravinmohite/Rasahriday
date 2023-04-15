@@ -1,8 +1,9 @@
-import { AfterViewInit, Component, EventEmitter, Input, OnInit } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, EventEmitter, Input, NgZone, OnInit } from '@angular/core';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 import { faEdit, faCheckSquare } from '@fortawesome/free-solid-svg-icons';
 import { CommonService } from 'src/app/services/common-service/common.service';
 import Stepper from 'bs-stepper';
+import { NotifierService } from 'angular-notifier';
 
 @Component({
   selector: 'app-confirm-order-details',
@@ -29,14 +30,14 @@ export class ConfirmOrderDetailsComponent implements OnInit {
   onlinePayment = false;
   constructor(
     public modalRef: BsModalRef,
-    private commonService: CommonService
+    private commonService: CommonService,
+    private notifierService: NotifierService
     ) {
       this.isPaymentGatewaySupported = this.commonService.isPaymentGatewaySupported;
       this.razorPayApiKey = this.commonService.razorPayApiKey;
   }
 
   ngOnInit(): void {
-   // this.initializeStepper();
     this.setCurrentCurrency();
     this.setUserDetailsForMultipleItems();
   }
@@ -54,7 +55,6 @@ export class ConfirmOrderDetailsComponent implements OnInit {
   }
 
   initializePaymentOptions() {
-    const self = this;
     this.product.price*=100 /*--to convert to rupees--*/
     this.options = {
       "key": this.razorPayApiKey, // Enter the Key ID generated from the Dashboard
@@ -64,9 +64,9 @@ export class ConfirmOrderDetailsComponent implements OnInit {
       "description": "Test Transaction",
       "image": "https://example.com/your_logo",
       "order_id": "", //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
-      "handler": function (response){
-          self.product.paidOnline = true;
-          self.save();
+      "handler": (response) =>  {
+          this.product.paidOnline = true;
+          this.save();
       },
       "prefill": {
           "name": "Gaurav Kumar", //your customer's name
@@ -108,14 +108,14 @@ export class ConfirmOrderDetailsComponent implements OnInit {
     this.rzPay = new this.commonService.nativeWindow.Razorpay(this.options);
     this.rzPay.open();
     this.rzPay.on('payment.failed', function (response){
-      alert(response.error.code);
-      alert(response.error.description);
-      alert(response.error.source);
-      alert(response.error.step);
-      alert(response.error.reason);
-      alert(response.error.metadata.order_id);
-      alert(response.error.metadata.payment_id);
-});
+      // alert(response.error.code +'-'+ response.error.description);
+      // alert(response.error.description);
+      // alert(response.error.source);
+      // alert(response.error.step);
+      // alert(response.error.reason);
+      // alert(response.error.metadata.order_id);
+      // alert(response.error.metadata.payment_id);
+    });
   }
 
   setCurrentCurrency() {
@@ -156,7 +156,7 @@ export class ConfirmOrderDetailsComponent implements OnInit {
   }
 
   save() {
-    this.modalRef.hide();
     this.event.emit(this.product);
+    this.modalRef.hide();
   }
 }

@@ -28,7 +28,7 @@ export class CommonService {
   productAllUrl = "/api/productAll";
   landingPageDetailsUrl = "/api/landingPageDetails";
   productPerCategoryUrl = "/api/productPerCategory";
-  isProd: boolean = true;
+  isProd: boolean = false;
  // prodUrl: String = "https://46.101.150.128";
   prodUrl: String = "https://rasahriday.com"
   devDomain: any = this.isProd ? this.prodUrl : "http://localhost:3000";
