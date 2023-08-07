@@ -311,14 +311,19 @@
     padding: 10px 5px 10px 5px;
 }
 
-// .html {
-//     display: none;
-// }
-.your-dynamic-class {
-    width: 125px;
-    padding: 25px;
-    // background-color: coral;
-    color: yellowgreen;
-    font-size: 16px;
+.html {
+    display: none;
+}
 
+::ng-deep {
+    .your-dynamic-class1 {
+        .your-dynamic-class1 {
+            resize: both; /* Allows resizing */
+            overflow: auto; /* Adds scrollbars if image exceeds container */
+            max-width: 100%; /* Ensures image doesn't overflow its container */
+            max-height: 100%; /* Ensures image doesn't overflow its container */
+            display: inline-block; /* Ensures proper sizing for inline images */
+        }
+        
+    }
 }

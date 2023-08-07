@@ -122,19 +122,45 @@ export class BlogsByCategoryComponent implements OnInit {
 
   checkForImage() {
     console.log('Checking for images');
-    
-    const editor = document.getElementById('editor1'); // Get the editor element by its ID
+
+    const editor = document.getElementById('editor1');
     console.log('Editor element:', editor);
 
-    const images = editor.getElementsByTagName('img'); // Get all <img> elements inside the editor
+    const images = editor.getElementsByTagName('img');
     console.log('Number of images:', images.length);
 
-    // Convert HTMLCollectionOf to an array
     const imageArray = Array.from(images) as HTMLImageElement[];
-  
+
     for (const image of imageArray) {
-      image.classList.add('your-dynamic-class'); // Replace 'your-dynamic-class' with your actual class name
+      image.classList.add('your-dynamic-class1');
+      this.makeResizable(image); // Call the method to make images resizable
     }
+  }
+
+  makeResizable(image: HTMLImageElement) {
+    // Add resize functionality to the image
+    image.addEventListener('mousedown', (e) => {
+      e.preventDefault();
+      const initialWidth = image.clientWidth;
+      const initialHeight = image.clientHeight;
+      const startX = e.clientX;
+      const startY = e.clientY;
+
+      const resize = (e) => {
+        const width = initialWidth + e.clientX - startX;
+        const height = initialHeight + e.clientY - startY;
+        image.style.width = `${width}px`;
+        image.style.height = `${height}px`;
+      };
+
+      const stopResize = () => {
+        window.removeEventListener('mousemove', resize);
+        window.removeEventListener('mouseup', stopResize);
+      };
+
+      window.addEventListener('mousemove', resize);
+      window.addEventListener('mouseup', stopResize);
+    });
   }
 
 }
