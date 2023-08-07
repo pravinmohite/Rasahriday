@@ -122,8 +122,10 @@ export class BlogsByCategoryComponent implements OnInit {
 
   checkForImage() {
     console.log('Checking for images');
+    
     const editor = document.getElementById('editor1'); // Get the editor element by its ID
     console.log('Editor element:', editor);
+
     const images = editor.getElementsByTagName('img'); // Get all <img> elements inside the editor
     console.log('Number of images:', images.length);
 
