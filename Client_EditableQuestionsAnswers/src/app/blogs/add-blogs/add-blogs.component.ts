@@ -1,6 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { NotifierService } from 'angular-notifier';
 import { BsModalRef } from 'ngx-bootstrap/modal';
+import { CommonService } from 'src/app/services/common-service/common.service';
+import { LoaderService } from 'src/app/services/loader-service/loader.service';
+import { ProductService } from 'src/app/services/product-service/product.service';
 @Component({
   selector: 'app-add-blogs',
   templateUrl: './add-blogs.component.html',
@@ -9,14 +13,25 @@ import { BsModalRef } from 'ngx-bootstrap/modal';
 
 export class AddBlogsComponent implements OnInit {
 
-  constructor(public modalRef: BsModalRef, private http: HttpClient) { }
+  blog: any = {
+    blogName: ''
+  }
+  constructor(public modalRef: BsModalRef, 
+    private http: HttpClient, 
+    private productService: ProductService,
+    private loaderService: LoaderService,
+    private notifierService: NotifierService,
+    private commonService: CommonService,
+
+
+  ) { }
 
   urls = [];
   ngOnInit(): void {
   }
   onselectFile(e: any) {
     if (e.target.files) {
-      for (let i = 0; i <  e.target.files.length; i++) {
+      for (let i = 0; i < e.target.files.length; i++) {
         var reader = new FileReader();
         reader.readAsDataURL(e.target.files[i]);
         reader.onload = (events: any) => {
@@ -25,33 +40,35 @@ export class AddBlogsComponent implements OnInit {
       }
     }
   }
-  save() {
-    const description = 'upload'; // Replace this with the actual description value
-    const imageUrls = this.urls;
 
-    // Replace 'YOUR_API_ENDPOINT' with the actual endpoint URL on your server to handle the save operation
-    const saveEndpoint = 'https://jsonplaceholder.typicode.com/todos/1';
 
-    const data = {
-      description: description,
-      imageUrls: imageUrls
-    };
 
-    this.http.post(saveEndpoint, data).subscribe(
-      (response) => {
-        // Handle the response from the server if needed
-        console.log('Save successful:', response);
+  // save(formVal): void {
+  //   // if (this.editMode && this.editMode.status) {
+  //   //   this.update(formVal);
+  //   // }
+  //   // else {
+  //   //   this.save(formVal);
+  //   // }
+  // }
 
-        // Clear the form after successful save if desired
-        this.urls = [];
-        // Clear the description textarea (you may need to use two-way binding [(ngModel)])
-        // this.description = '';
-      },
-      (error) => {
-        // Handle any errors that occurred during the save operation
-        console.error('Error saving data:', error);
-      }
-    );
+  save():void {
+    this.loaderService.display(true);
+    this.productService.addBlogs(this.blog).subscribe(data => {
+      this.loaderService.display(false);
+      this.notifierService.notify('success', 'Blog added successfully!');
+    })
   }
 
+  update(data) {
+    this.loaderService.display(true);
+    this.productService.addBlogs(data).subscribe(data => {
+      this.loaderService.display(false);
+      this.handleCategoryChangeEvent(data);
+    })
+  }
+  handleCategoryChangeEvent(data) {
+    this.modalRef?.hide();
+    // this.commonService.refreshCategoryEvent(data);
+  }
 }

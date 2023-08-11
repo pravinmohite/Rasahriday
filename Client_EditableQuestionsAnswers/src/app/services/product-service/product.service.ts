@@ -24,6 +24,7 @@ export class ProductService {
   $urlSearchVal = new Subject();
   productDataSearch = new Subject();
   productAllUrl: any;
+  finalBlogsUrl: any;
   
   constructor(
     private http: HttpClient,
@@ -37,6 +38,7 @@ export class ProductService {
       this.finalSignUpUrl = this.commonService.finalSignUpUrl;
       this.finalProductUrl = this.commonService.finalProductUrl;
       this.finalCategoryUrl = this.commonService.finalCategoryUrl;
+      this.finalBlogsUrl = this.commonService.finalBlogsUrl;
   }
 
   /*---------------for login details-------------*/
@@ -112,6 +114,25 @@ export class ProductService {
     return this.http.patch(this.finalCategoryUrl + '/' + data._id, data);
   }
   /*---end categories---*/
+
+   /*----blogs---*/
+
+   getBlogsList() {
+    return this.http.get(this.finalBlogsUrl);
+  }
+
+  addBlogs(data) {
+    return this.http.post(this.finalBlogsUrl, data);
+  }
+
+  deleteBlogs(id) {
+    return this.http.delete(this.finalBlogsUrl + "/" + id);
+  }
+
+  updateBlogs(data) {
+    return this.http.patch(this.finalBlogsUrl + '/' + data._id, data);
+  }
+  /*---end blogs---*/
 
   getProductImageToBeShown(productImage) {
     let url = this.devDomain;

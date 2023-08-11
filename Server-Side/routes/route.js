@@ -9,6 +9,7 @@ const QuestionType = require('../models/questionType');
 const QuestionAnswer = require('../models/questionAnswer');
 const Product = require('../models/product');
 const Category = require('../models/category');
+const Blogs = require('../models/blogs');//
 const Login = require('../models/login');
 const Cart = require('../models/cart');
 const Order = require('../models/order');
@@ -365,6 +366,61 @@ router.patch('/category/:id', (req, res, next) => {
 });
 
 /* end crud for Category */
+
+
+
+/*----crud for blogs data-----------------*/
+
+router.get('/blogs', (req, res, next) => {
+    //res.send('retrieving the question answer list');
+    Blogs.find((err, blogsList) => {
+        res.json(blogsList);
+    })
+})
+
+router.post('/blogs', (req, res, next) => {
+    //logic to add
+    let newblogs = new Blogs({
+        blogName: req.body.blogName,
+    })
+    newblogs.save((err, blogs) => {
+        if (err) {
+            res.json({ msg: 'failed to add blogs' });
+        }
+        else {
+            res.json({ msg: 'blogs added successfully' });
+        }
+    })
+})
+
+router.delete('/blogs/:id', (req, res, next) => {
+    Blogs.remove({ _id: req.params.id }, (err, result) => {
+        if (err) {
+            res.json(err);
+        }
+        else {
+            res.json(result);
+        }
+    })
+})
+
+router.patch('/blogs/:id', (req, res, next) => {
+    Blogs.updateOne({ _id: req.params.id }, {
+        $set: {
+            blogsName: req.body.blogsName,
+        }
+    }, (err, result) => {
+        if (err) {
+            res.json(err);
+        }
+        else {
+            res.json(result);
+        }
+    });
+});
+
+/* end crud for blogs */
+//
 
 /*---crud for cart data ---*/
 

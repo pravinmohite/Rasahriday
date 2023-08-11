@@ -17,6 +17,7 @@ export class CommonService {
   signUpUrl = "/api/signUp";
   productUrl: string = "/api/product";
   categoryUrl: string = "/api/category";
+  blogsUrl: string = "/api/blogs"; //blogs URL
   cartUrl: string = "/api/cart";
   cartAllUrl = '/api/cartAll';
   orderUrl = "/api/order";
@@ -26,7 +27,7 @@ export class CommonService {
   productAllUrl = "/api/productAll";
   landingPageDetailsUrl = "/api/landingPageDetails";
   productPerCategoryUrl = "/api/productPerCategory";
-  isProd: boolean = true;
+  isProd: boolean = false;
  // prodUrl: String = "https://46.101.150.128";
   prodUrl: String = "https://rasahriday.com"
   devDomain: any = this.isProd ? this.prodUrl : "http://localhost:3000";
@@ -43,6 +44,7 @@ export class CommonService {
   finalCartUrl = this.devDomain + this.cartUrl;
   finalCartAllUrl = this.devDomain + this.cartAllUrl;
   finalMultipleCartItemsUrl = this.devDomain + this.multipleCartItemsUrl;
+  finalBlogsUrl = this.devDomain + this.blogsUrl;
   userDetails: any;
   confirmationText = "Are you sure you want to delete";
   refreshCategory = new Subject();
