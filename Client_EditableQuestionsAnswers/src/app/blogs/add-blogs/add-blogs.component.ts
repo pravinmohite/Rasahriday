@@ -14,7 +14,8 @@ import { ProductService } from 'src/app/services/product-service/product.service
 export class AddBlogsComponent implements OnInit {
 
   blog: any = {
-    blogName: ''
+    blogName: '',
+    blogDesc: ''
   }
   constructor(public modalRef: BsModalRef, 
     private http: HttpClient, 

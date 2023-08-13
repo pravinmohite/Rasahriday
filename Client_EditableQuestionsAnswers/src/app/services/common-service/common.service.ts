@@ -18,6 +18,7 @@ export class CommonService {
   productUrl: string = "/api/product";
   categoryUrl: string = "/api/category";
   blogsUrl: string = "/api/blogs"; //blogs URL
+  galleryUrl: string = "/api/gallery"; //blogs URL
   cartUrl: string = "/api/cart";
   cartAllUrl = '/api/cartAll';
   orderUrl = "/api/order";
@@ -45,6 +46,7 @@ export class CommonService {
   finalCartAllUrl = this.devDomain + this.cartAllUrl;
   finalMultipleCartItemsUrl = this.devDomain + this.multipleCartItemsUrl;
   finalBlogsUrl = this.devDomain + this.blogsUrl;
+  finalGalleryUrl = this.devDomain + this.galleryUrl;
   userDetails: any;
   confirmationText = "Are you sure you want to delete";
   refreshCategory = new Subject();
@@ -62,6 +64,7 @@ export class CommonService {
   isMobile: boolean;
   mobileWidth = 768;
   fireCrackersTimeout = 4000;
+ 
 
   constructor(
     private route: ActivatedRoute,

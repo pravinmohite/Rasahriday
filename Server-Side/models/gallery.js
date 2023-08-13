@@ -1,7 +1,7 @@
 const mongoose=require('mongoose');
 
-const BlogsSchema=mongoose.Schema({
-    blogName:{
+const GallerySchema=mongoose.Schema({
+    galleryName:{
         type:String,
         required:true
     },
@@ -9,10 +9,10 @@ const BlogsSchema=mongoose.Schema({
         type:Number,
         required:false
     },
-    blogDesc:{
+    galleryDesc:{
         type:String,
         required:true
     }
 })
 
-const QuestionAnswer=module.exports=mongoose.model('Blogs',BlogsSchema)
+const QuestionAnswer=module.exports=mongoose.model('Gallery',GallerySchema)

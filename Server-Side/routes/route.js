@@ -10,6 +10,7 @@ const QuestionAnswer = require('../models/questionAnswer');
 const Product = require('../models/product');
 const Category = require('../models/category');
 const Blogs = require('../models/blogs');//
+const Gallery = require('../models/gallery');
 const Login = require('../models/login');
 const Cart = require('../models/cart');
 const Order = require('../models/order');
@@ -382,6 +383,7 @@ router.post('/blogs', (req, res, next) => {
     //logic to add
     let newblogs = new Blogs({
         blogName: req.body.blogName,
+        blogDesc: req.body.blogDesc
     })
     newblogs.save((err, blogs) => {
         if (err) {
@@ -421,7 +423,59 @@ router.patch('/blogs/:id', (req, res, next) => {
 
 /* end crud for blogs */
 //
+/*----crud for gallery data-----------------*/
 
+router.get('/gallery', (req, res, next) => {
+    //res.send('retrieving the question answer list');
+    Gallery.find((err, galleryList) => {
+        res.json(galleryList);
+    })
+})
+
+router.post('/gallery', (req, res, next) => {
+    //logic to add
+    let newgallery = new Gallery({
+        galleryName: req.body.galleryName,
+        galleryDescription: req.body.galleryDescription
+    })
+    newgallery.save((err, gallery) => {
+        if (err) {
+            res.json({ msg: 'failed to add gallery' });
+        }
+        else {
+            res.json({ msg: 'gallery added successfully' });
+        }
+    })
+})
+
+router.delete('/gallery/:id', (req, res, next) => {
+    Gallery.remove({ _id: req.params.id }, (err, result) => {
+        if (err) {
+            res.json(err);
+        }
+        else {
+            res.json(result);
+        }
+    })
+})
+
+router.patch('/gallery/:id', (req, res, next) => {
+    Gallery.updateOne({ _id: req.params.id }, {
+        $set: {
+            galleryName: req.body.galleryName,
+        }
+    }, (err, result) => {
+        if (err) {
+            res.json(err);
+        }
+        else {
+            res.json(result);
+        }
+    });
+});
+
+/* end crud for gallery */
+//
 /*---crud for cart data ---*/
 
 /*--cart for user--*/

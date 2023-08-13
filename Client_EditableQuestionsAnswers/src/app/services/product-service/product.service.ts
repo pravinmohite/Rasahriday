@@ -25,21 +25,24 @@ export class ProductService {
   productDataSearch = new Subject();
   productAllUrl: any;
   finalBlogsUrl: any;
-  
+  finalGalleryUrl: any;
   constructor(
     private http: HttpClient,
     private loaderService: LoaderService,
     private commonService: CommonService,
     private route: ActivatedRoute,
     private router: Router) {
-      this.devDomain = this.commonService.devDomain;
-      this.productAllUrl = this.commonService.finalProductAllUrl;
-      this.finalloginDetailsUrl = this.commonService.finalloginDetailsUrl;
-      this.finalSignUpUrl = this.commonService.finalSignUpUrl;
-      this.finalProductUrl = this.commonService.finalProductUrl;
-      this.finalCategoryUrl = this.commonService.finalCategoryUrl;
-      this.finalBlogsUrl = this.commonService.finalBlogsUrl;
+    this.devDomain = this.commonService.devDomain;
+    this.productAllUrl = this.commonService.finalProductAllUrl;
+    this.finalloginDetailsUrl = this.commonService.finalloginDetailsUrl;
+    this.finalSignUpUrl = this.commonService.finalSignUpUrl;
+    this.finalProductUrl = this.commonService.finalProductUrl;
+    this.finalCategoryUrl = this.commonService.finalCategoryUrl;
+    this.finalBlogsUrl = this.commonService.finalBlogsUrl;
+    this.finalGalleryUrl = this.commonService.finalGalleryUrl;
+
   }
+
 
   /*---------------for login details-------------*/
   getloginDetails() {
@@ -78,7 +81,7 @@ export class ProductService {
   /*-------------for question answers----------*/
 
   getProductListByCategoryId(categoryId) {
-    return this.http.get(this.finalProductUrl+'?categoryId='+categoryId);
+    return this.http.get(this.finalProductUrl + '?categoryId=' + categoryId);
   }
 
   getAllProductList() {
@@ -115,9 +118,9 @@ export class ProductService {
   }
   /*---end categories---*/
 
-   /*----blogs---*/
+  /*----blogs---*/
 
-   getBlogsList() {
+  getBlogsList() {
     return this.http.get(this.finalBlogsUrl);
   }
 
@@ -134,26 +137,45 @@ export class ProductService {
   }
   /*---end blogs---*/
 
+  /*----gallery---*/
+
+  getGalleryList() {
+    return this.http.get(this.finalGalleryUrl);
+  }
+
+  addGallery(data) {
+    return this.http.post(this.finalGalleryUrl, data);
+  }
+
+  deleteGallery(id) {
+    return this.http.delete(this.finalGalleryUrl + "/" + id);
+  }
+
+  updateGallery(data) {
+    return this.http.patch(this.finalGalleryUrl + '/' + data._id, data);
+  }
+  /*---end Gallery---*/
+
   getProductImageToBeShown(productImage) {
     let url = this.devDomain;
-    if(productImage) {
-     return url + '/' + productImage.split(',')[0];
-   }
-   return null;
+    if (productImage) {
+      return url + '/' + productImage.split(',')[0];
+    }
+    return null;
   }
 
   getAllProductImagesToBeShown(productImage) {
     let url = this.devDomain;
-    if(productImage) {
-      let allProductImages=productImage.split(',');
-      let productArr=[];
-      for(let image of allProductImages) {
-         let productUrl=url + '/' + image;
-         productArr.push(productUrl)
+    if (productImage) {
+      let allProductImages = productImage.split(',');
+      let productArr = [];
+      for (let image of allProductImages) {
+        let productUrl = url + '/' + image;
+        productArr.push(productUrl)
       }
       return productArr;
-   }
-   return null;
+    }
+    return null;
   }
 
   // filterDataByQuestionType(type) {
