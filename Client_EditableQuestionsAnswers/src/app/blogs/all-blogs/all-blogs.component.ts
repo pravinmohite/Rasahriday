@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { CommonService } from 'src/app/services/common-service/common.service';
 import { AddBlogsComponent } from '../add-blogs/add-blogs.component';
+import { ProductService } from 'src/app/services/product-service/product.service';
+import { LoaderService } from 'src/app/services/loader-service/loader.service';
 
 @Component({
   selector: 'app-all-blogs',
@@ -10,12 +12,24 @@ import { AddBlogsComponent } from '../add-blogs/add-blogs.component';
 })
 export class AllBlogsComponent implements OnInit {
   modalRef: BsModalRef;
+
+  categories: any;
+  categorySelectedObj = {
+    isAllCategorySelected: true
+  };
+  isCategoryOpen = false;
+  isMobile = false;
+  sideBarCloseStatus = 'close'; 
+
   constructor(
     private commonService: CommonService,
     private modalService: BsModalService,
+    private loaderService: LoaderService,
+    private productService: ProductService,
     ) { }
 
   ngOnInit(): void {
+    this.getCategories()
   }
   openAddBlogsModal(): void{
     // const initialState: any = {
@@ -30,4 +44,15 @@ export class AllBlogsComponent implements OnInit {
     //   this.placeOrder(data);
     // });
   }
+
+  getCategories() {
+    // this.loaderService.display(true);
+    this.productService.getBlogsList().subscribe(data=>{
+       this.categories = data;
+       console.log(data)
+  
+    })
+  }
+ 
+
 }
