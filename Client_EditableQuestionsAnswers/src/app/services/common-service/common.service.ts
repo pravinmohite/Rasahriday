@@ -122,7 +122,9 @@ export class CommonService {
   refreshCategoryEvent(data) {
     this.refreshCategory.next(data);
   }
-
+  refreshBlogsEvent(data) {
+    this.refreshCategory.next(data);
+  }
   refreshProductEvent(data) {
     this.refreshProduct.next(data);
   }
