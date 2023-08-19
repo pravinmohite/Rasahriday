@@ -409,7 +409,8 @@ router.delete('/blogs/:id', (req, res, next) => {
 router.patch('/blogs/:id', (req, res, next) => {
     Blogs.updateOne({ _id: req.params.id }, {
         $set: {
-            blogsName: req.body.blogsName,
+            blogName: req.body.blogName,
+            blogDesc: req.body.blogDesc
         }
     }, (err, result) => {
         if (err) {
