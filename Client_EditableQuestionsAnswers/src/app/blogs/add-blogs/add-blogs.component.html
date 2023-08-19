@@ -14,6 +14,8 @@
                     <p>Title</p>
                 </div>
                 <div class="col-md-9 col-8">
+                    <input type="hidden" [(ngModel)]="blog._id" name="blogId">
+
                     <input type="text" [(ngModel)]="blog.blogName" class="form-control form-input">
                 </div>
             </div>
@@ -52,7 +54,7 @@
         <div class="form-group ">
             <div class="row choose-btn">
                 <div class="offset-md-1 col-md-5 col-6">
-                    <button type="button" class="btn btn-light btn-add photo-btn" (click) = "save()">Save</button>
+                    <button type="button" class="btn btn-light btn-add photo-btn" (click) = "submit()">Save</button>
                 </div>
                 <div class="col-md-4 col-6">
                     <button type="button" class="btn btn-light btn-cancel photo-btn"

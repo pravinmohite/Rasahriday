@@ -1,10 +1,11 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { CommonService } from 'src/app/services/common-service/common.service';
 import { AddBlogsComponent } from '../add-blogs/add-blogs.component';
 import { ProductService } from 'src/app/services/product-service/product.service';
 import { LoaderService } from 'src/app/services/loader-service/loader.service';
-
+import { BlogService } from 'src/app/services/blog/blog.service';
+import { BlogsByCategoryComponent } from '../blogs-by-category/blogs-by-category.component'; 
 @Component({
   selector: 'app-all-blogs',
   templateUrl: './all-blogs.component.html',
@@ -12,7 +13,8 @@ import { LoaderService } from 'src/app/services/loader-service/loader.service';
 })
 export class AllBlogsComponent implements OnInit {
   @Input() cardData: any; // Replace with your actual card data type
-  modalRef: BsModalRef;
+  modalRef: BsModalRef;  @Output() modalClosed = new EventEmitter<void>();
+
   editMode = {
     status: false,
     editedItem: {}
@@ -28,38 +30,35 @@ export class AllBlogsComponent implements OnInit {
   sideBarCloseStatus = 'close';
   deleteIconTag = 'path';
   isAllCategoryActive = true;
-  activeIndex=-1;
+  activeIndex = -1;
   constructor(
     private commonService: CommonService,
     private modalService: BsModalService,
     private loaderService: LoaderService,
-    private productService: ProductService,
+    private blogService: BlogService,
   ) { }
 
   ngOnInit(): void {
     this.getBlogs()
 
   }
-  openAddBlogsModal(): void {
-    // const initialState: any = {
-    //   initialState: {
-    //     product
-    //   },
-    //   class: this.orderConfirmationClass
-    // };
-    const config = this.commonService.getModalConfig();
-    this.modalRef = this.modalService.show(AddBlogsComponent);
-    // this.modalRef.content.event.subscribe(data=>{
-    //   this.placeOrder(data);
-    // });
-  }
+  
+
+  // getBlogs() {
+  //   // this.loaderService.display(true);
+  //   this.blogService.getBlogsList().subscribe(data => {
+  //     this.categories = data;
+  //     console.log(data)
+
+  //   })
+  // }
 
   getBlogs() {
-    // this.loaderService.display(true);
-    this.productService.getBlogsList().subscribe(data => {
+    this.loaderService.display(true);
+    this.blogService.getBlogsList().subscribe(data => {
       this.categories = data;
-      console.log(data)
-
+      this.refreshProductAndSetCategoriesGlobally(data);
+      this.loaderService.display(false);
     })
   }
 
@@ -68,54 +67,31 @@ export class AllBlogsComponent implements OnInit {
     this.commonService.setCategoriesGlobally(data);
   }
 
-  deleteProduct(id: any) {
+  deleteProduct(id) {
     let result = this.commonService.confirmAction();
     if (result) {
       this.loaderService.display(true);
-      this.getBlogs()
-      alert("Your Blog is deleted successfully")
-      this.productService.deleteBlogs(id).subscribe(data => {
-
+      alert("success, blog deleted successfully!")
+      this.blogService.deleteBlogs(id).subscribe(data => {
+        this.getBlogs();
         this.loaderService.display(false);
       })
+
     }
   }
-
-  editBlog(item) {
-    let editedItem = JSON.parse(JSON.stringify(item));
+  editProduct(id) {
+    const editedItem = this.categories.find(category => category._id === id);
     this.editMode = {
       status: true,
       editedItem: editedItem
     };
+    this.openAddBlogsModal();
   }
-  onCategorySelected(event, data, i) {
-    const currentTagName = event.target.tagName;
-    if (currentTagName !== this.editIconTag && currentTagName !== this.deleteIconTag) {
-      this.setActiveIndex(i);
-      this.isAllCategoryActive = false;
-      this.commonService.refreshProduct.next(data);
-      this.commonService.sideBarStatus.next(this.sideBarCloseStatus);
-    }
+  openAddBlogsModal(): void {
+    const initialState = {
+      editMode: this.editMode  // Pass the editMode object to AddBlogsComponent
+    };
+    const config = this.commonService.getModalConfig();
+    this.modalRef = this.modalService.show(AddBlogsComponent, { initialState });
   }
-
-  allCategorySelected() {
-    this.setActiveIndex(-1);
-    this.isAllCategoryActive = true;
-    this.commonService.refreshProduct.next(this.categorySelectedObj);
-    this.commonService.sideBarStatus.next(this.sideBarCloseStatus);
-  }
-
-  setActiveIndex(index) {
-    this.activeIndex = index;
-  }
-
-  toggleCustomAccordion() {
-    if (this.isCategoryOpen) {
-      this.isCategoryOpen = false;
-    }
-    else {
-      this.isCategoryOpen = true;
-    }
-  }
-
 }
