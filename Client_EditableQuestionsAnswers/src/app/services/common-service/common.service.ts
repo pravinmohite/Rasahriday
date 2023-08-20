@@ -50,10 +50,12 @@ export class CommonService {
   userDetails: any;
   confirmationText = "Are you sure you want to delete";
   refreshCategory = new Subject();
+  refreshBlogs = new Subject();
   refreshProduct = new Subject();
   userLoggedIn = new Subject();
   sideBarStatus = new Subject();
   categoryMenus;
+  blogsMenus;
   currentCurrency = '₹';
   modalClass = 'modal-dialog-container';
   orderConfirmationClass='order-confirmation';
@@ -123,7 +125,7 @@ export class CommonService {
     this.refreshCategory.next(data);
   }
   refreshBlogsEvent(data) {
-    this.refreshCategory.next(data);
+    this.refreshBlogs.next(data);
   }
   refreshProductEvent(data) {
     this.refreshProduct.next(data);
@@ -158,7 +160,12 @@ export class CommonService {
   setCategoriesGlobally(data) {
     this.categoryMenus = data;
   }
-
+  setBlogsGlobally(data) {
+    this.blogsMenus = data;
+  }
+  getBlogs() {
+    return this.blogsMenus;
+  }
   getCategories() {
     return this.categoryMenus;
   }

@@ -63,8 +63,8 @@ export class AllBlogsComponent implements OnInit {
   }
 
   refreshProductAndSetCategoriesGlobally(data) {
-    this.commonService.refreshProduct.next(this.categorySelectedObj)
-    this.commonService.setCategoriesGlobally(data);
+    this.commonService.refreshBlogs.next(this.categorySelectedObj)
+    this.commonService.setBlogsGlobally(data);
   }
 
   deleteProduct(id) {
@@ -74,7 +74,8 @@ export class AllBlogsComponent implements OnInit {
       alert("success, blog deleted successfully!")
       this.blogService.deleteBlogs(id).subscribe(data => {
         this.getBlogs();
-        this.loaderService.display(false);
+        this.loaderService.display(false);     
+
       })
 
     }

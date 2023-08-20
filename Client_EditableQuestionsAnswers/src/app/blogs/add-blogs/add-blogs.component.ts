@@ -18,7 +18,11 @@ export class AddBlogsComponent implements OnInit {
   @Input() editMode: any;
   @Output() editingComplete = new EventEmitter<void>();
   @ViewChild('addBlogTemplate') templateRef: TemplateRef<any>;
-  
+  categoryForm: FormGroup;
+  categorySelectedObj = {
+
+    isAllCategorySelected: true
+  }; 
   blog: any = {
     blogName: '',
     blogDesc: ''
@@ -86,7 +90,7 @@ export class AddBlogsComponent implements OnInit {
   }
 
   submit(): void {
-    this.loaderService.display(true);
+
   
     if (this.editMode && this.editMode.status) {
       this.update(this.blog); // Update existing blog
@@ -97,24 +101,27 @@ export class AddBlogsComponent implements OnInit {
   
   update(data): void {
     this.loaderService.display(true);
-    this.blogService.updateBlogs(data).subscribe(updatedData => {
+    this.blogService.updateBlogs(data).subscribe(data => {
       this.loaderService.display(false);
       this.notifierService.notify('success', 'Blog updated successfully!');
-      this.handleCategoryChangeEvent(updatedData);
+      this.handleCategoryChangeEvent(data);
+    });
+  }
+  add(data): void {
+    this.loaderService.display(true);
+    this.blogService.addBlogs(data).subscribe(data => {
+      this.loaderService.display(false);
+      this.notifierService.notify('success', 'Blog added successfully!');
+      this.handleCategoryChangeEvent(data);
+
     });
   }
   
-  add(data): void {
-    this.blogService.addBlogs(data).subscribe(newData => {
-      this.loaderService.display(false);
-      this.notifierService.notify('success', 'Blog added successfully!');
-      this.handleCategoryChangeEvent(newData);
-    });
-  }
   
   handleCategoryChangeEvent(data) {
     this.modalRef?.hide();
-    this.commonService.refreshCategoryEvent(data);
+    this.commonService.refreshBlogsEvent(data);
+    console.log(data)
   }
   
 }
