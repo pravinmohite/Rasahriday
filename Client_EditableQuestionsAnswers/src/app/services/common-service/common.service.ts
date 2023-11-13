@@ -26,10 +26,10 @@ export class CommonService {
   productAllUrl = "/api/productAll";
   landingPageDetailsUrl = "/api/landingPageDetails";
   productPerCategoryUrl = "/api/productPerCategory";
-  isProd: boolean = false;
+  isProd: boolean = true;
   /*---with ssl changed due to loadbalancer----can be done using nginx*/
-  //prodUrl:String="https://www.ssl.frontendinterviewquestions.com";
-  prodUrl: String = "http://54.255.150.70:3000";
+  prodUrl:String="https://www.rasahriday.com";
+  //prodUrl: String = "http://46.101.150.128";
   devDomain: any = this.isProd ? this.prodUrl : "http://localhost:3000";
   finalloginDetailsUrl: string = this.devDomain + this.loginDetailsUrl;
   finalSignUpUrl = this.devDomain + this.signUpUrl;
