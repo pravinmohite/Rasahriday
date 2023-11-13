@@ -13,6 +13,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { NotifierModule } from 'angular-notifier';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { FooterComponent } from './partial_views/footer/footer.component';
+import { CategoryMenuModule } from '../app/partial_views/category-menu/category-menu.module';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,7 @@ import { FooterComponent } from './partial_views/footer/footer.component';
     HeaderComponent,
     LoaderComponent,
     SidebarComponent,
-    FooterComponent
+    FooterComponent,
   ],
   imports: [
     BrowserModule,
@@ -29,6 +30,7 @@ import { FooterComponent } from './partial_views/footer/footer.component';
     HttpClientModule,
     FormsModule,
     FontAwesomeModule,
+    CategoryMenuModule,
     BsDropdownModule.forRoot(),
     NotifierModule.withConfig({
       theme: 'material',
@@ -63,7 +65,9 @@ import { FooterComponent } from './partial_views/footer/footer.component';
           gap: 10
         }
       }
-   }),
+  
+   
+    }),
     ModalModule.forRoot()
   ],
   providers: [],

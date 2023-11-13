@@ -39,7 +39,12 @@ export class ProductService {
     private commonService: CommonService,
     private route: ActivatedRoute,
     private router: Router) {
+      this.devDomain = this.commonService.devDomain;
       this.productAllUrl = this.commonService.finalProductAllUrl;
+      this.finalloginDetailsUrl = this.commonService.finalloginDetailsUrl;
+      this.finalSignUpUrl = this.commonService.finalSignUpUrl;
+      this.finalProductUrl = this.commonService.finalProductUrl;
+      this.finalCategoryUrl = this.commonService.finalCategoryUrl;
   }
 
   /*---------------for login details-------------*/

@@ -1,17 +1,21 @@
+<div class="pyro" *ngIf="isFireCrackerShown">
+    <div class="before"></div>
+    <div class="after"></div>
+</div>
 <h2 class="page-heading">Shopping cart</h2>
 <div class="mutiple-selection-actionbtns" *ngIf="showMultiSelectedActionbtns && selectedProducts.selectedItems.length > 0">
     <div class="cart-item-actionbtns">
         <div class="row">
-            <div class="col-2 col-md-2">
-                <button class="btn btn-default btn-light btn-light-default" (click)="selectDeselectAllItems()">{{currentSelectionText}} all</button>
+            <div class="col-6 col-md-2 select-deselect-btncontainer">
+                <button class="btn btn-default btn-light btn-light-default btn-full-width" (click)="selectDeselectAllItems()">{{currentSelectionText}} all</button>
             </div>
-            <div class="product-price col-2 col-md-1">
+            <div class="product-price col-5 col-md-1">
                 <span class="current-currency-symbol">{{currentCurrency}}</span>
                 <span class="price-value">{{selectedProducts.price}}</span>
             </div>
-            <div class="col-8 col-md-8">
+            <div class="col-12 col-md-8 multiselect-btns-container">
                 <button class="btn btn-outline place-order-btn" (click)="confirmOrder(null, true)">Place order</button>
-                <button class="btn btn-outline-removebtn place-order-btn" (click)="deleteSelectedCartItems()">
+                <button class="btn btn-outline-removebtn place-order-btn remove-btn" (click)="deleteSelectedCartItems()">
                     <fa-icon class="hand-cursor delete-icon" [icon]="faTrash"></fa-icon>
                     remove
                 </button>
@@ -62,7 +66,7 @@
                     <div class="input-group-prepend">
                         <button class="input-group-text" [disabled]="cartItem.quantity == 1" (click)="decrementQuantity(cartItem, i)">-</button>
                     </div>
-                    <input type="text" class="qty-input form-control" [(ngModel)]='cartItem.quantity' value="1"
+                    <input type="text" class="col-2 col-md-5 qty-input form-control" [(ngModel)]='cartItem.quantity' value="1"
                         id="input1" placeholder="Qty">
                     <div class="input-group-append">
                         <button class="input-group-text" [disabled]="(cartItem.quantity >= cartItem.stock)" [attr.title]="(cartItem.quantity >= cartItem.stock) ? sellerStocksEmptyText : '' " (click)="incrementQuantity(cartItem, i)">+</button>
@@ -71,7 +75,7 @@
             </div>
             <div class="cart-item-actionbtns">
                 <button class="btn btn-outline place-order-btn" (click)="confirmOrder(cartItem)">Place order</button>
-                <button class="btn btn-outline-removebtn place-order-btn" (click)="deleteCartItem(cartItem)">
+                <button class="btn btn-outline-removebtn place-order-btn remove-btn" (click)="deleteCartItem(cartItem)">
                     <fa-icon class="hand-cursor delete-icon" [icon]="faTrash"></fa-icon>
                     remove
                 </button>

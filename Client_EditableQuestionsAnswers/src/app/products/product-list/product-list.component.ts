@@ -32,6 +32,7 @@ export class ProductListComponent implements OnInit {
   currentCurrency: string;
   modalRef: BsModalRef;
   sellerStocksEmptyText: string;
+  isFireCrackerShown = false;
   
   constructor(
     private loaderService: LoaderService,
@@ -139,15 +140,20 @@ export class ProductListComponent implements OnInit {
   }
 
   addToCart(product) {
-    this.setProductId(product);
-    let data = product;
-    this.commonService.addUserDetails(data);
-    this.loaderService.display(true);
-    this.cartService.addToCartList(data).subscribe(response=>{
-      this.loaderService.display(false);
-      console.log('product added to cart successfully');
-      this.cartService.cartItemChange.next();
-    })
+    if(this.commonService.checkIfVisitorAndNavigate()) {
+       this.commonService.navigateToLoginPage();
+    }
+    else {
+      this.setProductId(product);
+      let data = product;
+      this.commonService.addUserDetails(data);
+      this.loaderService.display(true);
+      this.cartService.addToCartList(data).subscribe(response=>{
+        this.loaderService.display(false);
+        console.log('product added to cart successfully');
+        this.cartService.cartItemChange.next();
+      })
+    }
   }
 
   setProductId(product) {
@@ -167,17 +173,22 @@ export class ProductListComponent implements OnInit {
   }
 
   openOrderConfirmationModal(product): void{
-    this.commonService.addUserDetails(product);
-    const initialState: ModalOptions = {
-      initialState: {
-        product
-      }
-    };
-    const config= this.commonService.getModalConfig(this.orderConfirmationClass);
-    this.modalRef = this.modalService.show(ConfirmOrderDetailsComponent, initialState);
-    this.modalRef.content.event.subscribe(data=>{
-      this.placeOrder(data);
-    });
+    if(this.commonService.checkIfVisitorAndNavigate()) {
+      this.commonService.navigateToLoginPage();
+   }
+   else {
+      this.commonService.addUserDetails(product);
+      const initialState: any = {
+        initialState: {
+          product
+        }
+      };
+      const config= this.commonService.getModalConfig(this.orderConfirmationClass);
+      this.modalRef = this.modalService.show(ConfirmOrderDetailsComponent, initialState);
+      this.modalRef.content.event.subscribe(data=>{
+        this.placeOrder(data);
+      });
+    }
   }
 
   placeOrder(cartItem) {
@@ -185,6 +196,7 @@ export class ProductListComponent implements OnInit {
     this.orderService.addToOrderList(cartItem).subscribe(response=>{
       this.loaderService.display(false);
       this.notifierService.notify('success', 'Order placed successfully!');
+      this.showFireCrackers();
     })
   }
 
@@ -196,5 +208,12 @@ export class ProductListComponent implements OnInit {
 
   incrementQuantity(product) {
     product.quantity += 1;
+  }
+
+  showFireCrackers() {
+    this.isFireCrackerShown= true;
+    setTimeout(()=>{
+      this.isFireCrackerShown = false;
+    },this.commonService.fireCrackersTimeout);
   }
 }

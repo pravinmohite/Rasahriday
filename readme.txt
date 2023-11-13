@@ -28,3 +28,72 @@ debug angular code in chrome->run with development configuration
   }
   
   ng build --configuration development
+
+
+  
+sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 3B4FE6ACC0B21F32
+
+mongodb on ubuntu 22
+
+
+const app_folder = './Client_EditableQuestionsAnswers\dist\sample-task';
+
+//cors
+app.use(cors());
+
+//body-parser
+app.use(bodyparser.json());
+
+app.use('/productImages', express.static('productImages'));
+
+//static files
+//app.use(express.static(path.join(__dirname,"public")));
+app.use(express.static('./Client_EditableQuestionsAnswers/dist'));
+app.use('/api',route);
+
+app.get('*.*', express.static(app_folder, {maxAge: '2y'}));
+
+app.get('*',(req,res) => {
+       res.status(200).sendFile('/',{root: app_folder});
+});
+
+app.listen(port,()=>{
+  console.log('server started at port:'+port);   
+})
+
+install mongodb on digital ocean:-
+
+https://wiki.crowncloud.net/How_To_Install_Duf_On_Ubuntu_22_04?How_to_Install_Latest_MongoDB_on_Ubuntu_22_04
+
+to restart nginx
+->go to /etc/nginx/sites-available
+>run following command
+sudo service nginx restart
+
+https://www.digitalocean.com/community/tutorials/how-to-secure-nginx-with-let-s-encrypt-on-ubuntu-20-04
+
+Mongod  on unbuntu:-
+
+root@ecommerce-webapp:~/Rasahriday# mongo
+MongoDB shell version v5.0.15
+connecting to: mongodb://127.0.0.1:27017/?compressors=disabled&gssapiServiceName=mongodb
+
+> show dbs
+admin        0.000GB
+config       0.000GB
+contactList  0.000GB
+local        0.000GB
+
+> use contactList
+switched to db contactList
+> db
+contactList
+
+->to get all data of carts table
+
+db.carts.find()
+
+To check size of folder:-
+
+root@ecommerce-webapp:~# du -sh Rasahriday/
+665M    Rasahriday/

@@ -1,4 +1,14 @@
+@import "./../../../assets/scss/common.scss";
+
 .switch-mode {
     margin-left:10px;
     cursor: pointer;
+}
+
+.btn-outline-modal {
+    padding:5px 8px !important;
+}
+
+.arrowright-icon {
+    font-size: 12px;
 }

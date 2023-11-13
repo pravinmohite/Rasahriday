@@ -1,19 +1,19 @@
 @import "./../../../../assets/scss/common.scss";
 
-label{
+label {
     display: block;
     margin-bottom: 2px;
 }
 
-.inline-block{
+.inline-block {
     display: inline-block;
 }
 
-form .ng-invalid.ng-touched{
+form .ng-invalid.ng-touched {
     border: 1px solid red;
 }
 
-.error-message{
+.error-message {
     color: red;
 }
 
@@ -49,4 +49,23 @@ form .ng-invalid.ng-touched{
     position: absolute;
     margin-left: -88px;
     opacity: 0;
+}
+
+.product-img-container {
+    .img-container {
+        @media screen and (max-width: 768px) {
+            margin-bottom: 10px;
+        }
+    }
+}
+
+.form-group {
+    .mobile-field {
+
+        &:first-child {
+            @media screen and (max-width: 768px) {
+                margin-bottom: 16px;
+            }
+        }
+    }
 }

@@ -1,6 +1,7 @@
 <div class="login-panel-container">
     <fieldset>
-        <legend>Login:</legend>
+        <legend *ngIf="!isSignUpMode">Login:</legend>
+        <legend *ngIf="isSignUpMode">Register:</legend>
         <div class="form-group row">
         <label for="username" class="col-4 col-form-label">Username</label> 
         <div class="col-8">
@@ -36,9 +37,9 @@
 
         <div class="form-group row">
         <div class="offset-4 col-8">
-            <button name="submit" type="submit" class="btn btn-success" (click)="loginToApplication()">Submit</button>
-            <a class="switch-mode" *ngIf="!isSignUpMode" href="javascript:void(0)" (click)="setSignUpMode()">Register <fa-icon class="hand-cursor edit-icon" [icon]="faArrowRight"></fa-icon></a>
-            <a class="switch-mode" *ngIf="isSignUpMode" href="javascript:void(0)" (click)="setLoginMode()">Login <fa-icon class="hand-cursor edit-icon" [icon]="faArrowRight"></fa-icon></a>
+            <button name="submit" type="submit" class="btn btn-outline-modal" (click)="loginToApplication()">Submit</button>
+            <a class="switch-mode" *ngIf="!isSignUpMode" href="javascript:void(0)" (click)="setSignUpMode()">Register <fa-icon class="hand-cursor edit-icon arrowright-icon" [icon]="faArrowRight"></fa-icon></a>
+            <a class="switch-mode" *ngIf="isSignUpMode" href="javascript:void(0)" (click)="setLoginMode()">Login <fa-icon class="hand-cursor edit-icon arrowright-icon" [icon]="faArrowRight"></fa-icon></a>
         </div>
         </div>
     </fieldset>

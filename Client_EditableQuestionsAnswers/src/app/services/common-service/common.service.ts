@@ -49,20 +49,51 @@ export class CommonService {
   refreshCategory = new Subject();
   refreshProduct = new Subject();
   userLoggedIn = new Subject();
+  sideBarStatus = new Subject();
   categoryMenus;
   currentCurrency = '₹';
   modalClass = 'modal-dialog-container';
   modalRef: any;
+  visitorObj = {
+    isVisitor: true
+  }
+  isMobile: boolean;
+  mobileWidth = 768;
+  fireCrackersTimeout = 4000;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router
-  ) { }
+  ) { 
+    this.checkAndSetIfMobile();
+    this.setWindowResizeEvent();
+  }
 
   setUserDetails(userDetails) {
     localStorage.setItem('userDetails', JSON.stringify(userDetails));
     this.userDetails = userDetails;
     this.userLoggedInEvent(userDetails);
+  }
+
+  openOrCloseSideBar(status) {
+    this.sideBarStatus.next(status);
+  }
+
+  checkAndSetIfMobile() {
+    if(window.innerWidth < 768) {
+      this.isMobile = true;
+      return true;
+    }
+    else {
+      this.isMobile = false;
+      return false;
+    }
+  }
+
+  setWindowResizeEvent() {
+    window.onresize = () => {
+      this.checkAndSetIfMobile();
+    };
   }
 
   getUserDetails() {
@@ -79,6 +110,8 @@ export class CommonService {
   removeUserDetails() {
     localStorage.removeItem('userDetails');
     localStorage.removeItem('loggedIn');
+    this.userDetails = this.visitorObj;
+    this.userLoggedIn.next(this.userDetails)
   }
 
   refreshCategoryEvent(data) {
@@ -92,6 +125,16 @@ export class CommonService {
   confirmAction() {
     let result = confirm(this.confirmationText);
     return result;
+  }
+
+  checkIfVisitorAndNavigate() {
+    if(this.userDetails && this.userDetails.isVisitor) {
+      return true;
+    }
+  }
+
+  navigateToLoginPage() {
+    this.router.navigate(['/login']);
   }
 
   getModalConfig(className?) {
@@ -220,6 +263,36 @@ export class CommonService {
 
   deepCloneArray(arrayItems){
     return JSON.parse(JSON.stringify(arrayItems));
+  }
+
+  checkIfLandingPage() {
+    let url = window.location.href;
+    if(url.indexOf('home')> -1) {
+       return true;
+    }
+    else {
+       return false;
+    }
+  }
+
+  checkIfProductListingPage() {
+    let url = window.location.href;
+    if(url.indexOf('products')> -1) {
+       return true;
+    }
+    else {
+       return false;
+    }
+  }
+
+  checkIfLoginPage() {
+    let url = window.location.href;
+    if (url.indexOf('login') > -1) {
+      return true;
+    }
+    else {
+      return false;
+    }
   }
 
 }

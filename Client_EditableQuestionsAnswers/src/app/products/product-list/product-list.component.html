@@ -1,11 +1,15 @@
+<div class="pyro" *ngIf="isFireCrackerShown">
+    <div class="before"></div>
+    <div class="after"></div>
+</div>
 <h2 class="page-heading">Products</h2>
 <div class="product-page-container">
     <div class="row">
         <!-- <div class="col-md-12 col-xs-12 col-12"> -->
-        <div class="col-md-2 col-4">
+        <div class="col-md-2 col-4 d-none d-md-block">
             <app-category-menu></app-category-menu>
         </div>
-        <div class="col-md-10 col-8 product-list-container">
+        <div class="col-md-10 col-12 product-list-container">
             <div class="row">
                 <div class="col-md-3 addproduct-btn-container">
                     <!-- add product modal -->
@@ -36,7 +40,7 @@
                                 <span class="price-value">{{product.price}}</span>
                             </div>
                             <div class="user-action-btns row" *ngIf="product.stock > 0">
-                                <div class="input-group col-5">
+                                <div class="input-group col-md-5 col-4">
                                     <div class="input-group-prepend">
                                         <button class="input-group-text" (click)="decrementQuantity(product)">-</button>
                                     </div>
