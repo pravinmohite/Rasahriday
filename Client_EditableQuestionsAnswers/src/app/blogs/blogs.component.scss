@@ -1,4 +1,4 @@
-@import "./../../../assets/scss/common.scss";
+@import "./../../assets/scss/common.scss";
 
 .gallery-heading {
     font-family: cursive;
@@ -64,6 +64,11 @@
         font-weight: 700;
     }
 
+    .card-cat-author {
+
+        display: flex;
+        justify-content: space-between;
+    }
     .btn-view-more {
         color: $goldentheme-header-background;
         background-color: $goldentheme-panel-background;

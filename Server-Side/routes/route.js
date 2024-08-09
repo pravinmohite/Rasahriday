@@ -369,60 +369,6 @@ router.patch('/category/:id', (req, res, next) => {
 /* end crud for Category */
 
 
-
-/*----crud for blogs data-----------------*/
-
-router.get('/blogs', (req, res, next) => {
-    //res.send('retrieving the question answer list');
-    Blogs.find((err, blogsList) => {
-        res.json(blogsList);
-    })
-})
-
-router.post('/blogs', (req, res, next) => {
-    //logic to add
-    let newblogs = new Blogs({
-        blogName: req.body.blogName,
-        blogDesc: req.body.blogDesc
-    })
-    newblogs.save((err, blogs) => {
-        if (err) {
-            res.json({ msg: 'failed to add blogs' });
-        }
-        else {
-            res.json({ msg: 'blogs added successfully' });
-        }
-    })
-})
-
-router.delete('/blogs/:id', (req, res, next) => {
-    Blogs.remove({ _id: req.params.id }, (err, result) => {
-        if (err) {
-            res.json(err);
-        }
-        else {
-            res.json(result);
-        }
-    })
-})
-
-router.patch('/blogs/:id', (req, res, next) => {
-    Blogs.updateOne({ _id: req.params.id }, {
-        $set: {
-            blogName: req.body.blogName,
-            blogDesc: req.body.blogDesc
-        }
-    }, (err, result) => {
-        if (err) {
-            res.json(err);
-        }
-        else {
-            res.json(result);
-        }
-    });
-});
-
-/* end crud for blogs */
 //
 /*----crud for gallery data-----------------*/
 

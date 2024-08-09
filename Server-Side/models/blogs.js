@@ -1,18 +1,27 @@
-const mongoose=require('mongoose');
+const mongoose = require('mongoose');
 
-const BlogsSchema=mongoose.Schema({
-    blogName:{
-        type:String,
-        required:true
+const BlogsSchema = mongoose.Schema({
+    title: {
+        type: String,
+        required: true
     },
-    id:{
-        type:Number,
-        required:false
+    author: {
+        type: String,
+        required: true
     },
-    blogDesc:{
+    content: {
+        type: String,
+        required: true
+    },
+    slug: {
         type:String,
-        required:true
+        required: true,
+    },
+    category: {
+        type: String,
+        required: false,
     }
+
 })
 
-const QuestionAnswer=module.exports=mongoose.model('Blogs',BlogsSchema)
+const Blogs = module.exports = mongoose.model('Blogs', BlogsSchema)

@@ -1,0 +1,12 @@
+@import "./../../../assets/scss/common.scss";
+
+.card-cat-author {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0 15px;
+    font-weight: 500;
+    .highlight {
+        font-weight: 700;
+    }
+}

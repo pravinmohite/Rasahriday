@@ -28,9 +28,11 @@ export class CommonService {
   productAllUrl = "/api/productAll";
   landingPageDetailsUrl = "/api/landingPageDetails";
   productPerCategoryUrl = "/api/productPerCategory";
+  // isProd: boolean = true;
   isProd: boolean = false;
  // prodUrl: String = "https://46.101.150.128";
   prodUrl: String = "https://rasahriday.com"
+  productImgUrl: string = "https://rasahriday.com"
   devDomain: any = this.isProd ? this.prodUrl : "http://localhost:3000";
   finalloginDetailsUrl: string = this.devDomain + this.loginDetailsUrl;
   finalSignUpUrl = this.devDomain + this.signUpUrl;
@@ -204,7 +206,8 @@ export class CommonService {
   }
 
   getProductImageToBeShown(productImage) {
-    let url = this.devDomain;
+    // let url = this.devDomain;
+    let url = this.productImgUrl;
     if (productImage) {
       return url + '/' + productImage.split(',')[0];
     }

@@ -1,17 +1,17 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { CommonService } from 'src/app/services/common-service/common.service';
-import { AddBlogsComponent } from '../add-blogs/add-blogs.component';
+import { AddBlogsComponent } from './add-blogs/add-blogs.component';
 import { ProductService } from 'src/app/services/product-service/product.service';
 import { LoaderService } from 'src/app/services/loader-service/loader.service';
 import { BlogService } from 'src/app/services/blog/blog.service';
-import { BlogsByCategoryComponent } from '../blogs-by-category/blogs-by-category.component'; 
+import { BlogsByCategoryComponent } from './blogs-by-category/blogs-by-category.component'; 
 @Component({
-  selector: 'app-all-blogs',
-  templateUrl: './all-blogs.component.html',
-  styleUrls: ['./all-blogs.component.scss']
+  selector: 'app-blogs',
+  templateUrl: './blogs.component.html',
+  styleUrls: ['./blogs.component.scss']
 })
-export class AllBlogsComponent implements OnInit {
+export class BlogsComponent implements OnInit {
   @Input() cardData: any; // Replace with your actual card data type
   modalRef: BsModalRef;  @Output() modalClosed = new EventEmitter<void>();
 
@@ -19,7 +19,8 @@ export class AllBlogsComponent implements OnInit {
     status: false,
     editedItem: {}
   };
-  categories: any;
+  blogs: any;
+  isAdmin: boolean = false;
   categorySelectedObj = {
 
     isAllCategorySelected: true
@@ -40,23 +41,17 @@ export class AllBlogsComponent implements OnInit {
 
   ngOnInit(): void {
     this.getBlogs()
-
+    this.setPrivileges();
   }
-  
 
-  // getBlogs() {
-  //   // this.loaderService.display(true);
-  //   this.blogService.getBlogsList().subscribe(data => {
-  //     this.categories = data;
-  //     console.log(data)
-
-  //   })
-  // }
-
+  setPrivileges() {
+    this.isAdmin = this.commonService.userDetails.isAdmin;
+  }
+ 
   getBlogs() {
     this.loaderService.display(true);
     this.blogService.getBlogsList().subscribe(data => {
-      this.categories = data;
+      this.blogs = data;
       this.refreshProductAndSetCategoriesGlobally(data);
       this.loaderService.display(false);
     })
@@ -80,7 +75,7 @@ export class AllBlogsComponent implements OnInit {
     }
   }
   editProduct(id) {
-    const editedItem = this.categories.find(category => category._id === id);
+    const editedItem = this.blogs.find(category => category._id === id);
     this.editMode = {
       status: true,
       editedItem: editedItem
@@ -89,7 +84,7 @@ export class AllBlogsComponent implements OnInit {
   }
   openAddBlogsModal(): void {
     const initialState = {
-      editMode: this.editMode  // Pass the editMode object to AddBlogsComponent
+      editMode: this.editMode,  // Pass the editMode object to AddBlogsComponent
     };
     const config = this.commonService.getModalConfig();
     this.modalRef = this.modalService.show(AddBlogsComponent, { initialState });

@@ -1,9 +1,15 @@
 const path = require('path');
 const multer = require('multer');
-
+const productImagesPath = 'productImages/';
+const blogImagesPath = 'blogImages/';
 var storage= multer.diskStorage({
     destination: function(req, file, cb) {
-        cb(null,'productImages/');
+        console.log("====req=====", req.url);
+        if(req.url !== '/blogssss') {
+            cb(null, productImagesPath);
+        } else {
+            cb(null, blogImagesPath);
+        }
     },
     filename: function(req, file, cb) {
         let ext = path.extname(file.originalname);

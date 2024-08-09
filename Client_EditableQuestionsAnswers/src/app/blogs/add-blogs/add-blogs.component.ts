@@ -7,6 +7,8 @@ import { CommonService } from 'src/app/services/common-service/common.service';
 import { LoaderService } from 'src/app/services/loader-service/loader.service';
 import { ProductService } from 'src/app/services/product-service/product.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { AngularEditorConfig } from './../../../lib/config';
+import { AngularEditorComponent } from './../../../lib/angular-editor.component';
 
 @Component({
   selector: 'app-add-blogs',
@@ -18,14 +20,64 @@ export class AddBlogsComponent implements OnInit {
   @Input() editMode: any;
   @Output() editingComplete = new EventEmitter<void>();
   @ViewChild('addBlogTemplate') templateRef: TemplateRef<any>;
-  
-  blog: any = {
-    blogName: '',
-    blogDesc: ''
-  }
+  @ViewChild(AngularEditorComponent) editor: AngularEditorComponent; // ViewChild reference to the AngularEditorComponent
+
+  config1: AngularEditorConfig = {
+    editable: true,
+    spellcheck: true,
+    minHeight: '15rem',
+    maxHeight: 'auto',
+    placeholder: 'Enter here...',
+    translate: 'no',
+    sanitize: false,
+    // toolbarPosition: 'top',
+    outline: true,
+    // defaultFontName: 'Comic Sans MS',
+    // defaultFontSize: '5',
+    // showToolbar: false,
+    defaultParagraphSeparator: 'p',
+    customClasses: [
+      {
+        name: 'quote',
+        class: 'quote',
+      },
+      {
+        name: 'redText',
+        class: 'redText'
+      },
+      {
+        name: 'text-center',
+        class: 'text-center',
+      },
+      {
+        name: 'text-right',
+        class: 'text-right',
+      },
+      {
+        name: 'img-center',
+        class: 'img-center',
+      },
+      {
+        name: 'img-right',
+        class: 'img-right',
+      },
+      {
+        name: 'titleText',
+        class: 'titleText',
+        tag: 'h1',
+      },
+    ],
+    toolbarHiddenButtons: [
+      // ['bold', 'italic'],
+      // ['fontSize']
+    ],
+      editHistoryLimit: 3,
+    imageResizeSensitivity: 2,
+  };
+  blogForm: FormGroup;
+  blogId: string;
+
   constructor(public modalRef: BsModalRef, 
-    private http: HttpClient, 
-    private productService: ProductService,
     private loaderService: LoaderService,
     private notifierService: NotifierService,
     private commonService: CommonService,
@@ -36,22 +88,37 @@ export class AddBlogsComponent implements OnInit {
   urls = [];
   ngOnInit(): void {
    
+    this.createForm();
 
     if (this.editMode && this.editMode.status) {
       this.setValuesToBeEdited(this.editMode.editedItem);
     }
   }
-  
+
+  createForm(): void{
+    this.blogForm = new FormGroup({
+      title: new FormControl('', Validators.required) , 
+      content: new FormControl('', Validators.required) ,      
+      category: new FormControl('', Validators.required),
+      author: new FormControl('', Validators.required),
+    })
+  }
+
   ngOnChanges(changes: SimpleChange) {
     if(this.editMode && this.editMode.status && this.modalService['modalsCount'] == 0) {
       this.openCategoryModal(this.templateRef);
       this.setValuesToBeEdited(this.editMode.editedItem);
     }
   }
+
   setValuesToBeEdited(editedItem) {
-    this.blog._id = editedItem._id; // Set the _id property
-    this.blog.blogName = editedItem.blogName;
-    this.blog.blogDesc = editedItem.blogDesc;
+    this.blogId = editedItem._id;
+    this.blogForm.setValue({
+      title: editedItem.title,
+      content: editedItem.content,
+      category: editedItem.category,
+      author: editedItem.author,
+    });
   
   }
 
@@ -65,42 +132,29 @@ export class AddBlogsComponent implements OnInit {
     this.modalRef.hide();
   }
 
-  onselectFile(e: any) {
-    if (e.target.files) {
-      for (let i = 0; i < e.target.files.length; i++) {
-        var reader = new FileReader();
-        reader.readAsDataURL(e.target.files[i]);
-        reader.onload = (events: any) => {
-          this.urls.push(events.target.result);
-        }
-      }
-    }
-  }
-
-  save(formVal): void {
-    if (this.editMode && this.editMode.status) {
-      this.update(formVal);
-    } else {
-      this.add(formVal);
-    }
-  }
-
   submit(): void {
     this.loaderService.display(true);
-  
+    if (!this.blogForm.valid) {
+      return;
+    }
+
     if (this.editMode && this.editMode.status) {
-      this.update(this.blog); // Update existing blog
+      this.update(this.blogForm.value); // Update existing blog
     } else {
-      this.add(this.blog); // Add new blog
+      this.add(this.blogForm.value); // Add new blog
     }
   }
   
   update(data): void {
     this.loaderService.display(true);
-    this.blogService.updateBlogs(data).subscribe(updatedData => {
+    this.blogService.updateBlogs(this.blogId, data).subscribe(updatedData => {
+      console.log('data', data);
+
       this.loaderService.display(false);
       this.notifierService.notify('success', 'Blog updated successfully!');
       this.handleCategoryChangeEvent(updatedData);
+    }, (error) => {
+      console.log('error', error);
     });
   }
   
@@ -114,7 +168,12 @@ export class AddBlogsComponent implements OnInit {
   
   handleCategoryChangeEvent(data) {
     this.modalRef?.hide();
+    this.blogId = '';
     this.commonService.refreshCategoryEvent(data);
   }
   
+  onChange(event) {}
+  onBlur(event) {}
+
+
 }
