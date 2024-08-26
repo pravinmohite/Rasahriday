@@ -17,6 +17,18 @@ const OrderSchema = mongoose.Schema({
         type:String,
         required: true
     },
+    isPractitioner: {
+        type: String,
+        required: false
+    },
+    regNumber: {
+        type: String,
+        required: false
+    },
+    userAddress: {
+        type: String,
+        required: false
+    },
     userAddress: {
         type: String,
         required: false

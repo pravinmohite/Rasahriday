@@ -9,6 +9,8 @@ const QuestionType = require('../models/questionType');
 const QuestionAnswer = require('../models/questionAnswer');
 const Product = require('../models/product');
 const Category = require('../models/category');
+const Blogs = require('../models/blogs');//
+const Gallery = require('../models/gallery');
 const Login = require('../models/login');
 const Cart = require('../models/cart');
 const Order = require('../models/order');
@@ -50,11 +52,16 @@ router.post(signUpEndPoint, (req, res, next) => {
         password: req.body.password,
         isAdmin: req.body.isAdmin,
         address: req.body.address,
+        state: req.body.state,
+        city: req.body.city,
+        pincode: req.body.pincode,
+        isPractitioner: req.body.isPractitioner,
+        regNumber: req.body.regNumber || '',
         phoneNumber: req.body.phoneNumber
     })
     newLogin.save((err, questionType) => {
         if (err) {
-            res.json({ msg: 'failed to add login details' });
+            res.json({ msg: 'failed to add login details' , err, questionType});
         }
         else {
             res.json(req.body);
@@ -366,6 +373,61 @@ router.patch('/category/:id', (req, res, next) => {
 
 /* end crud for Category */
 
+
+//
+/*----crud for gallery data-----------------*/
+
+router.get('/gallery', (req, res, next) => {
+    //res.send('retrieving the question answer list');
+    Gallery.find((err, galleryList) => {
+        res.json(galleryList);
+    })
+})
+
+router.post('/gallery', (req, res, next) => {
+    //logic to add
+    let newgallery = new Gallery({
+        galleryName: req.body.galleryName,
+        galleryDescription: req.body.galleryDescription
+    })
+    newgallery.save((err, gallery) => {
+        if (err) {
+            res.json({ msg: 'failed to add gallery' });
+        }
+        else {
+            res.json({ msg: 'gallery added successfully' });
+        }
+    })
+})
+
+router.delete('/gallery/:id', (req, res, next) => {
+    Gallery.remove({ _id: req.params.id }, (err, result) => {
+        if (err) {
+            res.json(err);
+        }
+        else {
+            res.json(result);
+        }
+    })
+})
+
+router.patch('/gallery/:id', (req, res, next) => {
+    Gallery.updateOne({ _id: req.params.id }, {
+        $set: {
+            galleryName: req.body.galleryName,
+        }
+    }, (err, result) => {
+        if (err) {
+            res.json(err);
+        }
+        else {
+            res.json(result);
+        }
+    });
+});
+
+/* end crud for gallery */
+//
 /*---crud for cart data ---*/
 
 /*--cart for user--*/
@@ -527,6 +589,8 @@ router.post('/order', (req, res, next) => {
         userId: req.body.userId,
         userName: req.body.userName,
         userAddress: req.body.userAddress,
+        isPractitioner: !!req.body.isPractitioner,
+        regNumber: req.body.regNumber ? req.body.regNumber : '',
         userPhoneNumber: req.body.userPhoneNumber,
         productName: req.body.productName,
         productImages: req.body.productImages,

@@ -1,0 +1,76 @@
+<div class="container confirm-order-modal">
+    <div class="row justify-content-center mt-3">
+        <h2 class="text-center gallery-heading mt-3">Add Blog</h2>
+    </div>
+
+    <div class="modal-body">
+       <form [formGroup]="blogForm">
+
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-12 col-12">
+
+                        <p class="form-label">Title</p>
+                        <div class="col-md-12 col-12">
+                            <input type="text" formControlName="title" class="form-control">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-6 col-12">
+                        <p class="form-label">Category</p>
+                        <div class="col-md-12 col-12">
+                            <input type="text" formControlName="category" class="form-control form-input">
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-12">
+                        <p class="form-label">Author</p>
+                        <div class="col-md-12 col-12">
+                            <input type="text" formControlName="author" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-md-12 col-12">
+                        <p class="form-label">About Author</p>
+                        <div class="col-md-12 col-12">
+                            <textarea rows="3" formControlName="aboutAuthor" class="form-control">
+                            </textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="row">
+                    <p class="form-label">Content</p>
+                    <div class="col-md-12 col-12 form-label">
+                        <angular-editor
+                            #editor
+                            id="editor1"
+                            class="content-editor"
+                            formControlName="content"
+                            [config]="config1"
+                            >
+                            <!-- (ngModelChange)="onChange($event)" -->
+                            <!-- (blur)="onBlur($event)" -->
+                        </angular-editor>
+
+                    </div>
+                </div>
+            </div>
+            <div class="form-group ">
+                <div class="offset-md-2 col-md-8 col-12">
+                    <div class="row choose-btn">
+                        <button type="button" class="btn btn-light btn-add photo-btn" (click) = "submit()" [disabled]="!blogForm.valid">Save</button>
+                        <button type="button" class="btn btn-light btn-cancel photo-btn"
+                        routerLink="/blogs">cancel</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+    </div>
+</div>
