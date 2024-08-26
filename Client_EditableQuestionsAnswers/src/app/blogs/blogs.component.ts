@@ -1,11 +1,8 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { Component, Input, OnInit } from '@angular/core';
 import { CommonService } from 'src/app/services/common-service/common.service';
-import { AddBlogsComponent } from './add-blogs/add-blogs.component';
-import { ProductService } from 'src/app/services/product-service/product.service';
 import { LoaderService } from 'src/app/services/loader-service/loader.service';
 import { BlogService } from 'src/app/services/blog/blog.service';
-import { BlogsByCategoryComponent } from './blogs-by-category/blogs-by-category.component'; 
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-blogs',
   templateUrl: './blogs.component.html',
@@ -13,7 +10,7 @@ import { BlogsByCategoryComponent } from './blogs-by-category/blogs-by-category.
 })
 export class BlogsComponent implements OnInit {
   @Input() cardData: any; // Replace with your actual card data type
-  modalRef: BsModalRef;  @Output() modalClosed = new EventEmitter<void>();
+  p: number = 1;
 
   editMode = {
     status: false,
@@ -34,12 +31,16 @@ export class BlogsComponent implements OnInit {
   activeIndex = -1;
   constructor(
     private commonService: CommonService,
-    private modalService: BsModalService,
     private loaderService: LoaderService,
     private blogService: BlogService,
+    private router: Router,
   ) { }
 
   ngOnInit(): void {
+    this.commonService.refreshCategory.subscribe((data) => {
+      this.getBlogs();
+    })
+
     this.getBlogs()
     this.setPrivileges();
   }
@@ -74,19 +75,8 @@ export class BlogsComponent implements OnInit {
 
     }
   }
+
   editProduct(id) {
-    const editedItem = this.blogs.find(category => category._id === id);
-    this.editMode = {
-      status: true,
-      editedItem: editedItem
-    };
-    this.openAddBlogsModal();
-  }
-  openAddBlogsModal(): void {
-    const initialState = {
-      editMode: this.editMode,  // Pass the editMode object to AddBlogsComponent
-    };
-    const config = this.commonService.getModalConfig();
-    this.modalRef = this.modalService.show(AddBlogsComponent, { initialState });
+    this.router.navigate(['/blogs', 'edit', id]);
   }
 }

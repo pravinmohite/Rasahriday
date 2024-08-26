@@ -10,6 +10,7 @@ import { BlogsComponent } from './blogs.component';
 import { AddBlogsComponent } from './add-blogs/add-blogs.component';
 import { SharedModule } from '../shared-module/shared.module';
 import { BlogDetailsComponent } from './blog-details/blog-details.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { BlogDetailsComponent } from './blog-details/blog-details.component';
     BlogsRoutingModule,
     SharedModule,
     AngularEditorModule,
-    HttpClientModule
+    HttpClientModule,
+    NgxPaginationModule,
   ]
 })
 export class BlogsModule { }

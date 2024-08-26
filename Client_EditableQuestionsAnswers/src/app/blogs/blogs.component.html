@@ -1,8 +1,8 @@
 <h2 class="text-center gallery-heading">Blogs</h2>
 <div class="container-fluid">
-    <div class="row justify-content-end" *ngIf="isAdmin">
-        <div class="col-md-2 col-sm-6 add-photo">
-            <button type="button" class="btn btn-light btn-add-photo" (click)="openAddBlogsModal()"> + add
+    <div class="row justify-content-start" *ngIf="isAdmin">
+        <div class="offset-1 col-md-2 col-sm-6 add-photo">
+            <button type="button" class="btn btn-light btn-add-photo" routerLink="/blogs/add"> + add
                 Blogs</button>
         </div>
     </div>
@@ -10,12 +10,12 @@
     <!-- cards start dynamic -->
     <div class="col-md-12 card-main-container">
         <div class="row">
-            <div class="col-md-3 col-sm-12 card-container" *ngFor="let blog of blogs">
+            <div class="col-md-3 col-sm-12 card-container" *ngFor="let blog of blogs | paginate: { itemsPerPage: 8, currentPage: p }">
                 <div class="card">
-                    <img src="{{blog?.image}}" class="card-img-top"
+                    <img [routerLink]="['/blogs', blog?._id, blog?.slug]" src="{{blog?.image}}" class="card-img-top cursor-pointer"
                         alt="Rasahriday/photo_gallery">
                     <div class="card-body">
-                        <h5 class="card-title">{{blog.title}}</h5>
+                        <h5 class="card-title cursor-pointer" [routerLink]="['/blogs', blog?._id, blog?.slug]">{{blog.title}}</h5>
                         <p class="card-cat-author">
                             <span>
                                 {{blog.category}}
@@ -26,7 +26,7 @@
                         </p>
 
                         <!-- delete/edit for Admin -->
-                        <div class="admin-btn">
+                        <div class="admin-btn {{!isAdmin ? 'justify-content-end' : ''}}">
                             <span *ngIf="isAdmin" class="edit-delete-container">
 
                                 <svg (click)="editProduct(blog._id)"  xmlns="http://www.w3.org/2000/svg" height="1em"
@@ -36,20 +36,23 @@
                                 </svg>
                                 <i class="fa fa-trash-o fa-trash" aria-hidden="true"></i>
 
-                                <svg (click)="deleteProduct(blog._id)" class="trash-image"
+                                <svg (click)="deleteProduct(blog._id)" class="delete-icon trash-image"
+                                    fill="#ce4545"
                                     xmlns="http://www.w3.org/2000/svg" height="1em"
                                     viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
                                     <path
+                                        fill="#ce4545"
                                         d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z" />
                                 </svg>
 
                             </span>
-                            <a [routerLink]="['/blogs', blog?._id, blog?.slug]" class="btn btn-primary btn-view-more">View more</a>
+                            <a [routerLink]="['/blogs', blog?._id, blog?.slug]" class="btn btn-primary btn-view-more cursor-pointer">View more</a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        <pagination-controls class="pagination-sec" (pageChange)="p = $event"></pagination-controls>
     </div>
     <!-- cards end dynamic -->
 

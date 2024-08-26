@@ -52,11 +52,16 @@ router.post(signUpEndPoint, (req, res, next) => {
         password: req.body.password,
         isAdmin: req.body.isAdmin,
         address: req.body.address,
+        state: req.body.state,
+        city: req.body.city,
+        pincode: req.body.pincode,
+        isPractitioner: req.body.isPractitioner,
+        regNumber: req.body.regNumber || '',
         phoneNumber: req.body.phoneNumber
     })
     newLogin.save((err, questionType) => {
         if (err) {
-            res.json({ msg: 'failed to add login details' });
+            res.json({ msg: 'failed to add login details' , err, questionType});
         }
         else {
             res.json(req.body);
@@ -584,6 +589,8 @@ router.post('/order', (req, res, next) => {
         userId: req.body.userId,
         userName: req.body.userName,
         userAddress: req.body.userAddress,
+        isPractitioner: !!req.body.isPractitioner,
+        regNumber: req.body.regNumber ? req.body.regNumber : '',
         userPhoneNumber: req.body.userPhoneNumber,
         productName: req.body.productName,
         productImages: req.body.productImages,

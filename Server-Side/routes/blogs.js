@@ -6,30 +6,30 @@ const router = express.Router();
 const upload = require('../middleware/upload');
 const Blogs = require('../models/blogs');
 
+const prepareBlogData = async (data) => {
+    const title = data?.title?.toLowerCase();
+    const count = await Blogs.find({ title: new RegExp(title, 'i') }).countDocuments();
+
+    return {
+        author: data.author,
+        aboutAuthor: data.aboutAuthor,
+        category: data.category || '',
+        content: data.content,
+        slug: `${title?.replace(/ /g, "_")}${count > 0 ? `_${count + 1}` : ''}`,
+        title: data.title,
+    };
+}
+
 router.post('/', upload.any(), async (req, res) => {
     try {
 
-        console.log('req files', req.files);
-        const title = req?.body?.title?.toLowerCase();
-        console.log("===slug====", title);
+        const blogData = await prepareBlogData(req.body);
 
-        const count = await Blogs.find({title: new RegExp(title, 'i')}).countDocuments();
-        console.log("===count====", count);
-    
-        let newBlog = new Blogs({
-            title: req.body.title,
-            category: req.body.category,
-            content: req.body.content,
-            category: req.body.category || '',
-            author: req.body.author,
-            slug: `${title?.replace(/ /g, "_")}${count > 0 ? `_${count + 1}` : ''}`
-        })
+        let newBlog = new Blogs(blogData)
 
         newBlog.save((err, blog) => {
-            console.log("====blog", blog);
-
             if (err) {
-                res.json({ msg: 'failed to add blog with err:' + err, blog});
+                res.json({ msg: 'failed to add blog with err:' + err, blog });
             }
             else {
                 res.json({ msg: 'blog added successfully' });
@@ -61,18 +61,9 @@ router.delete('/:id', (req, res, next) => {
 })
 
 router.patch('/:id', async (req, res, next) => {
-    const title = req?.body?.title?.toLowerCase();
-    console.log("===slug====", title);
-
+    const blogData = await prepareBlogData(req.body);
     Blogs.updateOne({ _id: req.params.id }, {
-        $set: {
-            title: req.body.title,
-            category: req.body.category,
-            author: req.body.author,
-            content: req.body.content,
-            blogDesc: req.body.blogDesc,
-            slug: title?.replace(/ /g, "_")
-        }
+        $set: blogData
     }, (err, result) => {
         if (err) {
             res.json(err);
@@ -84,7 +75,7 @@ router.patch('/:id', async (req, res, next) => {
 });
 
 router.get('/:id', async (req, res, next) => {
-    try { 
+    try {
         const blog = await Blogs.findById(req.params.id);
         if (blog) {
             res.json(blog);

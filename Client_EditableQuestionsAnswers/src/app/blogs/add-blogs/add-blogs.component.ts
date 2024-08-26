@@ -1,14 +1,12 @@
-import { HttpClient } from '@angular/common/http';
-import { Component,SimpleChange,TemplateRef,  OnInit, ViewChild, Input, Output, EventEmitter } from '@angular/core';
+import { Component,SimpleChange, OnInit, ViewChild, Input, Output, EventEmitter } from '@angular/core';
 import { NotifierService } from 'angular-notifier';
-import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { BlogService } from 'src/app/services/blog/blog.service';
 import { CommonService } from 'src/app/services/common-service/common.service';
 import { LoaderService } from 'src/app/services/loader-service/loader.service';
-import { ProductService } from 'src/app/services/product-service/product.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AngularEditorConfig } from './../../../lib/config';
 import { AngularEditorComponent } from './../../../lib/angular-editor.component';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-blogs',
@@ -17,9 +15,6 @@ import { AngularEditorComponent } from './../../../lib/angular-editor.component'
 })
 
 export class AddBlogsComponent implements OnInit {
-  @Input() editMode: any;
-  @Output() editingComplete = new EventEmitter<void>();
-  @ViewChild('addBlogTemplate') templateRef: TemplateRef<any>;
   @ViewChild(AngularEditorComponent) editor: AngularEditorComponent; // ViewChild reference to the AngularEditorComponent
 
   config1: AngularEditorConfig = {
@@ -74,25 +69,41 @@ export class AddBlogsComponent implements OnInit {
       editHistoryLimit: 3,
     imageResizeSensitivity: 2,
   };
+
   blogForm: FormGroup;
   blogId: string;
+  editMode: boolean  = false;
 
-  constructor(public modalRef: BsModalRef, 
+  constructor(
     private loaderService: LoaderService,
     private notifierService: NotifierService,
     private commonService: CommonService,
     private blogService: BlogService,
-    private modalService: BsModalService,
-  ) { }
+    private route: ActivatedRoute,
+    private router: Router
+  ) {
+  }
 
   urls = [];
   ngOnInit(): void {
-   
+
     this.createForm();
 
-    if (this.editMode && this.editMode.status) {
-      this.setValuesToBeEdited(this.editMode.editedItem);
-    }
+    this.route.paramMap.subscribe((params) => {
+      this.blogId = params.get('blogId')!;
+      if (this.blogId) {
+        this.editMode = true;
+        this.getBlogDetail(this.blogId);
+      }
+    });
+
+
+  }
+
+  getBlogDetail(blogId: string): void {
+    this.blogService.getBlogDetail(blogId).subscribe((blog) => {
+      this.setValuesToBeEdited(blog);
+    })
   }
 
   createForm(): void{
@@ -100,15 +111,9 @@ export class AddBlogsComponent implements OnInit {
       title: new FormControl('', Validators.required) , 
       content: new FormControl('', Validators.required) ,      
       category: new FormControl('', Validators.required),
+      aboutAuthor: new FormControl('', Validators.required),
       author: new FormControl('', Validators.required),
     })
-  }
-
-  ngOnChanges(changes: SimpleChange) {
-    if(this.editMode && this.editMode.status && this.modalService['modalsCount'] == 0) {
-      this.openCategoryModal(this.templateRef);
-      this.setValuesToBeEdited(this.editMode.editedItem);
-    }
   }
 
   setValuesToBeEdited(editedItem) {
@@ -118,27 +123,18 @@ export class AddBlogsComponent implements OnInit {
       content: editedItem.content,
       category: editedItem.category,
       author: editedItem.author,
+      aboutAuthor: editedItem.aboutAuthor || '',
     });
   
   }
-
-  openCategoryModal(templateRef:TemplateRef<any>): void{
-
-    const config= this.commonService.getModalConfig();
-    this.modalRef = this.modalService.show(templateRef, config);
-  }
-
-  hideCategoryModal() {
-    this.modalRef.hide();
-  }
-
+  
   submit(): void {
     this.loaderService.display(true);
     if (!this.blogForm.valid) {
       return;
     }
 
-    if (this.editMode && this.editMode.status) {
+    if (this.editMode) {
       this.update(this.blogForm.value); // Update existing blog
     } else {
       this.add(this.blogForm.value); // Add new blog
@@ -148,7 +144,6 @@ export class AddBlogsComponent implements OnInit {
   update(data): void {
     this.loaderService.display(true);
     this.blogService.updateBlogs(this.blogId, data).subscribe(updatedData => {
-      console.log('data', data);
 
       this.loaderService.display(false);
       this.notifierService.notify('success', 'Blog updated successfully!');
@@ -167,9 +162,10 @@ export class AddBlogsComponent implements OnInit {
   }
   
   handleCategoryChangeEvent(data) {
-    this.modalRef?.hide();
-    this.blogId = '';
-    this.commonService.refreshCategoryEvent(data);
+    // this.modalRef?.hide();
+    this.router.navigate(['/blogs']);
+    // this.blogId = '';
+    // this.commonService.refreshCategoryEvent(data);
   }
   
   onChange(event) {}
