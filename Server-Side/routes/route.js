@@ -50,6 +50,9 @@ router.post(signUpEndPoint, (req, res, next) => {
     let newLogin = new Login({
         username: req.body.username,
         password: req.body.password,
+        firstName: req.body.firstName, //new
+        middleName: req.body.middleName,//new
+        lastName: req.body.lastName,//new
         isAdmin: req.body.isAdmin,
         address: req.body.address,
         phoneNumber: req.body.phoneNumber
@@ -301,7 +304,7 @@ router.patch('/product/:id', upload.any(), (req, res, next) => {
             drugQuantity: req.body.drugQuantity,
             stock: req.body.stock,
             date: req.body.date,
-            productImages: path?path: req.body.productImages
+            productImages: path ? path : req.body.productImages
         }
     }, (err, result) => {
         if (err) {
@@ -667,7 +670,7 @@ router.post('/order', (req, res, next) => {
 router.post('/multipleOrder', (req, res, next) => {
     //logic to add
 
-    for(let i=0;i<req.body.selectedItems.length;i++) {
+    for (let i = 0; i < req.body.selectedItems.length; i++) {
         let reqBodySelectedItems = req.body.selectedItems;
         let newOrder = new Order({
             categoryId: reqBodySelectedItems[i].categoryId,
@@ -695,8 +698,8 @@ router.post('/multipleOrder', (req, res, next) => {
                 res.json({ msg: 'failed to order with err:' + err });
             }
             else {
-                if(i == reqBodySelectedItems.length-1) {
-                  removeMultipleCartItems(reqBodySelectedItems, res);
+                if (i == reqBodySelectedItems.length - 1) {
+                    removeMultipleCartItems(reqBodySelectedItems, res);
                 }
             }
         })
@@ -742,11 +745,11 @@ router.patch('/order/:id', (req, res, next) => {
             res.json(err);
         }
         else {
-            if(req.body.orderAccepted) {
+            if (req.body.orderAccepted) {
                 updateStockForProduct(req.body, res)
             }
             else {
-               res.json(result);
+                res.json(result);
             }
         }
     });
@@ -794,58 +797,58 @@ router.get('/landingPageDetails', (req, res, next) => {
 })
 
 /*------get one product from each category----*/
-router.get('/productPerCategory',(req, res, next) => {
+router.get('/productPerCategory', (req, res, next) => {
     Product.find((err, productList) => {
-        let obj={};
-        let resultArr=[];
-        productList.map(data=>{
-            if(!obj[data.categoryId] && data.productImages && data.productImages!="") {
-                 resultArr.push(data);
-                 obj[data.categoryId]=true;
+        let obj = {};
+        let resultArr = [];
+        productList.map(data => {
+            if (!obj[data.categoryId] && data.productImages && data.productImages != "") {
+                resultArr.push(data);
+                obj[data.categoryId] = true;
             }
         })
         res.json(resultArr);
     })
 })
 
-removeMultipleCartItems =(selectedItems, res)=> {
-    for(let i=0;i< selectedItems.length; i++) {
+removeMultipleCartItems = (selectedItems, res) => {
+    for (let i = 0; i < selectedItems.length; i++) {
         Cart.remove({ _id: selectedItems[i]._id }, (err, result) => {
             if (err) {
                 res.json(err);
             }
             else {
-                if(i == selectedItems.length-1) {
-                  res.json(result);
+                if (i == selectedItems.length - 1) {
+                    res.json(result);
                 }
             }
         })
     }
 }
 
-findStockValueForProduct = async (product) =>{
+findStockValueForProduct = async (product) => {
     let result;
     await Product.find((err, productList) => {
-           result = productList.filter(function (item) {
+        result = productList.filter(function (item) {
             if (product.productId === item.id) {
                 return true;
             }
         });
     })
-    if(result.length >0) {
-        let stockResult= result[0].stock
-        if(stockResult) {
-           return stockResult
+    if (result.length > 0) {
+        let stockResult = result[0].stock
+        if (stockResult) {
+            return stockResult
         }
     }
     return result;
 }
 
-updateStockForProduct =(product, res) => {
+updateStockForProduct = (product, res) => {
     //let stockValue = findStockValueForProduct(product);
-    findStockValueForProduct(product).then((stockValue)=>{
-        if(stockValue) {
-            Product.updateOne({ _id: product.productId}, {
+    findStockValueForProduct(product).then((stockValue) => {
+        if (stockValue) {
+            Product.updateOne({ _id: product.productId }, {
                 $set: {
                     stock: stockValue - product.quantity,
                 }
@@ -862,7 +865,7 @@ updateStockForProduct =(product, res) => {
             res.json({ msg: 'failed to update stock details for product' });
         }
     })
- 
+
 }
 
 module.exports = router;
