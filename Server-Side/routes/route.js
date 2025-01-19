@@ -50,6 +50,9 @@ router.post(signUpEndPoint, (req, res, next) => {
     let newLogin = new Login({
         username: req.body.username,
         password: req.body.password,
+        firstName: req.body.firstName, //new
+        middleName: req.body.middleName,//new
+        lastName: req.body.lastName,//new
         isAdmin: req.body.isAdmin,
         address: req.body.address,
         state: req.body.state,

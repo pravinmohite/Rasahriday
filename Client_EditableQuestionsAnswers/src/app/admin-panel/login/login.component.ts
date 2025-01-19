@@ -78,6 +78,9 @@ export class LoginComponent implements OnInit {
   setLoggedInUserDetails(userDetails) {
     const formattedUserDetails ={
       userName: userDetails.username,
+      firstName: userDetails.firstName, //new
+      middleName: userDetails.middleName, //new
+      lastName: userDetails.lastName, //new
       address: userDetails.address,
       city: userDetails.city,
       state: userDetails.state,
@@ -105,6 +108,14 @@ export class LoginComponent implements OnInit {
   keyPressEvent(event) {
     if(event.keyCode==13) {
       this.validateLoginDetails();
+    }
+  }
+  keyPressEventForCharacter(event: KeyboardEvent): void {
+    const charCode = event.charCode || event.keyCode;
+    const char = String.fromCharCode(charCode);
+
+    if (!/^[a-zA-Z]*$/.test(char) && charCode !== 8) {
+      event.preventDefault();
     }
   }
 
