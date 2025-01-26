@@ -34,7 +34,6 @@
             </div>
         </fieldset>
 
-
         <fieldset class="fieldset-container border p-2">
             <legend class="legend-title w-auto">User Details:</legend>
             <div class="user-details">
@@ -48,6 +47,53 @@
                         <label class="col-form-label" for="categoryName">{{product.userName}}</label>
                     </div>
                 </div>
+                <div class="form-group row">
+                    <label class="col-5 col-form-label" for="categoryName">Full Name</label>
+                    <div class="col-7 fullName-container">
+                        <div class="col-4 firstNameField">
+                            <label *ngIf="!editMode" class="col-form-label"
+                            for="categoryName">{{product.firstName}}</label>
+                        <input *ngIf="editMode" id="firstName" name="firstName"
+                            [(ngModel)]="editedProduct.firstName" placeholder="Enter user address" type="text"
+                            class="form-control">
+                        </div>
+                        <div class="col-4 firstNameField">
+                            <label *ngIf="!editMode" class="col-form-label"
+                            for="categoryName">{{product.middleName}}</label>
+                        <input *ngIf="editMode" id="middleName" name="middleName"
+                            [(ngModel)]="editedProduct.middleName" placeholder="Enter user address" type="text"
+                            class="form-control">
+                        </div>
+                        <div class="col-4 firstNameField">
+                            <label *ngIf="!editMode" class="col-form-label"
+                            for="categoryName">{{product.lastName}}</label>
+                        <input *ngIf="editMode" id="lastName" name="lastName"
+                            [(ngModel)]="editedProduct.lastName" placeholder="Enter user address" type="text"
+                            class="form-control">
+                        </div>
+                     
+                    </div>
+                </div>
+                <!-- <div class="form-group row">
+                    <label class="col-5 col-form-label" for="categoryName">Middle Name</label>
+                    <div class="col-7">
+                        <label *ngIf="!editMode" class="col-form-label"
+                            for="categoryName">{{product.middleName}}</label>
+                        <input *ngIf="editMode" id="middleName" name="middleName"
+                            [(ngModel)]="editedProduct.middleName" placeholder="Enter user address" type="text"
+                            class="form-control">
+                    </div>
+                </div> -->
+                <!-- <div class="form-group row">
+                    <label class="col-5 col-form-label" for="categoryName">Last Name</label>
+                    <div class="col-7">
+                        <label *ngIf="!editMode" class="col-form-label"
+                            for="categoryName">{{product.lastName}}</label>
+                        <input *ngIf="editMode" id="lastName" name="lastName"
+                            [(ngModel)]="editedProduct.lastName" placeholder="Enter user address" type="text"
+                            class="form-control">
+                    </div>
+                </div> -->
                 <div class="form-group row">
                     <label class="col-5 col-form-label" for="categoryName">User Address</label>
                     <div class="col-7">

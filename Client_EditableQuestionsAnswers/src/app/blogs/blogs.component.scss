@@ -32,7 +32,7 @@
 
 .card-main-container {
     .card-container {
-        display: flex;
+        // display: flex;
         justify-content: space-around;
         margin-bottom: 20px;
         position: relative;
@@ -56,6 +56,10 @@
         font-size: 16px;
         font-weight: 700;
         text-transform: capitalize;
+        width: calc(100% - 20px);
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
     }
 
     .card-text {

@@ -454,6 +454,9 @@ router.post('/cart', (req, res, next) => {
         productId: req.body.productId,
         userId: req.body.userId,
         userName: req.body.userName,
+        firstName: req.body.firstName, //new
+        middleName: req.body.middleName,//new
+        lastName: req.body.lastName,//new
         userAddress: req.body.userAddress,
         userPhoneNumber: req.body.userPhoneNumber,
         productName: req.body.productName,
@@ -505,6 +508,9 @@ router.patch('/cart/:id', (req, res, next) => {
             productId: req.body.productId,
             userId: req.body.userId,
             userName: req.body.userName,
+            firstName: req.body.firstName, //new
+            middleName: req.body.middleName,//new
+            lastName: req.body.lastName,//new
             userAddress: req.body.userAddress,
             userPhoneNumber: req.body.userPhoneNumber,
             productImages: req.body.productImages,
@@ -591,6 +597,9 @@ router.post('/order', (req, res, next) => {
         productId: req.body.productId,
         userId: req.body.userId,
         userName: req.body.userName,
+        firstName: req.body.firstName, //new
+        middleName: req.body.middleName,//new
+        lastName: req.body.lastName,//new
         userAddress: req.body.userAddress,
         isPractitioner: !!req.body.isPractitioner,
         regNumber: req.body.regNumber ? req.body.regNumber : '',
@@ -609,16 +618,39 @@ router.post('/order', (req, res, next) => {
         drugQuantity: req.body.drugQuantity,
         orderedDate: Date.now()
     })
-    newOrder.save((err, product) => {
+   
+     // Save the order first
+     newOrder.save((err, product) => {
         if (err) {
-            res.json({ msg: 'failed to order with err:' + err });
+            return res.status(500).json({ msg: 'Failed to order with error: ' + err });
         }
-        else {
-            res.json({ msg: 'product ordered successfully' });
-        }
-    })
-})
 
+        // Update the Login collection after order is created
+        Login.updateOne(
+            { _id: req.body.userId }, // Use the `userId` to find the relevant login record
+            {
+                $set: {
+                    firstName: req.body.firstName, // Update fields
+                    middleName: req.body.middleName,
+                    lastName: req.body.lastName
+                }
+            },
+            (err, result) => {
+                if (err) {
+                    // Respond only once with an error message
+                    return res.status(500).json({ msg: 'Order placed but failed to update login details', error: err });
+                }
+
+                // Respond with success for both operations
+                return res.status(200).json({ 
+                    msg: 'Product ordered successfully and login details updated', 
+                    order: product, 
+                    updateResult: result 
+                });
+            }
+        );
+    });
+});
 /*----to complete multiple order from cart---*/
 router.post('/multipleOrder', (req, res, next) => {
     //logic to add
@@ -630,6 +662,9 @@ router.post('/multipleOrder', (req, res, next) => {
             productId: reqBodySelectedItems[i].productId,
             userId: reqBodySelectedItems[i].userId,
             userName: req.body.userName,
+            firstName: req.body.firstName, //new
+            middleName: req.body.middleName,//new
+            lastName: req.body.lastName,//new
             userAddress: req.body.userAddress,
             userPhoneNumber: req.body.userPhoneNumber,
             productName: reqBodySelectedItems[i].productName,
@@ -677,6 +712,9 @@ router.patch('/order/:id', (req, res, next) => {
             productId: req.body.productId,
             userId: req.body.userId,
             userName: req.body.userName,
+            firstName: req.body.firstName, //new
+            middleName: req.body.middleName,//new
+            lastName: req.body.lastName,//new
             userAddress: req.body.userAddress,
             userPhoneNumber: req.body.userPhoneNumber,
             productImages: req.body.productImages,

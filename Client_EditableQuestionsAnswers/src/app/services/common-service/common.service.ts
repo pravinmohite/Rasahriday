@@ -242,6 +242,9 @@ export class CommonService {
     let userDetails = this.userDetails;
     data.userId = userDetails._id;
     data.userName = userDetails.userName;
+    data.firstName = userDetails.firstName;
+    data.middleName = userDetails.middleName;
+    data.lastName = userDetails.lastName;
     data.userAddress = `${
       userDetails.address
     }${

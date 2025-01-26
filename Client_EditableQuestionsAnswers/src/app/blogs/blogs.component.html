@@ -15,7 +15,7 @@
                     <img [routerLink]="['/blogs', blog?._id, blog?.slug]" src="{{blog?.image}}" class="card-img-top cursor-pointer"
                         alt="Rasahriday/photo_gallery">
                     <div class="card-body">
-                        <h5 class="card-title cursor-pointer" [routerLink]="['/blogs', blog?._id, blog?.slug]">{{blog.title}}</h5>
+                        <h5 class="card-title cursor-pointer" [routerLink]="['/blogs', blog?._id, blog?.slug]" title="{{blog.title}}">{{blog.title}}</h5>
                         <p class="card-cat-author">
                             <span>
                                 {{blog.category}}
