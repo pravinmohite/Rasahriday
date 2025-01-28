@@ -53,7 +53,7 @@
 
                 <div class="col-md-4 col-12 firstNameField">
                     <input id="firstName" name="firstName" [(ngModel)]="login.firstName"
-                        (keypress)="keyPressEventForCharacter($event)" placeholder="Enter your First Name" type="text"
+                        (keypress)="keyPressEventForCharacter($event)" placeholder="First Name" type="text"
                         class="form-control" #firstNameInput="ngModel"
                         [ngClass]="{'is-invalid': firstNameInput.invalid  && (firstNameInput.touched || userForm.submitted)}"
                         required>
@@ -61,13 +61,13 @@
 
                 <div class="col-md-4 col-12 firstNameField middleName">
                     <input id="middleName" name="middleName" [(ngModel)]="login.middleName"
-                        (keypress)="keyPressEventForCharacter($event)" placeholder="Enter your Middle Name" type="text"
+                        (keypress)="keyPressEventForCharacter($event)" placeholder="Middle Name" type="text"
                         class="form-control" required="required">
                 </div>
 
                 <div class="col-md-4 col-12 firstNameField">
                     <input id="lastName" name="lastName" [(ngModel)]="login.lastName"
-                        (keypress)="keyPressEventForCharacter($event)" placeholder="Enter your Last Name" type="text"
+                        (keypress)="keyPressEventForCharacter($event)" placeholder="Last Name" type="text"
                         class="form-control" required="required" #lastNameInput="ngModel"
                         [ngClass]="{'is-invalid': lastNameInput.invalid && (lastNameInput.touched || userForm.submitted)}"
                         required>
