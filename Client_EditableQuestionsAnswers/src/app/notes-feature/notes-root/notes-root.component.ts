@@ -28,7 +28,7 @@ export class NotesRootComponent implements DoCheck {
     });
   }
   ngDoCheck() {
-  /*  console.log('do check called');
+  /*  
     if(this.whatWentWellElem) {
       this.whatWentWellElem.changes.subscribe(()=>
       { 

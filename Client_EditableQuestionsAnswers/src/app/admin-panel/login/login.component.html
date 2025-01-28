@@ -1,90 +1,126 @@
-<div class="login-panel-container">
-    <fieldset>
+<div class="login-panel-container" [ngClass]="{registrationBox:isSignUpMode}">
+
+    <form #userForm="ngForm" novalidate>
         <legend class="login-register" *ngIf="!isSignUpMode">Login:</legend>
         <legend class="login-register" *ngIf="isSignUpMode">Register:</legend>
         <div class="form-group row field-container" *ngIf="isSignUpMode">
-            <label for="username" class="col-4 col-form-label">Practitioner?</label>
-            <div class="col-8">
-                <input [(ngModel)]="login.isPractitioner" (onchange)="login.isPractitioner = !login.isPractitioner" type="checkbox"
+            <label for="username" class="col-3 col-form-label">Practitioner?</label>
+            <div class="col-9">
+                <!-- this event is removed, (onchange)="login.isPractitioner = !login.isPractitioner" -->
+                <input name="isPractitioner" [(ngModel)]="login.isPractitioner" (change)="updatePractitionerStatus($event)"  type="checkbox"
                     class="form-control justify-content-start practicener-checkbox">
             </div>
         </div>
 
         <div class="form-group row field-container" *ngIf="isSignUpMode && login.isPractitioner">
-            <label for="username" class="col-4 col-form-label">Registartion Number</label>
-            <div class="col-8">
-                <input id="regNumber" name="regNumber" [(ngModel)]="login.regNumber" placeholder="Enter your Registration Number"
-                (keypress)="keyPressEvent($event)" type="text" class="form-control" required="required">
+            <label for="username" class="col-3 col-form-label required">Registartion Number</label>
+            <div class="col-9">
+                <input id="regNumber" name="regNumber" [(ngModel)]="login.regNumber"
+                    placeholder="Enter your Registration Number" (keypress)="keyPressEvent($event)" type="text"
+                    class="form-control" #regNumber="ngModel"
+                    [ngClass]="{'is-invalid': regNumber.invalid  && (regNumber.touched || userForm.submitted)}"
+                    [required]="login.isPractitioner">
             </div>
         </div>
 
         <div class="form-group row field-container">
-            <label for="username" class="col-4 col-form-label">Username</label>
+            <label for="username" class="col-3 col-form-label">Username</label>
 
-            <div class="col-8">
+            <div class="col-9">
                 <input id="username" name="username" [(ngModel)]="login.username" placeholder="Enter your username"
                     (keypress)="keyPressEvent($event)" type="text" class="form-control" required="required">
             </div>
         </div>
         <div class="form-group row field-container">
-            <label for="password" class="col-4 col-form-label">Password</label>
-            <div class="col-8">
+            <label for="password" class="col-3 col-form-label">Password</label>
+            <div class="col-9">
                 <input id="password" name="password" [(ngModel)]="login.password" (keypress)="keyPressEvent($event)"
                     placeholder="Enter your password" type="password" class="form-control" required="required">
             </div>
         </div>
         <div class="form-group row field-container" *ngIf="isSignUpMode">
-            <label for="password" class="col-4 col-form-label">Confirm Password</label>
-            <div class="col-8">
+            <label for="password" class="col-3 col-form-label">Confirm Password</label>
+            <div class="col-9">
                 <input id="confirmPassword" name="confirmPassword" [(ngModel)]="login.confirmPassword"
                     (keypress)="keyPressEvent($event)" placeholder="Enter your password" type="password"
                     class="form-control" required="required">
             </div>
         </div>
+        <!----------------------------- full name ------------------- -->
         <div class="form-group row field-container" *ngIf="isSignUpMode">
-            <label for="username" class="col-4 col-form-label">Phone Number</label>
-            <div class="col-8">
-                <input id="phoneNumber" name="phoneNumber" [(ngModel)]="login.phoneNumber" placeholder="Enter your Phone Number"
-                    (keypress)="keyPressEvent($event)" type="text" class="form-control" required="required">
+            <label class="col-3 col-form-label required">Full Name</label>
+            <div class="col-9 full-name-box">
+
+                <div class="col-md-4 col-12 firstNameField">
+                    <input id="firstName" name="firstName" [(ngModel)]="login.firstName"
+                        (keypress)="keyPressEventForCharacter($event)" placeholder="Enter your First Name" type="text"
+                        class="form-control" #firstNameInput="ngModel"
+                        [ngClass]="{'is-invalid': firstNameInput.invalid  && (firstNameInput.touched || userForm.submitted)}"
+                        required>
+                </div>
+
+                <div class="col-md-4 col-12 firstNameField middleName">
+                    <input id="middleName" name="middleName" [(ngModel)]="login.middleName"
+                        (keypress)="keyPressEventForCharacter($event)" placeholder="Enter your Middle Name" type="text"
+                        class="form-control" required="required">
+                </div>
+
+                <div class="col-md-4 col-12 firstNameField">
+                    <input id="lastName" name="lastName" [(ngModel)]="login.lastName"
+                        (keypress)="keyPressEventForCharacter($event)" placeholder="Enter your Last Name" type="text"
+                        class="form-control" required="required" #lastNameInput="ngModel"
+                        [ngClass]="{'is-invalid': lastNameInput.invalid && (lastNameInput.touched || userForm.submitted)}"
+                        required>
+                </div>
+
+            </div>
+        </div>
+        <div class="form-group row field-container" *ngIf="isSignUpMode">
+            <label for="username" class="col-3 col-form-label">Phone Number</label>
+            <div class="col-9">
+                <input id="phoneNumber" name="phoneNumber" [(ngModel)]="login.phoneNumber"
+                    placeholder="Enter your Phone Number" (keypress)="keyPressEvent($event)" type="text"
+                    class="form-control" required="required">
             </div>
         </div>
 
         <div class="form-group row field-container" *ngIf="isSignUpMode">
-            <label for="username" class="col-4 col-form-label">Address</label>
-            <div class="col-8">
+            <label for="username" class="col-3 col-form-label">Address</label>
+            <div class="col-9">
                 <input id="address" name="address" [(ngModel)]="login.address" placeholder="Enter your address"
                     (keypress)="keyPressEvent($event)" type="text" class="form-control" required="required">
             </div>
         </div>
         <div class="form-group row field-container" *ngIf="isSignUpMode">
-            <label for="username" class="col-4 col-form-label">City</label>
-            <div class="col-8">
+            <label for="username" class="col-3 col-form-label">City</label>
+            <div class="col-9">
                 <input id="city" name="city" [(ngModel)]="login.city" placeholder="Enter your City"
                     (keypress)="keyPressEvent($event)" type="text" class="form-control" required="required">
             </div>
         </div>
         <div class="form-group row field-container" *ngIf="isSignUpMode">
-            <label for="username" class="col-4 col-form-label">State</label>
-            <div class="col-8">
-                <select [(ngModel)]="login.state" aria-placeholder="Select State" (onchange)="keyPressEvent($event)" class="form-control" required="required">
-                    <option *ngFor ="let state of states" [value]="state?.label">{{state?.label}}</option>
+            <label for="username" class="col-3 col-form-label">State</label>
+            <div class="col-9">
+                <select [(ngModel)]="login.state" aria-placeholder="Select State" (onchange)="keyPressEvent($event)"
+                    class="form-control" required="required">
+                    <option *ngFor="let state of states" [value]="state?.label">{{state?.label}}</option>
                 </select>
                 <!-- <input id="state" name="state" [(ngModel)]="login.state" placeholder="Enter your state"
                     (keypress)="keyPressEvent($event)" type="text" class="form-control" required="required"> -->
             </div>
         </div>
         <div class="form-group row field-container" *ngIf="isSignUpMode">
-            <label for="username" class="col-4 col-form-label">Pincode</label>
-            <div class="col-8">
+            <label for="username" class="col-3 col-form-label">Pincode</label>
+            <div class="col-9">
                 <input id="pincode" name="pincode" [(ngModel)]="login.pincode" placeholder="Enter your Pincode"
                     (keypress)="keyPressEvent($event)" type="text" class="form-control" required="required">
             </div>
         </div>
 
         <div class="form-group row">
-            <div class="offset-4 col-8 action-btns">
+            <div class="offset-3 col-9 action-btns">
                 <button name="submit" type="submit" class="btn btn-outline-customsecondary submit-btn"
-                    (click)="loginToApplication()">Submit</button>
+                    (click)="loginToApplication(userForm)">Submit</button>
                 <button *ngIf="!isSignUpMode" class="btn btn-outline login-btn"
                     (click)="setSignUpMode()">Register</button>
                 <button *ngIf="isSignUpMode" class="btn btn-outline login-btn" (click)="setLoginMode()">Login</button>
@@ -92,8 +128,11 @@
             <a class="switch-mode" *ngIf="isSignUpMode" href="javascript:void(0)" (click)="setLoginMode()">Login <fa-icon class="hand-cursor edit-icon arrowright-icon" [icon]="faArrowRight"></fa-icon></a> -->
             </div>
         </div>
-    </fieldset>
+    </form>
+
 </div>
 
 
 <i class="fa-light fa-arrow-right"></i>
+
+

@@ -127,7 +127,7 @@ export class HeaderComponent implements OnInit, AfterViewInit {
     this.questionAnswerService.getQuestionTypes().subscribe(response => {
       this.questionTypes = response;
     });
-    console.log(this.questionTypes);
+    
   }
   onOptionsSelected(value) {
     this.questionAnswerService.filterDataByQuestionType(value);

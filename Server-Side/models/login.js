@@ -13,6 +13,18 @@ const LoginSchema = mongoose.Schema({
         type: String,
         required: false
     },
+    firstName:{
+        type:String,
+        required:true
+    },
+    middleName:{
+        type:String,
+        required:false
+    },
+    lastName: {
+        type: String,
+        required: true
+    },
     isAdmin: {
         type: Boolean,
         required: false

@@ -18,7 +18,8 @@
                 <div class="form-group row">
                     <label class="col-5 col-form-label" for="categoryName">Delivery Charges</label>
                     <div class="col-7">
-                        <label class="col-form-label" for="categoryName">Delivery charges extra, free delivery only on orders above <span class="current-currency-symbol">{{currentCurrency}}</span> 1000/-
+                        <label class="col-form-label" for="categoryName">Delivery charges extra, free delivery only on
+                            orders above <span class="current-currency-symbol">{{currentCurrency}}</span> 1000/-
                         </label>
                     </div>
                 </div>
@@ -34,7 +35,6 @@
             </div>
         </fieldset>
 
-
         <fieldset class="fieldset-container border p-2">
             <legend class="legend-title w-auto">User Details:</legend>
             <div class="user-details">
@@ -48,6 +48,54 @@
                         <label class="col-form-label" for="categoryName">{{product.userName}}</label>
                     </div>
                 </div>
+                <div class="form-group row">
+                    <label class="col-5 col-form-label" for="categoryName">Full Name</label>
+                    <div class="col-7 fullName-container" *ngIf="!editMode">
+                        <label class="col-form-label" for="categoryName">{{product.firstName}} {{product.middleName}}
+                            {{product.lastName}}</label>
+                    </div>
+                    <div class="col-7 fullName-container">
+
+                        <div class="col-md-4 col-12 firstNameField">
+
+                            <input *ngIf="editMode" id="firstName" name="firstName"
+                                [(ngModel)]="editedProduct.firstName" placeholder="Enter user address" type="text"
+                                class="form-control">
+                        </div>
+                        <div class="col-md-4 col-12 firstNameField">
+
+                            <input *ngIf="editMode" id="middleName" name="middleName"
+                                [(ngModel)]="editedProduct.middleName" placeholder="Enter user address" type="text"
+                                class="form-control">
+                        </div>
+                        <div class="col-md-4 col-12 firstNameField">
+
+                            <input *ngIf="editMode" id="lastName" name="lastName" [(ngModel)]="editedProduct.lastName"
+                                placeholder="Enter user address" type="text" class="form-control">
+                        </div>
+
+                    </div>
+                </div>
+                <!-- <div class="form-group row">
+                    <label class="col-5 col-form-label" for="categoryName">Middle Name</label>
+                    <div class="col-7">
+                        <label *ngIf="!editMode" class="col-form-label"
+                            for="categoryName">{{product.middleName}}</label>
+                        <input *ngIf="editMode" id="middleName" name="middleName"
+                            [(ngModel)]="editedProduct.middleName" placeholder="Enter user address" type="text"
+                            class="form-control">
+                    </div>
+                </div> -->
+                <!-- <div class="form-group row">
+                    <label class="col-5 col-form-label" for="categoryName">Last Name</label>
+                    <div class="col-7">
+                        <label *ngIf="!editMode" class="col-form-label"
+                            for="categoryName">{{product.lastName}}</label>
+                        <input *ngIf="editMode" id="lastName" name="lastName"
+                            [(ngModel)]="editedProduct.lastName" placeholder="Enter user address" type="text"
+                            class="form-control">
+                    </div>
+                </div> -->
                 <div class="form-group row">
                     <label class="col-5 col-form-label" for="categoryName">User Address</label>
                     <div class="col-7">
@@ -63,11 +111,9 @@
                     <div class="col-7">Yes</div>
                     <label class="col-5 col-form-label" for="categoryName">Registartion Number:</label>
                     <div class="col-7">
-                        <label *ngIf="!editMode" class="col-form-label"
-                            for="categoryName">{{product.regNumber}}</label>
-                        <input *ngIf="editMode" id="regNumber" name="regNumber"
-                            [(ngModel)]="editedProduct.regNumber" placeholder="Enter user address" type="text"
-                            class="form-control">
+                        <label *ngIf="!editMode" class="col-form-label" for="categoryName">{{product.regNumber}}</label>
+                        <input *ngIf="editMode" id="regNumber" name="regNumber" [(ngModel)]="editedProduct.regNumber"
+                            placeholder="Enter user address" type="text" class="form-control">
                     </div>
                 </div>
                 <div class="form-group row">

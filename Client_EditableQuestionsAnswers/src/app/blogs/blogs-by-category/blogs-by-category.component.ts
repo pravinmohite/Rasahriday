@@ -112,22 +112,22 @@ export class BlogsByCategoryComponent implements OnInit {
   }
 
   onChange(event) {
-    console.log('changed');
+    
     this.checkForImage(); // Call the method to check for images and add the class
   }
 
   onBlur(event) {
-    console.log('blur ' + event);
+    
   }
 
   checkForImage() {
-    console.log('Checking for images');
+    
 
     const editor = document.getElementById('editor1');
-    console.log('Editor element:', editor);
+   
 
     const images = editor.getElementsByTagName('img');
-    console.log('Number of images:', images.length);
+    
 
     const imageArray = Array.from(images) as HTMLImageElement[];
 

@@ -25,7 +25,7 @@ export class QuestionAnswerPanelComponent implements OnInit {
   
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
-      console.log(params.get('searchKey'));
+      
       this.searchKey = params.get('searchKey');
       this.questionAnswerService.setUrlSearchVal(this.searchKey);
     });

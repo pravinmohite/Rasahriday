@@ -36,7 +36,7 @@ router.post('/', upload.any(), async (req, res) => {
             }
         })
     } catch (err) {
-        console.log("error", err)
+      
         res.json({ msg: 'failed to add blog with err:' + err });
 
     }

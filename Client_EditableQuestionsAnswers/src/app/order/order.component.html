@@ -1,5 +1,6 @@
 <h2 class="page-heading">Your orders</h2>
-<alert *ngIf="showOrderDeliveryNotification" class="order-page-info" type="info" [dismissible]="true" (onClosed)="onClosed()">
+<alert *ngIf="showOrderDeliveryNotification" class="order-page-info" type="info" [dismissible]="true"
+    (onClosed)="onClosed()">
     Once confirmed! <strong>Your Order</strong> will be delivered within 2 week from the order placed date.
 </alert>
 <div class="cart-container">
@@ -49,27 +50,34 @@
                 </fa-icon>
                 Order Accepted
             </div>
+           
             <div class="col-md-8 col-xs-12 user-details" *ngIf="userDetails.isAdmin">
-                    <div class="user-name">
-                        <span>user name: </span>
-                        <span>{{orderedItem.userName}}</span>
-                    </div>
-                    <div class="user-contact">
-                        <span>user contact: </span>
-                        <a class="phone-number" href="tel:+91-{{orderedItem.userPhoneNumber}}">+91-{{orderedItem.userPhoneNumber}}</a>
-                    </div>
-                    <div class="user-address">
-                        <span>user address: </span>
-                        <span>{{orderedItem.userAddress}}</span>
-                    </div>
-                    <div class="user-address" *ngIf="orderedItem?.isPractitioner">
-                        <span>Practitioner: </span>
-                        <span>Yes</span>
-                    </div>
-                    <div class="user-address" *ngIf="orderedItem?.isPractitioner">
-                        <span>Registration Number: </span>
-                        <span>{{orderedItem.regNumber}}</span>
-                    </div>
+                <div class="user-name">
+                    <span>user name: </span>
+                    <span>{{orderedItem.userName}}</span>
+                </div>
+
+                <div class="user-name">
+                    <span>full name: </span>
+                    <span>{{orderedItem.firstName}} {{orderedItem.middleName}} {{orderedItem.lastName}}</span>
+                </div>
+                <div class="user-contact">
+                    <span>user contact: </span>
+                    <a class="phone-number"
+                        href="tel:+91-{{orderedItem.userPhoneNumber}}">+91-{{orderedItem.userPhoneNumber}}</a>
+                </div>
+                <div class="user-address">
+                    <span>user address: </span>
+                    <span>{{orderedItem.userAddress}}</span>
+                </div>
+                <div class="user-address" *ngIf="orderedItem?.isPractitioner">
+                    <span>Practitioner: </span>
+                    <span>Yes</span>
+                </div>
+                <div class="user-address" *ngIf="orderedItem?.isPractitioner">
+                    <span>Registration Number: </span>
+                    <span>{{orderedItem.regNumber}}</span>
+                </div>
             </div>
             <div class="cart-item-actionbtns" *ngIf="userDetails.isAdmin">
                 <button *ngIf="!orderedItem.orderAccepted" class="btn btn-outline place-order-btn"

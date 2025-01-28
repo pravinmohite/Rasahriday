@@ -125,7 +125,7 @@ export class AddProductComponent implements OnInit {
   }
 
   submit(formVal): void{
-    console.log('formVal',formVal);
+    
     if(this.editMode && this.editMode.status) {
       this.update(formVal);
     }
@@ -147,7 +147,7 @@ export class AddProductComponent implements OnInit {
 
   setFormDetailsInFormData(formData, data) {
     for (const property in data) {
-      console.log(`${property}: ${data[property]}`);
+      
       formData.append(property, data[property]);
     }
   }
