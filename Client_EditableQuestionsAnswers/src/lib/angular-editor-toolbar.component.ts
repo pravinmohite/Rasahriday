@@ -366,7 +366,7 @@ export class AngularEditorToolbarComponent {
         reader.onload = (e: ProgressEvent) => {
           const fr = e.currentTarget as FileReader;
           if (!fr || !fr.result) {
-            console.error(`No file selected.`);
+            
             return;
           }
           this.editorService.insertImage(fr.result.toString());
@@ -380,10 +380,7 @@ export class AngularEditorToolbarComponent {
 
   watchUploadImage(response: HttpResponse<{ imageUrl: string }>, event) {
     if (!response?.body?.imageUrl) {
-      console.error(
-        `Request body is empty or imageUrl property is not on the response`,
-        response,
-      );
+     
       return;
     }
     const { imageUrl } = response.body;

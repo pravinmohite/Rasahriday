@@ -30,7 +30,7 @@ export class BlogDetailsComponent implements OnInit {
 
   getBlogDetail(blogId: string): void {
     this.blogService.getBlogDetail(blogId).subscribe((blog) => {
-      console.log("blog===", blog);
+      
       this.blog = blog;
     })
   }

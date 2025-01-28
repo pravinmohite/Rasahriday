@@ -73,14 +73,14 @@ export class ProductDescriptionComponent implements OnInit {
       this.loaderService.display(true);
       this.cartService.addToCartList(data).subscribe(response=>{
         this.loaderService.display(false);
-        console.log('product added to cart successfully');
+       
         this.cartService.cartItemChange.next();
       })
     }
   }
 
   changeQty(product) {
-    console.log('qty', product.quantity)
+    
   }
  
   setProductQuantityIfNull() {

@@ -151,7 +151,7 @@ export class ProductListComponent implements OnInit {
       this.loaderService.display(true);
       this.cartService.addToCartList(data).subscribe(response=>{
         this.loaderService.display(false);
-        console.log('product added to cart successfully');
+        
         this.cartService.cartItemChange.next();
       })
     }
@@ -162,7 +162,7 @@ export class ProductListComponent implements OnInit {
   }
 
   changeQty(product) {
-    console.log('qty', product.quantity)
+    
   }
 
   receiveProductAddEvent(data) {

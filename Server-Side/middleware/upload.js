@@ -4,7 +4,7 @@ const productImagesPath = 'productImages/';
 const blogImagesPath = 'blogImages/';
 var storage= multer.diskStorage({
     destination: function(req, file, cb) {
-        console.log("====req=====", req.url);
+        
         if(req.url !== '/blogssss') {
             cb(null, productImagesPath);
         } else {
@@ -28,7 +28,7 @@ var upload = multer({
             callback(null,true);
         }
         else {
-            console.log('only png and jpg file supported!');
+            
             callback(null,false)
         }
     }

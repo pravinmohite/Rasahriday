@@ -236,7 +236,7 @@ router.get('/product', (req, res, next) => {
 
 //router.post('/product',(req,res,next)=>{
 router.post('/product', upload.any(), function (req, res) {
-    console.log('req files', req.files);
+    
 
     let newProduct = new Product({
         categoryId: req.body.categoryId,

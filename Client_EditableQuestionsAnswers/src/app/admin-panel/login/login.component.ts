@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import {QuestionAnswerService} from '../../services/question-answer-service/question-answer.service';
 import { Router } from '@angular/router';
 import { ProductService } from 'src/app/services/product-service/product.service';
@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit {
   isSignUpMode = false;
   faArrowRight = faArrowRight;
   public isPractitioner: boolean;
-  login:any={username:"",password:""};
+  login:any={username: "", password: "", regNumber: "", firstName: "", lastName: "" , isPractitioner: false};
   public states = [];
 
   constructor(
@@ -23,6 +23,7 @@ export class LoginComponent implements OnInit {
     private commonService: CommonService,
     private router:Router,
     private addressService: AddressService,
+    private cdr: ChangeDetectorRef
   ) {
     this.states = this.addressService.getStateList();
   }
@@ -34,7 +35,11 @@ export class LoginComponent implements OnInit {
   }
 
   
-  loginToApplication() {
+  loginToApplication(form:any) {
+    if (this.isSignUpMode && this.login.isPractitioner && !this.login.regNumber) {
+   
+      return;
+    }
     if(this.isSignUpMode) {
        this.signUpUser();
     }
@@ -45,11 +50,15 @@ export class LoginComponent implements OnInit {
 
   signUpUser() {
      this.productService.signUpUser(this.login).subscribe(data=>{
-        console.log('Registration successfull');
+        
         this.validateLoginDetails();
      })
   }
-
+  updatePractitionerStatus(event: Event) {
+    const checkbox = event.target as HTMLInputElement;
+    this.login.isPractitioner = checkbox.checked;
+  }
+  
   setPrivilegesOfUser(data) {
     if(data['isAdmin']) {
       localStorage.setItem('loggedIn','true');
@@ -74,7 +83,7 @@ export class LoginComponent implements OnInit {
   removeUserDetails(){
     this.commonService.removeUserDetails();
   }
-
+ 
   setLoggedInUserDetails(userDetails) {
     const formattedUserDetails ={
       userName: userDetails.username,

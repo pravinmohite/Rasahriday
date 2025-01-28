@@ -149,7 +149,7 @@ export class AddBlogsComponent implements OnInit {
       this.notifierService.notify('success', 'Blog updated successfully!');
       this.handleCategoryChangeEvent(updatedData);
     }, (error) => {
-      console.log('error', error);
+    
     });
   }
   
