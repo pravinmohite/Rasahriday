@@ -57,7 +57,7 @@
                     <span>{{orderedItem.userName}}</span>
                 </div>
 
-                <div class="user-name">
+                <div class="user-name" *ngIf="orderedItem?.firstName">
                     <span>full name: </span>
                     <span>{{orderedItem.firstName}} {{orderedItem.middleName}} {{orderedItem.lastName}}</span>
                 </div>

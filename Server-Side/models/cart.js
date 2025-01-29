@@ -19,15 +19,23 @@ const CartSchema = mongoose.Schema({
     },
     firstName:{
         type:String,
-        required:true
+        required:false
     },
     middleName:{
         type:String,
-        required:true
+        required:false
     },
     lastName: {
         type: String,
         required: false
+    },
+    isPractitioner: {
+        type: String,
+        required: false,
+    },
+    regNumber: {
+        type: String,
+        required: false,
     },
     userAddress: {
         type: String,

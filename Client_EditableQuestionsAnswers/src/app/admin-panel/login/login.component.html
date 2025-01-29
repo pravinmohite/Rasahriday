@@ -13,7 +13,7 @@
         </div>
 
         <div class="form-group row field-container" *ngIf="isSignUpMode && login.isPractitioner">
-            <label for="username" class="col-3 col-form-label required">Registartion Number</label>
+            <label for="username" class="col-3 col-form-label required">Registration Number</label>
             <div class="col-9">
                 <input id="regNumber" name="regNumber" [(ngModel)]="login.regNumber"
                     placeholder="Enter your Registration Number" (keypress)="keyPressEvent($event)" type="text"
