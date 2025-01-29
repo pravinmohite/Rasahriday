@@ -454,9 +454,11 @@ router.post('/cart', (req, res, next) => {
         productId: req.body.productId,
         userId: req.body.userId,
         userName: req.body.userName,
-        firstName: req.body.firstName, //new
-        middleName: req.body.middleName,//new
-        lastName: req.body.lastName,//new
+        firstName: req.body?.firstName, //new
+        middleName: req.body?.middleName,//new
+        lastName: req.body?.lastName,//new
+        regNumber: req.body?.regNumber,
+        isPractitioner: req.body?.isPractitioner,
         userAddress: req.body.userAddress,
         userPhoneNumber: req.body.userPhoneNumber,
         productName: req.body.productName,

@@ -151,7 +151,6 @@ export class ProductListComponent implements OnInit {
       this.loaderService.display(true);
       this.cartService.addToCartList(data).subscribe(response=>{
         this.loaderService.display(false);
-        
         this.cartService.cartItemChange.next();
       })
     }
