@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import {QuestionAnswerService} from '../../services/question-answer-service/question-answer.service';
+import { QuestionAnswerService } from '../../services/question-answer-service/question-answer.service';
 import { Router } from '@angular/router';
 import { ProductService } from 'src/app/services/product-service/product.service';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
@@ -15,13 +15,13 @@ export class LoginComponent implements OnInit {
   isSignUpMode = false;
   faArrowRight = faArrowRight;
   public isPractitioner: boolean;
-  login:any={username: "", password: "", regNumber: "", firstName: "", lastName: "" , isPractitioner: false};
+  login: any = { username: "", password: "", regNumber: "", firstName: "", lastName: "", isPractitioner: false };
   public states = [];
 
   constructor(
-    private productService :ProductService,
+    private productService: ProductService,
     private commonService: CommonService,
-    private router:Router,
+    private router: Router,
     private addressService: AddressService,
     private cdr: ChangeDetectorRef
   ) {
@@ -29,63 +29,72 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if(localStorage.getItem('loggedIn')=="true") {
+    if (localStorage.getItem('loggedIn') == "true") {
       this.router.navigateByUrl('/home');
     }
   }
 
-  
-  loginToApplication(form:any) {
-    if (this.isSignUpMode && this.login.isPractitioner && !this.login.regNumber) {
-   
-      return;
+
+  loginToApplication(form: any) {
+    if (this.isSignUpMode) {
+      if (this.login.isPractitioner) {
+        if (!this.login.regNumber || !this.login.firstName || !this.login.lastName) {
+
+          return;
+        }
+      } else {
+        if (!this.login.firstName || !this.login.lastName) {
+
+          return;
+        }
+      }
     }
-    if(this.isSignUpMode) {
-       this.signUpUser();
+    if (this.isSignUpMode) {
+      this.signUpUser();
     }
     else {
-       this.validateLoginDetails();
+      this.validateLoginDetails();
     }
   }
 
   signUpUser() {
-     this.productService.signUpUser(this.login).subscribe(data=>{
-        
-        this.validateLoginDetails();
-     })
+    this.productService.signUpUser(this.login).subscribe(data => {
+
+      this.validateLoginDetails();
+    })
   }
   updatePractitionerStatus(event: Event) {
     const checkbox = event.target as HTMLInputElement;
     this.login.isPractitioner = checkbox.checked;
   }
-  
+
   setPrivilegesOfUser(data) {
-    if(data['isAdmin']) {
-      localStorage.setItem('loggedIn','true');
-      localStorage.setItem('isAdmin','true');
+    if (data['isAdmin']) {
+      localStorage.setItem('loggedIn', 'true');
+      localStorage.setItem('isAdmin', 'true');
       this.setLoggedInUserDetails(data);
       this.router.navigateByUrl('/home');
-   }
-   else if(data) {
-     localStorage.setItem('loggedIn','true');
-     localStorage.setItem('isAdmin','false');
-     this.setLoggedInUserDetails(data);
-     this.router.navigateByUrl('/home');
-   }
-   else {
-     localStorage.removeItem('loggedIn');
-     localStorage.removeItem('isAdmin');
-     this.removeUserDetails();
-     alert('invalid user, please enter correct username or password');
-   }
+    }
+    else if (data) {
+      localStorage.setItem('loggedIn', 'true');
+      localStorage.setItem('isAdmin', 'false');
+      this.setLoggedInUserDetails(data);
+      this.router.navigateByUrl('/home');
+    }
+    else {
+      localStorage.removeItem('loggedIn');
+      localStorage.removeItem('isAdmin');
+      this.removeUserDetails();
+      alert('invalid user, please enter correct username or password');
+    }
   }
 
-  removeUserDetails(){
+  removeUserDetails() {
     this.commonService.removeUserDetails();
   }
- 
+
   setLoggedInUserDetails(userDetails) {
-    const formattedUserDetails ={
+    const formattedUserDetails = {
       userName: userDetails.username,
       firstName: userDetails.firstName, //new
       middleName: userDetails.middleName, //new
@@ -104,18 +113,18 @@ export class LoginComponent implements OnInit {
   }
 
   validateLoginDetails() {
-    this.productService.validateLoginDetails(this.login).subscribe(data=>{
-       if(data && data['invalidUser']) {
-         alert('incorrect credentials');
-       }
-       else {
-         this.setPrivilegesOfUser(data);
-       }
-     })
+    this.productService.validateLoginDetails(this.login).subscribe(data => {
+      if (data && data['invalidUser']) {
+        alert('incorrect credentials');
+      }
+      else {
+        this.setPrivilegesOfUser(data);
+      }
+    })
   }
 
   keyPressEvent(event) {
-    if(event.keyCode==13) {
+    if (event.keyCode == 13) {
       this.validateLoginDetails();
     }
   }
