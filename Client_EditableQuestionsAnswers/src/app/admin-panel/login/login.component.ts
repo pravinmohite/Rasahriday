@@ -38,16 +38,13 @@ export class LoginComponent implements OnInit {
   loginToApplication(form: any) {
     if (this.isSignUpMode) {
       if (this.login.isPractitioner) {
-        if (!this.login.regNumber || !this.login.firstName || !this.login.lastName) {
-
+        if (!this.login.regNumber ){
           return;
         }
-      } else {
-        if (!this.login.firstName || !this.login.lastName) {
-
+    }
+      if (!this.login.firstName || !this.login.lastName) {
           return;
         }
-      }
     }
     if (this.isSignUpMode) {
       this.signUpUser();
